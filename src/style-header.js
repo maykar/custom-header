@@ -14,9 +14,10 @@ export function styleHeader() {
                 width:100%;
                 display:flex;
                 justify-content: center;
-                ${config.bottom ? "position:sticky; bottom:0;" : ""}
+                ${config.bottom ? "position: sticky; bottom: 0px;" : ""}
                 background: var(--primary-color);
                 color: var(--text-primary-color);
+                ${header.tabs.length === 0 ? "margin-top: 48px;" : ""}
               }
               hui-view {
                 margin-top: -${headerHeight};
