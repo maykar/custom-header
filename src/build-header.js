@@ -1,9 +1,7 @@
-import { huiRoot } from "./get-root";
+import { root, lovelace } from "./get-root";
 import { config } from "./config";
 
 export function BuildHeader() {
-  const { lovelace } = huiRoot;
-  const root = huiRoot.shadowRoot;
   const header = {};
   const tabs = Array.from((root.querySelector("paper-tabs") || root).querySelectorAll("paper-tab"));
 
@@ -33,7 +31,7 @@ export function BuildHeader() {
   const buildButton = (button, icon, name) => {
     if (button === "options") {
       header[button] = root.querySelector(name).cloneNode(true);
-      if (config.bottom) {
+      if (config.footer) {
         header[button].setAttribute("vertical-align", "bottom");
       }
       header[button].removeAttribute("horizontal-offset");
@@ -58,6 +56,7 @@ export function BuildHeader() {
       });
     }
     header[button].setAttribute("icon", icon);
+    header[button].setAttribute("buttonElem", button);
     header[button].style.flexShrink = "0";
     header[button].style.height = "48px";
   };
@@ -67,7 +66,7 @@ export function BuildHeader() {
   buildButton("options", "mdi:dots-vertical", "paper-menu-button");
 
   header.container = document.createElement("cch-header");
-  if (!config.bottom) header.container.setAttribute("slot", "header");
+  if (!config.footer) header.container.setAttribute("slot", "header");
   if (header.menu) header.container.appendChild(header.menu);
   if (header.tabContainer) header.container.appendChild(header.tabContainer);
   if (header.voice) header.container.appendChild(header.voice);

@@ -1,8 +1,7 @@
-import { huiRoot } from "./get-root";
+import { root } from "./get-root";
 import { styleHeader } from "./style-header";
 
 export const observers = () => {
-  const root = huiRoot.shadowRoot;
   const callback = (mutations) => {
     mutations.forEach(({ addedNodes, target }) => {
       if (target.className === "edit-mode" && addedNodes.length) {

@@ -1,40 +1,45 @@
-import { huiRoot } from "./get-root";
+import { root } from "./get-root";
 import { config } from "./config";
 import { BuildHeader } from "./build-header";
 
 export function styleHeader() {
   const header = BuildHeader();
-  const root = huiRoot.shadowRoot;
   root.querySelector("app-header").style.visibility = "hidden";
   const headerHeight = getComputedStyle(root.querySelector("app-header")).getPropertyValue("height");
   let style = document.createElement("style");
   style.setAttribute("id", "cch_header_style");
   style.innerHTML = `
-              cch-header {
-                width:100%;
-                display:flex;
-                justify-content: center;
-                ${config.bottom ? "position: sticky; bottom: 0px;" : ""}
-                background: var(--primary-color);
-                color: var(--text-primary-color);
-                ${header.tabs.length === 0 ? "margin-top: 48px;" : ""}
-              }
-              hui-view {
-                margin-top: -${headerHeight};
-                margin-bottom: ${config.bottom ? "-48px" : ""};
-                padding-top: ${config.bottom ? "0" : "53px"};
-                padding-bottom: ${config.bottom ? "48px" : ""};
-              }
-              hui-panel-view {
-                margin-top: -${headerHeight};
-                margin-bottom: ${config.bottom ? "-48px" : ""};
-                padding-top: ${config.bottom ? "0" : "48px"};
-                padding-bottom: ${config.bottom ? "48px" : ""};
-              }
-              #view {
-                ${config.bottom ? "min-height: calc(100vh - 160px) !important;" : ""}
-              }
-            `;
+        cch-header {
+          width:100%;
+          display:flex;
+          justify-content: center;
+          background: ${config.background};
+          color: ${config.elements_color};
+          ${header.tabs.length === 0 ? "margin-top: 48px;" : ""}
+          ${config.footer ? "position: sticky; bottom: 0px;" : ""}
+        }
+        hui-view, hui-panel-view {
+          margin-top: -${headerHeight};
+          padding-top: ${config.footer ? "0px;" : "53px;"}
+          ${config.footer ? "padding-bottom: 48px;" : ""}
+          ${config.footer ? "margin-bottom: -48px;" : ""}
+        }
+        hui-panel-view {
+          ${config.footer ? "" : "padding-top: 48px;"}
+        }
+        #view {
+          ${config.footer ? "min-height: calc(100vh - 160px) !important;" : ""}
+        }
+        [buttonElem="menu"] {
+          ${config.menu_color ? `color: ${config.menu_color};` : ""}
+        }
+        [buttonElem="options"] {
+          ${config.options_color ? `color: ${config.options_color};` : ""}
+        }
+        [buttonElem="voice"] {
+          ${config.voice_color ? `color: ${config.voice_color};` : ""}
+        }
+      `;
   root.appendChild(style);
 
   // Hide cheverons completely when not visible.
@@ -58,7 +63,7 @@ export function styleHeader() {
   const menuButtonVisibility = () => {
     menu.style.display = "none";
     if (menu.style.visibility === "hidden") {
-      if (config.bottom) header.menu.style.display = "none";
+      if (config.footer) header.menu.style.display = "none";
       header.menu.style.visibility = "hidden";
       header.menu.style.marginRight = "33px";
     } else {
