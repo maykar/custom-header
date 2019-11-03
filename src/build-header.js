@@ -5,12 +5,14 @@ export function BuildHeader() {
   let lovelace = huiRoot.lovelace;
   let root = huiRoot.shadowRoot;
   const header = {};
-  const tabs = Array.from(root.querySelector("paper-tabs").querySelectorAll("paper-tab"));
+  const tabs = Array.from((root.querySelector("paper-tabs") || root).querySelectorAll("paper-tab"));
+
   header.tabContainer = document.createElement("paper-tabs");
   header.tabContainer.setAttribute("scrollable", "");
   header.tabContainer.setAttribute("dir", "ltr");
   header.tabContainer.style.width = "100%";
   header.tabContainer.style.marginLeft = "0";
+
   tabs.forEach((tab) => {
     const index = tabs.indexOf(tab);
     tab = tab.cloneNode(true);
@@ -22,11 +24,12 @@ export function BuildHeader() {
       root
         .querySelector("paper-tabs")
         .querySelectorAll("paper-tab")
-        [index].dispatchEvent(new MouseEvent("click", { bubbles: false, cancelable: true }));
+      [index].dispatchEvent(new MouseEvent("click", { bubbles: false, cancelable: true }));
     });
     header.tabContainer.appendChild(tab);
   });
   header.tabs = header.tabContainer.querySelectorAll("paper-tab");
+
 
   const buildButton = (button, icon, name) => {
     if (button == "options") {
@@ -43,7 +46,7 @@ export function BuildHeader() {
           root
             .querySelector(name)
             .querySelectorAll("paper-item")
-            [index].dispatchEvent(new MouseEvent("click", { bubbles: false, cancelable: true }));
+          [index].dispatchEvent(new MouseEvent("click", { bubbles: false, cancelable: true }));
         });
       });
     } else {
