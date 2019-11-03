@@ -16,6 +16,7 @@ export function styleHeader() {
                 justify-content: center;
                 ${config.bottom ? "position:sticky; bottom:0;" : ""}
                 background: var(--primary-color);
+                color: var(--text-primary-color);
               }
               hui-view {
                 margin-top: -${headerHeight};
