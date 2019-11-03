@@ -57,7 +57,7 @@ export function styleHeader() {
   const menu = root.querySelector("ha-menu-button");
   const menuButtonVisibility = () => {
     menu.style.display = "none";
-    if (menu.style.visibility == "hidden") {
+    if (menu.style.visibility === "hidden") {
       if (config.bottom) header.menu.style.display = "none";
       header.menu.style.visibility = "hidden";
       header.menu.style.marginRight = "33px";

@@ -2,8 +2,8 @@ import { huiRoot } from "./get-root";
 import { config } from "./config";
 
 export function BuildHeader() {
-  let lovelace = huiRoot.lovelace;
-  let root = huiRoot.shadowRoot;
+  const { lovelace } = huiRoot;
+  const root = huiRoot.shadowRoot;
   const header = {};
   const tabs = Array.from((root.querySelector("paper-tabs") || root).querySelectorAll("paper-tab"));
 
@@ -15,24 +15,23 @@ export function BuildHeader() {
 
   tabs.forEach((tab) => {
     const index = tabs.indexOf(tab);
-    tab = tab.cloneNode(true);
-    const haIcon = tab.querySelector("ha-icon");
+    const tabClone = tab.cloneNode(true);
+    const haIcon = tabClone.querySelector("ha-icon");
     if (haIcon) {
       haIcon.setAttribute("icon", lovelace.config.views[index].icon);
     }
-    tab.addEventListener("click", () => {
+    tabClone.addEventListener("click", () => {
       root
         .querySelector("paper-tabs")
-        .querySelectorAll("paper-tab")
-      [index].dispatchEvent(new MouseEvent("click", { bubbles: false, cancelable: true }));
+        .querySelectorAll("paper-tab")[index]
+        .dispatchEvent(new MouseEvent("click", { bubbles: false, cancelable: true }));
     });
-    header.tabContainer.appendChild(tab);
+    header.tabContainer.appendChild(tabClone);
   });
   header.tabs = header.tabContainer.querySelectorAll("paper-tab");
 
-
   const buildButton = (button, icon, name) => {
-    if (button == "options") {
+    if (button === "options") {
       header[button] = root.querySelector(name).cloneNode(true);
       if (config.bottom) {
         header[button].setAttribute("vertical-align", "bottom");
@@ -45,8 +44,8 @@ export function BuildHeader() {
         item.addEventListener("click", () => {
           root
             .querySelector(name)
-            .querySelectorAll("paper-item")
-          [index].dispatchEvent(new MouseEvent("click", { bubbles: false, cancelable: true }));
+            .querySelectorAll("paper-item")[index]
+            .dispatchEvent(new MouseEvent("click", { bubbles: false, cancelable: true }));
         });
       });
     } else {

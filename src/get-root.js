@@ -7,4 +7,4 @@ root = root && root.shadowRoot || root;
 root = root && root.querySelector('ha-panel-lovelace');
 root = root && root.shadowRoot;
 root = root && root.querySelector('hui-root');
-export const huiRoot = root
+export const huiRoot = root;
