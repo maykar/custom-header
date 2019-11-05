@@ -1,5 +1,4 @@
 import { root } from "./get-root";
-import { buildHeader } from "./build-header";
 import { styleHeader } from "./style-header";
 
 export const observers = () => {
@@ -8,10 +7,10 @@ export const observers = () => {
       if (target.className === "edit-mode" && addedNodes.length) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         root.querySelector("app-header").style.visibility = "initial";
-        root.querySelector("cch-header").remove();
+        root.querySelector("cch-header").style.visibility = "hidden";
         root.querySelector("#cch_header_style").remove();
       } else if (target.nodeName === "APP-HEADER" && addedNodes.length) {
-        buildHeader();
+        root.querySelector("cch-header").style.visibility = "initial";
         styleHeader();
       }
     });

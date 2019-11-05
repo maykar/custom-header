@@ -7,6 +7,7 @@ import { header } from "./build-header";
 export function styleHeader() {
   root.querySelector("app-header").style.visibility = "hidden";
   const headerHeight = getComputedStyle(root.querySelector("app-header")).getPropertyValue("height");
+
   let style = document.createElement("style");
   style.setAttribute("id", "cch_header_style");
   style.innerHTML = `
@@ -82,7 +83,8 @@ export function styleHeader() {
   if (config.indicator_top) header.tabContainer.alignBottom = true;
 
   // Style menu button with sidebar changes/resizing.
-  const menu = root.querySelector("ha-menu-button");
+  // eslint-disable-next-line prefer-const
+  let menu = root.querySelector("ha-menu-button");
   const menuButtonVisibility = () => {
     menu.style.display = "none";
     if (menu.style.visibility === "hidden") {
