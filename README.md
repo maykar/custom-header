@@ -7,8 +7,8 @@ custom_header:
   background: black
   elements_color: "#fff"    # Color of all buttons and tabs
   menu_color: red
-  voice_color: blue
-  options_color: purple
+  voice_color: rgb(255, 99, 71)
+  options_color: var(--text-primary-color)
   tabs_color: yellow
   chevrons: false           # Scroll buttons for tabs
   indicator_top: true       # Current tab indicator can be on top or bottom
