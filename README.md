@@ -5,16 +5,16 @@ Current config options. Place at root of lovelace yaml (the following config wil
 custom_header:
   footer: true
   background: black
-  elements_color: "#fff" # Color of all buttons and tabs
+  elements_color: "#fff"    # Color of all buttons and tabs
   menu_color: red
   voice_color: blue
   options_color: purple
   tabs_color: yellow
-  chevrons: false # Scroll buttons for tabs
-  indicator_top: true # Current tab indicator can be on top or bottom
-  hide_tabs: # Can be show_tabs if you prefer
+  chevrons: false           # Scroll buttons for tabs
+  indicator_top: true       # Current tab indicator can be on top or bottom
+  hide_tabs:                # Can be show_tabs if you prefer
     - 1
-    - home # View's title or path may be used
+    - home                  # View's title or path may be used
     - 10
 ```
 
