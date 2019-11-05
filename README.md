@@ -1,6 +1,25 @@
 # Lovelace custom-header
 
-_Not much to see here yet._
+Current config options. Place at root of lovelace yaml:
+```yaml
+custom_header:
+  footer: true
+  background: black
+  elements_color: "#fff"
+  menu_color: red
+  voice_color: blue
+  options_color: purple
+  tabs_color: yellow
+  chevrons: false
+  indicator_top: true
+  hide_tabs: # Can be show_tabs if you prefer
+    - 1
+    - home # View's title or path may be used
+    - 10
+```
+
+hide_tabs and show_tabs can also be written as `hide_tabs: 1, home, 10`
+
 
 ## Development
 
