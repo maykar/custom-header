@@ -1,6 +1,6 @@
 # Lovelace custom-header
 
-Current config options. Place at root of lovelace yaml:
+Current config options. Place at root of lovelace yaml (the following config will result in one ugly header/footer):
 ```yaml
 custom_header:
   footer: true
