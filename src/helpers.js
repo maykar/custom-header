@@ -1,4 +1,3 @@
-/* eslint radix: ["error", "as-needed"] */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-restricted-syntax */
 
@@ -6,15 +5,17 @@ import { lovelace } from "./get-root";
 
 export const tabIndexByName = ((tab) => {
   const { views } = lovelace.config;
+  let index;
   if (isNaN(tab)) {
     for (const view in views) {
       if (views[view].title === tab || views[view].path === tab) {
-        return parseInt(view);
+        return parseInt(view, 10);
       }
     }
   } else if (!isNaN(tab)) {
-    return parseInt(tab);
+    index = parseInt(tab, 10);
   }
+  return index;
 });
 
 export const processTabConfig = ((config) => {

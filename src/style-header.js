@@ -1,5 +1,3 @@
-/* eslint radix: ["error", "as-needed"] */
-
 import { root } from "./get-root";
 import { config } from "./config";
 import { header } from "./build-header";
