@@ -3,6 +3,7 @@
 import { root } from "./get-root";
 import { config } from "./config";
 import { header } from "./build-header";
+import { tabIndexByName } from "./helpers";
 
 export function styleHeader() {
   root.querySelector("app-header").style.visibility = "hidden";
@@ -41,23 +42,26 @@ export function styleHeader() {
       [buttonElem="voice"] {
         ${config.voice_color ? `color: ${config.voice_color};` : ""}
       }
+      paper-tab {
+        ${config.all_tabs_color ? `color: ${config.all_tabs_color};` : ""}
+      }
     `;
 
   // Per tab coloring.
   if (config.tabs_color) {
     Object.keys(config.tabs_color).forEach((tab) => {
       style.innerHTML += `
-        paper-tabs > paper-tab:nth-child(${parseInt(tab) + 1}) {
-          color: ${config.tabs_color};
-        }
-      `;
+      paper-tab:nth-child(${tabIndexByName(tab) + 1}) {
+        color: ${config.tabs_color[tab]};
+      }
+    `;
     });
   }
   // Per tab hiding.
   if (config.hide_tabs) {
     config.hide_tabs.forEach((tab) => {
       style.innerHTML += `
-      paper-tabs > paper-tab:nth-child(${parseInt(tab) + 1}) {
+      paper-tab:nth-child(${tabIndexByName(tab) + 1}) {
         display: none;
       }
     `;
