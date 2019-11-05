@@ -1,18 +1,16 @@
 /* eslint-disable no-restricted-globals */
-/* eslint-disable no-restricted-syntax */
-
 import { lovelace } from "./get-root";
 
 export const tabIndexByName = ((tab) => {
-  const { views } = lovelace.config;
   let index;
+  const { views } = lovelace.config;
   if (isNaN(tab)) {
-    for (const view in views) {
-      if (views[view].title === tab || views[view].path === tab) {
-        return parseInt(view, 10);
+    views.forEach((view) => {
+      if (view.title === tab || view.path === tab) {
+        index = views.indexOf(view);
       }
-    }
-  } else if (!isNaN(tab)) {
+    });
+  } else {
     index = parseInt(tab, 10);
   }
   return index;
@@ -23,8 +21,8 @@ export const processTabConfig = ((config) => {
   const array = (typeof config === "string")
     ? config.replace(/\s+/g, "").split(",")
     : config;
-  for (const tab of array) {
+  array.forEach((tab) => {
     array[array.indexOf(tab)] = tabIndexByName(tab);
-  }
+  });
   return array;
 });

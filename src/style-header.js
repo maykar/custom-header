@@ -72,10 +72,10 @@ export function styleHeader() {
   style = document.createElement("style");
   style.setAttribute("id", "cch_chevron");
   style.innerHTML = `
-        .not-visible[icon*="chevron"] {
-          display:none;
-        }
-      `;
+      .not-visible[icon*="chevron"] {
+        display:none;
+      }
+    `;
   header.tabContainer.shadowRoot.appendChild(style);
 
   // Remove chevrons
