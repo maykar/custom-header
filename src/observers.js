@@ -1,5 +1,6 @@
 import { root } from "./get-root";
 import { styleHeader } from "./style-header";
+import { header } from "./build-header";
 
 export const observers = () => {
   const callback = (mutations) => {
@@ -9,7 +10,9 @@ export const observers = () => {
         root.querySelector("app-header").style.visibility = "initial";
         root.querySelector("cch-header").style.visibility = "hidden";
         root.querySelector("#cch_header_style").remove();
+        header.menu.style.display = "none"
       } else if (target.nodeName === "APP-HEADER" && addedNodes.length) {
+        header.menu.style.display = ""
         root.querySelector("cch-header").style.visibility = "initial";
         styleHeader();
       }
