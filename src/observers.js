@@ -1,4 +1,5 @@
 import { root } from "./get-root";
+import { buildHeader } from "./build-header";
 import { styleHeader } from "./style-header";
 
 export const observers = () => {
@@ -10,6 +11,7 @@ export const observers = () => {
         root.querySelector("cch-header").remove();
         root.querySelector("#cch_header_style").remove();
       } else if (target.nodeName === "APP-HEADER" && addedNodes.length) {
+        buildHeader();
         styleHeader();
       }
     });

@@ -47,7 +47,7 @@ export function styleHeader() {
     Object.keys(config.tabs_color).forEach((tab) => {
       style.innerHTML += `
         paper-tabs > paper-tab:nth-child(${parseInt(tab) + 1}) {
-          color: ${config.tabs_color[tab]};
+          color: ${config.tabs_color};
         }
       `;
     });

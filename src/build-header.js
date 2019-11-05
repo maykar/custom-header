@@ -1,7 +1,7 @@
 import { root, lovelace } from "./get-root";
 import { config } from "./config";
 
-export function BuildHeader() {
+export function buildHeader() {
   const header = {};
   const tabs = Array.from((root.querySelector("paper-tabs") || root).querySelectorAll("paper-tab"));
 
@@ -76,4 +76,4 @@ export function BuildHeader() {
   return header;
 }
 
-export const header = BuildHeader();
+export const header = buildHeader();
