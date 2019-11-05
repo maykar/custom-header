@@ -2,10 +2,9 @@
 
 import { root } from "./get-root";
 import { config } from "./config";
-import { BuildHeader } from "./build-header";
+import { header } from "./build-header";
 
 export function styleHeader() {
-  const header = BuildHeader();
   root.querySelector("app-header").style.visibility = "hidden";
   const headerHeight = getComputedStyle(root.querySelector("app-header")).getPropertyValue("height");
   let style = document.createElement("style");
@@ -43,14 +42,26 @@ export function styleHeader() {
       }
     `;
 
-  Object.keys(config.tabs_color).forEach((tab) => {
-    style.innerHTML += `
+  // Per tab coloring.
+  if (config.tabs_color) {
+    Object.keys(config.tabs_color).forEach((tab) => {
+      style.innerHTML += `
+        paper-tabs > paper-tab:nth-child(${parseInt(tab) + 1}) {
+          color: ${config.tabs_color[tab]};
+        }
+      `;
+    });
+  }
+  // Per tab hiding.
+  if (config.hide_tabs) {
+    config.hide_tabs.forEach((tab) => {
+      style.innerHTML += `
       paper-tabs > paper-tab:nth-child(${parseInt(tab) + 1}) {
-        color: ${config.tabs_color[tab]};
-        ${config.hide_tabs && config.hide_tabs[tab] ? "display: none;" : ""}
+        display: none;
       }
     `;
-  });
+    });
+  }
 
   root.appendChild(style);
 
@@ -58,17 +69,17 @@ export function styleHeader() {
   style = document.createElement("style");
   style.setAttribute("id", "cch_chevron");
   style.innerHTML = `
-              .not-visible[icon*="chevron"] {
-                display:none;
-              }
-            `;
+        .not-visible[icon*="chevron"] {
+          display:none;
+        }
+      `;
   header.tabContainer.shadowRoot.appendChild(style);
 
   // Remove chevrons
-  // header.tabContainer.hideScrollButtons = true
+  if (!config.chevrons) header.tabContainer.hideScrollButtons = true;
 
   // Current tab indicator on top
-  // header.tabContainer.alignBottom = true
+  if (config.indicator_top) header.tabContainer.alignBottom = true;
 
   // Style menu button with sidebar changes/resizing.
   const menu = root.querySelector("ha-menu-button");

@@ -75,3 +75,5 @@ export function BuildHeader() {
 
   return header;
 }
+
+export const header = BuildHeader();
