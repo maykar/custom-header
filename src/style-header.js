@@ -1,17 +1,14 @@
-import {
-  getRoot
-} from 'custom-card-helpers';
+import { root } from './helpers';
+import { config } from './config';
+import { header } from './build-header';
+import { tabIndexByName } from './helpers';
 
-import { config } from "./config";
-import { header } from "./build-header";
-import { tabIndexByName } from "./helpers";
+export const styleHeader = () => {
+  root.querySelector('app-header').style.visibility = 'hidden';
+  const headerHeight = getComputedStyle(root.querySelector('app-header')).getPropertyValue('height');
 
-export function styleHeader() {
-  getRoot().querySelector("app-header").style.visibility = "hidden";
-  const headerHeight = getComputedStyle(getRoot().querySelector("app-header")).getPropertyValue("height");
-
-  let style = document.createElement("style");
-  style.setAttribute("id", "cch_header_style");
+  let style = document.createElement('style');
+  style.setAttribute('id', 'cch_header_style');
   style.innerHTML = `
       cch-header {
         width:100%;
@@ -19,38 +16,38 @@ export function styleHeader() {
         justify-content: center;
         background: ${config.background};
         color: ${config.elements_color};
-        ${header.tabs.length === 0 ? "margin-top: 48px;" : ""}
-        ${config.footer ? "position: sticky; bottom: 0px;" : ""}
+        ${header.tabs.length === 0 ? 'margin-top: 48px;' : ''}
+        ${config.footer ? 'position: sticky; bottom: 0px;' : ''}
       }
       hui-view, hui-panel-view {
         margin-top: -${headerHeight};
-        padding-top: ${config.footer ? "0px;" : "53px;"}
-        ${config.footer ? "padding-bottom: 48px;" : ""}
-        ${config.footer ? "margin-bottom: -48px;" : ""}
+        padding-top: ${config.footer ? '0px;' : '53px;'}
+        ${config.footer ? 'padding-bottom: 48px;' : ''}
+        ${config.footer ? 'margin-bottom: -48px;' : ''}
       }
       hui-panel-view {
-        ${config.footer ? "" : "padding-top: 48px;"}
+        ${config.footer ? '' : 'padding-top: 48px;'}
       }
       #view {
-        ${config.footer ? "min-height: calc(100vh - 160px) !important;" : ""}
+        ${config.footer ? 'min-height: calc(100vh - 160px) !important;' : ''}
       }
       [buttonElem="menu"] {
-        ${config.menu_color ? `color: ${config.menu_color};` : ""}
+        ${config.menu_color ? `color: ${config.menu_color};` : ''}
       }
       [buttonElem="options"] {
-        ${config.options_color ? `color: ${config.options_color};` : ""}
+        ${config.options_color ? `color: ${config.options_color};` : ''}
       }
       [buttonElem="voice"] {
-        ${config.voice_color ? `color: ${config.voice_color};` : ""}
+        ${config.voice_color ? `color: ${config.voice_color};` : ''}
       }
       paper-tab {
-        ${config.all_tabs_color ? `color: ${config.all_tabs_color};` : ""}
+        ${config.all_tabs_color ? `color: ${config.all_tabs_color};` : ''}
       }
     `;
 
   // Per tab coloring.
   if (config.tabs_color) {
-    Object.keys(config.tabs_color).forEach((tab) => {
+    Object.keys(config.tabs_color).forEach(tab => {
       style.innerHTML += `
       paper-tab:nth-child(${tabIndexByName(tab) + 1}) {
         color: ${config.tabs_color[tab]};
@@ -60,7 +57,7 @@ export function styleHeader() {
   }
   // Per tab hiding.
   if (config.hide_tabs) {
-    config.hide_tabs.forEach((tab) => {
+    config.hide_tabs.forEach(tab => {
       style.innerHTML += `
       paper-tab:nth-child(${tabIndexByName(tab) + 1}) {
         display: none;
@@ -69,11 +66,11 @@ export function styleHeader() {
     });
   }
 
-  getRoot().appendChild(style);
+  root.appendChild(style);
 
   // Hide cheverons completely when not visible.
-  style = document.createElement("style");
-  style.setAttribute("id", "cch_chevron");
+  style = document.createElement('style');
+  style.setAttribute('id', 'cch_chevron');
   style.innerHTML = `
       .not-visible[icon*="chevron"] {
         display:none;
@@ -89,17 +86,17 @@ export function styleHeader() {
 
   // Style menu button with sidebar changes/resizing.
   // eslint-disable-next-line prefer-const
-  let menu = getRoot().querySelector("ha-menu-button");
+  let menu = root.querySelector('ha-menu-button');
   const menuButtonVisibility = () => {
-    menu.style.display = "none";
-    if (menu.style.visibility === "hidden") {
-      if (config.footer) header.menu.style.display = "none";
-      header.menu.style.visibility = "hidden";
-      header.menu.style.marginRight = "33px";
+    menu.style.display = 'none';
+    if (menu.style.visibility === 'hidden') {
+      if (config.footer) header.menu.style.display = 'none';
+      header.menu.style.visibility = 'hidden';
+      header.menu.style.marginRight = '33px';
     } else {
-      header.menu.style.visibility = "initial";
-      header.menu.style.display = "initial";
-      header.menu.style.marginRight = "";
+      header.menu.style.visibility = 'initial';
+      header.menu.style.display = 'initial';
+      header.menu.style.marginRight = '';
     }
   };
   menuButtonVisibility();
@@ -107,6 +104,6 @@ export function styleHeader() {
     menuButtonVisibility();
   }).observe(menu, {
     attributes: true,
-    attributeFilter: ["style"]
+    attributeFilter: ['style'],
   });
 }

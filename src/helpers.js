@@ -1,12 +1,13 @@
-import {
-  getLovelace,
-} from 'custom-card-helpers';
+import { getLovelace, getRoot } from 'custom-card-helpers';
 
-export const tabIndexByName = ((tab) => {
+export const lovelace = getLovelace();
+export const root = getRoot();
+
+export const tabIndexByName = tab => {
   let index;
-  const { views } = getLovelace().config;
+  const { views } = lovelace.config;
   if (isNaN(tab)) {
-    views.forEach((view) => {
+    views.forEach(view => {
       if (view.title === tab || view.path === tab) {
         index = views.indexOf(view);
       }
@@ -15,15 +16,13 @@ export const tabIndexByName = ((tab) => {
     index = parseInt(tab, 10);
   }
   return index;
-});
+};
 
-export const processTabConfig = ((config) => {
+export const processTabConfig = config => {
   // Convert to array if comma seperated string.
-  const array = (typeof config === "string")
-    ? config.replace(/\s+/g, "").split(",")
-    : config;
-  array.forEach((tab) => {
+  const array = typeof config === 'string' ? config.replace(/\s+/g, '').split(',') : config;
+  array.forEach(tab => {
     array[array.indexOf(tab)] = tabIndexByName(tab);
   });
   return array;
-});
+};
