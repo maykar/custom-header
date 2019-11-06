@@ -1,11 +1,14 @@
-import { root } from "./get-root";
+import {
+  getRoot
+} from 'custom-card-helpers';
+
 import { config } from "./config";
 import { header } from "./build-header";
 import { tabIndexByName } from "./helpers";
 
 export function styleHeader() {
-  root.querySelector("app-header").style.visibility = "hidden";
-  const headerHeight = getComputedStyle(root.querySelector("app-header")).getPropertyValue("height");
+  getRoot().querySelector("app-header").style.visibility = "hidden";
+  const headerHeight = getComputedStyle(getRoot().querySelector("app-header")).getPropertyValue("height");
 
   let style = document.createElement("style");
   style.setAttribute("id", "cch_header_style");
@@ -66,7 +69,7 @@ export function styleHeader() {
     });
   }
 
-  root.appendChild(style);
+  getRoot().appendChild(style);
 
   // Hide cheverons completely when not visible.
   style = document.createElement("style");
