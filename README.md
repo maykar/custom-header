@@ -11,9 +11,6 @@ custom_header:
   menu_color: red
   voice_color: rgb(255, 99, 71)
   options_color: var(--text-primary-color)
-  menu: true
-  voice: false
-  options: true
   all_tabs_color: pink
   tabs_color:
     5: yellow
