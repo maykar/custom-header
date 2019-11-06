@@ -1,9 +1,12 @@
-import { root, lovelace } from "./get-root";
+import {
+  getLovelace, getRoot
+} from 'custom-card-helpers';
+
 import { config } from "./config";
 
 export function buildHeader() {
   const header = {};
-  const tabs = Array.from((root.querySelector("paper-tabs") || root).querySelectorAll("paper-tab"));
+  const tabs = Array.from((getRoot().querySelector("paper-tabs") || getRoot()).querySelectorAll("paper-tab"));
 
   header.tabContainer = document.createElement("paper-tabs");
   header.tabContainer.setAttribute("scrollable", "");
@@ -16,10 +19,10 @@ export function buildHeader() {
     const tabClone = tab.cloneNode(true);
     const haIcon = tabClone.querySelector("ha-icon");
     if (haIcon) {
-      haIcon.setAttribute("icon", lovelace.config.views[index].icon);
+      haIcon.setAttribute("icon", getLovelace().config.views[index].icon);
     }
     tabClone.addEventListener("click", () => {
-      root
+      getRoot()
         .querySelector("paper-tabs")
         .querySelectorAll("paper-tab")[index]
         .dispatchEvent(new MouseEvent("click", { bubbles: false, cancelable: true }));
@@ -30,7 +33,7 @@ export function buildHeader() {
 
   const buildButton = (button, icon, name) => {
     if (button === "options") {
-      header[button] = root.querySelector(name).cloneNode(true);
+      header[button] = getRoot().querySelector(name).cloneNode(true);
       if (config.footer) {
         header[button].setAttribute("vertical-align", "bottom");
       }
@@ -40,7 +43,7 @@ export function buildHeader() {
       items.forEach((item) => {
         const index = items.indexOf(item);
         item.addEventListener("click", () => {
-          root
+          getRoot()
             .querySelector(name)
             .querySelectorAll("paper-item")[index]
             .dispatchEvent(new MouseEvent("click", { bubbles: false, cancelable: true }));
@@ -49,7 +52,7 @@ export function buildHeader() {
     } else {
       header[button] = document.createElement("paper-icon-button");
       header[button].addEventListener("click", () => {
-        root
+        getRoot()
           .querySelector(name)
           .shadowRoot.querySelector("paper-icon-button")
           .dispatchEvent(new MouseEvent("click", { bubbles: false, cancelable: true }));
@@ -71,7 +74,7 @@ export function buildHeader() {
   if (header.tabContainer) header.container.appendChild(header.tabContainer);
   if (header.voice) header.container.appendChild(header.voice);
   if (header.options) header.container.appendChild(header.options);
-  root.querySelector("ha-app-layout").appendChild(header.container);
+  getRoot().querySelector("ha-app-layout").appendChild(header.container);
 
   return header;
 }

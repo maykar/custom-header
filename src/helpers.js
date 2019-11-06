@@ -1,9 +1,10 @@
-/* eslint-disable no-restricted-globals */
-import { lovelace } from "./get-root";
+import {
+  getLovelace,
+} from 'custom-card-helpers';
 
 export const tabIndexByName = ((tab) => {
   let index;
-  const { views } = lovelace.config;
+  const { views } = getLovelace().config;
   if (isNaN(tab)) {
     views.forEach((view) => {
       if (view.title === tab || view.path === tab) {

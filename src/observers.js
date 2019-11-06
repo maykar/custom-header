@@ -1,4 +1,7 @@
-import { root } from "./get-root";
+import {
+  getRoot
+} from 'custom-card-helpers';
+
 import { styleHeader } from "./style-header";
 import { header } from "./build-header";
 
@@ -7,19 +10,19 @@ export const observers = () => {
     mutations.forEach(({ addedNodes, target }) => {
       if (target.className === "edit-mode" && addedNodes.length) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        root.querySelector("app-header").style.visibility = "initial";
-        root.querySelector("cch-header").style.visibility = "hidden";
-        root.querySelector("#cch_header_style").remove();
+        getRoot().querySelector("app-header").style.visibility = "initial";
+        getRoot().querySelector("cch-header").style.visibility = "hidden";
+        getRoot().querySelector("#cch_header_style").remove();
         header.menu.style.display = "none";
       } else if (target.nodeName === "APP-HEADER" && addedNodes.length) {
         header.menu.style.display = "";
-        root.querySelector("cch-header").style.visibility = "initial";
+        getRoot().querySelector("cch-header").style.visibility = "initial";
         styleHeader();
       }
     });
   };
   const observer = new MutationObserver(callback);
-  observer.observe(root.querySelector("app-header"), {
+  observer.observe(getRoot().querySelector("app-header"), {
     childList: true
   });
 };

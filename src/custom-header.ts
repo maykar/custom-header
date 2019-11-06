@@ -1,5 +1,5 @@
-import { styleHeader } from "./style-header";
-import { observers } from "./observers";
+import { styleHeader } from './style-header';
+import { observers } from './observers';
 
 styleHeader();
 observers();
