@@ -89,7 +89,7 @@ export function styleHeader() {
 
   // Style menu button with sidebar changes/resizing.
   // eslint-disable-next-line prefer-const
-  let menu = root.querySelector("ha-menu-button");
+  let menu = getRoot().querySelector("ha-menu-button");
   const menuButtonVisibility = () => {
     menu.style.display = "none";
     if (menu.style.visibility === "hidden") {
