@@ -7,7 +7,7 @@ will result in one ugly header/footer):
 custom_header:
   footer: true
   background: black
-  elements_color: "#fff" # Color of all buttons and tabs
+  elements_color: "#fff"    # Color of all buttons and tabs
   menu_color: red
   voice_color: rgb(255, 99, 71)
   options_color: var(--text-primary-color)
@@ -15,11 +15,11 @@ custom_header:
   tabs_color:
     5: yellow
     home: "#fff"
-  chevrons: false         # Scroll buttons for tabs
-  indicator_top: true     # Current tab indicator can be on top or bottom
-  hide_tabs:              # Can be show_tabs if you prefer
+  chevrons: false           # Scroll buttons for tabs
+  indicator_top: true       # Current tab indicator can be on top or bottom
+  hide_tabs:                # Can be show_tabs if you prefer
     - 1
-    - home                # View's title or path may be used
+    - home                  # View's title or path may be used
     - 10
 ```
 
