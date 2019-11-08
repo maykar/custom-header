@@ -3,7 +3,7 @@
 Current config options. Place at root of lovelace yaml (the following config
 will result in one ugly header/footer):
 
-**EVERY** Config item can be templated with Jinja and updates dynamically with entity changes, etc.
+**EVERY Config item can be templated with Jinja and updates dynamically with entity changes, etc.**
 
 ```yaml
 custom_header:
