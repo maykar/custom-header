@@ -1,5 +1,4 @@
 import { root, lovelace } from './helpers';
-import { config } from './config';
 
 export const buildHeader = () => {
   const header = {};
@@ -31,9 +30,6 @@ export const buildHeader = () => {
   const buildButton = (button, icon, name) => {
     if (button === 'options') {
       header[button] = root.querySelector(name).cloneNode(true);
-      if (config.footer) {
-        header[button].setAttribute('vertical-align', 'bottom');
-      }
       header[button].removeAttribute('horizontal-offset');
       header[button].querySelector('paper-icon-button').style.height = '48px';
       const items = Array.from(header[button].querySelectorAll('paper-item'));
@@ -66,7 +62,6 @@ export const buildHeader = () => {
   buildButton('options', 'mdi:dots-vertical', 'paper-menu-button');
 
   header.container = document.createElement('cch-header');
-  if (!config.footer) header.container.setAttribute('slot', 'header');
   if (header.menu) header.container.appendChild(header.menu);
   if (header.tabContainer) header.container.appendChild(header.tabContainer);
   if (header.voice) header.container.appendChild(header.voice);
@@ -74,6 +69,6 @@ export const buildHeader = () => {
   root.querySelector('ha-app-layout').appendChild(header.container);
 
   return header;
-}
+};
 
 export const header = buildHeader();

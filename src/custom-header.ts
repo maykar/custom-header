@@ -1,5 +1,5 @@
-import { styleHeader } from './style-header';
+import { buildConfig } from './config';
 import { observers } from './observers';
 
-styleHeader();
+buildConfig();
 observers();

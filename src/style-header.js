@@ -1,9 +1,8 @@
 import { root } from './helpers';
-import { config } from './config';
 import { header } from './build-header';
 import { tabIndexByName } from './helpers';
 
-export const styleHeader = () => {
+export const styleHeader = config => {
   root.querySelector('app-header').style.visibility = 'hidden';
   const headerHeight = getComputedStyle(root.querySelector('app-header')).getPropertyValue('height');
 
@@ -66,7 +65,9 @@ export const styleHeader = () => {
     });
   }
 
+  let oldStyle = root.querySelector("#cch_header_style");
   root.appendChild(style);
+  if (oldStyle) oldStyle.remove();
 
   // Hide cheverons completely when not visible.
   style = document.createElement('style');
@@ -76,13 +77,24 @@ export const styleHeader = () => {
         display:none;
       }
     `;
+  oldStyle = header.tabContainer.shadowRoot.querySelector("#cch_chevron");
   header.tabContainer.shadowRoot.appendChild(style);
+  if (oldStyle) oldStyle.remove();
 
   // Remove chevrons
   if (!config.chevrons) header.tabContainer.hideScrollButtons = true;
 
   // Current tab indicator on top
   if (config.indicator_top) header.tabContainer.alignBottom = true;
+
+  if (config.footer) {
+    header.options.setAttribute('vertical-align', 'bottom');
+  } else {
+    header.options.removeAttribute('vertical-align');
+  }
+
+  if (!config.footer) header.container.setAttribute('slot', 'header');
+  else header.container.removeAttribute('slot');
 
   // Style menu button with sidebar changes/resizing.
   // eslint-disable-next-line prefer-const
@@ -106,4 +118,4 @@ export const styleHeader = () => {
     attributes: true,
     attributeFilter: ['style'],
   });
-}
+};

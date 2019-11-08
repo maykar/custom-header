@@ -1,6 +1,5 @@
 import { root } from './helpers';
-
-import { styleHeader } from './style-header';
+import { buildConfig } from './config';
 import { header } from './build-header';
 
 export const observers = () => {
@@ -15,7 +14,7 @@ export const observers = () => {
       } else if (target.nodeName === 'APP-HEADER' && addedNodes.length) {
         header.menu.style.display = '';
         root.querySelector('cch-header').style.visibility = 'initial';
-        styleHeader();
+        buildConfig();
       }
     });
   };
