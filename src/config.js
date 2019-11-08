@@ -59,7 +59,9 @@ export const buildConfig = () => {
     subscribeRenderTemplate(
       result => {
         config[configName[i]] = result;
-        if ((i = templates.length - 1)) styleHeader(config);
+        if (i == templates.length - 1) {
+          styleHeader(config);
+        }
       },
       { template: templates[i] },
     );
