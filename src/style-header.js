@@ -13,8 +13,8 @@ export const styleHeader = config => {
         width:100%;
         display:flex;
         justify-content: center;
-        background: ${config.background};
-        color: ${config.elements_color};
+        background: ${config.background || 'var(--primary-color)'};
+        color: ${config.elements_color || 'var(--text-primary-color)'};
         ${header.tabs.length === 0 ? 'margin-top: 48px;' : ''}
         ${config.footer ? 'position: sticky; bottom: 0px;' : ''}
       }
@@ -99,12 +99,13 @@ export const styleHeader = config => {
     menu.style.display = 'none';
     if (menu.style.visibility === 'hidden') {
       if (config.footer) header.menu.style.display = 'none';
+      else header.menu.style.display = 'initial';
       header.menu.style.visibility = 'hidden';
       header.menu.style.marginRight = '33px';
     } else {
       header.menu.style.visibility = 'initial';
-      header.menu.style.display = 'initial';
       header.menu.style.marginRight = '';
+      header.menu.style.display = 'initial';
     }
   };
   // Watch for menu button changes.
