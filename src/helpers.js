@@ -38,3 +38,22 @@ export const invertNumArray = show_tabs => {
     return total_tabs.filter(el => !userConfig.show_tabs.includes(el));
   }
 };
+
+export const subscribeRenderTemplate = (onChange, params) => {
+  const conn = document.body.querySelector('home-assistant').hass.connection;
+  const variables = {
+    user: document.body.querySelector('home-assistant').hass.user.name,
+    browser: navigator.userAgent,
+    hash: location.hash.substr(1) || ' ',
+    ...params.variables,
+  };
+  const template = params.template;
+  const entity_ids = params.entity_ids;
+
+  return conn.subscribeMessage(msg => onChange(msg.result), {
+    type: 'render_template',
+    template,
+    variables,
+    entity_ids,
+  });
+};

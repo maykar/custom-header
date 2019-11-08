@@ -87,18 +87,14 @@ export const styleHeader = config => {
   // Current tab indicator on top
   if (config.indicator_top) header.tabContainer.alignBottom = true;
 
-  if (config.footer) {
-    header.options.setAttribute('vertical-align', 'bottom');
-  } else {
-    header.options.removeAttribute('vertical-align');
-  }
-
+  // Set/remove attributes for footer mode.
+  if (config.footer) header.options.setAttribute('vertical-align', 'bottom');
+  else header.options.removeAttribute('vertical-align');
   if (!config.footer) header.container.setAttribute('slot', 'header');
   else header.container.removeAttribute('slot');
 
   // Style menu button with sidebar changes/resizing.
-  // eslint-disable-next-line prefer-const
-  let menu = root.querySelector('ha-menu-button');
+  const menu = root.querySelector('ha-menu-button');
   const menuButtonVisibility = () => {
     menu.style.display = 'none';
     if (menu.style.visibility === 'hidden') {
@@ -111,11 +107,12 @@ export const styleHeader = config => {
       header.menu.style.marginRight = '';
     }
   };
-  menuButtonVisibility();
+  // Watch for menu button changes.
   new MutationObserver(() => {
     menuButtonVisibility();
   }).observe(menu, {
     attributes: true,
     attributeFilter: ['style'],
   });
+  menuButtonVisibility();
 };
