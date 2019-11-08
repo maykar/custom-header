@@ -65,7 +65,7 @@ export const styleHeader = config => {
     });
   }
 
-  let oldStyle = root.querySelector("#cch_header_style");
+  let oldStyle = root.querySelector('#cch_header_style');
   root.appendChild(style);
   if (oldStyle) oldStyle.remove();
 
@@ -77,7 +77,7 @@ export const styleHeader = config => {
         display:none;
       }
     `;
-  oldStyle = header.tabContainer.shadowRoot.querySelector("#cch_chevron");
+  oldStyle = header.tabContainer.shadowRoot.querySelector('#cch_chevron');
   header.tabContainer.shadowRoot.appendChild(style);
   if (oldStyle) oldStyle.remove();
 
