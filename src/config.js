@@ -22,7 +22,7 @@ export const buildConfig = () => {
 
   subscribeRenderTemplate(
     result => {
-      config = JSON.parse(result);
+      config = JSON.parse(result.replace('"true"', 'true').replace('"false"', 'false'));
       if (config.hide_tabs) config.hide_tabs = processTabConfig(config.hide_tabs);
       if (config.show_tabs) config.show_tabs = processTabConfig(config.show_tabs);
       if (config.show_tabs && config.show_tabs.length) config.hide_tabs = invertNumArray(config.show_tabs);
