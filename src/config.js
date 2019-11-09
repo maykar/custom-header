@@ -16,19 +16,27 @@ export const buildConfig = () => {
     indicator_top: false,
     hide_tabs: [],
     show_tabs: [],
+    template_variables: '',
   };
 
   let config = { ...defaultConfig, ...conditionalConfig(lovelace.config.custom_header) };
+  const variables = config.variables;
+  delete config.variables;
 
   subscribeRenderTemplate(
     result => {
-      config = JSON.parse(result.replace('"true"', 'true').replace('"false"', 'false'));
+      config = JSON.parse(
+        result
+          .replace(/"true"/gi, 'true')
+          .replace(/"false"/gi, 'false')
+          .replace(/""/, ''),
+      );
       if (config.hide_tabs) config.hide_tabs = processTabConfig(config.hide_tabs);
       if (config.show_tabs) config.show_tabs = processTabConfig(config.show_tabs);
       if (config.show_tabs && config.show_tabs.length) config.hide_tabs = invertNumArray(config.show_tabs);
       delete config.show_tabs;
       styleHeader(config);
     },
-    { template: JSON.stringify(config).replace(/\\/g, '') },
+    { template: JSON.stringify(variables).replace(/\\/g, '') + JSON.stringify(config).replace(/\\/g, '') },
   );
 };
