@@ -17,11 +17,13 @@ export const buildConfig = () => {
     hide_tabs: [],
     show_tabs: [],
     template_variables: '',
+    exceptions: [],
   };
 
-  let config = { ...defaultConfig, ...conditionalConfig(lovelace.config.custom_header) };
-  const variables = config.variables;
-  delete config.variables;
+  let config = { ...defaultConfig, ...lovelace.config.custom_header };
+  config = { ...config, ...conditionalConfig(config) };
+  const variables = config.template_variables;
+  delete config.template_variables;
 
   subscribeRenderTemplate(
     result => {
