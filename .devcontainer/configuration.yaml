@@ -1,4 +1,41 @@
 default_config:
 lovelace:
   mode: yaml
-demo:
+input_boolean:
+  footer:
+    name: 'footer:'
+    initial: off
+    icon: mdi:arrow-down-bold-box
+  chevrons:
+    name: 'chevrons:'
+    initial: off
+    icon: mdi:chevron-right-box-outline
+  indicator_top:
+    name: 'indicator_top:'
+    initial: off
+    icon: mdi:format-vertical-align-top
+input_text:
+  hide_tabs:
+    name: 'hide_tabs:'
+    initial: '6, invader'
+    icon: 'mdi:eye-off'
+  background:
+    name: 'background:'
+    initial: '#000000'
+    icon: 'mdi:palette'
+  all_tabs_color:
+    name: 'all_tabs_color:'
+    initial: 'var(--text-primary-color)'
+    icon: 'mdi:table-row'
+  menu_color:
+    name: 'menu_color:'
+    initial: 'white'
+    icon: 'mdi:menu'
+  voice_color:
+    name: 'voice_color:'
+    initial: 'rgb(220,220,220)'
+    icon: 'mdi:microphone'
+  options_color:
+    name: 'options_color:'
+    initial: '#DCDCDC'
+    icon: 'mdi:dots-vertical'

@@ -83,9 +83,11 @@ export const styleHeader = config => {
 
   // Remove chevrons
   if (!config.chevrons) header.tabContainer.hideScrollButtons = true;
+  else header.tabContainer.hideScrollButtons = false;
 
   // Current tab indicator on top
   if (config.indicator_top) header.tabContainer.alignBottom = true;
+  else header.tabContainer.alignBottom = false;
 
   // Set/remove attributes for footer mode.
   if (config.footer) header.options.setAttribute('vertical-align', 'bottom');

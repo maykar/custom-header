@@ -2,30 +2,46 @@ resources:
   - url: http://127.0.0.1:5000/custom-header.js
     type: module
 custom_header:
-  footer: true
-  background: black
-  elements_color: "#fff" # Color of all buttons and tabs
-  menu_color: red
-  voice_color: rgb(255, 99, 71)
-  options_color: var(--text-primary-color)
-  all_tabs_color: pink
-  tabs_color:
-    5: yellow
-    home: "#fff"
-  chevrons: false # Scroll buttons for tabs
-  indicator_top: true # Current tab indicator can be on top or bottom
-  hide_tabs: # Can be show_tabs if you prefer
-    - 1
-    - home # View's title or path may be used
-    - 10
+  background: '{{ states.input_text.background.state }}'
+  menu_color: '{{ states.input_text.menu_color.state }}'
+  voice_color: '{{ states.input_text.voice_color.state }}'
+  options_color: '{{ states.input_text.options_color.state }}'
+  all_tabs_color: '{{ states.input_text.all_tabs_color.state }}'
+  indicator_top: '{{ states.input_boolean.indicator_top.state == "on" }}'
+  footer: '{{ states.input_boolean.footer.state == "on" }}'
+  chevrons: '{{ states.input_boolean.chevrons.state == "on" }}'
+  hide_tabs: '{{ states.input_text.hide_tabs.state }}'
 views:
-  - icon: mdi:house
+  - icon: mdi:pac-man
+    title: pacman
+    background: dimgray
     cards:
       - type: entities
         entities:
-          - sun.sun
-  - icon: mdi:account-circle
-    cards:
-      - type: entities
-        entities:
-          - sun.sun
+          - entity: input_boolean.footer
+          - entity: input_boolean.indicator_top
+          - entity: input_boolean.chevrons
+          - entity: input_text.background
+          - entity: input_text.menu_color
+          - entity: input_text.voice_color
+          - entity: input_text.options_color
+          - entity: input_text.all_tabs_color
+          - entity: input_text.hide_tabs
+  - icon: mdi:ghost
+    title: ghost
+    background: dimgray
+  - icon: mdi:skull
+    title: skull
+    background: dimgray
+  - icon: mdi:bomb
+    title: bomb
+    background: dimgray
+  - icon: mdi:death-star-variant
+    title: death star
+    background: dimgray
+  - icon: mdi:space-invaders
+    title: invader
+    background: dimgray
+  - icon: mdi:triforce
+    title: triforce
+    background: dimgray
