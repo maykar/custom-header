@@ -43,6 +43,7 @@ export const buildHeader = () => {
         });
       });
     } else {
+      if (!root.querySelector(name)) return;
       header[button] = document.createElement('paper-icon-button');
       header[button].addEventListener('click', () => {
         root

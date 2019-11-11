@@ -1,6 +1,7 @@
 default_config:
 lovelace:
   mode: yaml
+conversation:
 input_boolean:
   footer:
     name: 'footer:'

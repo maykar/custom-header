@@ -11,10 +11,10 @@ custom_header:
   footer: '{{ states.input_boolean.footer.state == "on" }}'
   chevrons: '{{ states.input_boolean.chevrons.state == "on" }}'
   hide_tabs: '{{ states.input_text.hide_tabs.state }}'
+background: dimgray
 views:
   - icon: mdi:pac-man
     title: pacman
-    background: dimgray
     cards:
       - type: entities
         entities:
@@ -29,19 +29,13 @@ views:
           - entity: input_text.hide_tabs
   - icon: mdi:ghost
     title: ghost
-    background: dimgray
   - icon: mdi:skull
     title: skull
-    background: dimgray
   - icon: mdi:bomb
     title: bomb
-    background: dimgray
   - icon: mdi:death-star-variant
     title: death star
-    background: dimgray
   - icon: mdi:space-invaders
     title: invader
-    background: dimgray
   - icon: mdi:triforce
     title: triforce
-    background: dimgray

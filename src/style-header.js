@@ -118,4 +118,7 @@ export const styleHeader = config => {
     attributeFilter: ['style'],
   });
   menuButtonVisibility();
+
+  header.tabContainer.querySelector('paper-tab.iron-selected').click();
+  window.dispatchEvent(new Event('resize'));
 };
