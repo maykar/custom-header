@@ -3,6 +3,10 @@ lovelace:
   mode: yaml
 conversation:
 input_boolean:
+  kiosk_mode:
+    name: 'kiosk_mode:'
+    initial: off
+    icon: mdi:overscan
   footer:
     name: 'footer:'
     initial: off

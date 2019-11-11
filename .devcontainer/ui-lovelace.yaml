@@ -11,6 +11,7 @@ custom_header:
   footer: '{{ states.input_boolean.footer.state == "on" }}'
   chevrons: '{{ states.input_boolean.chevrons.state == "on" }}'
   hide_tabs: '{{ states.input_text.hide_tabs.state }}'
+  kiosk_mode: '{{ states.input_boolean.kiosk_mode.state == "on" }}'
 background: dimgray
 views:
   - icon: mdi:pac-man
@@ -18,6 +19,7 @@ views:
     cards:
       - type: entities
         entities:
+          - entity: input_boolean.kiosk_mode
           - entity: input_boolean.footer
           - entity: input_boolean.indicator_top
           - entity: input_boolean.chevrons

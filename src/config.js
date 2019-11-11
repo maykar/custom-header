@@ -1,6 +1,7 @@
 import { processTabConfig, invertNumArray, lovelace, subscribeRenderTemplate } from './helpers';
 import { conditionalConfig } from './conditional-config';
 import { styleHeader } from './style-header';
+import { kioskMode } from './kiosk-mode';
 
 export const buildConfig = () => {
   const defaultConfig = {
@@ -37,7 +38,8 @@ export const buildConfig = () => {
       if (config.show_tabs) config.show_tabs = processTabConfig(config.show_tabs);
       if (config.show_tabs && config.show_tabs.length) config.hide_tabs = invertNumArray(config.show_tabs);
       delete config.show_tabs;
-      styleHeader(config);
+      if (config.kiosk_mode) kioskMode();
+      else styleHeader(config);
     },
     { template: JSON.stringify(variables).replace(/\\/g, '') + JSON.stringify(config).replace(/\\/g, '') },
   );

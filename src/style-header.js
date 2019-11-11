@@ -1,10 +1,11 @@
 import { root } from './helpers';
 import { header } from './build-header';
 import { tabIndexByName } from './helpers';
+import { removeKioskMode } from './kiosk-mode';
 
 export const styleHeader = config => {
-  root.querySelector('app-header').style.visibility = 'hidden';
-  const headerHeight = getComputedStyle(root.querySelector('app-header')).getPropertyValue('height');
+  if (window.location.href.includes('disable_ch')) return;
+  removeKioskMode();
 
   let style = document.createElement('style');
   style.setAttribute('id', 'cch_header_style');
@@ -18,8 +19,11 @@ export const styleHeader = config => {
         ${header.tabs.length === 0 ? 'margin-top: 48px;' : ''}
         ${config.footer ? 'position: sticky; bottom: 0px;' : ''}
       }
+      app-header {
+        display: none;
+      }
       hui-view, hui-panel-view {
-        margin-top: -${headerHeight};
+        min-height: 100vh;
         padding-top: ${config.footer ? '0px;' : '53px;'}
         ${config.footer ? 'padding-bottom: 48px;' : ''}
         ${config.footer ? 'margin-bottom: -48px;' : ''}

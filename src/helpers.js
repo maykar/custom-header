@@ -1,5 +1,6 @@
 import { getLovelace, getRoot } from 'custom-card-helpers';
 
+export const main = document.querySelector('body > home-assistant').shadowRoot.querySelector('home-assistant-main');
 export const lovelace = getLovelace();
 export const root = getRoot();
 
