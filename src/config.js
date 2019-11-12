@@ -1,4 +1,4 @@
-import { processTabConfig, invertNumArray, lovelace, subscribeRenderTemplate } from './helpers';
+import { invertNumArray, lovelace, subscribeRenderTemplate, processTabArray } from './helpers';
 import { conditionalConfig } from './conditional-config';
 import { styleHeader } from './style-header';
 import { kioskMode } from './kiosk-mode';
@@ -26,21 +26,37 @@ export const buildConfig = () => {
   const variables = config.template_variables;
   delete config.template_variables;
 
-  subscribeRenderTemplate(
-    result => {
-      config = JSON.parse(
-        result
-          .replace(/"true"/gi, 'true')
-          .replace(/"false"/gi, 'false')
-          .replace(/""/, ''),
-      );
-      if (config.hide_tabs) config.hide_tabs = processTabConfig(config.hide_tabs);
-      if (config.show_tabs) config.show_tabs = processTabConfig(config.show_tabs);
-      if (config.show_tabs && config.show_tabs.length) config.hide_tabs = invertNumArray(config.show_tabs);
-      delete config.show_tabs;
-      if (config.kiosk_mode) kioskMode();
-      else styleHeader(config);
-    },
-    { template: JSON.stringify(variables).replace(/\\/g, '') + JSON.stringify(config).replace(/\\/g, '') },
-  );
+  const processAndContinue = () => {
+    if (config.hide_tabs) config.hide_tabs = processTabArray(config.hide_tabs);
+    if (config.show_tabs) config.show_tabs = processTabArray(config.show_tabs);
+    if (config.show_tabs && config.show_tabs.length) config.hide_tabs = invertNumArray(config.show_tabs);
+    if (config.kiosk_mode) kioskMode();
+    else styleHeader(config);
+  };
+
+  let templatesRendered = false;
+  const configString = JSON.stringify(config);
+  const hasTemplates = !!variables || configString.includes('{{') || configString.includes('{%');
+  if (hasTemplates) {
+    subscribeRenderTemplate(
+      result => {
+        templatesRendered = true;
+        config = JSON.parse(
+          result
+            .replace(/"true"/gi, 'true')
+            .replace(/"false"/gi, 'false')
+            .replace(/""/, ''),
+        );
+        processAndContinue();
+      },
+      { template: JSON.stringify(variables).replace(/\\/g, '') + JSON.stringify(config).replace(/\\/g, '') },
+    );
+  } else {
+    processAndContinue();
+  }
+  setTimeout(function() {
+    if (!templatesRendered && hasTemplates) {
+      console.log('Custom-Header: There was an issue with your template/s. Please, check your config.');
+    }
+  }, 10000);
 };
