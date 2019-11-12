@@ -1,4 +1,4 @@
-import { root } from './helpers';
+import { root, main } from './helpers';
 import { header } from './build-header';
 import { tabIndexByName } from './helpers';
 import { removeKioskMode } from './kiosk-mode';
@@ -12,6 +12,10 @@ export const styleHeader = config => {
     header.container.querySelector('#contentContainer').innerHTML = config.header_text;
     headerHeight = 98;
   }
+
+  const sidebar = main.shadowRoot.querySelector('ha-sidebar').shadowRoot;
+  sidebar.querySelector('.menu').style = 'height:49px;';
+  sidebar.querySelector('paper-listbox').style = 'height:calc(100% - 180px);';
 
   let style = document.createElement('style');
   style.setAttribute('id', 'cch_header_style');
@@ -30,7 +34,7 @@ export const styleHeader = config => {
         width: 100%;
       }
       #contentContainer {
-        padding: 12px 0px 12px 7px;
+        padding: 12px 0px 12px 20px;
         color: var(--text-primary-color);
         font: 400 20px Roboto, sans-serif;
         ${config.compact_mode ? 'display: none;' : ''}
