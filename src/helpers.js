@@ -27,7 +27,7 @@ export const invertNumArray = show_tabs => {
     for (let i = 0; i < tabs.length; i += 1) {
       total_tabs.push(i);
     }
-    return total_tabs.filter(el => !userConfig.show_tabs.includes(el));
+    return total_tabs.filter(el => !show_tabs.includes(el));
   }
 };
 

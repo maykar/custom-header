@@ -7,6 +7,12 @@ export const styleHeader = config => {
   if (window.location.href.includes('disable_ch')) return;
   removeKioskMode();
 
+  let headerHeight = 50;
+  if (!config.compact_mode) {
+    header.container.querySelector('#contentContainer').innerHTML = config.header_text;
+    headerHeight = 98;
+  }
+
   let style = document.createElement('style');
   style.setAttribute('id', 'cch_header_style');
   style.innerHTML = `
@@ -16,20 +22,30 @@ export const styleHeader = config => {
         justify-content: center;
         background: ${config.background || 'var(--primary-color)'};
         color: ${config.elements_color || 'var(--text-primary-color)'};
-        ${header.tabs.length === 0 ? 'margin-top: 48px;' : ''}
+        ${header.tabs.length === 0 ? `margin-top: ${headerHeight}px;` : ''}
         ${config.footer ? 'position: sticky; bottom: 0px;' : ''}
+      }
+      cch-stack {
+        flex-direction: column;
+        width: 100%;
+      }
+      #contentContainer {
+        padding: 12px 0px 12px 7px;
+        color: var(--text-primary-color);
+        font: 400 20px Roboto, sans-serif;
+        ${config.compact_mode ? 'display: none;' : ''}
       }
       app-header {
         display: none;
       }
       hui-view, hui-panel-view {
         min-height: 100vh;
-        padding-top: ${config.footer ? '0px;' : '53px;'}
-        ${config.footer ? 'padding-bottom: 48px;' : ''}
-        ${config.footer ? 'margin-bottom: -48px;' : ''}
+        padding-top: ${config.footer ? '0px;' : `${headerHeight}px;`}
+        ${config.footer ? `padding-bottom: ${headerHeight}px;` : ''}
+        ${config.footer ? `margin-bottom: -${headerHeight}px;` : ''}
       }
       hui-panel-view {
-        ${config.footer ? '' : 'padding-top: 48px;'}
+        ${config.footer ? '' : `padding-top: ${headerHeight}px;`}
       }
       #view {
         ${config.footer ? 'min-height: calc(100vh - 160px) !important;' : ''}
@@ -42,6 +58,9 @@ export const styleHeader = config => {
       }
       [buttonElem="voice"] {
         ${config.voice_color ? `color: ${config.voice_color};` : ''}
+      }
+      paper-tabs {
+        margin-left: 7px !important;
       }
       paper-tab {
         ${config.all_tabs_color ? `color: ${config.all_tabs_color};` : ''}

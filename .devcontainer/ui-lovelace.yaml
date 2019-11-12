@@ -12,6 +12,9 @@ custom_header:
   chevrons: '{{ states.input_boolean.chevrons.state == "on" }}'
   hide_tabs: '{{ states.input_text.hide_tabs.state }}'
   kiosk_mode: '{{ states.input_boolean.kiosk_mode.state == "on" }}'
+  compact_mode: '{{ states.input_boolean.compact_mode.state == "on" }}'
+  header_text: '{{ clock }}'
+  template_variables: '{% set clock = (now().strftime("%I")|int)~now().strftime(":%M") %}'
 background: dimgray
 views:
   - icon: mdi:pac-man
@@ -20,6 +23,7 @@ views:
       - type: entities
         entities:
           - entity: input_boolean.kiosk_mode
+          - entity: input_boolean.compact_mode
           - entity: input_boolean.footer
           - entity: input_boolean.indicator_top
           - entity: input_boolean.chevrons

@@ -6,6 +6,8 @@ import { kioskMode } from './kiosk-mode';
 export const buildConfig = () => {
   const defaultConfig = {
     footer: false,
+    kiosk_mode: false,
+    compact_mode: true,
     background: 'var(--primary-color)',
     elements_color: 'var(--text-primary-color)',
     menu_color: '',
@@ -19,6 +21,7 @@ export const buildConfig = () => {
     show_tabs: [],
     template_variables: '',
     exceptions: [],
+    header_text: 'Home Assistant',
   };
 
   let config = { ...defaultConfig, ...lovelace.config.custom_header };
@@ -48,6 +51,9 @@ export const buildConfig = () => {
             .replace(/""/, ''),
         );
         processAndContinue();
+        window.setTimeout(() => {
+          buildConfig();
+        }, (60 - new Date().getSeconds()) * 1000);
       },
       { template: JSON.stringify(variables).replace(/\\/g, '') + JSON.stringify(config).replace(/\\/g, '') },
     );

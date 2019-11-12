@@ -62,9 +62,16 @@ export const buildHeader = () => {
   buildButton('voice', 'mdi:microphone', 'ha-start-voice-button');
   buildButton('options', 'mdi:dots-vertical', 'paper-menu-button');
 
+  const stack = document.createElement('cch-stack');
+  const contentContainer = document.createElement('div');
+  contentContainer.setAttribute('id', 'contentContainer');
+
   header.container = document.createElement('cch-header');
   if (header.menu) header.container.appendChild(header.menu);
-  if (header.tabContainer) header.container.appendChild(header.tabContainer);
+  header.container.appendChild(stack);
+  header.stack = header.container.querySelector('cch-stack');
+  header.stack.appendChild(contentContainer);
+  if (header.tabContainer) header.stack.appendChild(header.tabContainer);
   if (header.voice) header.container.appendChild(header.voice);
   if (header.options) header.container.appendChild(header.options);
   root.querySelector('ha-app-layout').appendChild(header.container);

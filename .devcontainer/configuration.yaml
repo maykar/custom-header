@@ -7,6 +7,10 @@ input_boolean:
     name: 'kiosk_mode:'
     initial: off
     icon: mdi:overscan
+  compact_mode:
+    name: 'compact_mode:'
+    initial: on
+    icon: mdi:resize
   footer:
     name: 'footer:'
     initial: off
