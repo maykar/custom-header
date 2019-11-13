@@ -15,6 +15,14 @@ input_boolean:
     name: 'disable_sidebar:'
     initial: off
     icon: mdi:dock-left
+  tab_direction:
+    name: 'tab_direction:'
+    initial: on
+    icon: mdi:arrow-left-right-bold
+  button_direction:
+    name: 'button_direction:'
+    initial: on
+    icon: mdi:arrow-left-right-bold
   footer:
     name: 'footer:'
     initial: off

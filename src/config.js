@@ -18,6 +18,8 @@ export const buildConfig = () => {
     options_color: '',
     all_tabs_color: '',
     tabs_color: [],
+    tab_direction: 'ltr',
+    button_direction: 'ltr',
     chevrons: true,
     indicator_top: false,
     hide_tabs: [],

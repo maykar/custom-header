@@ -16,6 +16,8 @@ custom_header:
   kiosk_mode: '{{ states.input_boolean.kiosk_mode.state == "on" }}'
   compact_mode: '{{ states.input_boolean.compact_mode.state == "on" }}'
   disable_sidebar: '{{ states.input_boolean.disable_sidebar.state == "on" }}'
+  tab_direction: '{% if states.input_boolean.tab_direction.state == "on" %}ltr{% else %}rtl{% endif %}'
+  button_direction: '{% if states.input_boolean.button_direction.state == "on" %}ltr{% else %}rtl{% endif %}'
 background: url('https://bit.ly/375dx0T')
 views:
   - icon: mdi:pac-man
@@ -29,6 +31,8 @@ views:
           - entity: input_boolean.footer
           - entity: input_boolean.indicator_top
           - entity: input_boolean.chevrons
+          - entity: input_boolean.tab_direction
+          - entity: input_boolean.button_direction
       - type: entities
         entities:
           - entity: input_text.background
@@ -49,6 +53,8 @@ views:
           - entity: input_boolean.footer
           - entity: input_boolean.indicator_top
           - entity: input_boolean.chevrons
+          - entity: input_boolean.tab_direction
+          - entity: input_boolean.button_direction
           - entity: input_text.background
           - entity: input_text.menu_color
           - entity: input_text.voice_color

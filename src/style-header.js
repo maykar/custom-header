@@ -140,6 +140,10 @@ export const styleHeader = config => {
   if (!config.footer) header.container.setAttribute('slot', 'header');
   else header.container.removeAttribute('slot');
 
+  // Tabs direction left to right or right to marginLeft
+  header.tabContainer.dir = config.tab_direction;
+  header.container.dir = config.button_direction;
+
   // Style menu button with sidebar changes/resizing.
   const menu = root.querySelector('ha-menu-button');
   const menuButtonVisibility = () => {
