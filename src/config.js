@@ -3,6 +3,8 @@ import { conditionalConfig } from './conditional-config';
 import { styleHeader } from './style-header';
 import { kioskMode } from './kiosk-mode';
 
+let customHeaderTimeout = false;
+let oldResult = '';
 export const buildConfig = () => {
   const defaultConfig = {
     footer: false,
@@ -44,6 +46,8 @@ export const buildConfig = () => {
   if (hasTemplates) {
     subscribeRenderTemplate(
       result => {
+        if (oldResult == result) return;
+        oldResult = result;
         templatesRendered = true;
         config = JSON.parse(
           result
@@ -52,9 +56,9 @@ export const buildConfig = () => {
             .replace(/""/, ''),
         );
         processAndContinue();
-        if (!window.customHeaderTimeout) {
-          window.customHeaderTimeout = true;
-          window.setTimeout(() => {
+        if (!customHeaderTimeout) {
+          customHeaderTimeout = true;
+          window.setInterval(() => {
             buildConfig();
           }, (60 - new Date().getSeconds()) * 1000);
         }

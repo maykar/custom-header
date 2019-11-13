@@ -49,18 +49,6 @@ export const styleHeader = config => {
       app-header {
         display: none;
       }
-      hui-view, hui-panel-view {
-        min-height: 100vh;
-        padding-top: 0px;
-        ${config.footer ? `padding-bottom: ${headerHeight}px;` : ''}
-        ${config.footer ? `margin-bottom: -${headerHeight}px;` : ''}
-      }
-      hui-panel-view {
-        ${config.footer ? '' : `padding-top: ${headerHeight}px;`}
-      }
-      #view {
-        ${config.footer ? 'min-height: calc(100vh - 160px) !important;' : ''}
-      }
       [buttonElem="menu"] {
         ${config.menu_color ? `color: ${config.menu_color};` : ''}
       }
@@ -77,6 +65,23 @@ export const styleHeader = config => {
         ${config.all_tabs_color ? `color: ${config.all_tabs_color};` : ''}
       }
     `;
+
+  const viewStyle = document.createElement('style');
+  viewStyle.setAttribute('id', 'cch_view_style');
+  viewStyle.innerHTML = `
+        hui-view, hui-panel-view {
+          min-height: 100vh;
+          padding-top: 2px;
+          ${config.footer ? `padding-bottom: ${headerHeight}px;` : ''}
+          ${config.footer ? `margin-bottom: -${headerHeight}px;` : ''}
+        }
+        hui-panel-view {
+          padding-top: 0px;
+        }
+        #view {
+          ${config.footer ? 'min-height: calc(100vh - 160px) !important;' : ''}
+        }
+      `;
 
   // Per tab coloring.
   if (config.tabs_color) {
@@ -102,6 +107,12 @@ export const styleHeader = config => {
   let oldStyle = root.querySelector('#cch_header_style');
   root.appendChild(style);
   if (oldStyle) oldStyle.remove();
+
+  oldStyle = root.querySelector('#cch_view_style');
+  if (!oldStyle || viewStyle.innerHTML != oldStyle.innerHTML) {
+    root.appendChild(viewStyle);
+    if (oldStyle) oldStyle.remove();
+  }
 
   // Hide cheverons completely when not visible.
   style = document.createElement('style');
