@@ -68,9 +68,4 @@ export const buildConfig = () => {
   } else {
     processAndContinue();
   }
-  setTimeout(function() {
-    if (!templatesRendered && hasTemplates) {
-      console.log('Custom-Header: There was an issue with your template/s. Please, check your config.');
-    }
-  }, 10000);
 };
