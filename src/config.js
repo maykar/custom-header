@@ -33,7 +33,7 @@ export const buildConfig = () => {
     if (config.hide_tabs) config.hide_tabs = processTabArray(config.hide_tabs);
     if (config.show_tabs) config.show_tabs = processTabArray(config.show_tabs);
     if (config.show_tabs && config.show_tabs.length) config.hide_tabs = invertNumArray(config.show_tabs);
-    if (config.kiosk_mode) kioskMode();
+    if (config.kiosk_mode) kioskMode(false);
     else styleHeader(config);
   };
 
@@ -51,9 +51,12 @@ export const buildConfig = () => {
             .replace(/""/, ''),
         );
         processAndContinue();
-        window.setTimeout(() => {
-          buildConfig();
-        }, (60 - new Date().getSeconds()) * 1000);
+        if (!window.customHeaderTimeout) {
+          window.customHeaderTimeout = true;
+          window.setTimeout(() => {
+            buildConfig();
+          }, (60 - new Date().getSeconds()) * 1000);
+        }
       },
       { template: JSON.stringify(variables).replace(/\\/g, '') + JSON.stringify(config).replace(/\\/g, '') },
     );

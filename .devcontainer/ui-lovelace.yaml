@@ -2,6 +2,8 @@ resources:
   - url: http://127.0.0.1:5000/custom-header.js
     type: module
 custom_header:
+  template_variables: '{% set clock = (now().strftime("%I")|int)~now().strftime(":%M") %}'
+  header_text: '{{ clock }}'
   background: '{{ states.input_text.background.state }}'
   menu_color: '{{ states.input_text.menu_color.state }}'
   voice_color: '{{ states.input_text.voice_color.state }}'
@@ -13,8 +15,7 @@ custom_header:
   hide_tabs: '{{ states.input_text.hide_tabs.state }}'
   kiosk_mode: '{{ states.input_boolean.kiosk_mode.state == "on" }}'
   compact_mode: '{{ states.input_boolean.compact_mode.state == "on" }}'
-  header_text: '{{ clock }}'
-  template_variables: '{% set clock = (now().strftime("%I")|int)~now().strftime(":%M") %}'
+  disable_sidebar: '{{ states.input_boolean.disable_sidebar.state == "on" }}'
 background: dimgray
 views:
   - icon: mdi:pac-man
@@ -24,6 +25,7 @@ views:
         entities:
           - entity: input_boolean.kiosk_mode
           - entity: input_boolean.compact_mode
+          - entity: input_boolean.disable_sidebar
           - entity: input_boolean.footer
           - entity: input_boolean.indicator_top
           - entity: input_boolean.chevrons

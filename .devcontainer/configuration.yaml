@@ -11,6 +11,10 @@ input_boolean:
     name: 'compact_mode:'
     initial: on
     icon: mdi:resize
+  disable_sidebar:
+    name: 'disable_sidebar:'
+    initial: off
+    icon: mdi:dock-left
   footer:
     name: 'footer:'
     initial: off

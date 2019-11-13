@@ -1,6 +1,7 @@
 import { root, lovelace } from './helpers';
 
 export const buildHeader = () => {
+  if (root.querySelector('cch-header')) return;
   const header = {};
   const tabs = Array.from((root.querySelector('paper-tabs') || root).querySelectorAll('paper-tab'));
 

@@ -1,11 +1,20 @@
 import { root, main } from './helpers';
 import { header } from './build-header';
 import { tabIndexByName } from './helpers';
-import { removeKioskMode } from './kiosk-mode';
+import { kioskMode, removeKioskMode } from './kiosk-mode';
 
 export const styleHeader = config => {
+  let style = document.createElement('style');
+  const sidebar = main.shadowRoot.querySelector('ha-sidebar');
   if (window.location.href.includes('disable_ch')) return;
   removeKioskMode();
+
+  if (config.disable_sidebar) {
+    kioskMode(true);
+  } else {
+    sidebar.shadowRoot.querySelector('.menu').style = 'height:49px;';
+    sidebar.shadowRoot.querySelector('paper-listbox').style = 'height:calc(100% - 180px);';
+  }
 
   let headerHeight = 50;
   if (!config.compact_mode) {
@@ -13,11 +22,6 @@ export const styleHeader = config => {
     headerHeight = 98;
   }
 
-  const sidebar = main.shadowRoot.querySelector('ha-sidebar').shadowRoot;
-  sidebar.querySelector('.menu').style = 'height:49px;';
-  sidebar.querySelector('paper-listbox').style = 'height:calc(100% - 180px);';
-
-  let style = document.createElement('style');
   style.setAttribute('id', 'cch_header_style');
   style.innerHTML = `
       cch-header {
@@ -126,6 +130,10 @@ export const styleHeader = config => {
   const menu = root.querySelector('ha-menu-button');
   const menuButtonVisibility = () => {
     menu.style.display = 'none';
+    if (config.disable_sidebar) {
+      header.menu.style.display = 'none';
+      return;
+    }
     if (menu.style.visibility === 'hidden') {
       if (config.footer) header.menu.style.display = 'none';
       else header.menu.style.display = 'initial';
