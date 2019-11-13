@@ -46,9 +46,9 @@ export const buildConfig = () => {
   if (hasTemplates) {
     subscribeRenderTemplate(
       result => {
+        templatesRendered = true;
         if (oldResult == result) return;
         oldResult = result;
-        templatesRendered = true;
         config = JSON.parse(
           result
             .replace(/"true"/gi, 'true')
@@ -68,4 +68,9 @@ export const buildConfig = () => {
   } else {
     processAndContinue();
   }
+  setTimeout(function() {
+    if (!templatesRendered && hasTemplates) {
+      console.log('Custom-Header: There was an issue with your template/s. Please, check your config.');
+    }
+  }, 10000);
 };

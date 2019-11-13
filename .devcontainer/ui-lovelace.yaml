@@ -16,7 +16,7 @@ custom_header:
   kiosk_mode: '{{ states.input_boolean.kiosk_mode.state == "on" }}'
   compact_mode: '{{ states.input_boolean.compact_mode.state == "on" }}'
   disable_sidebar: '{{ states.input_boolean.disable_sidebar.state == "on" }}'
-background: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/efa5f38e-1b17-45fc-999b-0b5db1804b89/d31qde8-c4f9ca19-6ab4-4e69-b9ad-087d564e6f5f.jpg/v1/fill/w_1024,h_1024,q_75,strp/tileable_wood_texture_01_by_simoonmurray_d31qde8-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTAyNCIsInBhdGgiOiJcL2ZcL2VmYTVmMzhlLTFiMTctNDVmYy05OTliLTBiNWRiMTgwNGI4OVwvZDMxcWRlOC1jNGY5Y2ExOS02YWI0LTRlNjktYjlhZC0wODdkNTY0ZTZmNWYuanBnIiwid2lkdGgiOiI8PTEwMjQifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.sPM3jytY8yve-fgn2pevLnGN7isRo9iqna7nlPrSIgg')
+background: url('https://bit.ly/375dx0T')
 views:
   - icon: mdi:pac-man
     title: pacman
