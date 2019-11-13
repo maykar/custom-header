@@ -7,6 +7,7 @@ export const buildConfig = () => {
   const defaultConfig = {
     footer: false,
     kiosk_mode: false,
+    disable_sidebar: false,
     compact_mode: true,
     background: 'var(--primary-color)',
     elements_color: 'var(--text-primary-color)',

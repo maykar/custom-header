@@ -29,6 +29,8 @@ views:
           - entity: input_boolean.footer
           - entity: input_boolean.indicator_top
           - entity: input_boolean.chevrons
+      - type: entities
+        entities:
           - entity: input_text.background
           - entity: input_text.menu_color
           - entity: input_text.voice_color

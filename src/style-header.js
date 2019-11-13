@@ -19,7 +19,7 @@ export const styleHeader = config => {
   let headerHeight = 50;
   if (!config.compact_mode) {
     header.container.querySelector('#contentContainer').innerHTML = config.header_text;
-    headerHeight = 98;
+    headerHeight = header.tabs.length ? 100 : 50;
   }
 
   style.setAttribute('id', 'cch_header_style');
@@ -30,7 +30,8 @@ export const styleHeader = config => {
         justify-content: center;
         background: ${config.background || 'var(--primary-color)'};
         color: ${config.elements_color || 'var(--text-primary-color)'};
-        ${header.tabs.length === 0 ? `margin-top: ${headerHeight}px;` : ''}
+        margin-top: 0px;
+        margin-bottom: 0px;
         ${config.footer ? 'position: sticky; bottom: 0px;' : ''}
       }
       cch-stack {
@@ -154,6 +155,7 @@ export const styleHeader = config => {
   });
   menuButtonVisibility();
 
-  header.tabContainer.querySelector('paper-tab.iron-selected').click();
+  if (header.tabs.length) header.tabContainer.querySelector('paper-tab.iron-selected').click();
+  else header.tabContainer.style.display = 'none';
   window.dispatchEvent(new Event('resize'));
 };
