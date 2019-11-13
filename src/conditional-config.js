@@ -1,5 +1,5 @@
 export const conditionalConfig = config => {
-  function countMatches(conditions) {
+  const countMatches = conditions => {
     const userVars = {
       user: document.body.querySelector('home-assistant').hass.user.name,
       user_agent: navigator.userAgent,
@@ -24,7 +24,7 @@ export const conditionalConfig = config => {
       }
     }
     return count;
-  }
+  };
 
   let exceptionConfig = {};
   let highestMatch = 0;

@@ -5,24 +5,27 @@ import { kioskMode, removeKioskMode } from './kiosk-mode';
 
 export const styleHeader = config => {
   let style = document.createElement('style');
-  const sidebar = main.shadowRoot.querySelector('ha-sidebar');
   if (window.location.href.includes('disable_ch')) return;
-  removeKioskMode();
 
+  // Disable sidebar or style to fit header's new sizeing/placement.
+  const sidebar = main.shadowRoot.querySelector('ha-sidebar');
   if (config.disable_sidebar) {
     kioskMode(true);
-  } else {
+  } else if (!config.disable_sidebar && !config.kiosk_mode) {
+    removeKioskMode();
     sidebar.shadowRoot.querySelector('.menu').style = 'height:49px;';
     sidebar.shadowRoot.querySelector('paper-listbox').style = 'height:calc(100% - 155px);';
     sidebar.shadowRoot.querySelector('div.divider').style = 'margin-bottom: -10px;';
   }
 
+  // Get header height.
   let headerHeight = 50;
   if (!config.compact_mode) {
     header.container.querySelector('#contentContainer').innerHTML = config.header_text;
     headerHeight = header.tabs.length ? 100 : 50;
   }
 
+  // Main header styling.
   style.setAttribute('id', 'cch_header_style');
   style.innerHTML = `
       cch-header {
@@ -66,23 +69,6 @@ export const styleHeader = config => {
       }
     `;
 
-  const viewStyle = document.createElement('style');
-  viewStyle.setAttribute('id', 'cch_view_style');
-  viewStyle.innerHTML = `
-        hui-view, hui-panel-view {
-          min-height: 100vh;
-          padding-top: 2px;
-          ${config.footer ? `padding-bottom: ${headerHeight}px;` : ''}
-          ${config.footer ? `margin-bottom: -${headerHeight}px;` : ''}
-        }
-        hui-panel-view {
-          padding-top: 0px;
-        }
-        #view {
-          ${config.footer ? 'min-height: calc(100vh - 160px) !important;' : ''}
-        }
-      `;
-
   // Per tab coloring.
   if (config.tabs_color) {
     Object.keys(config.tabs_color).forEach(tab => {
@@ -104,10 +90,30 @@ export const styleHeader = config => {
     });
   }
 
+  // Add updated style elements and remove old ones after.
   let oldStyle = root.querySelector('#cch_header_style');
   root.appendChild(style);
   if (oldStyle) oldStyle.remove();
 
+  // Style views elements.
+  const viewStyle = document.createElement('style');
+  viewStyle.setAttribute('id', 'cch_view_style');
+  viewStyle.innerHTML = `
+        hui-view, hui-panel-view {
+          min-height: 100vh;
+          padding-top: 2px;
+          ${config.footer ? `padding-bottom: ${headerHeight}px;` : ''}
+          ${config.footer ? `margin-bottom: -${headerHeight}px;` : ''}
+        }
+        hui-panel-view {
+          padding-top: 0px;
+        }
+        #view {
+          ${config.footer ? 'min-height: calc(100vh - 160px) !important;' : ''}
+        }
+      `;
+
+  // Add updated view style if changed.
   oldStyle = root.querySelector('#cch_view_style');
   if (!oldStyle || viewStyle.innerHTML != oldStyle.innerHTML) {
     root.appendChild(viewStyle);
@@ -126,11 +132,11 @@ export const styleHeader = config => {
   header.tabContainer.shadowRoot.appendChild(style);
   if (oldStyle) oldStyle.remove();
 
-  // Remove chevrons
+  // Remove chevrons.
   if (!config.chevrons) header.tabContainer.hideScrollButtons = true;
   else header.tabContainer.hideScrollButtons = false;
 
-  // Current tab indicator on top
+  // Current tab indicator on top.
   if (config.indicator_top) header.tabContainer.alignBottom = true;
   else header.tabContainer.alignBottom = false;
 
@@ -140,7 +146,7 @@ export const styleHeader = config => {
   if (!config.footer) header.container.setAttribute('slot', 'header');
   else header.container.removeAttribute('slot');
 
-  // Tabs direction left to right or right to marginLeft
+  // Tabs direction left to right or right to left.
   header.tabContainer.dir = config.tab_direction;
   header.container.dir = config.button_direction;
 
@@ -171,7 +177,10 @@ export const styleHeader = config => {
   });
   menuButtonVisibility();
 
+  // Click active tab to refresh indicator.
   if (header.tabs.length) header.tabContainer.querySelector('paper-tab.iron-selected').click();
+  // Hide tabcontainer if there's only one view.
   else header.tabContainer.style.display = 'none';
+
   window.dispatchEvent(new Event('resize'));
 };

@@ -4,6 +4,7 @@ export const main = document.querySelector('body > home-assistant').shadowRoot.q
 export const lovelace = getLovelace();
 export const root = getRoot();
 
+// Get tab index number from view's title or path
 export const tabIndexByName = tab => {
   let index;
   const { views } = lovelace.config;
@@ -31,6 +32,7 @@ export const invertNumArray = show_tabs => {
   }
 };
 
+// Subscribe and render Jinja templates.
 export const subscribeRenderTemplate = (onChange, params) => {
   const conn = document.body.querySelector('home-assistant').hass.connection;
   const variables = {

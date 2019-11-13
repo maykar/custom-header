@@ -45,6 +45,7 @@ export const buildConfig = () => {
   let templatesRendered = false;
   const configString = JSON.stringify(config);
   const hasTemplates = !!variables || configString.includes('{{') || configString.includes('{%');
+
   if (hasTemplates) {
     subscribeRenderTemplate(
       result => {
@@ -58,6 +59,7 @@ export const buildConfig = () => {
             .replace(/""/, ''),
         );
         processAndContinue();
+        // Render templates every minute.
         if (!customHeaderTimeout) {
           customHeaderTimeout = true;
           window.setInterval(() => {
@@ -70,6 +72,7 @@ export const buildConfig = () => {
   } else {
     processAndContinue();
   }
+  // If no config is returned from subscribeRenderTemplate for 10 secs there is likely a bad template.
   setTimeout(function() {
     if (!templatesRendered && hasTemplates) {
       console.log('Custom-Header: There was an issue with your template/s. Please, check your config.');

@@ -1,7 +1,10 @@
 import { root, main } from './helpers';
 
+// Kiosk mode is used to hide sidebar only as well.
 export const kioskMode = sidebarOnly => {
   if (window.location.href.includes('disable_ch')) return;
+
+  // Kiosk mode styling.
   let style = document.createElement('style');
   style.setAttribute('id', 'cch_header_style');
   style.innerHTML += `
@@ -23,12 +26,16 @@ export const kioskMode = sidebarOnly => {
       `;
   }
 
+  // Add updated styles only if changed.
   const oldStyle = root.querySelector('#cch_header_style');
-  root.appendChild(style);
-  if (oldStyle) oldStyle.remove();
+  if (!oldStyle || oldStyle.innerText != style.innerHTML) {
+    root.appendChild(style);
+    if (oldStyle) oldStyle.remove();
+  }
 
   main.shadowRoot.querySelector('#drawer').style.display = 'none';
 
+  // Style sidebar to close immediately and prevent opening.
   if (!main.shadowRoot.querySelector('ha-sidebar').shadowRoot.querySelector('#cch_sidebar_style')) {
     style = document.createElement('style');
     style.setAttribute('id', 'cch_sidebar_style');
