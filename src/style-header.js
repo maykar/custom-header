@@ -13,7 +13,8 @@ export const styleHeader = config => {
     kioskMode(true);
   } else {
     sidebar.shadowRoot.querySelector('.menu').style = 'height:49px;';
-    sidebar.shadowRoot.querySelector('paper-listbox').style = 'height:calc(100% - 180px);';
+    sidebar.shadowRoot.querySelector('paper-listbox').style = 'height:calc(100% - 155px);';
+    sidebar.shadowRoot.querySelector('div.divider').style = 'margin-bottom: -10px;';
   }
 
   let headerHeight = 50;
@@ -30,9 +31,10 @@ export const styleHeader = config => {
         justify-content: center;
         background: ${config.background || 'var(--primary-color)'};
         color: ${config.elements_color || 'var(--text-primary-color)'};
-        margin-top: 0px;
+        margin-top: 4px;
         margin-bottom: 0px;
-        ${config.footer ? 'position: sticky; bottom: 0px;' : ''}
+        margin-top: ${config.footer ? '4px;' : '0px'};
+        ${config.footer ? 'position: sticky; bottom: 0px;' : 'position: sticky; top: 0px;'}
       }
       cch-stack {
         flex-direction: column;
@@ -49,7 +51,7 @@ export const styleHeader = config => {
       }
       hui-view, hui-panel-view {
         min-height: 100vh;
-        padding-top: ${config.footer ? '0px;' : `${headerHeight}px;`}
+        padding-top: 0px;
         ${config.footer ? `padding-bottom: ${headerHeight}px;` : ''}
         ${config.footer ? `margin-bottom: -${headerHeight}px;` : ''}
       }
@@ -69,7 +71,7 @@ export const styleHeader = config => {
         ${config.voice_color ? `color: ${config.voice_color};` : ''}
       }
       paper-tabs {
-        margin-left: 7px !important;
+        margin-left: 9px !important;
       }
       paper-tab {
         ${config.all_tabs_color ? `color: ${config.all_tabs_color};` : ''}
@@ -136,8 +138,7 @@ export const styleHeader = config => {
       return;
     }
     if (menu.style.visibility === 'hidden') {
-      if (config.footer) header.menu.style.display = 'none';
-      else header.menu.style.display = 'initial';
+      header.menu.style.display = 'none';
       header.menu.style.visibility = 'hidden';
       header.menu.style.marginRight = '33px';
     } else {
