@@ -7,6 +7,7 @@ export const observers = () => {
     mutations.forEach(({ addedNodes, target }) => {
       if (addedNodes.length && target.nodeName == 'PARTIAL-PANEL-RESOLVER') {
         // When returning to lovelace/overview from elsewhere in HA.
+        window.customHeaderDefaultClicked = false;
         buildConfig();
       } else if (target.className === 'edit-mode' && addedNodes.length) {
         // Entered edit mode.

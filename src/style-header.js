@@ -49,7 +49,7 @@ export const styleHeader = config => {
         margin-right: 9px;
       }
       #contentContainer {
-        padding: 12px 20px 12px ${!header.tabs.length ? 0 : 20}px;
+        padding: 12px 6px 12px 6px;
         color: var(--text-primary-color);
         font: 400 20px Roboto, sans-serif;
         ${config.compact_mode ? 'display: none;' : ''}
@@ -182,6 +182,29 @@ export const styleHeader = config => {
     });
   }
   menuButtonVisibility();
+
+  // Redirect off hidden tab to first not hidden tab or default tab.
+  const defaultTab = config.default_tab != undefinded ? tabIndexByName(config.default_tab) : null;
+  if (config.redirect && header.tabs.length) {
+    const activeTab = header.tabContainer.indexOf(header.tabContainer.querySelector('paper-tab.iron-selected'));
+    if (config.hide_tabs.includes(activeTab) && config.hide_tabs.length != header.tabs.length) {
+      if (defaultTab != null && !config.hide_tabs.includes(tabIndexByName(defaultTab))) {
+        header.tabs[defaultTab].click();
+      } else {
+        for (const tab of header.tabs) {
+          if (getComputedStyle(tab).display != 'none') {
+            tab.click();
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  if (defaultTab != null && !window.customHeaderDefaultClicked) {
+    window.customHeaderDefaultClicked = true;
+    header.tabs[defaultTab].click();
+  }
 
   // Click active tab to refresh indicator.
   if (header.tabs.length) header.tabContainer.querySelector('paper-tab.iron-selected').click();
