@@ -4,12 +4,12 @@ import { tabIndexByName } from './helpers';
 import { kioskMode, removeKioskMode } from './kiosk-mode';
 
 export const styleHeader = config => {
-  let style = document.createElement('style');
   if (window.location.href.includes('disable_ch')) return;
 
+  // No need to compact header if there is only one view.
   if (!header.tabs.length) config.compact_mode = false;
 
-  // Disable sidebar or style to fit header's new sizeing/placement.
+  // Disable sidebar or style it to fit header's new sizing/placement.
   const sidebar = main.shadowRoot.querySelector('ha-sidebar');
   if (config.disable_sidebar) {
     kioskMode(true);
@@ -28,6 +28,7 @@ export const styleHeader = config => {
   }
 
   // Main header styling.
+  let style = document.createElement('style');
   style.setAttribute('id', 'cch_header_style');
   style.innerHTML = `
       cch-header {
@@ -80,6 +81,7 @@ export const styleHeader = config => {
     `;
     });
   }
+
   // Per tab hiding.
   if (config.hide_tabs) {
     config.hide_tabs.forEach(tab => {
@@ -170,12 +172,15 @@ export const styleHeader = config => {
     }
   };
   // Watch for menu button changes.
-  new MutationObserver(() => {
-    menuButtonVisibility();
-  }).observe(menu, {
-    attributes: true,
-    attributeFilter: ['style'],
-  });
+  if (!window.customHeaderMenuObserver) {
+    window.customHeaderMenuObserver = true;
+    new MutationObserver(() => {
+      menuButtonVisibility();
+    }).observe(menu, {
+      attributes: true,
+      attributeFilter: ['style'],
+    });
+  }
   menuButtonVisibility();
 
   // Click active tab to refresh indicator.
