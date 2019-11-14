@@ -188,7 +188,7 @@ export const styleHeader = config => {
   if (config.redirect && header.tabs.length) {
     const activeTab = header.tabContainer.indexOf(header.tabContainer.querySelector('paper-tab.iron-selected'));
     if (config.hide_tabs.includes(activeTab) && config.hide_tabs.length != header.tabs.length) {
-      if (defaultTab != null && !config.hide_tabs.includes(tabIndexByName(defaultTab))) {
+      if (defaultTab && !config.hide_tabs.includes(tabIndexByName(defaultTab))) {
         if (getComputedStyle(header.tabs[defaultTab]).display != 'none') header.tabs[defaultTab].click();
       } else {
         for (const tab of header.tabs) {
@@ -202,12 +202,14 @@ export const styleHeader = config => {
   }
 
   if (defaultTab != null && !window.customHeaderDefaultClicked) {
-    if (getComputedStyle(header.tabs[defaultTab]).display != 'none') header.tabs[defaultTab].click();
+    if (header.tabs[defaultTab] && getComputedStyle(header.tabs[defaultTab]).display != 'none') {
+      header.tabs[defaultTab].click();
+    }
   }
   window.customHeaderDefaultClicked = true;
 
   // Click active tab to refresh indicator.
-  if (header.tabs.length) header.tabContainer.querySelector('paper-tab.iron-selected').click();
+  if (header.tabs.length) root.querySelector('paper-tab.iron-selected').click();
   // Hide tabcontainer if there's only one view.
   else header.tabContainer.style.display = 'none';
 

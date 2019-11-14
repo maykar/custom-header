@@ -19,6 +19,10 @@ input_boolean:
     name: 'tab_direction:'
     initial: on
     icon: mdi:arrow-left-right-bold
+  redirect:
+    name: 'redirect:'
+    initial: on
+    icon: mdi:directions
   button_direction:
     name: 'button_direction:'
     initial: on
@@ -40,6 +44,10 @@ input_text:
     name: 'hide_tabs:'
     initial: '6, invader'
     icon: 'mdi:eye-off'
+  default_tab:
+    name: 'default_tab:'
+    initial: 'pacman'
+    icon: 'mdi:arrow-up-drop-circle'
   background:
     name: 'background:'
     initial: '#000000'
