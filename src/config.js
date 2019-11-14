@@ -3,8 +3,6 @@ import { conditionalConfig } from './conditional-config';
 import { styleHeader } from './style-header';
 import { kioskMode } from './kiosk-mode';
 
-let customHeaderTimeout = false;
-let oldResult = '';
 export const buildConfig = () => {
   const defaultConfig = {
     footer: false,
@@ -50,8 +48,8 @@ export const buildConfig = () => {
     subscribeRenderTemplate(
       result => {
         templatesRendered = true;
-        if (oldResult == result) return;
-        oldResult = result;
+        if (window.customHeaderLastTemplateResult == result) return;
+        window.customHeaderLastTemplateResult = result;
         config = JSON.parse(
           result
             .replace(/"true"/gi, 'true')
@@ -60,8 +58,8 @@ export const buildConfig = () => {
         );
         processAndContinue();
         // Render templates every minute.
-        if (!customHeaderTimeout) {
-          customHeaderTimeout = true;
+        if (!window.customHeaderTemplateRenderTimeout) {
+          window.customHeaderTemplateRenderTimeout = true;
           window.setInterval(() => {
             buildConfig();
           }, (60 - new Date().getSeconds()) * 1000);
