@@ -18,6 +18,7 @@ custom_header:
   disable_sidebar: '{{ states.input_boolean.disable_sidebar.state == "on" }}'
   tab_direction: '{% if states.input_boolean.tab_direction.state == "on" %}ltr{% else %}rtl{% endif %}'
   button_direction: '{% if states.input_boolean.button_direction.state == "on" %}ltr{% else %}rtl{% endif %}'
+  default_tab: ghost
 background: url('https://bit.ly/375dx0T')
 views:
   - icon: mdi:pac-man
