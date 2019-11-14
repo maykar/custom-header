@@ -53,6 +53,7 @@ export const buildHeader = () => {
         ).dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: true }));
       });
     }
+
     header[button].setAttribute('icon', icon);
     header[button].setAttribute('buttonElem', button);
     header[button].style.flexShrink = '0';
@@ -73,7 +74,7 @@ export const buildHeader = () => {
   header.stack = header.container.querySelector('cch-stack');
   header.stack.appendChild(contentContainer);
   if (header.tabContainer) header.stack.appendChild(header.tabContainer);
-  if (header.voice) header.container.appendChild(header.voice);
+  if (header.voice && header.voice.style.visibility != 'hidden') header.container.appendChild(header.voice);
   if (header.options) header.container.appendChild(header.options);
   root.querySelector('ha-app-layout').appendChild(header.container);
 

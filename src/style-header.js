@@ -42,6 +42,8 @@ export const styleHeader = config => {
       cch-stack {
         flex-direction: column;
         width: 100%;
+        margin-left: 9px;
+        margin-right: 9px;
       }
       #contentContainer {
         padding: 12px 20px 12px 20px;
@@ -60,10 +62,6 @@ export const styleHeader = config => {
       }
       [buttonElem="voice"] {
         ${config.voice_color ? `color: ${config.voice_color};` : ''}
-      }
-      paper-tabs {
-        margin-left: 9px !important;
-        margin-right: 9px !important;
       }
       paper-tab {
         ${config.all_tabs_color ? `color: ${config.all_tabs_color};` : ''}
