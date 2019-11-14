@@ -44,13 +44,13 @@ export const buildHeader = () => {
         });
       });
     } else {
+      if (button === 'voice' && !root.querySelector('ha-start-voice-button')) name = '[icon="hass:microphone"]';
       if (!root.querySelector(name)) return;
       header[button] = document.createElement('paper-icon-button');
       header[button].addEventListener('click', () => {
-        root
-          .querySelector(name)
-          .shadowRoot.querySelector('paper-icon-button')
-          .dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: true }));
+        (
+          root.querySelector(name).shadowRoot.querySelector('paper-icon-button') || root.querySelector(name)
+        ).dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: true }));
       });
     }
     header[button].setAttribute('icon', icon);
