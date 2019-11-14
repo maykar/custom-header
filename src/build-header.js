@@ -73,7 +73,7 @@ export const buildHeader = () => {
   header.container.appendChild(stack);
   header.stack = header.container.querySelector('cch-stack');
   header.stack.appendChild(contentContainer);
-  if (header.tabContainer) header.stack.appendChild(header.tabContainer);
+  header.stack.appendChild(header.tabContainer);
   if (header.voice && header.voice.style.visibility != 'hidden') header.container.appendChild(header.voice);
   if (header.options) header.container.appendChild(header.options);
   root.querySelector('ha-app-layout').appendChild(header.container);

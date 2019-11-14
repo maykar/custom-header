@@ -7,6 +7,8 @@ export const styleHeader = config => {
   let style = document.createElement('style');
   if (window.location.href.includes('disable_ch')) return;
 
+  if (!header.tabs.length) config.compact_mode = false;
+
   // Disable sidebar or style to fit header's new sizeing/placement.
   const sidebar = main.shadowRoot.querySelector('ha-sidebar');
   if (config.disable_sidebar) {
@@ -46,7 +48,7 @@ export const styleHeader = config => {
         margin-right: 9px;
       }
       #contentContainer {
-        padding: 12px 20px 12px 20px;
+        padding: 12px 20px 12px ${!header.tabs.length ? 0 : 20}px;
         color: var(--text-primary-color);
         font: 400 20px Roboto, sans-serif;
         ${config.compact_mode ? 'display: none;' : ''}
