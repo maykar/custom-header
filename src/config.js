@@ -58,8 +58,8 @@ export const buildConfig = () => {
         );
         processAndContinue();
         // Render templates every minute.
-        if (!window.customHeaderTemplateRenderTimeout) {
-          window.customHeaderTemplateRenderTimeout = true;
+        if (!window.customHeaderTemplateRenderInterval) {
+          window.customHeaderTemplateRenderInterval = true;
           window.setInterval(() => {
             buildConfig();
           }, (60 - new Date().getSeconds()) * 1000);

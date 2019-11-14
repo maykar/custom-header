@@ -19,10 +19,10 @@ export const styleHeader = config => {
   }
 
   // Get header height.
-  let headerHeight = 50;
+  let headerHeight = 48;
   if (!config.compact_mode) {
     header.container.querySelector('#contentContainer').innerHTML = config.header_text;
-    headerHeight = header.tabs.length ? 100 : 50;
+    headerHeight = header.tabs.length ? 96 : 48;
   }
 
   // Main header styling.
@@ -44,7 +44,7 @@ export const styleHeader = config => {
         width: 100%;
       }
       #contentContainer {
-        padding: 12px 0px 12px 20px;
+        padding: 12px 20px 12px 20px;
         color: var(--text-primary-color);
         font: 400 20px Roboto, sans-serif;
         ${config.compact_mode ? 'display: none;' : ''}
@@ -63,6 +63,7 @@ export const styleHeader = config => {
       }
       paper-tabs {
         margin-left: 9px !important;
+        margin-right: 9px !important;
       }
       paper-tab {
         ${config.all_tabs_color ? `color: ${config.all_tabs_color};` : ''}
@@ -100,16 +101,16 @@ export const styleHeader = config => {
   viewStyle.setAttribute('id', 'cch_view_style');
   viewStyle.innerHTML = `
         hui-view, hui-panel-view {
-          min-height: 100vh;
+          min-height: calc(100vh - ${headerHeight}px);
           padding-top: 2px;
           ${config.footer ? `padding-bottom: ${headerHeight}px;` : ''}
-          ${config.footer ? `margin-bottom: -${headerHeight}px;` : ''}
+          ${config.footer ? `margin-bottom: -${headerHeight + 4}px;` : ''}
         }
         hui-panel-view {
           padding-top: 0px;
         }
         #view {
-          ${config.footer ? 'min-height: calc(100vh - 160px) !important;' : ''}
+          ${config.footer ? `min-height: calc(100vh - ${headerHeight + 4}px) !important;` : ''}
         }
       `;
 
