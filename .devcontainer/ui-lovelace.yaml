@@ -10,17 +10,18 @@ custom_header:
   options_color: '{{ states.input_text.options_color.state }}'
   all_tabs_color: '{{ states.input_text.all_tabs_color.state }}'
   indicator_top: '{{ states.input_boolean.indicator_top.state == "on" }}'
-  footer: '{{ states.input_boolean.footer.state == "on" }}'
+  footer_mode: '{{ states.input_boolean.footer_mode.state == "on" }}'
   chevrons: '{{ states.input_boolean.chevrons.state == "on" }}'
   hide_tabs: '{{ states.input_text.hide_tabs.state }}'
   hidden_tab_redirect: '{{ states.input_boolean.hidden_tab_redirect.state == "on" }}'
   kiosk_mode: '{{ states.input_boolean.kiosk_mode.state == "on" }}'
+  mobile_mode: '{{ states.input_boolean.mobile_mode.state == "on" }}'
   compact_mode: '{{ states.input_boolean.compact_mode.state == "on" }}'
   disable_sidebar: '{{ states.input_boolean.disable_sidebar.state == "on" }}'
   tab_direction: '{% if states.input_boolean.tab_direction.state == "on" %}ltr{% else %}rtl{% endif %}'
   button_direction: '{% if states.input_boolean.button_direction.state == "on" %}ltr{% else %}rtl{% endif %}'
   default_tab: '{{ states.input_text.default_tab.state }}'
-  disabled: '{{ states.input_boolean.disabled.state == "on" }}'
+  disabled_mode: '{{ states.input_boolean.disabled_mode.state == "on" }}'
   active_tab_color: '{{ states.input_text.active_tab_color.state }}'
   indicator_color: '{{ states.input_text.indicator_color.state }}'
 background: url('https://bit.ly/375dx0T')
@@ -30,11 +31,12 @@ views:
     cards:
       - type: entities
         entities:
-          - entity: input_boolean.disabled
+          - entity: input_boolean.disabled_mode
           - entity: input_boolean.kiosk_mode
           - entity: input_boolean.compact_mode
+          - entity: input_boolean.footer_mode
+          - entity: input_boolean.mobile_mode
           - entity: input_boolean.disable_sidebar
-          - entity: input_boolean.footer
           - entity: input_boolean.indicator_top
           - entity: input_boolean.chevrons
           - entity: input_boolean.hidden_tab_redirect
@@ -57,11 +59,12 @@ views:
     cards:
       - type: entities
         entities:
-          - entity: input_boolean.disabled
+          - entity: input_boolean.disabled_mode
           - entity: input_boolean.kiosk_mode
           - entity: input_boolean.compact_mode
+          - entity: input_boolean.footer_mode
+          - entity: input_boolean.mobile_mode
           - entity: input_boolean.disable_sidebar
-          - entity: input_boolean.footer
           - entity: input_boolean.indicator_top
           - entity: input_boolean.chevrons
           - entity: input_boolean.hidden_tab_redirect

@@ -7,25 +7,25 @@ export const styleHeader = config => {
   if (window.location.href.includes('disable_ch')) return;
   const sidebar = main.shadowRoot.querySelector('ha-sidebar');
 
-  if (config.disabled) {
+  if (config.disabled_mode) {
+    window.customHeaderDisabled = true;
     removeKioskMode();
+    if (header.container) header.container.style.visibility = 'hidden';
     if (root.querySelector('#cch_header_style')) root.querySelector('#cch_header_style').remove();
     if (root.querySelector('#cch_view_style')) root.querySelector('#cch_view_style').remove();
     if (header.tabContainer.shadowRoot.querySelector('#cch_chevron')) {
       header.tabContainer.shadowRoot.querySelector('#cch_chevron').remove();
     }
-    if (header.container) header.container.style.visibility = 'hidden';
+    header.menu.style.display = 'none';
+    root.querySelector('ha-menu-button').style.display = '';
     sidebar.shadowRoot.querySelector('.menu').style = '';
     sidebar.shadowRoot.querySelector('paper-listbox').style = '';
     sidebar.shadowRoot.querySelector('div.divider').style = '';
-    window.customHeaderDisabled = true;
     window.dispatchEvent(new Event('resize'));
-    header.menu.style.display = 'none';
-    root.querySelector('ha-menu-button').style.display = '';
     return;
   } else {
-    header.menu.style.display = '';
     window.customHeaderDisabled = false;
+    header.menu.style.display = '';
     if (header.container) header.container.style.visibility = 'visible';
   }
 
@@ -61,8 +61,8 @@ export const styleHeader = config => {
         color: ${config.elements_color || 'var(--text-primary-color)'};
         margin-top: 4px;
         margin-bottom: 0px;
-        margin-top: ${config.footer ? '4px;' : '0px'};
-        ${config.footer ? 'position: sticky; bottom: 0px;' : 'position: sticky; top: 0px;'}
+        margin-top: ${config.footer_mode ? '4px;' : '0px'};
+        ${config.footer_mode ? 'position: sticky; bottom: 0px;' : 'position: sticky; top: 0px;'}
       }
       cch-stack {
         flex-direction: column;
@@ -133,14 +133,14 @@ export const styleHeader = config => {
         hui-view, hui-panel-view {
           min-height: calc(100vh - ${headerHeight}px);
           padding-top: 2px;
-          ${config.footer ? `padding-bottom: ${headerHeight}px;` : ''}
-          ${config.footer ? `margin-bottom: -${headerHeight + 4}px;` : ''}
+          ${config.footer_mode ? `padding-bottom: ${headerHeight}px;` : ''}
+          ${config.footer_mode ? `margin-bottom: -${headerHeight + 4}px;` : ''}
         }
         hui-panel-view {
           padding-top: 0px;
         }
         #view {
-          ${config.footer ? `min-height: calc(100vh - ${headerHeight + 4}px) !important;` : ''}
+          ${config.footer_mode ? `min-height: calc(100vh - ${headerHeight + 4}px) !important;` : ''}
         }
       `;
 
@@ -172,9 +172,9 @@ export const styleHeader = config => {
   else header.tabContainer.alignBottom = false;
 
   // Set/remove attributes for footer mode.
-  if (config.footer) header.options.setAttribute('vertical-align', 'bottom');
+  if (config.footer_mode) header.options.setAttribute('vertical-align', 'bottom');
   else header.options.removeAttribute('vertical-align');
-  if (!config.footer) header.container.setAttribute('slot', 'header');
+  if (!config.footer_mode) header.container.setAttribute('slot', 'header');
   else header.container.removeAttribute('slot');
 
   // Tabs direction left to right or right to left.

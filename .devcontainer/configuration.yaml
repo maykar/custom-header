@@ -7,13 +7,17 @@ input_boolean:
     name: 'kiosk_mode:'
     initial: off
     icon: mdi:overscan
-  disabled:
-    name: 'disabled:'
+  mobile_mode:
+    name: 'mobile_mode:'
+    initial: off
+    icon: mdi:cellphone-android
+  disabled_mode:
+    name: 'disabled_mode:'
     initial: off
     icon: mdi:cancel
   compact_mode:
     name: 'compact_mode:'
-    initial: on
+    initial: off
     icon: mdi:resize
   disable_sidebar:
     name: 'disable_sidebar:'
@@ -31,8 +35,8 @@ input_boolean:
     name: 'button_direction:'
     initial: on
     icon: mdi:arrow-left-right-bold
-  footer:
-    name: 'footer:'
+  footer_mode:
+    name: 'footer_mode:'
     initial: off
     icon: mdi:arrow-down-bold-box
   chevrons:

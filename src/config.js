@@ -3,33 +3,34 @@ import { conditionalConfig } from './conditional-config';
 import { styleHeader } from './style-header';
 import { kioskMode } from './kiosk-mode';
 
-export const buildConfig = refreshTemplates => {
-  const defaultConfig = {
-    footer: false,
-    kiosk_mode: false,
-    disable_sidebar: false,
-    compact_mode: true,
-    background: 'var(--primary-color)',
-    elements_color: 'var(--text-primary-color)',
-    menu_color: '',
-    voice_color: '',
-    options_color: '',
-    all_tabs_color: '',
-    tabs_color: [],
-    tab_direction: 'ltr',
-    button_direction: 'ltr',
-    chevrons: true,
-    indicator_top: false,
-    hide_tabs: [],
-    show_tabs: [],
-    template_variables: '',
-    exceptions: [],
-    header_text: 'Home Assistant',
-    hidden_tab_redirect: true,
-    default_tab: 0,
-    disabled: false,
-  };
+export const defaultConfig = {
+  footer_mode: false,
+  kiosk_mode: false,
+  disabled_mode: false,
+  compact_mode: false,
+  mobile_mode: false,
+  disable_sidebar: false,
+  background: 'var(--primary-color)',
+  elements_color: 'var(--text-primary-color)',
+  menu_color: '',
+  voice_color: '',
+  options_color: '',
+  all_tabs_color: '',
+  tabs_color: [],
+  tab_direction: 'ltr',
+  button_direction: 'ltr',
+  chevrons: true,
+  indicator_top: false,
+  hide_tabs: [],
+  show_tabs: [],
+  template_variables: '',
+  exceptions: [],
+  header_text: 'Home Assistant',
+  hidden_tab_redirect: true,
+  default_tab: 0,
+};
 
+export const buildConfig = refreshTemplates => {
   let config = { ...defaultConfig, ...lovelace.config.custom_header };
   config = { ...config, ...conditionalConfig(config) };
   const variables = config.template_variables;
@@ -39,7 +40,13 @@ export const buildConfig = refreshTemplates => {
     if (config.hide_tabs) config.hide_tabs = processTabArray(config.hide_tabs);
     if (config.show_tabs) config.show_tabs = processTabArray(config.show_tabs);
     if (config.show_tabs && config.show_tabs.length) config.hide_tabs = invertNumArray(config.show_tabs);
-    if (config.kiosk_mode && !config.disabled) kioskMode(false);
+    if (config.mobile_mode) {
+      config.tab_direction = 'rtl';
+      config.button_direction = 'rtl';
+      config.footer_mode = true;
+      config.compact_mode = true;
+    }
+    if (config.kiosk_mode && !config.disabled_mode) kioskMode(false);
     else styleHeader(config);
   };
 
