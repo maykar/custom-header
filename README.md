@@ -16,7 +16,7 @@ custom_header:
   disable_sidebar: false
   tab_direction: 'ltr'       # "ltr" left to right or "rtl" right to left
   button_direction: 'ltr'
-  template_variables: ''
+  template_variables: '{% set clock = (now().strftime("%I")|int)~now().strftime(":%M") %}'
   header_text: 'Home Assistant'
   hidden_tab_redirect: true
   default_tab: 0
