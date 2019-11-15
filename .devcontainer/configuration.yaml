@@ -72,3 +72,11 @@ input_text:
     name: 'options_color:'
     initial: '#DCDCDC'
     icon: 'mdi:dots-vertical'
+  active_tab_color:
+    name: 'active_tab_color:'
+    initial: 'white'
+    icon: 'mdi:tab'
+  indicator_color:
+    name: 'indicator_color:'
+    initial: 'grey'
+    icon: 'mdi:minus'

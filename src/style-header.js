@@ -74,6 +74,9 @@ export const styleHeader = config => {
       app-header {
         display: none;
       }
+      .iron-selected {
+        ${config.active_tab_color ? `color: ${config.active_tab_color};` : ''}
+      }
       [buttonElem="menu"] {
         ${config.menu_color ? `color: ${config.menu_color};` : ''}
       }
@@ -85,6 +88,9 @@ export const styleHeader = config => {
       }
       paper-tab {
         ${config.all_tabs_color ? `color: ${config.all_tabs_color};` : ''}
+      }
+      paper-tabs {
+        ${config.indicator_color ? `--paper-tabs-selection-bar-color: ${config.indicator_color} !important;` : ''}
       }
     `;
 
