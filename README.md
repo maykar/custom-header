@@ -13,7 +13,7 @@ custom_header:
   kiosk_mode: false
   disabled_mode: false
   compact_mode: false
-  mobile_mode: false        # Turns on footer_mode, compact_mode, and makes button and tab directions right to left
+  mobile_mode: false        # Turns on footer_mode & compact_mode. Makes button & tab directions right to left
   disable_sidebar: false
   tab_direction: 'ltr'      # "ltr" left to right or "rtl" right to left
   button_direction: 'ltr'
