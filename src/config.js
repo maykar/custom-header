@@ -39,7 +39,7 @@ export const buildConfig = refreshTemplates => {
     if (config.hide_tabs) config.hide_tabs = processTabArray(config.hide_tabs);
     if (config.show_tabs) config.show_tabs = processTabArray(config.show_tabs);
     if (config.show_tabs && config.show_tabs.length) config.hide_tabs = invertNumArray(config.show_tabs);
-    if (config.kiosk_mode) kioskMode(false);
+    if (config.kiosk_mode && !config.disabled) kioskMode(false);
     else styleHeader(config);
   };
 

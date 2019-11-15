@@ -122,14 +122,14 @@ export const styleHeader = config => {
   }
 
   // Add updated style elements and remove old ones after.
-  let oldStyle = root.querySelector('#cch_header_style');
+  let currentStyle = root.querySelector('#cch_header_style');
   root.appendChild(style);
-  if (oldStyle) oldStyle.remove();
+  if (currentStyle) currentStyle.remove();
 
   // Style views elements.
-  const viewStyle = document.createElement('style');
-  viewStyle.setAttribute('id', 'cch_view_style');
-  viewStyle.innerHTML = `
+  style = document.createElement('style');
+  style.setAttribute('id', 'cch_view_style');
+  style.innerHTML = `
         hui-view, hui-panel-view {
           min-height: calc(100vh - ${headerHeight}px);
           padding-top: 2px;
@@ -145,10 +145,10 @@ export const styleHeader = config => {
       `;
 
   // Add updated view style if changed.
-  oldStyle = root.querySelector('#cch_view_style');
-  if (!oldStyle || viewStyle.innerHTML != oldStyle.innerHTML) {
-    root.appendChild(viewStyle);
-    if (oldStyle) oldStyle.remove();
+  currentStyle = root.querySelector('#cch_view_style');
+  if (!currentStyle || style.innerHTML != currentStyle.innerHTML) {
+    root.appendChild(style);
+    if (currentStyle) currentStyle.remove();
   }
 
   // Hide cheverons completely when not visible.
@@ -159,9 +159,9 @@ export const styleHeader = config => {
         display:none;
       }
     `;
-  oldStyle = header.tabContainer.shadowRoot.querySelector('#cch_chevron');
+  currentStyle = header.tabContainer.shadowRoot.querySelector('#cch_chevron');
   header.tabContainer.shadowRoot.appendChild(style);
-  if (oldStyle) oldStyle.remove();
+  if (currentStyle) currentStyle.remove();
 
   // Remove chevrons.
   if (!config.chevrons) header.tabContainer.hideScrollButtons = true;
