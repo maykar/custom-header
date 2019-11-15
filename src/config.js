@@ -26,6 +26,8 @@ export const buildConfig = refreshTemplates => {
     exceptions: [],
     header_text: 'Home Assistant',
     hidden_tab_redirect: true,
+    default_tab: 0,
+    disabled: false,
   };
 
   let config = { ...defaultConfig, ...lovelace.config.custom_header };

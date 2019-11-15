@@ -7,6 +7,10 @@ input_boolean:
     name: 'kiosk_mode:'
     initial: off
     icon: mdi:overscan
+  disabled:
+    name: 'disabled:'
+    initial: off
+    icon: mdi:cancel
   compact_mode:
     name: 'compact_mode:'
     initial: on

@@ -20,6 +20,7 @@ custom_header:
   tab_direction: '{% if states.input_boolean.tab_direction.state == "on" %}ltr{% else %}rtl{% endif %}'
   button_direction: '{% if states.input_boolean.button_direction.state == "on" %}ltr{% else %}rtl{% endif %}'
   default_tab: '{{ states.input_text.default_tab.state }}'
+  disabled: '{{ states.input_boolean.disabled.state == "on" }}'
 background: url('https://bit.ly/375dx0T')
 views:
   - icon: mdi:pac-man
@@ -27,6 +28,7 @@ views:
     cards:
       - type: entities
         entities:
+          - entity: input_boolean.disabled
           - entity: input_boolean.kiosk_mode
           - entity: input_boolean.compact_mode
           - entity: input_boolean.disable_sidebar
@@ -51,6 +53,7 @@ views:
     cards:
       - type: entities
         entities:
+          - entity: input_boolean.disabled
           - entity: input_boolean.kiosk_mode
           - entity: input_boolean.compact_mode
           - entity: input_boolean.disable_sidebar

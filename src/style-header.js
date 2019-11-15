@@ -5,12 +5,29 @@ import { kioskMode, removeKioskMode } from './kiosk-mode';
 
 export const styleHeader = config => {
   if (window.location.href.includes('disable_ch')) return;
+  const sidebar = main.shadowRoot.querySelector('ha-sidebar');
+
+  if (config.disabled) {
+    removeKioskMode();
+    if (root.querySelector('#cch_header_style')) root.querySelector('#cch_header_style').remove();
+    if (root.querySelector('#cch_view_style')) root.querySelector('#cch_view_style').remove();
+    if (header.tabContainer.shadowRoot.querySelector('#cch_chevron')) {
+      header.tabContainer.shadowRoot.querySelector('#cch_chevron').remove();
+    }
+    if (header.container) header.container.style.visibility = 'hidden';
+    sidebar.shadowRoot.querySelector('.menu').style = '';
+    sidebar.shadowRoot.querySelector('paper-listbox').style = '';
+    sidebar.shadowRoot.querySelector('div.divider').style = '';
+    window.dispatchEvent(new Event('resize'));
+    return;
+  } else {
+    if (header.container) header.container.style.visibility = 'visible';
+  }
 
   // No need to compact header if there is only one view.
   if (!header.tabs.length) config.compact_mode = false;
 
   // Disable sidebar or style it to fit header's new sizing/placement.
-  const sidebar = main.shadowRoot.querySelector('ha-sidebar');
   if (config.disable_sidebar) {
     kioskMode(true);
   } else if (!config.disable_sidebar && !config.kiosk_mode) {
