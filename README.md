@@ -3,13 +3,27 @@
 Current config options. Place at root of lovelace yaml (the following config
 will result in one ugly header/footer):
 
-**EVERY Config item can be templated with Jinja and updates dynamically with entity changes, etc.**
+**EVERY Config item can be templated with Jinja and updates dynamically with entity changes, etc.**<br><br>
+**Can use exception config just like CCH: https://maykar.github.io/compact-custom-header/Exception-Config/**
 
 ```yaml
 custom_header:
-  footer: true
+  footer_mode: true
+  kiosk_mode: false
+  disabled_mode: false
+  compact_mode: false
+  mobile_mode: false
+  disable_sidebar: false
+  tab_direction: 'ltr'       # "ltr" left to right or "rtl" right to left
+  button_direction: 'ltr'
+  template_variables: ''
+  header_text: 'Home Assistant'
+  hidden_tab_redirect: true
+  default_tab: 0
   background: black
   elements_color: "#fff"    # Color of all buttons and tabs
+  indicator_color: yellow
+  active_tab_color: yellow
   menu_color: red
   voice_color: rgb(255, 99, 71)
   options_color: var(--text-primary-color)
@@ -23,6 +37,7 @@ custom_header:
     - 1
     - home                  # View's title or path may be used
     - 10
+
 ```
 
 hide_tabs and show_tabs can also be written as `hide_tabs: 1, home, 10`
