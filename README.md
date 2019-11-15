@@ -3,8 +3,9 @@
 Current config options. Place at root of lovelace yaml (the following config
 will result in one ugly header/footer):
 
-**EVERY Config item can be templated with Jinja and updates dynamically with entity changes, etc.**<br><br>
-**Can use exception config just like CCH: https://maykar.github.io/compact-custom-header/Exception-Config/**
+* EVERY Config item can be templated with Jinja and updates dynamically with entity changes, etc.
+* Can use exception config just like CCH: https://maykar.github.io/compact-custom-header/Exception-Config/
+* hide_tabs and show_tabs can also be written as `hide_tabs: 1, home, 10`
 
 ```yaml
 custom_header:
@@ -39,8 +40,6 @@ custom_header:
     - 10
 
 ```
-
-hide_tabs and show_tabs can also be written as `hide_tabs: 1, home, 10`
 
 ## Development
 
