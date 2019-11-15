@@ -18,9 +18,14 @@ export const styleHeader = config => {
     sidebar.shadowRoot.querySelector('.menu').style = '';
     sidebar.shadowRoot.querySelector('paper-listbox').style = '';
     sidebar.shadowRoot.querySelector('div.divider').style = '';
+    window.customHeaderDisabled = true;
     window.dispatchEvent(new Event('resize'));
+    header.menu.style.display = 'none';
+    root.querySelector('ha-menu-button').style.display = '';
     return;
   } else {
+    header.menu.style.display = '';
+    window.customHeaderDisabled = false;
     if (header.container) header.container.style.visibility = 'visible';
   }
 
@@ -198,7 +203,7 @@ export const styleHeader = config => {
   if (!window.customHeaderMenuObserver) {
     window.customHeaderMenuObserver = true;
     new MutationObserver(() => {
-      menuButtonVisibility();
+      if (!window.customHeaderDisabled) menuButtonVisibility();
     }).observe(menu, {
       attributes: true,
       attributeFilter: ['style'],
