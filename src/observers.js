@@ -7,7 +7,7 @@ export const observers = () => {
     mutations.forEach(({ addedNodes, target }) => {
       if (addedNodes.length && target.nodeName == 'PARTIAL-PANEL-RESOLVER') {
         // When returning to lovelace/overview from elsewhere in HA.
-        buildConfig();
+        buildConfig(true);
       } else if (target.className === 'edit-mode' && addedNodes.length) {
         // Entered edit mode.
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -19,7 +19,7 @@ export const observers = () => {
         // Exited edit mode.
         header.menu.style.display = '';
         root.querySelector('cch-header').style.visibility = 'initial';
-        buildConfig();
+        buildConfig(true);
       }
     });
   };

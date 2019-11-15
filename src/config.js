@@ -3,7 +3,7 @@ import { conditionalConfig } from './conditional-config';
 import { styleHeader } from './style-header';
 import { kioskMode } from './kiosk-mode';
 
-export const buildConfig = () => {
+export const buildConfig = refreshTemplates => {
   const defaultConfig = {
     footer: false,
     kiosk_mode: false,
@@ -25,8 +25,7 @@ export const buildConfig = () => {
     template_variables: '',
     exceptions: [],
     header_text: 'Home Assistant',
-    redirect: true,
-    default_tab: undefined,
+    hidden_tab_redirect: true,
   };
 
   let config = { ...defaultConfig, ...lovelace.config.custom_header };
@@ -50,7 +49,7 @@ export const buildConfig = () => {
     subscribeRenderTemplate(
       result => {
         templatesRendered = true;
-        if (window.customHeaderLastTemplateResult == result) return;
+        if (!refreshTemplates && window.customHeaderLastTemplateResult == result) return;
         window.customHeaderLastTemplateResult = result;
         config = JSON.parse(
           result
@@ -59,18 +58,17 @@ export const buildConfig = () => {
             .replace(/""/, ''),
         );
         processAndContinue();
-        // Render templates every minute.
-        if (!window.customHeaderTemplateRenderInterval) {
-          window.customHeaderTemplateRenderInterval = true;
-          window.setInterval(() => {
-            buildConfig();
-          }, (60 - new Date().getSeconds()) * 1000);
-        }
       },
       { template: JSON.stringify(variables).replace(/\\/g, '') + JSON.stringify(config).replace(/\\/g, '') },
     );
   } else {
     processAndContinue();
+  }
+  // Render templates every minute.
+  if (!refreshTemplates && hasTemplates) {
+    window.setTimeout(() => {
+      buildConfig(false);
+    }, (60 - new Date().getSeconds()) * 1000);
   }
   // If no config is returned from subscribeRenderTemplate for 10 secs there is likely a bad template.
   setTimeout(function() {

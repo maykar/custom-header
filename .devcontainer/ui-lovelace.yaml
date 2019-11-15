@@ -13,7 +13,7 @@ custom_header:
   footer: '{{ states.input_boolean.footer.state == "on" }}'
   chevrons: '{{ states.input_boolean.chevrons.state == "on" }}'
   hide_tabs: '{{ states.input_text.hide_tabs.state }}'
-  redirect: '{{ states.input_boolean.redirect.state == "on" }}'
+  hidden_tab_redirect: '{{ states.input_boolean.hidden_tab_redirect.state == "on" }}'
   kiosk_mode: '{{ states.input_boolean.kiosk_mode.state == "on" }}'
   compact_mode: '{{ states.input_boolean.compact_mode.state == "on" }}'
   disable_sidebar: '{{ states.input_boolean.disable_sidebar.state == "on" }}'
@@ -33,7 +33,7 @@ views:
           - entity: input_boolean.footer
           - entity: input_boolean.indicator_top
           - entity: input_boolean.chevrons
-          - entity: input_boolean.redirect
+          - entity: input_boolean.hidden_tab_redirect
           - entity: input_boolean.tab_direction
           - entity: input_boolean.button_direction
       - type: entities
@@ -57,7 +57,7 @@ views:
           - entity: input_boolean.footer
           - entity: input_boolean.indicator_top
           - entity: input_boolean.chevrons
-          - entity: input_boolean.redirect
+          - entity: input_boolean.hidden_tab_redirect
           - entity: input_boolean.tab_direction
           - entity: input_boolean.button_direction
           - entity: input_text.background

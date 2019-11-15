@@ -19,8 +19,8 @@ input_boolean:
     name: 'tab_direction:'
     initial: on
     icon: mdi:arrow-left-right-bold
-  redirect:
-    name: 'redirect:'
+  hidden_tab_redirect:
+    name: 'hidden_tab_redirect:'
     initial: on
     icon: mdi:directions
   button_direction:

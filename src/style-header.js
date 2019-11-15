@@ -185,7 +185,7 @@ export const styleHeader = config => {
 
   // Redirect off hidden tab to first not hidden tab or default tab.
   const defaultTab = config.default_tab != undefined ? tabIndexByName(config.default_tab) : null;
-  if (config.redirect && header.tabs.length) {
+  if (config.hidden_tab_redirect && header.tabs.length) {
     const activeTab = header.tabContainer.indexOf(header.tabContainer.querySelector('paper-tab.iron-selected'));
     if (config.hide_tabs.includes(activeTab) && config.hide_tabs.length != header.tabs.length) {
       if (defaultTab && !config.hide_tabs.includes(tabIndexByName(defaultTab))) {
@@ -209,7 +209,9 @@ export const styleHeader = config => {
   window.customHeaderDefaultClicked = true;
 
   // Click active tab to refresh indicator.
-  if (header.tabs.length) root.querySelector('paper-tab.iron-selected').click();
+  if (header.tabs.length && root.querySelector('paper-tab.iron-selected')) {
+    root.querySelector('paper-tab.iron-selected').click();
+  }
   // Hide tabcontainer if there's only one view.
   else header.tabContainer.style.display = 'none';
 
