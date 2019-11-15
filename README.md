@@ -13,9 +13,9 @@ custom_header:
   kiosk_mode: false
   disabled_mode: false
   compact_mode: false
-  mobile_mode: false
+  mobile_mode: false        # Turns on footer_mode, compact_mode, and makes button and tab directions right to left
   disable_sidebar: false
-  tab_direction: 'ltr'       # "ltr" left to right or "rtl" right to left
+  tab_direction: 'ltr'      # "ltr" left to right or "rtl" right to left
   button_direction: 'ltr'
   template_variables: '{% set clock = (now().strftime("%I")|int)~now().strftime(":%M") %}'
   header_text: 'Home Assistant'
