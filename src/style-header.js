@@ -84,12 +84,15 @@ export const styleHeader = config => {
       }
       [buttonElem="menu"] {
         ${config.menu_color ? `color: ${config.menu_color};` : ''}
+        ${config.menu_hide ? `display: none;` : ''}
       }
       [buttonElem="options"] {
         ${config.options_color ? `color: ${config.options_color};` : ''}
+        ${config.options_hide ? `display: none;` : ''}
       }
       [buttonElem="voice"] {
         ${config.voice_color ? `color: ${config.voice_color};` : ''}
+        ${config.voice_hide ? `display: none;` : ''}
       }
       paper-tab {
         ${config.all_tabs_color ? `color: ${config.all_tabs_color};` : ''}
@@ -278,19 +281,24 @@ export const styleHeader = config => {
     }
   }
 
-  if (defaultTab != null && !window.customHeaderDefaultClicked) {
-    if (header.tabs[defaultTab] && getComputedStyle(header.tabs[defaultTab]).display != 'none') {
-      header.tabs[defaultTab].click();
-    }
+  // Click default tab on first open.
+  if (
+    defaultTab != null &&
+    !window.customHeaderDefaultClicked &&
+    header.tabs[defaultTab] &&
+    getComputedStyle(header.tabs[defaultTab]).display != 'none'
+  ) {
+    header.tabs[defaultTab].click();
   }
   window.customHeaderDefaultClicked = true;
 
-  // Click active tab to refresh indicator.
   if (header.tabs.length && root.querySelector('paper-tab.iron-selected')) {
-    root.querySelector('paper-tab.iron-selected').click();
+    // Click active tab to refresh indicator.
+    header.tabs[root.querySelector('paper-tabs').indexOf(root.querySelector('paper-tab.iron-selected'))].click();
+  } else {
+    // Hide tabcontainer if there's only one view.
+    header.tabContainer.style.display = 'none';
   }
-  // Hide tabcontainer if there's only one view.
-  else header.tabContainer.style.display = 'none';
 
   window.dispatchEvent(new Event('resize'));
 };

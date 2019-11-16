@@ -30,13 +30,13 @@ export const defaultConfig = {
   default_tab: 0,
 };
 
-export const buildConfig = refreshTemplates => {
+export const buildConfig = (refreshTemplates: boolean): void => {
   let config = { ...defaultConfig, ...lovelace.config.custom_header };
   config = { ...config, ...conditionalConfig(config) };
   const variables = config.template_variables;
   delete config.template_variables;
 
-  const processAndContinue = () => {
+  const processAndContinue = (): void => {
     if (config.hide_tabs) config.hide_tabs = processTabArray(config.hide_tabs);
     if (config.show_tabs) config.show_tabs = processTabArray(config.show_tabs);
     if (config.show_tabs && config.show_tabs.length) config.hide_tabs = invertNumArray(config.show_tabs);
@@ -54,13 +54,13 @@ export const buildConfig = refreshTemplates => {
   const configString = JSON.stringify(config);
   const hasTemplates = !!variables || configString.includes('{{') || configString.includes('{%');
 
-  let unsubRenderTemplate;
+  let unsubRenderTemplate: Function;
   if (hasTemplates) {
     unsubRenderTemplate = subscribeRenderTemplate(
-      result => {
+      (result: string) => {
         templatesRendered = true;
-        if (!refreshTemplates && window.customHeaderLastTemplateResult == result) return;
-        window.customHeaderLastTemplateResult = result;
+        if (!refreshTemplates && window['customHeaderLastTemplateResult'] == result) return;
+        window['customHeaderLastTemplateResult'] = result;
         config = JSON.parse(
           result
             .replace(/"true"/gi, 'true')
@@ -80,15 +80,15 @@ export const buildConfig = refreshTemplates => {
   // Render templates every minute.
   if (!refreshTemplates && hasTemplates) {
     window.setTimeout(() => {
-      // Unsubscribe from template.
-      (async () => {
-        const unsub = await unsubRenderTemplate;
-        unsubRenderTemplate = undefined;
+      // Unsubscribe from previous template.
+      (async (): Promise<void> => {
+        const unsub = unsubRenderTemplate;
         await unsub();
       })();
       buildConfig(false);
     }, (60 - new Date().getSeconds()) * 1000);
   }
+
   // If no config is returned from subscribeRenderTemplate for 10 secs there is likely a bad template.
   setTimeout(function() {
     if (!templatesRendered && hasTemplates) {
