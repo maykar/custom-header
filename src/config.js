@@ -1,6 +1,5 @@
 import { invertNumArray, lovelace, subscribeRenderTemplate, processTabArray } from './helpers';
 import { conditionalConfig } from './conditional-config';
-import { defaultVariables } from './template-variables';
 import { styleHeader } from './style-header';
 import { kioskMode } from './kiosk-mode';
 
@@ -55,8 +54,9 @@ export const buildConfig = refreshTemplates => {
   const configString = JSON.stringify(config);
   const hasTemplates = !!variables || configString.includes('{{') || configString.includes('{%');
 
+  let unsubRenderTemplate;
   if (hasTemplates) {
-    subscribeRenderTemplate(
+    unsubRenderTemplate = subscribeRenderTemplate(
       result => {
         templatesRendered = true;
         if (!refreshTemplates && window.customHeaderLastTemplateResult == result) return;
@@ -70,16 +70,22 @@ export const buildConfig = refreshTemplates => {
         processAndContinue();
       },
       {
-        variables: defaultVariables(),
         template: JSON.stringify(variables).replace(/\\/g, '') + JSON.stringify(config).replace(/\\/g, ''),
       },
     );
   } else {
     processAndContinue();
   }
+
   // Render templates every minute.
   if (!refreshTemplates && hasTemplates) {
     window.setTimeout(() => {
+      // Unsubscribe from template.
+      (async () => {
+        const unsub = await unsubRenderTemplate;
+        unsubRenderTemplate = undefined;
+        await unsub();
+      })();
       buildConfig(false);
     }, (60 - new Date().getSeconds()) * 1000);
   }

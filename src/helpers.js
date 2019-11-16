@@ -1,4 +1,5 @@
 import { getLovelace, getRoot } from 'custom-card-helpers';
+import { defaultVariables } from './template-variables';
 
 export const main = document.querySelector('body > home-assistant').shadowRoot.querySelector('home-assistant-main');
 export const lovelace = getLovelace();
@@ -39,6 +40,7 @@ export const subscribeRenderTemplate = (onChange, params) => {
     user: document.body.querySelector('home-assistant').hass.user.name,
     browser: navigator.userAgent,
     ...params.variables,
+    ...defaultVariables(),
   };
   const template = params.template;
   const entity_ids = params.entity_ids;
