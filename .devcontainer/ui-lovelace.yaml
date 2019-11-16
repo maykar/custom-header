@@ -3,7 +3,7 @@ resources:
     type: module
 custom_header:
   template_variables: '{% set clock = (now().strftime("%I")|int)~now().strftime(":%M") %}'
-  header_text: '{{ clock }}'
+  header_text: '{{ time }}'
   background: '{{ states.input_text.background.state }}'
   menu_color: '{{ states.input_text.menu_color.state }}'
   voice_color: '{{ states.input_text.voice_color.state }}'

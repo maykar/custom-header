@@ -38,7 +38,6 @@ export const subscribeRenderTemplate = (onChange, params) => {
   const variables = {
     user: document.body.querySelector('home-assistant').hass.user.name,
     browser: navigator.userAgent,
-    hash: location.hash.substr(1) || ' ',
     ...params.variables,
   };
   const template = params.template;

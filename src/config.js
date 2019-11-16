@@ -1,5 +1,6 @@
 import { invertNumArray, lovelace, subscribeRenderTemplate, processTabArray } from './helpers';
 import { conditionalConfig } from './conditional-config';
+import { defaultVariables } from './template-variables';
 import { styleHeader } from './style-header';
 import { kioskMode } from './kiosk-mode';
 
@@ -68,7 +69,10 @@ export const buildConfig = refreshTemplates => {
         );
         processAndContinue();
       },
-      { template: JSON.stringify(variables).replace(/\\/g, '') + JSON.stringify(config).replace(/\\/g, '') },
+      {
+        variables: defaultVariables(),
+        template: JSON.stringify(variables).replace(/\\/g, '') + JSON.stringify(config).replace(/\\/g, ''),
+      },
     );
   } else {
     processAndContinue();
