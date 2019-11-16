@@ -10,16 +10,17 @@ export const observers = () => {
         buildConfig(true);
       } else if (target.className === 'edit-mode' && addedNodes.length) {
         // Entered edit mode.
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        root.querySelector('app-header').style.visibility = 'initial';
-        root.querySelector('cch-header').style.visibility = 'hidden';
-        root.querySelector('#cch_header_style').remove();
         header.menu.style.display = 'none';
+        root.querySelector('cch-header').style.display = 'none';
+        root.querySelector('app-header').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        root.querySelector('#cch_view_style').remove();
       } else if (target.nodeName === 'APP-HEADER' && addedNodes.length) {
         // Exited edit mode.
-        header.menu.style.display = '';
-        root.querySelector('cch-header').style.visibility = 'initial';
+        root.querySelector('app-header').style.display = 'none';
         buildConfig(true);
+        header.menu.style.display = '';
+        root.querySelector('cch-header').style.display = '';
       }
     });
   };

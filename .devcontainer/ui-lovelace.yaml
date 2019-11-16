@@ -31,6 +31,10 @@ custom_header:
     menu: '{% if states.input_boolean.icon_changes.state == "on" %}mdi:xbox-controller-menu{% endif %}'
     voice: '{% if states.input_boolean.icon_changes.state == "on" %}mdi:microphone-variant{%else%}mdi:comment-processing{% endif %}'
     options: '{% if states.input_boolean.icon_changes.state == "on" %}mdi:dots-horizontal{% endif %}'
+  button_text:
+    voice: '{% if states.input_boolean.text_changes.state == "on" %}VOICE{% endif %}'
+    menu: '{% if states.input_boolean.text_changes.state == "on" %}Menu{% endif %}'
+    options: '{% if states.input_boolean.text_changes.state == "on" %}options{% endif %}'
 background: url('https://bit.ly/375dx0T')
 views:
   - icon: mdi:pac-man
@@ -50,6 +54,7 @@ views:
           - entity: input_boolean.tab_direction
           - entity: input_boolean.button_direction
           - entity: input_boolean.icon_changes
+          - entity: input_boolean.text_changes
       - type: entities
         entities:
           - entity: input_text.background
@@ -79,6 +84,7 @@ views:
           - entity: input_boolean.tab_direction
           - entity: input_boolean.button_direction
           - entity: input_boolean.icon_changes
+          - entity: input_boolean.text_changes
           - entity: input_text.background
           - entity: input_text.menu_color
           - entity: input_text.voice_color

@@ -57,6 +57,7 @@ export const styleHeader = config => {
         width:100%;
         display:flex;
         justify-content: center;
+        font: 400 20px Roboto, sans-serif;
         background: ${config.background || 'var(--primary-color)'};
         color: ${config.elements_color || 'var(--text-primary-color)'};
         margin-top: 4px;
@@ -73,7 +74,6 @@ export const styleHeader = config => {
       #contentContainer {
         padding: 12px 6px 12px 6px;
         color: var(--text-primary-color);
-        font: 400 20px Roboto, sans-serif;
         ${config.compact_mode ? 'display: none;' : ''}
       }
       app-header {
@@ -231,6 +231,31 @@ export const styleHeader = config => {
       } else {
         if (button === 'options') header[button].querySelector('paper-icon-button').icon = config.button_icons[button];
         else header[button].icon = config.button_icons[button];
+      }
+    }
+  }
+
+  // Button text customization
+  if (config.button_text) {
+    for (const button in config.button_text) {
+      const text = document.createElement('p');
+      text.className = 'buttonText';
+      const buttonElem = button === 'options' ? header[button].querySelector('paper-icon-button') : header[button];
+      if (!config.button_text[button] && buttonElem.shadowRoot.querySelector('.buttonText')) {
+        buttonElem.shadowRoot.querySelector('.buttonText').remove();
+        buttonElem.shadowRoot.querySelector('iron-icon').style.display = '';
+        buttonElem.style.width = '';
+        continue;
+      } else if (config.button_text[button]) {
+        if (!buttonElem.shadowRoot.querySelector('.buttonText')) {
+          text.innerText = config.button_text[button];
+          buttonElem.shadowRoot.appendChild(text);
+        } else {
+          buttonElem.shadowRoot.querySelector('.buttonText').innerText = config.button_text[button];
+        }
+        buttonElem.shadowRoot.querySelector('iron-icon').style.display = 'none';
+        buttonElem.style.width = 'auto';
+        buttonElem.shadowRoot.querySelector('.buttonText').style.margin = '5.5px 0px 0px 0px';
       }
     }
   }

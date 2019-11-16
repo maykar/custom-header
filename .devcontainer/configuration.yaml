@@ -48,9 +48,13 @@ input_boolean:
     initial: off
     icon: mdi:format-vertical-align-top
   icon_changes:
-    name: 'icon_changes:'
+    name: 'icon change demo'
     initial: off
     icon: mdi:emoticon-poop
+  text_changes:
+    name: 'button text demo'
+    initial: off
+    icon: mdi:alphabetical
 input_text:
   hide_tabs:
     name: 'hide_tabs:'
