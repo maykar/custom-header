@@ -47,6 +47,10 @@ input_boolean:
     name: 'indicator_top:'
     initial: off
     icon: mdi:format-vertical-align-top
+  icon_changes:
+    name: 'icon_changes:'
+    initial: off
+    icon: mdi:emoticon-poop
 input_text:
   hide_tabs:
     name: 'hide_tabs:'

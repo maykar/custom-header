@@ -24,6 +24,13 @@ custom_header:
   disabled_mode: '{{ states.input_boolean.disabled_mode.state == "on" }}'
   active_tab_color: '{{ states.input_text.active_tab_color.state }}'
   indicator_color: '{{ states.input_text.indicator_color.state }}'
+  tab_icons:
+    pacman: '{% if states.input_boolean.icon_changes.state == "on" %}mdi:ghost{% endif %}'
+    '1': '{% if states.input_boolean.icon_changes.state == "on" %}mdi:pac-man{% endif %}'
+  button_icons:
+    menu: '{% if states.input_boolean.icon_changes.state == "on" %}mdi:xbox-controller-menu{% endif %}'
+    voice: '{% if states.input_boolean.icon_changes.state == "on" %}mdi:microphone-variant{%else%}mdi:comment-processing{% endif %}'
+    options: '{% if states.input_boolean.icon_changes.state == "on" %}mdi:dots-horizontal{% endif %}'
 background: url('https://bit.ly/375dx0T')
 views:
   - icon: mdi:pac-man
@@ -42,6 +49,7 @@ views:
           - entity: input_boolean.hidden_tab_redirect
           - entity: input_boolean.tab_direction
           - entity: input_boolean.button_direction
+          - entity: input_boolean.icon_changes
       - type: entities
         entities:
           - entity: input_text.background
@@ -70,6 +78,7 @@ views:
           - entity: input_boolean.hidden_tab_redirect
           - entity: input_boolean.tab_direction
           - entity: input_boolean.button_direction
+          - entity: input_boolean.icon_changes
           - entity: input_text.background
           - entity: input_text.menu_color
           - entity: input_text.voice_color

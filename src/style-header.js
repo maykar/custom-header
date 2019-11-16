@@ -1,4 +1,4 @@
-import { root, main } from './helpers';
+import { root, main, lovelace } from './helpers';
 import { header } from './build-header';
 import { tabIndexByName } from './helpers';
 import { kioskMode, removeKioskMode } from './kiosk-mode';
@@ -209,7 +209,31 @@ export const styleHeader = config => {
       attributeFilter: ['style'],
     });
   }
-  menuButtonVisibility();
+  menuButtonVisibility(); // header.tabContainer[tabIndexByName(tab)]
+
+  // Tab icon customization.
+  if (config.tab_icons) {
+    for (const tab in config.tab_icons) {
+      const index = tabIndexByName(tab);
+      const haIcon = header.tabs[index].querySelector('ha-icon');
+      if (!config.tab_icons[tab]) haIcon.icon = lovelace.config.views[index].icon;
+      else haIcon.icon = config.tab_icons[tab];
+    }
+  }
+
+  // Button icon customization.
+  if (config.button_icons) {
+    for (const button in config.button_icons) {
+      if (!config.button_icons[button]) {
+        if (button === 'menu') header.menu.icon = 'mdi:menu';
+        else if (button === 'voice') header.voice.icon = 'mdi:microphone';
+        else if (button === 'options') header[button].querySelector('paper-icon-button').icon = 'mdi:dots-vertical';
+      } else {
+        if (button === 'options') header[button].querySelector('paper-icon-button').icon = config.button_icons[button];
+        else header[button].icon = config.button_icons[button];
+      }
+    }
+  }
 
   // Redirect off hidden tab to first not hidden tab or default tab.
   const defaultTab = config.default_tab != undefined ? tabIndexByName(config.default_tab) : null;
