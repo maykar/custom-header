@@ -31,6 +31,13 @@ export const styleHeader = config => {
 
   let headerHeight = 48;
   if (!config.compact_mode) {
+    if (config.button_direction == 'rtl') {
+      header.container.querySelector('#contentContainer').dir = 'ltr';
+      header.container.querySelector('#contentContainer').style.textAlign = 'right';
+    } else {
+      header.container.querySelector('#contentContainer').style.textAlign = '';
+      header.container.querySelector('#contentContainer').dir = '';
+    }
     header.container.querySelector('#contentContainer').innerHTML = config.header_text;
     headerHeight = header.tabs.length ? 96 : 48;
   }
@@ -223,6 +230,11 @@ export const styleHeader = config => {
           buttonElem.shadowRoot.appendChild(text);
         } else {
           buttonElem.shadowRoot.querySelector('.buttonText').innerText = config.button_text[button];
+        }
+        if (config.button_direction == 'rtl') {
+          buttonElem.shadowRoot.querySelector('.buttonText').dir = 'ltr';
+        } else {
+          buttonElem.shadowRoot.querySelector('.buttonText').dir = '';
         }
         buttonElem.shadowRoot.querySelector('iron-icon').style.display = 'none';
         buttonElem.style.width = 'auto';
