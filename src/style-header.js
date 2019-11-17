@@ -23,6 +23,8 @@ export const styleHeader = config => {
     sidebar.shadowRoot.querySelector('paper-listbox').style = '';
     sidebar.shadowRoot.querySelector('div.divider').style = '';
     window.dispatchEvent(new Event('resize'));
+    config.sidebar_right = false;
+    sidebarMod(config, header);
     return;
   } else {
     window.customHeaderDisabled = false;
@@ -30,8 +32,15 @@ export const styleHeader = config => {
     if (header.container) header.container.style.visibility = 'visible';
   }
 
-  // No need to compact header if there is only one view.
+  let headerHeight = 48;
+  if (!config.compact_mode) {
+    header.container.querySelector('#contentContainer').innerHTML = config.header_text;
+    headerHeight = header.tabs.length ? 96 : 48;
+  }
+
   if (!header.tabs.length) config.compact_mode = false;
+
+  sidebarMod(config, header);
 
   // Disable sidebar or style it to fit header's new sizing/placement.
   if (config.disable_sidebar) {
@@ -41,13 +50,6 @@ export const styleHeader = config => {
     sidebar.shadowRoot.querySelector('.menu').style = 'height:49px;';
     sidebar.shadowRoot.querySelector('paper-listbox').style = 'height:calc(100% - 155px);';
     sidebar.shadowRoot.querySelector('div.divider').style = 'margin-bottom: -10px;';
-  }
-
-  // Get header height.
-  let headerHeight = 48;
-  if (!config.compact_mode) {
-    header.container.querySelector('#contentContainer').innerHTML = config.header_text;
-    headerHeight = header.tabs.length ? 96 : 48;
   }
 
   // Main header styling.
@@ -233,8 +235,6 @@ export const styleHeader = config => {
       }
     }
   }
-
-  sidebarMod(config, header);
 
   // Redirect off hidden tab to first not hidden tab or default tab.
   const defaultTab = config.default_tab != undefined ? tabIndexByName(config.default_tab) : null;
