@@ -2,6 +2,7 @@ import { root, main, lovelace } from './helpers';
 import { header } from './build-header';
 import { tabIndexByName } from './helpers';
 import { kioskMode, removeKioskMode } from './kiosk-mode';
+import { sidebarMod } from './sidebar-mod';
 
 export const styleHeader = config => {
   if (window.location.href.includes('disable_ch')) return;
@@ -184,36 +185,6 @@ export const styleHeader = config => {
   header.tabContainer.dir = config.tab_direction;
   header.container.dir = config.button_direction;
 
-  // Style menu button with sidebar changes/resizing.
-  const menu = root.querySelector('ha-menu-button');
-  const menuButtonVisibility = () => {
-    menu.style.display = 'none';
-    if (config.disable_sidebar) {
-      header.menu.style.display = 'none';
-      return;
-    }
-    if (menu.style.visibility === 'hidden') {
-      header.menu.style.display = 'none';
-      header.menu.style.visibility = 'hidden';
-      header.menu.style.marginRight = '33px';
-    } else {
-      header.menu.style.visibility = 'initial';
-      header.menu.style.marginRight = '';
-      header.menu.style.display = 'initial';
-    }
-  };
-  // Watch for menu button changes.
-  if (!window.customHeaderMenuObserver) {
-    window.customHeaderMenuObserver = true;
-    new MutationObserver(() => {
-      if (!window.customHeaderDisabled) menuButtonVisibility();
-    }).observe(menu, {
-      attributes: true,
-      attributeFilter: ['style'],
-    });
-  }
-  menuButtonVisibility(); // header.tabContainer[tabIndexByName(tab)]
-
   // Tab icon customization.
   if (config.tab_icons) {
     for (const tab in config.tab_icons) {
@@ -262,6 +233,8 @@ export const styleHeader = config => {
       }
     }
   }
+
+  sidebarMod(config, header);
 
   // Redirect off hidden tab to first not hidden tab or default tab.
   const defaultTab = config.default_tab != undefined ? tabIndexByName(config.default_tab) : null;

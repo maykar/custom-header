@@ -35,6 +35,7 @@ custom_header:
     voice: '{% if states.input_boolean.text_changes.state == "on" %}VOICE{% endif %}'
     menu: '{% if states.input_boolean.text_changes.state == "on" %}Menu{% endif %}'
     options: '{% if states.input_boolean.text_changes.state == "on" %}options{% endif %}'
+  sidebar_right: '{{ states.input_boolean.sidebar_right.state == "on" }}'
 background: url('https://bit.ly/375dx0T')
 views:
   - icon: mdi:pac-man
@@ -48,6 +49,7 @@ views:
           - entity: input_boolean.footer_mode
           - entity: input_boolean.mobile_mode
           - entity: input_boolean.disable_sidebar
+          - entity: input_boolean.sidebar_right
           - entity: input_boolean.indicator_top
           - entity: input_boolean.chevrons
           - entity: input_boolean.hidden_tab_redirect
@@ -78,6 +80,7 @@ views:
           - entity: input_boolean.footer_mode
           - entity: input_boolean.mobile_mode
           - entity: input_boolean.disable_sidebar
+          - entity: input_boolean.sidebar_right
           - entity: input_boolean.indicator_top
           - entity: input_boolean.chevrons
           - entity: input_boolean.hidden_tab_redirect

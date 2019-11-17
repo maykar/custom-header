@@ -1,4 +1,4 @@
-import { buildConfig } from './config';
+import { buildConfig } from './config.js';
 import { observers } from './observers';
 
 buildConfig(false);
