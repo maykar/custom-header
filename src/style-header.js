@@ -2,7 +2,6 @@ import { root, main, lovelace } from './helpers';
 import { header } from './build-header';
 import { tabIndexByName } from './helpers';
 import { kioskMode, removeKioskMode } from './kiosk-mode';
-import { sidebarMod } from './sidebar-mod';
 
 export const styleHeader = config => {
   if (window.location.href.includes('disable_ch')) return;
@@ -23,8 +22,6 @@ export const styleHeader = config => {
     sidebar.shadowRoot.querySelector('paper-listbox').style = '';
     sidebar.shadowRoot.querySelector('div.divider').style = '';
     window.dispatchEvent(new Event('resize'));
-    config.sidebar_right = false;
-    sidebarMod(config, header);
     return;
   } else {
     window.customHeaderDisabled = false;
@@ -39,8 +36,6 @@ export const styleHeader = config => {
   }
 
   if (!header.tabs.length) config.compact_mode = false;
-
-  sidebarMod(config, header);
 
   // Disable sidebar or style it to fit header's new sizing/placement.
   if (config.disable_sidebar) {
@@ -272,6 +267,37 @@ export const styleHeader = config => {
     // Hide tabcontainer if there's only one view.
     header.tabContainer.style.display = 'none';
   }
+
+  // Style menu button with sidebar changes/resizing.
+  const menu = root.querySelector('ha-menu-button');
+  const menuButtonVisibility = () => {
+    menu.style.display = 'none';
+    if (config.disable_sidebar) {
+      header.menu.style.display = 'none';
+      return;
+    } else if (menu.style.visibility === 'hidden') {
+      header.menu.style.display = 'none';
+      header.menu.style.visibility = 'hidden';
+      header.menu.style.marginRight = '33px';
+    } else {
+      header.menu.style.visibility = 'initial';
+      header.menu.style.marginRight = '';
+      header.menu.style.display = 'initial';
+    }
+  };
+
+  // Watch for menu button changes.
+  if (!window.customHeaderMenuObserver) {
+    window.customHeaderMenuObserver = true;
+    new MutationObserver(() => {
+      if (!window.customHeaderDisabled) menuButtonVisibility();
+    }).observe(menu, {
+      attributes: true,
+      attributeFilter: ['style'],
+    });
+  }
+
+  menuButtonVisibility();
 
   window.dispatchEvent(new Event('resize'));
 };

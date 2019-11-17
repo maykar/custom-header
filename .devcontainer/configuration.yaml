@@ -23,10 +23,6 @@ input_boolean:
     name: 'disable_sidebar:'
     initial: off
     icon: mdi:dock-left
-  sidebar_right:
-    name: 'sidebar_right:'
-    initial: off
-    icon: mdi:dock-right
   tab_direction:
     name: 'tab_direction:'
     initial: on
