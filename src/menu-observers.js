@@ -23,7 +23,7 @@ export const menuButtonObservers = (config, header, root) => {
   dot.style.cssText = `
         pointer-events: none;
         position: relative;
-        background-color: ${notification_dot_color};
+        background-color: ${config.notification_dot_color};
         width: 12px;
         height: 12px;
         top: -30px;
