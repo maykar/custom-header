@@ -91,6 +91,12 @@ export const styleHeader = config => {
       paper-tab.iron-selected {
         ${config.active_tab_color ? `color: ${config.active_tab_color};` : ''}
       }
+      paper-listbox {
+        position: fixed;
+        width: fit-content;
+        ${config.button_direction == 'rtl' ? 'left: 0' : 'right: 0'};
+        ${config.footer_mode ? 'bottom: 0' : 'top: 0'};
+      }
       [buttonElem="menu"] {
         ${config.menu_color ? `color: ${config.menu_color};` : ''}
         ${config.menu_hide ? `display: none;` : ''}
