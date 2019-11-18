@@ -23,7 +23,7 @@ export const menuButtonObservers = (config, header, root) => {
   dot.style.cssText = `
         pointer-events: none;
         position: relative;
-        background-color: #ff9800;
+        background-color: ${notification_dot_color};
         width: 12px;
         height: 12px;
         top: -30px;
@@ -37,12 +37,11 @@ export const menuButtonObservers = (config, header, root) => {
   // Watch for menu button changes.
   if (!window.customHeaderMenuObserver) {
     window.customHeaderMenuObserver = true;
-    new MutationObserver(mutations => {
+    new MutationObserver(() => {
       if (!window.customHeaderDisabled) menuButtonVisibility();
     }).observe(menu, {
       attributes: true,
       attributeFilter: ['style'],
-      childList: true,
     });
     new MutationObserver(mutations => {
       const root = document

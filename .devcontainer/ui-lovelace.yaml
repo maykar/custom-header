@@ -15,7 +15,6 @@ custom_header:
   hide_tabs: '{{ states.input_text.hide_tabs.state }}'
   hidden_tab_redirect: '{{ states.input_boolean.hidden_tab_redirect.state == "on" }}'
   kiosk_mode: '{{ states.input_boolean.kiosk_mode.state == "on" }}'
-  mobile_mode: '{{ states.input_boolean.mobile_mode.state == "on" }}'
   compact_mode: '{{ states.input_boolean.compact_mode.state == "on" }}'
   disable_sidebar: '{{ states.input_boolean.disable_sidebar.state == "on" }}'
   tab_direction: '{% if states.input_boolean.tab_direction.state == "on" %}ltr{% else %}rtl{% endif %}'
@@ -47,7 +46,6 @@ views:
           - entity: input_boolean.kiosk_mode
           - entity: input_boolean.compact_mode
           - entity: input_boolean.footer_mode
-          - entity: input_boolean.mobile_mode
           - entity: input_boolean.disable_sidebar
           - entity: input_boolean.indicator_top
           - entity: input_boolean.chevrons
@@ -77,7 +75,6 @@ views:
           - entity: input_boolean.kiosk_mode
           - entity: input_boolean.compact_mode
           - entity: input_boolean.footer_mode
-          - entity: input_boolean.mobile_mode
           - entity: input_boolean.disable_sidebar
           - entity: input_boolean.indicator_top
           - entity: input_boolean.chevrons

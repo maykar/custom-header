@@ -7,10 +7,6 @@ input_boolean:
     name: 'kiosk_mode:'
     initial: off
     icon: mdi:overscan
-  mobile_mode:
-    name: 'mobile_mode:'
-    initial: off
-    icon: mdi:cellphone-android
   disabled_mode:
     name: 'disabled_mode:'
     initial: off
