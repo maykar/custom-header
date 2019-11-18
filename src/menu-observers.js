@@ -1,21 +1,5 @@
 export const menuButtonObservers = (config, header, root) => {
-  // Style menu button with sidebar changes/resizing.
   const menu = root.querySelector('ha-menu-button');
-  const menuButtonVisibility = () => {
-    menu.style.display = 'none';
-    if (config.disable_sidebar) {
-      header.menu.style.display = 'none';
-      return;
-    } else if (menu.style.visibility === 'hidden') {
-      header.menu.style.display = 'none';
-      header.menu.style.visibility = 'hidden';
-      header.menu.style.marginRight = '33px';
-    } else {
-      header.menu.style.visibility = 'initial';
-      header.menu.style.marginRight = '';
-      header.menu.style.display = 'initial';
-    }
-  };
 
   // Create Notification Dot
   const dot = document.createElement('div');
@@ -30,48 +14,49 @@ export const menuButtonObservers = (config, header, root) => {
         right: ${config.button_direction == 'rtl' ? '' : '-'}20px;
         border-radius: 50%;
     `;
-  if (menu.shadowRoot.querySelector('.dot')) {
-    header.menu.shadowRoot.appendChild(dot);
-  }
 
-  // Watch for menu button changes.
-  if (!window.customHeaderMenuObserver) {
-    window.customHeaderMenuObserver = true;
-    new MutationObserver(() => {
-      if (!window.customHeaderDisabled) menuButtonVisibility();
-    }).observe(menu, {
-      attributes: true,
-      attributeFilter: ['style'],
-    });
-    new MutationObserver(mutations => {
-      const root = document
-        .querySelector('home-assistant')
-        .shadowRoot.querySelector('home-assistant-main')
-        .shadowRoot.querySelector('ha-panel-lovelace')
-        .shadowRoot.querySelector('hui-root');
-      mutations.forEach(({ addedNodes, removedNodes }) => {
-        if (addedNodes) {
-          for (const node of addedNodes) {
-            if (node.className === 'dot') {
-              root.shadowRoot.querySelector('[buttonElem="menu"]').shadowRoot.appendChild(dot);
-            }
+  const menuButtonVisibility = () => {
+    if (config.disable_sidebar || window.customHeaderDisabled) {
+      header.menu.style.display = 'none';
+      return;
+    }
+    if (menu.style.visibility === 'hidden') header.menu.style.display = 'none';
+    else header.menu.style.display = 'initial';
+  };
+
+  const notificationDot = mutations => {
+    const root = document
+      .querySelector('home-assistant')
+      .shadowRoot.querySelector('home-assistant-main')
+      .shadowRoot.querySelector('ha-panel-lovelace')
+      .shadowRoot.querySelector('hui-root');
+    mutations.forEach(({ addedNodes, removedNodes }) => {
+      if (addedNodes) {
+        for (const node of addedNodes) {
+          if (node.className === 'dot') {
+            root.shadowRoot.querySelector('[buttonElem="menu"]').shadowRoot.appendChild(dot);
           }
         }
-        if (removedNodes) {
-          for (const node of removedNodes) {
-            if (node.className === 'dot') {
-              root.shadowRoot
-                .querySelector('[buttonElem="menu"]')
-                .shadowRoot.querySelector('.dot')
-                .remove();
-            }
+      }
+      if (removedNodes) {
+        for (const node of removedNodes) {
+          if (node.className === 'dot') {
+            root.shadowRoot
+              .querySelector('[buttonElem="menu"]')
+              .shadowRoot.querySelector('.dot')
+              .remove();
           }
         }
-      });
-    }).observe(menu.shadowRoot, {
-      childList: true,
+      }
     });
-  }
+  };
+
+  const notificationObserver = new MutationObserver(notificationDot);
+  notificationObserver.observe(menu.shadowRoot, { childList: true });
+
+  const menuButtonObserver = new MutationObserver(menuButtonVisibility);
+  menuButtonObserver.observe(menu, { attributes: true, attributeFilter: ['style'] });
 
   menuButtonVisibility();
+  if (menu.shadowRoot.querySelector('.dot')) header.menu.shadowRoot.appendChild(dot);
 };

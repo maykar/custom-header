@@ -284,7 +284,10 @@ export const styleHeader = config => {
     header.tabContainer.style.display = 'none';
   }
 
-  menuButtonObservers(config, header, root);
+  if (!window.customHeaderMenuObserver) {
+    window.customHeaderMenuObserver = true;
+    menuButtonObservers(config, header, root);
+  }
 
   window.dispatchEvent(new Event('resize'));
 };
