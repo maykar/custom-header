@@ -112,5 +112,3 @@ export const buildConfig = refreshTemplates => {
     }
   }, 10000);
 };
-
-export const config = buildConfig(false);
