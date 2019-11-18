@@ -1,11 +1,14 @@
 import { root, main, lovelace } from './helpers';
 import { header } from './build-header';
 import { tabIndexByName } from './helpers';
+import { hideMenuItems } from './overflow-menu';
 import { kioskMode, removeKioskMode } from './kiosk-mode';
 
 export const styleHeader = config => {
   if (window.location.href.includes('disable_ch')) return;
   const sidebar = main.shadowRoot.querySelector('ha-sidebar');
+
+  hideMenuItems(config, header);
 
   if (config.disabled_mode) {
     window.customHeaderDisabled = true;

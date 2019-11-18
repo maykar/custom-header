@@ -89,12 +89,10 @@ export const buildConfig = refreshTemplates => {
   }
 
   // Render templates every minute.
-  if (!refreshTemplates && hasTemplates && templatesRendered) {
-    console.log('timeout');
+  if (!refreshTemplates && hasTemplates) {
     window.setTimeout(() => {
       // Unsubscribe from template.
       (async () => {
-        console.log('timeout async');
         const unsub = await unsubRenderTemplate;
         unsubRenderTemplate = undefined;
         await unsub();

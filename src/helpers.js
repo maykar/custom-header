@@ -2,6 +2,7 @@ import { getLovelace, getRoot } from 'custom-card-helpers';
 import { defaultVariables } from './template-variables';
 
 export const main = document.querySelector('body > home-assistant').shadowRoot.querySelector('home-assistant-main');
+export const hass = document.body.querySelector('home-assistant').hass;
 export const lovelace = getLovelace();
 export const root = getRoot();
 
@@ -35,9 +36,9 @@ export const invertNumArray = show_tabs => {
 
 // Subscribe and render Jinja templates.
 export const subscribeRenderTemplate = (onChange, params) => {
-  const conn = document.body.querySelector('home-assistant').hass.connection;
+  const conn = hass.connection;
   const variables = {
-    user: document.body.querySelector('home-assistant').hass.user.name,
+    user: hass.user.name,
     browser: navigator.userAgent,
     ...params.variables,
     ...defaultVariables(),
