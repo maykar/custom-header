@@ -63,7 +63,9 @@ export const styleHeader = config => {
   style.setAttribute('id', 'cch_header_style');
   style.innerHTML = `
       cch-header {
-        width:100%;
+        padding-left: 10px;
+        padding-right: 10px;
+        width: calc(100% - 20px);
         display:flex;
         justify-content: center;
         font: 400 20px Roboto, sans-serif;
@@ -290,10 +292,7 @@ export const styleHeader = config => {
     header.tabContainer.style.display = 'none';
   }
 
-  if (!window.customHeaderMenuObserver) {
-    window.customHeaderMenuObserver = true;
-    menuButtonObservers(config, header, root);
-  }
+  menuButtonObservers(config, header, root);
 
   window.dispatchEvent(new Event('resize'));
 };

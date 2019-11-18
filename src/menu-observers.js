@@ -16,10 +16,7 @@ export const menuButtonObservers = (config, header, root) => {
     `;
 
   const menuButtonVisibility = () => {
-    if (config.disable_sidebar || window.customHeaderDisabled) {
-      header.menu.style.display = 'none';
-      return;
-    }
+    if (config.disable_sidebar || window.customHeaderDisabled) return;
     if (menu.style.visibility === 'hidden') header.menu.style.display = 'none';
     else header.menu.style.display = 'initial';
   };
@@ -51,11 +48,14 @@ export const menuButtonObservers = (config, header, root) => {
     });
   };
 
-  const notificationObserver = new MutationObserver(notificationDot);
-  notificationObserver.observe(menu.shadowRoot, { childList: true });
+  if (!window.customHeaderMenuObserver) {
+    window.customHeaderMenuObserver = true;
+    const notificationObserver = new MutationObserver(notificationDot);
+    notificationObserver.observe(menu.shadowRoot, { childList: true });
 
-  const menuButtonObserver = new MutationObserver(menuButtonVisibility);
-  menuButtonObserver.observe(menu, { attributes: true, attributeFilter: ['style'] });
+    const menuButtonObserver = new MutationObserver(menuButtonVisibility);
+    menuButtonObserver.observe(menu, { attributes: true, attributeFilter: ['style'] });
+  }
 
   menuButtonVisibility();
   if (menu.shadowRoot.querySelector('.dot')) header.menu.shadowRoot.appendChild(dot);
