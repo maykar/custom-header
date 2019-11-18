@@ -5,10 +5,9 @@ import { hideMenuItems } from './overflow-menu';
 import { kioskMode, removeKioskMode } from './kiosk-mode';
 
 export const styleHeader = config => {
-  if (window.location.href.includes('disable_ch')) return;
+  if (window.location.href.includes('disable_ch')) config.disabled_mode = true;
   const sidebar = main.shadowRoot.querySelector('ha-sidebar');
-
-  hideMenuItems(config, header);
+  window.customHeaderConfig = config;
 
   if (config.disabled_mode) {
     window.customHeaderDisabled = true;
@@ -28,6 +27,7 @@ export const styleHeader = config => {
     return;
   } else {
     window.customHeaderDisabled = false;
+    hideMenuItems(config, header, false);
     header.menu.style.display = '';
     if (header.container) header.container.style.visibility = 'visible';
   }
@@ -87,7 +87,7 @@ export const styleHeader = config => {
       app-header {
         display: none;
       }
-      .iron-selected {
+      paper-tab.iron-selected {
         ${config.active_tab_color ? `color: ${config.active_tab_color};` : ''}
       }
       [buttonElem="menu"] {

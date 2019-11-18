@@ -29,6 +29,11 @@ export const defaultConfig = {
   hidden_tab_redirect: true,
   default_tab: 0,
   sidebar_right: false,
+  hide_help: false,
+  hide_unused: false,
+  hide_refresh: false,
+  hide_config: false,
+  hide_raw: false,
 };
 
 export const buildConfig = refreshTemplates => {
@@ -107,3 +112,5 @@ export const buildConfig = refreshTemplates => {
     }
   }, 10000);
 };
+
+export const config = buildConfig(false);
