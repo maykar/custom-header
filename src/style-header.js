@@ -3,6 +3,7 @@ import { header } from './build-header';
 import { tabIndexByName } from './helpers';
 import { hideMenuItems } from './overflow-menu';
 import { kioskMode, removeKioskMode } from './kiosk-mode';
+import { menuButtonObservers } from './menu-observers';
 
 export const styleHeader = config => {
   if (window.location.href.includes('disable_ch')) config.disabled_mode = true;
@@ -283,36 +284,7 @@ export const styleHeader = config => {
     header.tabContainer.style.display = 'none';
   }
 
-  // Style menu button with sidebar changes/resizing.
-  const menu = root.querySelector('ha-menu-button');
-  const menuButtonVisibility = () => {
-    menu.style.display = 'none';
-    if (config.disable_sidebar) {
-      header.menu.style.display = 'none';
-      return;
-    } else if (menu.style.visibility === 'hidden') {
-      header.menu.style.display = 'none';
-      header.menu.style.visibility = 'hidden';
-      header.menu.style.marginRight = '33px';
-    } else {
-      header.menu.style.visibility = 'initial';
-      header.menu.style.marginRight = '';
-      header.menu.style.display = 'initial';
-    }
-  };
-
-  // Watch for menu button changes.
-  if (!window.customHeaderMenuObserver) {
-    window.customHeaderMenuObserver = true;
-    new MutationObserver(() => {
-      if (!window.customHeaderDisabled) menuButtonVisibility();
-    }).observe(menu, {
-      attributes: true,
-      attributeFilter: ['style'],
-    });
-  }
-
-  menuButtonVisibility();
+  menuButtonObservers(config, header, root);
 
   window.dispatchEvent(new Event('resize'));
 };

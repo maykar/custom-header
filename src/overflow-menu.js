@@ -1,5 +1,4 @@
 export const hideMenuItems = (config, header, editMode) => {
-  config = window.customHeaderConfig;
   const localized = (item, string) => {
     let localString;
     const hass = document.querySelector('home-assistant').hass;
