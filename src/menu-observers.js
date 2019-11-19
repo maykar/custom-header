@@ -1,6 +1,6 @@
-export const menuButtonObservers = (config, header, root) => {
-  const menu = root.querySelector('ha-menu-button');
+import { haElem } from './ha-elements';
 
+export const menuButtonObservers = (config, header) => {
   // Create Notification Dot
   const buildDot = () => {
     const dot = document.createElement('div');
@@ -20,7 +20,7 @@ export const menuButtonObservers = (config, header, root) => {
 
   const menuButtonVisibility = () => {
     if (config.disable_sidebar || window.customHeaderDisabled) return;
-    if (menu.style.visibility === 'hidden') header.menu.style.display = 'none';
+    if (haElem.menu.style.visibility === 'hidden') header.menu.style.display = 'none';
     else header.menu.style.display = 'initial';
   };
 
@@ -60,10 +60,10 @@ export const menuButtonObservers = (config, header, root) => {
   if (!window.customHeaderMenuObserver) {
     window.customHeaderMenuObserver = true;
     const notificationObserver = new MutationObserver(notificationDot);
-    notificationObserver.observe(menu.shadowRoot, { childList: true });
+    notificationObserver.observe(haElem.menu.shadowRoot, { childList: true });
 
     const menuButtonObserver = new MutationObserver(menuButtonVisibility);
-    menuButtonObserver.observe(menu, { attributes: true, attributeFilter: ['style'] });
+    menuButtonObserver.observe(haElem.menu, { attributes: true, attributeFilter: ['style'] });
   }
 
   menuButtonVisibility();
@@ -72,9 +72,6 @@ export const menuButtonObservers = (config, header, root) => {
   if (prevDot && prevDot.style.cssText != buildDot().style.cssText) {
     prevDot.remove();
   }
-  if (
-    !header.menu.shadowRoot.querySelector('.dot') &&
-    root.querySelector('ha-menu-button').shadowRoot.querySelector('.dot')
-  )
+  if (!header.menu.shadowRoot.querySelector('.dot') && haElem.menu.shadowRoot.querySelector('.dot'))
     header.menu.shadowRoot.appendChild(buildDot());
 };

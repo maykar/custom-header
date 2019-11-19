@@ -1,4 +1,8 @@
-export const insertStyleTags = (config, root, header, tabIndexByName) => {
+import { root } from './ha-elements';
+import { header } from './build-header';
+import { tabIndexByName } from './helpers';
+
+export const insertStyleTags = config => {
   let headerHeight = 48;
   if (!config.compact_mode) {
     if (config.button_direction == 'rtl') {

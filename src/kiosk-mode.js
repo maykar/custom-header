@@ -1,4 +1,4 @@
-import { root, main } from './helpers';
+import { haElem, root } from './ha-elements';
 
 // Kiosk mode is used to hide sidebar only as well.
 export const kioskMode = sidebarOnly => {
@@ -33,29 +33,29 @@ export const kioskMode = sidebarOnly => {
     if (oldStyle) oldStyle.remove();
   }
 
-  main.shadowRoot.querySelector('#drawer').style.display = 'none';
+  haElem.drawer.style.display = 'none';
 
   // Style sidebar to close immediately and prevent opening.
-  if (!main.shadowRoot.querySelector('ha-sidebar').shadowRoot.querySelector('#cch_sidebar_style')) {
+  if (!haElem.sidebar.main.shadowRoot.querySelector('#cch_sidebar_style')) {
     style = document.createElement('style');
     style.setAttribute('id', 'cch_sidebar_style');
     style.innerHTML = ':host(:not([expanded])) {width: 0px !important;}';
-    main.shadowRoot.querySelector('ha-sidebar').shadowRoot.appendChild(style);
+    haElem.sidebar.main.shadowRoot.appendChild(style);
   }
-  if (!main.shadowRoot.querySelector('#cch_sidebar_style')) {
+  if (!haElem.main.shadowRoot.querySelector('#cch_sidebar_style')) {
     style = document.createElement('style');
     style.setAttribute('id', 'cch_sidebar_style');
     style.innerHTML = ':host {--app-drawer-width: 0px !important;}';
-    main.shadowRoot.appendChild(style);
+    haElem.main.shadowRoot.appendChild(style);
   }
   window.dispatchEvent(new Event('resize'));
 };
 
 export const removeKioskMode = () => {
-  main.shadowRoot.querySelector('#drawer').style.display = '';
-  let style = main.shadowRoot.querySelector('#cch_sidebar_style');
+  haElem.drawer.style.display = '';
+  let style = haElem.main.shadowRoot.querySelector('#cch_sidebar_style');
   if (style) style.remove();
-  style = main.shadowRoot.querySelector('ha-sidebar').shadowRoot.querySelector('#cch_sidebar_style');
+  style = haElem.sidebar.main.shadowRoot.querySelector('#cch_sidebar_style');
   if (style) style.remove();
-  main.shadowRoot.querySelector('#drawer').style.display = '';
+  haElem.drawer.style.display = '';
 };

@@ -1,10 +1,5 @@
-import { getLovelace, getRoot } from 'custom-card-helpers';
 import { defaultVariables } from './template-variables';
-
-export const main = document.querySelector('body > home-assistant').shadowRoot.querySelector('home-assistant-main');
-export const hass = document.body.querySelector('home-assistant').hass;
-export const lovelace = getLovelace();
-export const root = getRoot();
+import { haElem, lovelace, hass } from './ha-elements';
 
 // Get tab index number from view's title or path
 export const tabIndexByName = tab => {
@@ -22,10 +17,9 @@ export const tabIndexByName = tab => {
 
 // Invert show_tabs to hide_tabs
 export const invertNumArray = show_tabs => {
-  const tabs = Array.from(root.querySelectorAll('paper-tab'));
   if (show_tabs && show_tabs.length) {
     const total_tabs = [];
-    for (let i = 0; i < tabs.length; i += 1) total_tabs.push(i);
+    for (let i = 0; i < haElem.tabs.length; i += 1) total_tabs.push(i);
     return total_tabs.filter(el => !show_tabs.includes(el));
   }
 };

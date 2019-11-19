@@ -1,14 +1,13 @@
-import { root, main, lovelace } from './helpers';
 import { header } from './build-header';
 import { tabIndexByName } from './helpers';
 import { hideMenuItems } from './overflow-menu';
 import { kioskMode, removeKioskMode } from './kiosk-mode';
 import { menuButtonObservers } from './menu-observers';
 import { insertStyleTags } from './style-tags';
+import { haElem, root, lovelace } from './ha-elements';
 
 export const styleHeader = config => {
   if (window.location.href.includes('disable_ch')) config.disabled_mode = true;
-  const sidebar = main.shadowRoot.querySelector('ha-sidebar');
   window.customHeaderConfig = config;
 
   if (config.disabled_mode) {
@@ -22,9 +21,9 @@ export const styleHeader = config => {
     }
     header.menu.style.display = 'none';
     root.querySelector('ha-menu-button').style.display = '';
-    sidebar.shadowRoot.querySelector('.menu').style = '';
-    sidebar.shadowRoot.querySelector('paper-listbox').style = '';
-    sidebar.shadowRoot.querySelector('div.divider').style = '';
+    haElem.sidebar.main.shadowRoot.querySelector('.menu').style = '';
+    haElem.sidebar.main.shadowRoot.querySelector('paper-listbox').style = '';
+    haElem.sidebar.main.shadowRoot.querySelector('div.divider').style = '';
     window.dispatchEvent(new Event('resize'));
     return;
   } else {
@@ -41,12 +40,12 @@ export const styleHeader = config => {
     kioskMode(true);
   } else if (!config.disable_sidebar && !config.kiosk_mode) {
     removeKioskMode();
-    sidebar.shadowRoot.querySelector('.menu').style = 'height:49px;';
-    sidebar.shadowRoot.querySelector('paper-listbox').style = 'height:calc(100% - 155px);';
-    sidebar.shadowRoot.querySelector('div.divider').style = 'margin-bottom: -10px;';
+    haElem.sidebar.main.shadowRoot.querySelector('.menu').style = 'height:49px;';
+    haElem.sidebar.main.shadowRoot.querySelector('paper-listbox').style = 'height:calc(100% - 155px);';
+    haElem.sidebar.main.shadowRoot.querySelector('div.divider').style = 'margin-bottom: -10px;';
   }
 
-  insertStyleTags(config, root, header, tabIndexByName);
+  insertStyleTags(config);
 
   // Remove chevrons.
   if (!config.chevrons) header.tabContainer.hideScrollButtons = true;
@@ -149,9 +148,9 @@ export const styleHeader = config => {
   }
   window.customHeaderDefaultClicked = true;
 
-  if (header.tabs.length && root.querySelector('paper-tab.iron-selected')) {
+  if (header.tabs.length && haElem.activeTab) {
     // Click active tab to refresh indicator.
-    header.tabs[root.querySelector('paper-tabs').indexOf(root.querySelector('paper-tab.iron-selected'))].click();
+    header.tabs[haElem.tabs.indexOf(haElem.activeTab)].click();
   } else {
     // Hide tabcontainer if there's only one view.
     header.tabContainer.style.display = 'none';

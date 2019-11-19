@@ -1,9 +1,8 @@
-import { root, lovelace } from './helpers';
+import { haElem, root, lovelace } from './ha-elements';
 
 export const buildHeader = () => {
   if (root.querySelector('cch-header')) return;
   const header = {};
-  const tabs = Array.from((root.querySelector('paper-tabs') || root).querySelectorAll('paper-tab'));
 
   header.tabContainer = document.createElement('paper-tabs');
   header.tabContainer.setAttribute('scrollable', '');
@@ -11,46 +10,41 @@ export const buildHeader = () => {
   header.tabContainer.style.width = '100%';
   header.tabContainer.style.marginLeft = '0';
 
-  tabs.forEach(tab => {
-    const index = tabs.indexOf(tab);
+  haElem.tabs.forEach(tab => {
+    const index = haElem.tabs.indexOf(tab);
     const tabClone = tab.cloneNode(true);
     const haIcon = tabClone.querySelector('ha-icon');
     if (haIcon) {
       haIcon.setAttribute('icon', lovelace.config.views[index].icon);
     }
     tabClone.addEventListener('click', () => {
-      root
-        .querySelector('paper-tabs')
-        .querySelectorAll('paper-tab')
-        [index].dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: true }));
+      haElem.tabs[index].dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: true }));
     });
     header.tabContainer.appendChild(tabClone);
   });
   header.tabs = header.tabContainer.querySelectorAll('paper-tab');
 
-  const buildButton = (button, icon, name) => {
+  const buildButton = (button, icon) => {
     if (button === 'options') {
-      header[button] = root.querySelector(name).cloneNode(true);
+      header[button] = haElem[button].cloneNode(true);
       header[button].removeAttribute('horizontal-offset');
       header[button].querySelector('paper-icon-button').style.height = '48px';
       const items = Array.from(header[button].querySelectorAll('paper-item'));
       items.forEach(item => {
         const index = items.indexOf(item);
         item.addEventListener('click', () => {
-          root
-            .querySelector(name)
+          haElem[button]
             .querySelectorAll('paper-item')
             [index].dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: true }));
         });
       });
     } else {
-      if (button === 'voice' && !root.querySelector('ha-start-voice-button')) name = '[icon="hass:microphone"]';
-      if (!root.querySelector(name)) return;
+      if (!haElem[button]) return;
       header[button] = document.createElement('paper-icon-button');
       header[button].addEventListener('click', () => {
-        (
-          root.querySelector(name).shadowRoot.querySelector('paper-icon-button') || root.querySelector(name)
-        ).dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: true }));
+        (haElem[button].shadowRoot.querySelector('paper-icon-button') || haElem[button]).dispatchEvent(
+          new MouseEvent('click', { bubbles: false, cancelable: true }),
+        );
       });
     }
 
@@ -60,9 +54,9 @@ export const buildHeader = () => {
     header[button].style.height = '48px';
   };
 
-  buildButton('menu', 'mdi:menu', 'ha-menu-button');
-  buildButton('voice', 'mdi:microphone', 'ha-start-voice-button');
-  buildButton('options', 'mdi:dots-vertical', 'paper-menu-button');
+  buildButton('menu', 'mdi:menu');
+  buildButton('voice', 'mdi:microphone');
+  buildButton('options', 'mdi:dots-vertical');
 
   const stack = document.createElement('cch-stack');
   const contentContainer = document.createElement('div');
@@ -76,7 +70,7 @@ export const buildHeader = () => {
   header.stack.appendChild(header.tabContainer);
   if (header.voice && header.voice.style.visibility != 'hidden') header.container.appendChild(header.voice);
   if (header.options) header.container.appendChild(header.options);
-  root.querySelector('ha-app-layout').appendChild(header.container);
+  haElem.appLayout.appendChild(header.container);
 
   return header;
 };

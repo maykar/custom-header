@@ -1,7 +1,9 @@
+import { hass } from './ha-elements';
+
 export const conditionalConfig = config => {
   const countMatches = conditions => {
     const userVars = {
-      user: document.body.querySelector('home-assistant').hass.user.name,
+      user: hass.user.name,
       user_agent: navigator.userAgent,
     };
     let count = 0;
