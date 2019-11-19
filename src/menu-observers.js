@@ -72,5 +72,9 @@ export const menuButtonObservers = (config, header, root) => {
   if (prevDot && prevDot.style.cssText != buildDot().style.cssText) {
     prevDot.remove();
   }
-  if (!header.menu.shadowRoot.querySelector('.dot')) header.menu.shadowRoot.appendChild(buildDot());
+  if (
+    !header.menu.shadowRoot.querySelector('.dot') &&
+    root.querySelector('ha-menu-button').shadowRoot.querySelector('.dot')
+  )
+    header.menu.shadowRoot.appendChild(buildDot());
 };
