@@ -2,18 +2,21 @@ export const menuButtonObservers = (config, header, root) => {
   const menu = root.querySelector('ha-menu-button');
 
   // Create Notification Dot
-  const dot = document.createElement('div');
-  dot.className = 'dot';
-  dot.style.cssText = `
+  const buildDot = () => {
+    const dot = document.createElement('div');
+    dot.className = 'dot';
+    dot.style.cssText = `
         pointer-events: none;
         position: relative;
         background-color: ${config.notification_dot_color};
         width: 12px;
         height: 12px;
-        top: -30px;
-        right: ${config.button_direction == 'rtl' ? '' : '-'}20px;
+        top: -28px;
+        right: ${config.button_direction == 'rtl' ? '' : '-'}16px;
         border-radius: 50%;
     `;
+    return dot;
+  };
 
   const menuButtonVisibility = () => {
     if (config.disable_sidebar || window.customHeaderDisabled) return;
@@ -30,14 +33,20 @@ export const menuButtonObservers = (config, header, root) => {
     mutations.forEach(({ addedNodes, removedNodes }) => {
       if (addedNodes) {
         for (const node of addedNodes) {
-          if (node.className === 'dot') {
-            root.shadowRoot.querySelector('[buttonElem="menu"]').shadowRoot.appendChild(dot);
+          if (
+            node.className === 'dot' &&
+            !root.shadowRoot.querySelector('[buttonElem="menu"]').shadowRoot.querySelector('.dot')
+          ) {
+            root.shadowRoot.querySelector('[buttonElem="menu"]').shadowRoot.appendChild(buildDot());
           }
         }
       }
       if (removedNodes) {
         for (const node of removedNodes) {
-          if (node.className === 'dot') {
+          if (
+            node.className === 'dot' &&
+            root.shadowRoot.querySelector('[buttonElem="menu"]').shadowRoot.querySelector('.dot')
+          ) {
             root.shadowRoot
               .querySelector('[buttonElem="menu"]')
               .shadowRoot.querySelector('.dot')
@@ -58,5 +67,10 @@ export const menuButtonObservers = (config, header, root) => {
   }
 
   menuButtonVisibility();
-  if (menu.shadowRoot.querySelector('.dot')) header.menu.shadowRoot.appendChild(dot);
+
+  const prevDot = header.menu.shadowRoot.querySelector('.dot');
+  if (prevDot && prevDot.style.cssText != buildDot().style.cssText) {
+    prevDot.remove();
+  }
+  if (!header.menu.shadowRoot.querySelector('.dot')) header.menu.shadowRoot.appendChild(buildDot());
 };
