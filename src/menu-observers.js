@@ -1,6 +1,7 @@
 import { haElem } from './ha-elements';
 
 export const menuButtonObservers = (config, header) => {
+  if (config.menu_hide) return;
   // Create Notification Dot
   const buildDot = () => {
     const dot = document.createElement('div');

@@ -1,10 +1,10 @@
 import { header } from './build-header';
-import { tabIndexByName } from './helpers';
+import { tabIndexByName, buttonToOverflow } from './helpers';
 import { hideMenuItems } from './overflow-menu';
 import { kioskMode, removeKioskMode } from './kiosk-mode';
 import { menuButtonObservers } from './menu-observers';
 import { insertStyleTags } from './style-tags';
-import { haElem, root, lovelace } from './ha-elements';
+import { haElem, root, lovelace, hass } from './ha-elements';
 
 export const styleHeader = config => {
   if (window.location.href.includes('disable_ch')) config.disabled_mode = true;
@@ -34,6 +34,9 @@ export const styleHeader = config => {
   }
 
   if (!header.tabs.length) config.compact_mode = false;
+
+  if (config.voice_dropdown) buttonToOverflow('Voice', 'mdi:microphone', header);
+  if (config.menu_dropdown) buttonToOverflow('Menu', 'mdi:menu', header);
 
   // Disable sidebar or style it to fit header's new sizing/placement.
   if (config.disable_sidebar) {

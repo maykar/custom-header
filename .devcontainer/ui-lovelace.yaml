@@ -35,6 +35,8 @@ custom_header:
     menu: '{% if states.input_boolean.text_changes.state == "on" %}Menu{% endif %}'
     options: '{% if states.input_boolean.text_changes.state == "on" %}options{% endif %}'
   hide_unused: true
+  voice_dropdown: true
+  menu_dropdown: true
 background: url('https://bit.ly/375dx0T')
 views:
   - icon: mdi:pac-man
