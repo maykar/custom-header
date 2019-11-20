@@ -8,6 +8,7 @@ export const haElem = {};
 
 haElem.main = homeAssistant.shadowRoot.querySelector('home-assistant-main');
 haElem.tabs = Array.from((root.querySelector('paper-tabs') || root).querySelectorAll('paper-tab'));
+haElem.tabContainer = root.querySelector('paper-tabs');
 haElem.activeTab = root.querySelector('paper-tab.iron-selected');
 haElem.menu = root.querySelector('ha-menu-button');
 haElem.options = root.querySelector('paper-menu-button');

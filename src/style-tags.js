@@ -18,9 +18,9 @@ export const insertStyleTags = config => {
 
   // Main header styling.
   let style = document.createElement('style');
-  style.setAttribute('id', 'cch_header_style');
+  style.setAttribute('id', 'ch_header_style');
   style.innerHTML = `
-      cch-header {
+      ch-header {
         padding-left: 10px;
         padding-right: 10px;
         box-sizing: border-box;
@@ -35,7 +35,7 @@ export const insertStyleTags = config => {
         ${config.footer_mode ? 'position: sticky; bottom: 0px;' : 'position: sticky; top: 0px;'}
         ${config.header_css ? config.header_css : ''}
       }
-      cch-stack {
+      ch-stack {
         flex-direction: column;
         width: 100%;
         margin-left: 9px;
@@ -121,13 +121,13 @@ export const insertStyleTags = config => {
   }
 
   // Add updated style elements and remove old ones after.
-  let currentStyle = root.querySelector('#cch_header_style');
+  let currentStyle = root.querySelector('#ch_header_style');
   root.appendChild(style);
   if (currentStyle) currentStyle.remove();
 
   // Style views elements.
   style = document.createElement('style');
-  style.setAttribute('id', 'cch_view_style');
+  style.setAttribute('id', 'ch_view_style');
   style.innerHTML = `
         hui-view, hui-panel-view {
           min-height: calc(100vh - ${headerHeight}px);
@@ -149,7 +149,7 @@ export const insertStyleTags = config => {
       `;
 
   // Add updated view style if changed.
-  currentStyle = root.querySelector('#cch_view_style');
+  currentStyle = root.querySelector('#ch_view_style');
   if (!currentStyle || style.innerHTML != currentStyle.innerHTML) {
     root.appendChild(style);
     if (currentStyle) currentStyle.remove();
@@ -157,13 +157,13 @@ export const insertStyleTags = config => {
 
   // Hide cheverons completely when not visible.
   style = document.createElement('style');
-  style.setAttribute('id', 'cch_chevron');
+  style.setAttribute('id', 'ch_chevron');
   style.innerHTML = `
       .not-visible[icon*="chevron"] {
         display:none;
       }
     `;
-  currentStyle = header.tabContainer.shadowRoot.querySelector('#cch_chevron');
+  currentStyle = header.tabContainer.shadowRoot.querySelector('#ch_chevron');
   header.tabContainer.shadowRoot.appendChild(style);
   if (currentStyle) currentStyle.remove();
 };

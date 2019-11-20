@@ -1,5 +1,5 @@
 import { buildConfig } from './config.js';
 import { observers } from './observers';
 
-buildConfig(false);
+buildConfig(true);
 observers();

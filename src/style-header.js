@@ -14,10 +14,10 @@ export const styleHeader = config => {
     window.customHeaderDisabled = true;
     removeKioskMode();
     if (header.container) header.container.style.visibility = 'hidden';
-    if (root.querySelector('#cch_header_style')) root.querySelector('#cch_header_style').remove();
-    if (root.querySelector('#cch_view_style')) root.querySelector('#cch_view_style').remove();
-    if (header.tabContainer.shadowRoot.querySelector('#cch_chevron')) {
-      header.tabContainer.shadowRoot.querySelector('#cch_chevron').remove();
+    if (root.querySelector('#ch_header_style')) root.querySelector('#ch_header_style').remove();
+    if (root.querySelector('#ch_view_style')) root.querySelector('#ch_view_style').remove();
+    if (header.tabContainer.shadowRoot.querySelector('#ch_chevron')) {
+      header.tabContainer.shadowRoot.querySelector('#ch_chevron').remove();
     }
     header.menu.style.display = 'none';
     root.querySelector('ha-menu-button').style.display = '';

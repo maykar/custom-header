@@ -1,7 +1,7 @@
 import { haElem, root, lovelace } from './ha-elements';
 
 export const buildHeader = () => {
-  if (root.querySelector('cch-header')) return;
+  if (root.querySelector('ch-header')) return;
   const header = {};
 
   header.tabContainer = document.createElement('paper-tabs');
@@ -58,14 +58,14 @@ export const buildHeader = () => {
   buildButton('voice', 'mdi:microphone');
   buildButton('options', 'mdi:dots-vertical');
 
-  const stack = document.createElement('cch-stack');
+  const stack = document.createElement('ch-stack');
   const contentContainer = document.createElement('div');
   contentContainer.setAttribute('id', 'contentContainer');
 
-  header.container = document.createElement('cch-header');
+  header.container = document.createElement('ch-header');
   if (header.menu) header.container.appendChild(header.menu);
   header.container.appendChild(stack);
-  header.stack = header.container.querySelector('cch-stack');
+  header.stack = header.container.querySelector('ch-stack');
   header.stack.appendChild(contentContainer);
   header.stack.appendChild(header.tabContainer);
   if (header.voice && header.voice.style.visibility != 'hidden') header.container.appendChild(header.voice);

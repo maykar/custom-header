@@ -6,7 +6,7 @@ export const kioskMode = sidebarOnly => {
 
   // Kiosk mode styling.
   let style = document.createElement('style');
-  style.setAttribute('id', 'cch_header_style');
+  style.setAttribute('id', 'ch_header_style');
   style.innerHTML += `
         #drawer {
           display: none;
@@ -14,7 +14,7 @@ export const kioskMode = sidebarOnly => {
       `;
   if (!sidebarOnly) {
     style.innerHTML += `
-        cch-header {
+        ch-header {
           display: none;
         }
         app-header {
@@ -27,7 +27,7 @@ export const kioskMode = sidebarOnly => {
   }
 
   // Add updated styles only if changed.
-  const oldStyle = root.querySelector('#cch_header_style');
+  const oldStyle = root.querySelector('#ch_header_style');
   if (!oldStyle || oldStyle.innerText != style.innerHTML) {
     root.appendChild(style);
     if (oldStyle) oldStyle.remove();
@@ -36,15 +36,15 @@ export const kioskMode = sidebarOnly => {
   haElem.drawer.style.display = 'none';
 
   // Style sidebar to close immediately and prevent opening.
-  if (!haElem.sidebar.main.shadowRoot.querySelector('#cch_sidebar_style')) {
+  if (!haElem.sidebar.main.shadowRoot.querySelector('#ch_sidebar_style')) {
     style = document.createElement('style');
-    style.setAttribute('id', 'cch_sidebar_style');
+    style.setAttribute('id', 'ch_sidebar_style');
     style.innerHTML = ':host(:not([expanded])) {width: 0px !important;}';
     haElem.sidebar.main.shadowRoot.appendChild(style);
   }
-  if (!haElem.main.shadowRoot.querySelector('#cch_sidebar_style')) {
+  if (!haElem.main.shadowRoot.querySelector('#ch_sidebar_style')) {
     style = document.createElement('style');
-    style.setAttribute('id', 'cch_sidebar_style');
+    style.setAttribute('id', 'ch_sidebar_style');
     style.innerHTML = ':host {--app-drawer-width: 0px !important;}';
     haElem.main.shadowRoot.appendChild(style);
   }
@@ -53,9 +53,9 @@ export const kioskMode = sidebarOnly => {
 
 export const removeKioskMode = () => {
   haElem.drawer.style.display = '';
-  let style = haElem.main.shadowRoot.querySelector('#cch_sidebar_style');
+  let style = haElem.main.shadowRoot.querySelector('#ch_sidebar_style');
   if (style) style.remove();
-  style = haElem.sidebar.main.shadowRoot.querySelector('#cch_sidebar_style');
+  style = haElem.sidebar.main.shadowRoot.querySelector('#ch_sidebar_style');
   if (style) style.remove();
   haElem.drawer.style.display = '';
 };
