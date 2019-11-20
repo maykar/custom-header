@@ -47,7 +47,7 @@ export const buildConfig = refreshTemplates => {
     const position = error.toString().match(/\d+/g)[0];
     const left = result.substr(0, position).match(/[^,]*$/);
     const right = result.substr(position).match(/^[^,]*/);
-    return `${left ? left[0] : ''}${right ? right[0] : ''}`.replace('":"', ':');
+    return `${left ? left[0] : ''}${right ? right[0] : ''}`.replace('":"', ': "');
   };
 
   const processAndContinue = () => {
@@ -60,7 +60,6 @@ export const buildConfig = refreshTemplates => {
     else styleHeader(config);
   };
 
-  let templatesRendered = false;
   const configString = JSON.stringify(config);
   const hasTemplates = !!variables || configString.includes('{{') || configString.includes('{%');
 
@@ -68,7 +67,6 @@ export const buildConfig = refreshTemplates => {
   if (hasTemplates) {
     unsubRenderTemplate = subscribeRenderTemplate(
       result => {
-        templatesRendered = true;
         if (!refreshTemplates && window.customHeaderLastTemplateResult == result) return;
         window.customHeaderLastTemplateResult = result;
         try {
@@ -79,7 +77,7 @@ export const buildConfig = refreshTemplates => {
               .replace(/""/, ''),
           );
         } catch (e) {
-          console.log(`Custom-Header: There was an issue with the template: ${getBadTemplate(result, e)}`);
+          console.log(`[CUSTOM-HEADER] There was an issue with the template: ${getBadTemplate(result, e)}`);
         }
         processAndContinue();
       },
@@ -89,22 +87,29 @@ export const buildConfig = refreshTemplates => {
     processAndContinue();
   }
 
+  // Catch less helpful template errors.
+  let templateFailed = false;
+  (async () => {
+    try {
+      const test = await unsubRenderTemplate;
+    } catch (e) {
+      templateFailed = true;
+      console.log('[CUSTOM-HEADER] There was an error with one or more of your templates:');
+      console.log(`${e.message.substring(0, e.message.indexOf(')'))})`);
+    }
+  })();
+
   // Render templates every minute.
   if (!refreshTemplates && hasTemplates) {
     window.setTimeout(() => {
       // Unsubscribe from template.
+      if (templateFailed) return;
       (async () => {
         const unsub = await unsubRenderTemplate;
         unsubRenderTemplate = undefined;
-        await unsub();
+        await unsub;
       })();
       buildConfig(false);
     }, (60 - new Date().getSeconds()) * 1000);
   }
-  // If no config is returned from subscribeRenderTemplate for 10 secs there is likely a bad template.
-  setTimeout(function() {
-    if (!templatesRendered && hasTemplates) {
-      console.log('Custom-Header: There was an issue with one or more templates in your config.');
-    }
-  }, 10000);
 };
