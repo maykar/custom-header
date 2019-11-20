@@ -71,7 +71,7 @@ export const styleHeader = config => {
   header.container.dir = config.button_direction;
 
   // Tab icon customization.
-  if (config.tab_icons) {
+  if (config.tab_icons && header.tabs.length) {
     for (const tab in config.tab_icons) {
       const index = tabIndexByName(tab);
       const haIcon = header.tabs[index].querySelector('ha-icon');

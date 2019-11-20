@@ -24,7 +24,9 @@ haElem.partialPanelResolver = haElem.main.shadowRoot.querySelector('partial-pane
 
 const missing = [];
 for (const item in haElem) {
-  if (!haElem[item]) {
+  if (item == 'activeTab') {
+    continue;
+  } else if (!haElem[item]) {
     missing.push(item);
   } else if (typeof haElem[item] === 'object' && !haElem[item].nodeName) {
     for (const nested in haElem[item]) {
