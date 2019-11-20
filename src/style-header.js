@@ -153,13 +153,7 @@ export const styleHeader = config => {
   }
   window.customHeaderDefaultClicked = true;
 
-  if (header.tabs.length && haElem.activeTab) {
-    // Click active tab to refresh indicator.
-    header.tabs[haElem.tabs.indexOf(haElem.activeTab)].click();
-  } else {
-    // Hide tabcontainer if there's only one view.
-    header.tabContainer.style.display = 'none';
-  }
+  if (!header.tabs.length) header.tabContainer.style.display = 'none';
 
   menuButtonObservers(config, header, root);
 

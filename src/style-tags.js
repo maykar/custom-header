@@ -23,7 +23,7 @@ export const insertStyleTags = config => {
       cch-header {
         padding-left: 10px;
         padding-right: 10px;
-        width: calc(100% - 20px);
+        box-sizing: border-box;
         display:flex;
         justify-content: center;
         font: 400 20px Roboto, sans-serif;
@@ -33,47 +33,57 @@ export const insertStyleTags = config => {
         margin-bottom: 0px;
         margin-top: ${config.footer_mode ? '4px;' : '0px'};
         ${config.footer_mode ? 'position: sticky; bottom: 0px;' : 'position: sticky; top: 0px;'}
+        ${config.header_css ? config.header_css : ''}
       }
       cch-stack {
         flex-direction: column;
         width: 100%;
         margin-left: 9px;
         margin-right: 9px;
+        ${config.stack_css ? config.stack_css : ''}
       }
       #contentContainer {
         padding: 12px 6px 12px 6px;
         color: var(--text-primary-color);
         ${config.compact_mode ? 'display: none;' : ''}
+        ${config.header_text_css ? config.header_text_css : ''}
       }
       app-header {
         display: none;
       }
       paper-tab.iron-selected {
         ${config.active_tab_color ? `color: ${config.active_tab_color};` : ''}
+        ${config.active_tab_css ? config.active_tab_css : ''}
       }
       paper-listbox {
         position: fixed;
         width: fit-content;
         ${config.button_direction == 'rtl' ? 'left: 0' : 'right: 0'};
         ${config.footer_mode ? 'bottom: 0' : 'top: 0'};
+        ${config.options_list_css ? config.options_list_css : ''}
       }
       [buttonElem="menu"] {
         ${config.menu_color ? `color: ${config.menu_color};` : ''}
         ${config.menu_hide ? `display: none;` : ''}
+        ${config.menu_css ? config.menu_css : ''}
       }
       [buttonElem="options"] {
         ${config.options_color ? `color: ${config.options_color};` : ''}
         ${config.options_hide ? `display: none;` : ''}
+        ${config.options_css ? config.options_css : ''}
       }
       [buttonElem="voice"] {
         ${config.voice_color ? `color: ${config.voice_color};` : ''}
         ${config.voice_hide ? `display: none;` : ''}
+        ${config.voice_css ? config.voice_css : ''}
       }
       paper-tab {
         ${config.all_tabs_color ? `color: ${config.all_tabs_color};` : ''}
+        ${config.all_tabs_css ? config.all_tabs_css : ''}
       }
       paper-tabs {
         ${config.indicator_color ? `--paper-tabs-selection-bar-color: ${config.indicator_color} !important;` : ''}
+        ${config.tab_container_css ? config.tab_container_css : ''}
       }
     `;
 
@@ -83,6 +93,17 @@ export const insertStyleTags = config => {
       style.innerHTML += `
       paper-tab:nth-child(${tabIndexByName(tab) + 1}) {
         color: ${config.tabs_color[tab]};
+      }
+    `;
+    });
+  }
+
+  // Per tab custom css.
+  if (config.tabs_css) {
+    Object.keys(config.tabs_css).forEach(tab => {
+      style.innerHTML += `
+      paper-tab:nth-child(${tabIndexByName(tab) + 1}) {
+        ${config.tabs_css[tab]};
       }
     `;
     });
@@ -116,6 +137,11 @@ export const insertStyleTags = config => {
         }
         hui-panel-view {
           padding-top: 0px;
+          ${config.panel_view_css ? config.panel_view_css : ''}
+        }
+        hui-view {
+          padding-top: 0px;
+          ${config.view_css ? config.view_css : ''}
         }
         #view {
           ${config.footer_mode ? `min-height: calc(100vh - ${headerHeight + 4}px) !important;` : ''}
