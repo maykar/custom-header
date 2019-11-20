@@ -68,42 +68,42 @@ views:
           - entity: input_text.indicator_color
           - entity: input_text.hide_tabs
           - entity: input_text.default_tab
-  # - icon: mdi:ghost
-  #   title: ghost
-  #   panel: true
-  #   cards:
-  #     - type: entities
-  #       entities:
-  #         - entity: input_boolean.disabled_mode
-  #         - entity: input_boolean.kiosk_mode
-  #         - entity: input_boolean.compact_mode
-  #         - entity: input_boolean.footer_mode
-  #         - entity: input_boolean.disable_sidebar
-  #         - entity: input_boolean.menu_dropdown
-  #         - entity: input_boolean.voice_dropdown
-  #         - entity: input_boolean.indicator_top
-  #         - entity: input_boolean.chevrons
-  #         - entity: input_boolean.hidden_tab_redirect
-  #         - entity: input_boolean.tab_direction
-  #         - entity: input_boolean.button_direction
-  #         - entity: input_boolean.icon_changes
-  #         - entity: input_boolean.text_changes
-  #         - entity: input_text.background
-  #         - entity: input_text.menu_color
-  #         - entity: input_text.voice_color
-  #         - entity: input_text.options_color
-  #         - entity: input_text.all_tabs_color
-  #         - entity: input_text.active_tab_color
-  #         - entity: input_text.indicator_color
-  #         - entity: input_text.hide_tabs
-  #         - entity: input_text.default_tab
-  # - icon: mdi:skull
-  #   title: skull
-  # - icon: mdi:bomb
-  #   title: bomb
-  # - icon: mdi:death-star-variant
-  #   title: death star
-  # - icon: mdi:space-invaders
-  #   title: invader
-  # - icon: mdi:triforce
-  #   title: triforce
+  - icon: mdi:ghost
+    title: ghost
+    panel: true
+    cards:
+      - type: entities
+        entities:
+          - entity: input_boolean.disabled_mode
+          - entity: input_boolean.kiosk_mode
+          - entity: input_boolean.compact_mode
+          - entity: input_boolean.footer_mode
+          - entity: input_boolean.disable_sidebar
+          - entity: input_boolean.menu_dropdown
+          - entity: input_boolean.voice_dropdown
+          - entity: input_boolean.indicator_top
+          - entity: input_boolean.chevrons
+          - entity: input_boolean.hidden_tab_redirect
+          - entity: input_boolean.tab_direction
+          - entity: input_boolean.button_direction
+          - entity: input_boolean.icon_changes
+          - entity: input_boolean.text_changes
+          - entity: input_text.background
+          - entity: input_text.menu_color
+          - entity: input_text.voice_color
+          - entity: input_text.options_color
+          - entity: input_text.all_tabs_color
+          - entity: input_text.active_tab_color
+          - entity: input_text.indicator_color
+          - entity: input_text.hide_tabs
+          - entity: input_text.default_tab
+  - icon: mdi:skull
+    title: skull
+  - icon: mdi:bomb
+    title: bomb
+  - icon: mdi:death-star-variant
+    title: death star
+  - icon: mdi:space-invaders
+    title: invader
+  - icon: mdi:triforce
+    title: triforce
