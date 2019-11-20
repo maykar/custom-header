@@ -19,6 +19,14 @@ input_boolean:
     name: 'disable_sidebar:'
     initial: off
     icon: mdi:dock-left
+  menu_dropdown:
+    name: 'menu_dropdown:'
+    initial: off
+    icon: mdi:menu
+  voice_dropdown:
+    name: 'voice_dropdown:'
+    initial: off
+    icon: mdi:microphone
   tab_direction:
     name: 'tab_direction:'
     initial: on
