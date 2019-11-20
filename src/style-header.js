@@ -5,6 +5,7 @@ import { kioskMode, removeKioskMode } from './kiosk-mode';
 import { menuButtonObservers } from './menu-observers';
 import { insertStyleTags } from './style-tags';
 import { haElem, root, lovelace } from './ha-elements';
+import { redirects } from './redirects';
 
 export const styleHeader = config => {
   if (window.location.href.includes('disable_ch')) config.disabled_mode = true;
@@ -124,34 +125,7 @@ export const styleHeader = config => {
     }
   }
 
-  // Redirect off hidden tab to first not hidden tab or default tab.
-  const defaultTab = config.default_tab != undefined ? tabIndexByName(config.default_tab) : null;
-  if (config.hidden_tab_redirect && header.tabs.length) {
-    const activeTab = header.tabContainer.indexOf(header.tabContainer.querySelector('paper-tab.iron-selected'));
-    if (config.hide_tabs.includes(activeTab) && config.hide_tabs.length != header.tabs.length) {
-      if (defaultTab && !config.hide_tabs.includes(tabIndexByName(defaultTab))) {
-        if (getComputedStyle(header.tabs[defaultTab]).display != 'none') header.tabs[defaultTab].click();
-      } else {
-        for (const tab of header.tabs) {
-          if (getComputedStyle(tab).display != 'none') {
-            tab.click();
-            break;
-          }
-        }
-      }
-    }
-  }
-
-  // Click default tab on first open.
-  if (
-    defaultTab != null &&
-    !window.customHeaderDefaultClicked &&
-    header.tabs[defaultTab] &&
-    getComputedStyle(header.tabs[defaultTab]).display != 'none'
-  ) {
-    header.tabs[defaultTab].click();
-  }
-  window.customHeaderDefaultClicked = true;
+  redirects(config, header);
 
   if (!header.tabs.length) header.tabContainer.style.display = 'none';
 
