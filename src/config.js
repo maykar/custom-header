@@ -3,39 +3,7 @@ import { lovelace } from './ha-elements';
 import { conditionalConfig } from './conditional-config';
 import { styleHeader } from './style-header';
 import { kioskMode } from './kiosk-mode';
-
-export const defaultConfig = {
-  footer_mode: false,
-  kiosk_mode: false,
-  disabled_mode: false,
-  compact_mode: false,
-  disable_sidebar: false,
-  background: 'var(--primary-color)',
-  elements_color: 'var(--text-primary-color)',
-  menu_color: '',
-  voice_color: '',
-  options_color: '',
-  all_tabs_color: '',
-  tabs_color: [],
-  tab_direction: 'ltr',
-  button_direction: 'ltr',
-  chevrons: true,
-  indicator_top: false,
-  hide_tabs: [],
-  show_tabs: [],
-  template_variables: '',
-  exceptions: [],
-  header_text: 'Home Assistant',
-  hidden_tab_redirect: true,
-  default_tab: 0,
-  sidebar_right: false,
-  hide_help: false,
-  hide_unused: false,
-  hide_refresh: false,
-  hide_config: false,
-  hide_raw: false,
-  notification_dot_color: '#ff9800',
-};
+import { defaultConfig } from './default-config';
 
 export const buildConfig = () => {
   let config = { ...defaultConfig, ...lovelace.config.custom_header };

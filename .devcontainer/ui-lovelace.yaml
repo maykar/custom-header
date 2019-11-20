@@ -22,7 +22,7 @@ custom_header:
   default_tab: '{{ states.input_text.default_tab.state }}'
   disabled_mode: '{{ states.input_boolean.disabled_mode.state == "on" }}'
   active_tab_color: '{{ states.input_text.active_tab_color.state }}'
-  indicator_color: '{{ states.input_text.indicator_color.state }}'
+  tab_indicator_color: '{{ states.input_text.tab_indicator_color.state }}'
   tab_icons:
     pacman: '{% if states.input_boolean.icon_changes.state == "on" %}mdi:ghost{% endif %}'
     '1': '{% if states.input_boolean.icon_changes.state == "on" %}mdi:pac-man{% endif %}'
@@ -65,7 +65,7 @@ views:
           - entity: input_text.options_color
           - entity: input_text.all_tabs_color
           - entity: input_text.active_tab_color
-          - entity: input_text.indicator_color
+          - entity: input_text.tab_indicator_color
           - entity: input_text.hide_tabs
           - entity: input_text.default_tab
   - icon: mdi:ghost
@@ -94,7 +94,7 @@ views:
           - entity: input_text.options_color
           - entity: input_text.all_tabs_color
           - entity: input_text.active_tab_color
-          - entity: input_text.indicator_color
+          - entity: input_text.tab_indicator_color
           - entity: input_text.hide_tabs
           - entity: input_text.default_tab
   - icon: mdi:skull

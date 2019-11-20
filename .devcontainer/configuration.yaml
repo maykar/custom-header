@@ -92,7 +92,7 @@ input_text:
     name: 'active_tab_color:'
     initial: 'white'
     icon: 'mdi:tab'
-  indicator_color:
-    name: 'indicator_color:'
+  tab_indicator_color:
+    name: 'tab_indicator_color:'
     initial: 'grey'
     icon: 'mdi:minus'

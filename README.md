@@ -24,7 +24,7 @@ custom_header:
   default_tab: 0
   background: black
   elements_color: '#fff' # Color of all buttons and tabs
-  indicator_color: yellow
+  tab_indicator_color: yellow
   active_tab_color: yellow
   menu_color: red
   voice_color: rgb(255, 99, 71)

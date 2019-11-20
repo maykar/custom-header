@@ -8,7 +8,6 @@ import { haElem, root, lovelace } from './ha-elements';
 import { redirects } from './redirects';
 
 export const styleHeader = config => {
-  console.log('style');
   if (window.location.href.includes('disable_ch')) config.disabled_mode = true;
   window.customHeaderConfig = config;
 

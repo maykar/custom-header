@@ -82,7 +82,11 @@ export const insertStyleTags = config => {
         ${config.all_tabs_css ? config.all_tabs_css : ''}
       }
       paper-tabs {
-        ${config.indicator_color ? `--paper-tabs-selection-bar-color: ${config.indicator_color} !important;` : ''}
+        ${
+          config.tab_indicator_color
+            ? `--paper-tabs-selection-bar-color: ${config.tab_indicator_color} !important;`
+            : ''
+        }
         ${config.tab_container_css ? config.tab_container_css : ''}
       }
     `;
