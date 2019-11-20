@@ -37,7 +37,7 @@ export const defaultConfig = {
   notification_dot_color: '#ff9800',
 };
 
-export const buildConfig = refreshTemplates => {
+export const buildConfig = () => {
   let config = { ...defaultConfig, ...lovelace.config.custom_header };
   config = { ...config, ...conditionalConfig(config) };
   const variables = config.template_variables;
@@ -67,7 +67,7 @@ export const buildConfig = refreshTemplates => {
   if (hasTemplates) {
     unsubRenderTemplate = subscribeRenderTemplate(
       result => {
-        if (!refreshTemplates && window.customHeaderLastTemplateResult == result) return;
+        if (window.customHeaderLastTemplateResult == result) return;
         window.customHeaderLastTemplateResult = result;
         try {
           config = JSON.parse(
@@ -100,16 +100,16 @@ export const buildConfig = refreshTemplates => {
   })();
 
   // Render templates every minute.
-  if (!refreshTemplates && hasTemplates) {
+  if (hasTemplates) {
     window.setTimeout(() => {
       // Unsubscribe from template.
       if (templateFailed) return;
       (async () => {
         const unsub = await unsubRenderTemplate;
         unsubRenderTemplate = undefined;
-        await unsub;
+        await unsub();
       })();
-      buildConfig(false);
+      buildConfig();
     }, (60 - new Date().getSeconds()) * 1000);
   }
 };

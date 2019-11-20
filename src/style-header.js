@@ -8,6 +8,7 @@ import { haElem, root, lovelace } from './ha-elements';
 import { redirects } from './redirects';
 
 export const styleHeader = config => {
+  console.log('style');
   if (window.location.href.includes('disable_ch')) config.disabled_mode = true;
   window.customHeaderConfig = config;
 
@@ -128,6 +129,7 @@ export const styleHeader = config => {
   redirects(config, header);
 
   if (!header.tabs.length) header.tabContainer.style.display = 'none';
+  else header.tabContainer.querySelector('.iron-selected').click();
 
   menuButtonObservers(config, header, root);
 
