@@ -56,7 +56,9 @@ export const insertStyleTags = config => {
         ${config.active_tab_css ? config.active_tab_css : ''}
       }
       [buttonElem="menu"] {
-        position: relative;
+        ${config.menu_color ? `color: ${config.menu_color};` : ''}
+        ${config.menu_hide ? `display: none;` : ''}
+        ${config.menu_css ? config.menu_css : ''}
       }
       [buttonElem="options"] {
         ${config.options_color ? `color: ${config.options_color};` : ''}

@@ -49,8 +49,9 @@ export const styleHeader = config => {
     header.options.setAttribute('horizontal-align', 'right');
     header.options.querySelector('paper-listbox').setAttribute('dir', 'rtl');
   }
+
+  // Disable sidebar or style it to fit header's new sizing/placement.
   if (config.disable_sidebar) {
-    // Disable sidebar or style it to fit header's new sizing/placement.
     kioskMode(true);
   } else if (!config.disable_sidebar && !config.kiosk_mode) {
     removeKioskMode();
