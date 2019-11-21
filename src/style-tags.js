@@ -55,17 +55,8 @@ export const insertStyleTags = config => {
         ${config.active_tab_color ? `color: ${config.active_tab_color};` : ''}
         ${config.active_tab_css ? config.active_tab_css : ''}
       }
-      paper-listbox {
-        position: fixed;
-        width: fit-content;
-        ${config.button_direction == 'rtl' ? 'left: 0' : 'right: 0'};
-        ${config.footer_mode ? 'bottom: 0' : 'top: 0'};
-        ${config.options_list_css ? config.options_list_css : ''}
-      }
       [buttonElem="menu"] {
-        ${config.menu_color ? `color: ${config.menu_color};` : ''}
-        ${config.menu_hide ? `display: none;` : ''}
-        ${config.menu_css ? config.menu_css : ''}
+        position: relative;
       }
       [buttonElem="options"] {
         ${config.options_color ? `color: ${config.options_color};` : ''}

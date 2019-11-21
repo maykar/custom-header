@@ -73,24 +73,3 @@ export const processTabArray = array => {
   }
   return ranges.sort(sortNumber);
 };
-
-// Add button to overflow menu.
-export const buttonToOverflow = (item, mdiIcon, header) => {
-  if (!header.options.querySelector(`#${item.toLowerCase()}_dropdown`)) {
-    const paperItem = document.createElement('paper-item');
-    const icon = document.createElement('ha-icon');
-    paperItem.setAttribute('id', `${item.toLowerCase()}_dropdown`);
-    icon.setAttribute('icon', mdiIcon);
-    icon.style.pointerEvents = 'none';
-    icon.style.marginLeft = 'auto';
-    paperItem.innerText = item;
-    paperItem.appendChild(icon);
-    paperItem.addEventListener('click', () => {
-      header[item.toLowerCase()].click();
-    });
-    icon.addEventListener('click', () => {
-      header[item.toLowerCase()].click();
-    });
-    header.options.querySelector('paper-listbox').appendChild(paperItem);
-  }
-};

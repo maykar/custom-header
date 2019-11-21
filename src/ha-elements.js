@@ -12,7 +12,8 @@ haElem.tabContainer = root.querySelector('paper-tabs');
 haElem.activeTab = root.querySelector('paper-tab.iron-selected');
 haElem.menu = root.querySelector('ha-menu-button');
 haElem.options = root.querySelector('paper-menu-button');
-haElem.voice = root.querySelector('ha-start-voice-button') || root.querySelector('[icon="hass:microphone"]');
+haElem.voice =
+  root.querySelector('ha-start-voice-button') || root.querySelector('paper-icon-button[icon="hass:microphone"]');
 haElem.drawer = haElem.main.shadowRoot.querySelector('#drawer');
 haElem.sidebar = {};
 haElem.sidebar.main = haElem.main.shadowRoot.querySelector('ha-sidebar');
@@ -25,7 +26,7 @@ haElem.partialPanelResolver = haElem.main.shadowRoot.querySelector('partial-pane
 
 const missing = [];
 for (const item in haElem) {
-  if (item == 'activeTab') {
+  if (item == 'activeTab' || 'voice') {
     continue;
   } else if (!haElem[item]) {
     missing.push(item);

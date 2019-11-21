@@ -1,6 +1,6 @@
 import { header } from './build-header';
-import { tabIndexByName, buttonToOverflow } from './helpers';
-import { hideMenuItems } from './overflow-menu';
+import { tabIndexByName } from './helpers';
+import { hideMenuItems, buttonToOverflow } from './overflow-menu';
 import { kioskMode, removeKioskMode } from './kiosk-mode';
 import { menuButtonObservers } from './menu-observers';
 import { insertStyleTags } from './style-tags';
@@ -36,13 +36,21 @@ export const styleHeader = config => {
 
   if (!header.tabs.length) config.compact_mode = false;
 
-  if (config.menu_dropdown && !config.disable_sidebar) buttonToOverflow('Menu', 'mdi:menu', header);
+  if (config.menu_dropdown && !config.disable_sidebar) buttonToOverflow('Menu', 'mdi:menu', header, config);
   else if (header.options.querySelector(`#menu_dropdown`)) header.options.querySelector(`#menu_dropdown`).remove();
-  if (config.voice_dropdown) buttonToOverflow('Voice', 'mdi:microphone', header);
+  if (config.voice_dropdown) buttonToOverflow('Voice', 'mdi:microphone', header, config);
   else if (header.options.querySelector(`#voice_dropdown`)) header.options.querySelector(`#voice_dropdown`).remove();
 
-  // Disable sidebar or style it to fit header's new sizing/placement.
+  // Style overflow menu depending on position.
+  if (config.button_direction == 'rtl') {
+    header.options.setAttribute('horizontal-align', 'left');
+    header.options.querySelector('paper-listbox').setAttribute('dir', 'ltr');
+  } else {
+    header.options.setAttribute('horizontal-align', 'right');
+    header.options.querySelector('paper-listbox').setAttribute('dir', 'rtl');
+  }
   if (config.disable_sidebar) {
+    // Disable sidebar or style it to fit header's new sizing/placement.
     kioskMode(true);
   } else if (!config.disable_sidebar && !config.kiosk_mode) {
     removeKioskMode();
@@ -128,7 +136,6 @@ export const styleHeader = config => {
   redirects(config, header);
 
   if (!header.tabs.length) header.tabContainer.style.display = 'none';
-  else header.tabContainer.querySelector('.iron-selected').click();
 
   menuButtonObservers(config, header, root);
 

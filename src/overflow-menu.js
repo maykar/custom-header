@@ -32,3 +32,26 @@ export const hideMenuItems = (config, header, editMode) => {
       }
     });
 };
+
+// Add button to overflow menu.
+export const buttonToOverflow = (item, mdiIcon, header, config) => {
+  if (header.options.querySelector(`#${item.toLowerCase()}_dropdown`)) {
+    header.options.querySelector(`#${item.toLowerCase()}_dropdown`).remove();
+  }
+  const paperItem = document.createElement('paper-item');
+  const icon = document.createElement('ha-icon');
+  paperItem.setAttribute('id', `${item.toLowerCase()}_dropdown`);
+  icon.setAttribute('icon', mdiIcon);
+  icon.style.pointerEvents = 'none';
+  if (config.button_direction === 'rtl') icon.style.marginLeft = 'auto';
+  else icon.style.marginRight = 'auto';
+  paperItem.innerText = item;
+  paperItem.appendChild(icon);
+  paperItem.addEventListener('click', () => {
+    header[item.toLowerCase()].click();
+  });
+  icon.addEventListener('click', () => {
+    header[item.toLowerCase()].click();
+  });
+  header.options.querySelector('paper-listbox').appendChild(paperItem);
+};
