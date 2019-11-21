@@ -36,7 +36,7 @@ export const styleHeader = config => {
 
   if (!header.tabs.length) config.compact_mode = false;
 
-  if (config.menu_dropdown) buttonToOverflow('Menu', 'mdi:menu', header);
+  if (config.menu_dropdown && !config.disable_sidebar) buttonToOverflow('Menu', 'mdi:menu', header);
   else if (header.options.querySelector(`#menu_dropdown`)) header.options.querySelector(`#menu_dropdown`).remove();
   if (config.voice_dropdown) buttonToOverflow('Voice', 'mdi:microphone', header);
   else if (header.options.querySelector(`#voice_dropdown`)) header.options.querySelector(`#voice_dropdown`).remove();

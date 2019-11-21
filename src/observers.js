@@ -14,16 +14,16 @@ export const observers = () => {
         // Entered edit mode.
         if (!window.customHeaderDisabled) hideMenuItems(config, header, true);
         header.menu.style.display = 'none';
-        root.querySelector('cch-header').style.display = 'none';
+        root.querySelector('ch-header').style.display = 'none';
         haElem.appHeader.style.display = 'block';
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        if (root.querySelector('#cch_view_style')) root.querySelector('#cch_view_style').remove();
+        if (root.querySelector('#ch_view_style')) root.querySelector('#ch_view_style').remove();
       } else if (target.nodeName === 'APP-HEADER' && addedNodes.length) {
         // Exited edit mode.
         buildConfig();
         haElem.appHeader.style.display = 'none';
         header.menu.style.display = '';
-        root.querySelector('cch-header').style.display = '';
+        root.querySelector('ch-header').style.display = '';
       }
     });
   };
