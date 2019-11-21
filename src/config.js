@@ -50,6 +50,7 @@ export const buildConfig = () => {
         processAndContinue();
       },
       { template: JSON.stringify(variables).replace(/\\/g, '') + JSON.stringify(config).replace(/\\/g, '') },
+      config.locale,
     );
   } else {
     processAndContinue();

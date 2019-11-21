@@ -12,6 +12,7 @@ export const defaultConfig = {
   notification_dot_color: getThemeVar('--ch-notification-dot-color') || '#ff9800',
   tab_indicator_color: getThemeVar('--ch-tab-indicator-color') || '',
   active_tab_color: getThemeVar('--ch-active-tab-color') || '',
+  locale: '',
   footer_mode: false,
   kiosk_mode: false,
   disabled_mode: false,

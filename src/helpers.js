@@ -25,13 +25,13 @@ export const invertNumArray = show_tabs => {
 };
 
 // Subscribe and render Jinja templates.
-export const subscribeRenderTemplate = (onChange, params) => {
+export const subscribeRenderTemplate = (onChange, params, locale) => {
   const conn = hass.connection;
   const variables = {
     user: hass.user.name,
     browser: navigator.userAgent,
     ...params.variables,
-    ...defaultVariables(),
+    ...defaultVariables(locale),
   };
   const template = params.template;
   const entity_ids = params.entity_ids;
