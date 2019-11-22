@@ -20,10 +20,10 @@ export const observers = () => {
         if (root.querySelector('#ch_view_style')) root.querySelector('#ch_view_style').remove();
       } else if (target.nodeName === 'APP-HEADER' && addedNodes.length) {
         // Exited edit mode.
-        buildConfig();
         haElem.appHeader.style.display = 'none';
         header.menu.style.display = '';
         root.querySelector('ch-header').style.display = '';
+        buildConfig();
       }
     });
   };

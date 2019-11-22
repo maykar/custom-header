@@ -1,12 +1,12 @@
 import { invertNumArray, subscribeRenderTemplate, processTabArray } from './helpers';
-import { lovelace } from './ha-elements';
+import { lovelace, root } from './ha-elements';
 import { conditionalConfig } from './conditional-config';
 import { styleHeader } from './style-header';
 import { kioskMode } from './kiosk-mode';
 import { defaultConfig } from './default-config';
 
-export const buildConfig = () => {
-  let config = { ...defaultConfig, ...lovelace.config.custom_header };
+export const buildConfig = config => {
+  if (!config) config = { ...defaultConfig, ...lovelace.config.custom_header };
   config = { ...config, ...conditionalConfig(config) };
   const variables = config.template_variables;
   delete config.template_variables;
@@ -72,7 +72,7 @@ export const buildConfig = () => {
   if (hasTemplates) {
     window.setTimeout(() => {
       // Unsubscribe from template.
-      if (templateFailed) return;
+      if (templateFailed || root.querySelector('custom-header-editor')) return;
       (async () => {
         const unsub = await unsubRenderTemplate;
         unsubRenderTemplate = undefined;

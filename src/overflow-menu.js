@@ -1,3 +1,7 @@
+import './editor';
+import { header } from './build-header';
+import { root, lovelace } from './ha-elements';
+
 export const hideMenuItems = (config, header, editMode) => {
   const localized = (item, string) => {
     let localString;
@@ -55,3 +59,41 @@ export const buttonToOverflow = (item, mdiIcon, header, config) => {
   });
   header.options.querySelector('paper-listbox').appendChild(paperItem);
 };
+
+const showEditor = () => {
+  window.scrollTo(0, 0);
+  if (!root.querySelector('ha-app-layout editor')) {
+    const container = document.createElement('editor');
+    const nest = document.createElement('div');
+    nest.style.cssText = `
+      padding: 20px;
+      max-width: 600px;
+      margin: 15px auto;
+      background: var(--paper-card-background-color);
+      border: 6px solid var(--paper-card-background-color);
+    `;
+    container.style.cssText = `
+      width: 100%;
+      min-height: 100%;
+      box-sizing: border-box;
+      position: absolute;
+      background: var(--background-color, grey);
+      z-index: 2;
+      padding: 5px;
+    `;
+    root.querySelector('ha-app-layout').insertBefore(container, root.querySelector('#view'));
+    container.appendChild(nest);
+    nest.appendChild(document.createElement('custom-header-editor'));
+  }
+};
+
+if (lovelace.mode === 'storage') {
+  const cchSettings = document.createElement('paper-item');
+  cchSettings.setAttribute('id', 'cch_settings');
+  cchSettings.addEventListener('click', () => showEditor());
+  cchSettings.innerHTML = 'CCH Settings';
+  const first_item = header.options.querySelector('paper-listbox').querySelector('paper-item');
+  if (!header.options.querySelector('paper-listbox').querySelector(`#cch_settings`)) {
+    header.options.querySelector('paper-listbox').insertBefore(cchSettings, first_item);
+  }
+}
