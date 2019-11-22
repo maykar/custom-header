@@ -8,9 +8,9 @@ import { haElem, root, lovelace } from './ha-elements';
 import { redirects } from './redirects';
 
 export const styleHeader = config => {
-  if (window.location.href.includes('disable_ch')) config.disabled_mode = true;
   window.customHeaderConfig = config;
 
+  if (window.location.href.includes('disable_ch')) config.disabled_mode = true;
   if (config.disabled_mode) {
     window.customHeaderDisabled = true;
     removeKioskMode();

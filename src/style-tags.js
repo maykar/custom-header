@@ -16,7 +16,7 @@ export const insertStyleTags = config => {
     headerHeight = header.tabs.length ? 96 : 48;
   }
 
-  // Main header styling.
+  // Build header's main style.
   let style = document.createElement('style');
   style.setAttribute('id', 'ch_header_style');
   style.innerHTML = `
@@ -84,40 +84,41 @@ export const insertStyleTags = config => {
       }
     `;
 
-  // Per tab coloring.
+  // Add per tab coloring.
   if (config.tabs_color) {
     Object.keys(config.tabs_color).forEach(tab => {
       style.innerHTML += `
-      paper-tab:nth-child(${tabIndexByName(tab) + 1}) {
-        color: ${config.tabs_color[tab]};
-      }
-    `;
+        paper-tab:nth-child(${tabIndexByName(tab) + 1}) {
+          color: ${config.tabs_color[tab]};
+        }
+      `;
     });
   }
 
-  // Per tab custom css.
-  if (config.tabs_css) {
-    Object.keys(config.tabs_css).forEach(tab => {
-      style.innerHTML += `
-      paper-tab:nth-child(${tabIndexByName(tab) + 1}) {
-        ${config.tabs_css[tab]};
-      }
-    `;
-    });
-  }
-
-  // Per tab hiding.
+  // Add per tab hiding.
   if (config.hide_tabs) {
     config.hide_tabs.forEach(tab => {
       style.innerHTML += `
-      paper-tab:nth-child(${tabIndexByName(tab) + 1}) {
-        display: none;
-      }
-    `;
+        paper-tab:nth-child(${tabIndexByName(tab) + 1}) {
+          display: none;
+        }
+      `;
     });
   }
 
-  // Add updated style elements and remove old ones after.
+  // Add per tab custom css.
+  if (config.tabs_css) {
+    Object.keys(config.tabs_css).forEach(tab => {
+      style.innerHTML += `
+        paper-tab:nth-child(${tabIndexByName(tab) + 1}) {
+          ${config.tabs_css[tab]};
+        }
+      `;
+    });
+  }
+
+  // Add updated style element and remove old one after.
+  // This prevents elements "flashing" when styles change.
   let currentStyle = root.querySelector('#ch_header_style');
   root.appendChild(style);
   if (currentStyle) currentStyle.remove();
@@ -146,6 +147,7 @@ export const insertStyleTags = config => {
       `;
 
   // Add updated view style if changed.
+  // Prevents background images flashing on every change.
   currentStyle = root.querySelector('#ch_view_style');
   if (!currentStyle || style.innerHTML != currentStyle.innerHTML) {
     root.appendChild(style);
@@ -160,6 +162,7 @@ export const insertStyleTags = config => {
         display:none;
       }
     `;
+  // Add updated style element and remove old one after.
   currentStyle = header.tabContainer.shadowRoot.querySelector('#ch_chevron');
   header.tabContainer.shadowRoot.appendChild(style);
   if (currentStyle) currentStyle.remove();
