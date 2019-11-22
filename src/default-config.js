@@ -4,7 +4,7 @@ const getThemeVar = themeVar => {
 
 export const defaultConfig = {
   // Main config
-  locale: '',
+  locale: [],
   header_text: 'Home Assistant',
   disabled_mode: false,
   kiosk_mode: false,
