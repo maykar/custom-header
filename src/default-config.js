@@ -5,14 +5,14 @@ const getThemeVar = themeVar => {
 export const defaultConfig = {
   // Main config
   locale: [],
-  header_text: 'Home Assistant', //
+  header_text: 'Home Assistant',
   disabled_mode: false,
   kiosk_mode: false,
   compact_mode: false,
   footer_mode: false,
   disable_sidebar: false,
   chevrons: true,
-  indicator_top: false, //
+  indicator_top: false,
   hidden_tab_redirect: true,
 
   // Colors

@@ -87,13 +87,13 @@ const showEditor = () => {
   }
 };
 
-if (lovelace.mode === 'storage') {
-  const cchSettings = document.createElement('paper-item');
-  cchSettings.setAttribute('id', 'cch_settings');
-  cchSettings.addEventListener('click', () => showEditor());
-  cchSettings.innerHTML = 'CCH Settings';
-  const first_item = header.options.querySelector('paper-listbox').querySelector('paper-item');
-  if (!header.options.querySelector('paper-listbox').querySelector(`#cch_settings`)) {
-    header.options.querySelector('paper-listbox').insertBefore(cchSettings, first_item);
-  }
+// if (lovelace.mode === 'storage') {
+const chSettings = document.createElement('paper-item');
+chSettings.setAttribute('id', 'ch_settings');
+chSettings.addEventListener('click', () => showEditor());
+chSettings.innerHTML = 'Custom Header';
+const paperItems = header.options.querySelector('paper-listbox').querySelectorAll('paper-item');
+if (!header.options.querySelector('paper-listbox').querySelector(`#ch_settings`)) {
+  header.options.querySelector('paper-listbox').insertBefore(chSettings, paperItems[paperItems.length]);
 }
+// }
