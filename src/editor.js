@@ -245,8 +245,39 @@ class ChConfigEditor extends LitElement {
     else return false;
   }
 
+  switchElement(option, templateWarn, editorWarn, text, title, checked) {
+    const templateIcon = html`
+      <iron-icon icon="mdi:alpha-t-box" class="alert" title="Disabled since current value is a template."></iron-icon>
+    `;
+    const editorWarning = html`
+      <iron-icon icon="hass:alert" class="alert" title="Removes ability to edit UI"></iron-icon>
+    `;
+    return html`
+      <ha-switch
+        class="${this.exception && this.config[option] === undefined ? 'inherited' : 'slotted'}"
+        ?checked="${this.getConfig(option) !== false}"
+        .configValue="${option}"
+        @change="${this._valueChanged}"
+        title=${title}
+        ?disabled=${this.templateExists(this.getConfig(option))}
+      >
+        ${text}
+        ${this.getConfig('editor_warnings') && this.templateExists(this.getConfig(option)) && templateWarn
+          ? templateIcon
+          : ''}
+        ${this.getConfig('editor_warnings') && editorWarn ? editorWarning : ''}
+      </ha-switch>
+    `;
+  }
+
   render() {
     this.exception = this.exception !== undefined && this.exception !== false;
+    const templateIcon = html`
+      <iron-icon icon="mdi:alpha-t-box" class="alert" title="Disabled: current value is a template."></iron-icon>
+    `;
+    const editorWarning = html`
+      <iron-icon icon="hass:alert" class="alert" title="Removes ability to edit UI"></iron-icon>
+    `;
     return html`
       <custom-style>
         <style is="custom-style">
@@ -290,151 +321,29 @@ class ChConfigEditor extends LitElement {
                     You can temporaily disable Custom-Header by adding "?disable_ch" to the end of your URL. Hover over
                     any option or icon below for more info.
                   </div>
-                  <br />
                 `
               : ''}
           `
         : ''}
       ${this.renderStyle()}
       <div class="side-by-side">
-        <ha-switch
-          class="${this.exception && this.config.disabled_mode === undefined ? 'inherited' : ''}"
-          ?checked="${this.getConfig('disabled_mode') !== false}"
-          .configValue="${'disabled_mode'}"
-          @change="${this._valueChanged}"
-          title="Completely disable Custom-Header. Useful for exceptions."
-          ?disabled=${this.templateExists(this.getConfig('disabled_mode'))}
-        >
-          Disabled Mode
-        </ha-switch>
-        <ha-switch
-          class="${this.exception && this.config.footer_mode === undefined ? 'inherited' : ''}"
-          ?checked="${this.getConfig('footer_mode') !== false}"
-          .configValue="${'footer_mode'}"
-          @change="${this._valueChanged}"
-          title="Turn the header into a footer."
-          ?disabled=${this.templateExists(this.getConfig('footer_mode'))}
-        >
-          Footer Mode
-        </ha-switch>
-        <ha-switch
-          class="${this.exception && this.config.compact_mode === undefined ? 'inherited' : ''}"
-          ?checked="${this.getConfig('compact_mode') !== false}"
-          .configValue="${'compact_mode'}"
-          @change="${this._valueChanged}"
-          title="Make header compact."
-          ?disabled=${this.templateExists(this.getConfig('compact_mode'))}
-        >
-          Compact Mode
-        </ha-switch>
-        <ha-switch
-          class="${this.exception && this.config.kiosk_mode === undefined ? 'inherited' : ''}"
-          ?checked="${this.getConfig('kiosk_mode') !== false}"
-          .configValue="${'kiosk_mode'}"
-          @change="${this._valueChanged}"
-          title="Hide the header, close the sidebar, and disable sidebar swipe."
-          ?disabled=${this.templateExists(this.getConfig('kiosk_mode'))}
-        >
-          Kiosk Mode
-          ${this.getConfig('editor_warnings')
-            ? html`
-                <iron-icon icon="hass:alert" class="alert" title="Removes ability to edit UI"></iron-icon>
-              `
-            : ''}
-        </ha-switch>
-        <ha-switch
-          class="${this.exception && this.config.disable_sidebar === undefined ? 'inherited' : ''}"
-          ?checked="${this.getConfig('disable_sidebar') !== false || this.getConfig('kiosk_mode') !== false}"
-          .configValue="${'disable_sidebar'}"
-          @change="${this._valueChanged}"
-          title="Disable sidebar and menu button."
-          ?disabled=${this.templateExists(this.getConfig('disable_sidebar'))}
-        >
-          Disable Sidebar
-        </ha-switch>
-        <ha-switch
-          class="${this.exception && this.config.chevrons === undefined ? 'inherited' : ''}"
-          ?checked="${this.getConfig('chevrons') !== false}"
-          .configValue="${'chevrons'}"
-          @change="${this._valueChanged}"
-          title="View scrolling controls in header."
-          ?disabled=${this.templateExists(this.getConfig('chevrons'))}
-        >
-          Display Tab Chevrons
-        </ha-switch>
-        <ha-switch
-          class="${this.exception && this.config.hidden_tab_redirect === undefined ? 'inherited' : ''}"
-          ?checked="${this.getConfig('hidden_tab_redirect') !== false}"
-          .configValue="${'hidden_tab_redirect'}"
-          @change="${this._valueChanged}"
-          title="Auto-redirect away from hidden tabs."
-          ?disabled=${this.templateExists(this.getConfig('hidden_tab_redirect'))}
-        >
-          Hidden Tab Redirect
-        </ha-switch>
+        ${this.switchElement('disabled_mode', true, false, 'Disabled Mode', 'Completely disable Custom-Header.')}
+        ${this.switchElement('footer_mode', true, false, 'Footer Mode', 'Turn the header into a footer.')}
+        ${this.switchElement('compact_mode', true, false, 'Compact Mode', 'Make header compact.')}
+        ${this.switchElement('kiosk_mode', true, true, 'Kiosk Mode', 'Hide and disable the header and sidebar')}
+        ${this.switchElement('disable_sidebar', true, false, 'Disable Sidebar', 'Disable sidebar and menu button.')}
+        ${this.switchElement('chevrons', true, false, 'Display Tab Chevrons', 'Disable scrolling arrows for tabs.')}
+        ${this.switchElement('hidden_tab_redirect', true, false, 'Hidden Tab Redirect', 'Redirect from hidden tab.')}
         ${!this.exception
-          ? html`
-              <ha-switch
-                class="${this.exception && this.config.editor_warnings === undefined ? 'inherited' : ''}"
-                ?checked="${this.getConfig('editor_warnings') !== false}"
-                .configValue="${'editor_warnings'}"
-                @change="${this._valueChanged}"
-                title="Toggle warnings in this editor."
-                ?disabled=${this.templateExists(this.getConfig('editor_warnings'))}
-              >
-                Display Editor Warnings
-              </ha-switch>
-            `
+          ? this.switchElement('editor_warnings', false, false, 'Display Editor Warnings', 'Toggle editor warnings.')
           : ''}
       </div>
       <h4 class="underline">Menu Items</h4>
       <div class="side-by-side">
-        <ha-switch
-          class="${this.exception && this.config.hide_config === undefined ? 'inherited' : ''}"
-          ?checked="${this.getConfig('hide_config') !== false}"
-          .configValue="${'hide_config'}"
-          @change="${this._valueChanged}"
-          title='Hide "Configure UI" in options menu.'
-        >
-          Hide "Configure UI"
-          ${this.getConfig('editor_warnings')
-            ? html`
-                <iron-icon icon="hass:alert" class="alert"></iron-icon>
-              `
-            : ''}
-        </ha-switch>
-        <ha-switch
-          class="${this.exception && this.config.hide_raw === undefined ? 'inherited' : ''}"
-          ?checked="${this.getConfig('hide_raw') !== false}"
-          .configValue="${'hide_raw'}"
-          @change="${this._valueChanged}"
-          title='Hide "Raw Config Editor" in options menu.'
-        >
-          Hide "Raw Config Editor"
-          ${this.getConfig('editor_warnings')
-            ? html`
-                <iron-icon icon="hass:alert" class="alert"></iron-icon>
-              `
-            : ''}
-        </ha-switch>
-        <ha-switch
-          class="${this.exception && this.config.hide_help === undefined ? 'inherited' : ''}"
-          ?checked="${this.getConfig('hide_help') !== false}"
-          .configValue="${'hide_help'}"
-          @change="${this._valueChanged}"
-          title='Hide "Help" in options menu.'
-        >
-          Hide "Help"
-        </ha-switch>
-        <ha-switch
-          class="${this.exception && this.config.hide_unused === undefined ? 'inherited' : ''}"
-          ?checked="${this.getConfig('hide_unused') !== false}"
-          .configValue="${'hide_unused'}"
-          @change="${this._valueChanged}"
-          title='Hide "Help" in options menu.'
-        >
-          Hide "Unused Entities"
-        </ha-switch>
+        ${this.switchElement('hide_config', true, true, 'Hide "Configure UI"', 'Hide item in options menu.')}
+        ${this.switchElement('hide_raw', true, true, 'Hide "Raw Config Editor"', 'Hide item in options menu.')}
+        ${this.switchElement('hide_help', true, false, 'Hide "Help"', 'Hide item in options menu.')}
+        ${this.switchElement('hide_unused', true, false, 'Hide "Unused Entities"', 'Hide item in options menu.')}
       </div>
       <h4 class="underline">Buttons</h4>
 
