@@ -32,11 +32,11 @@ export const defaultConfig = {
   show_tabs: [],
   default_tab: 0,
   tab_icons: [],
-  tab_direction: 'ltr',
+  reverse_tab_direction: false,
 
   // Buttons
   button_icons: [],
-  button_direction: 'ltr',
+  reverse_button_direction: false,
   menu_dropdown: false,
   menu_hide: false,
   voice_dropdown: false,

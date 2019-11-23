@@ -5,7 +5,7 @@ import { tabIndexByName } from './helpers';
 export const insertStyleTags = config => {
   let headerHeight = 48;
   if (!config.compact_mode) {
-    if (config.button_direction == 'rtl') {
+    if (config.reverse_button_direction) {
       header.container.querySelector('#contentContainer').dir = 'ltr';
       header.container.querySelector('#contentContainer').style.textAlign = 'right';
     } else {
@@ -129,7 +129,7 @@ export const insertStyleTags = config => {
   style.innerHTML = `
         hui-view, hui-panel-view {
           min-height: calc(100vh - ${headerHeight}px);
-          padding-top: 2px;
+          padding-top: 3px;
           ${config.footer_mode ? `padding-bottom: ${headerHeight}px;` : ''}
           ${config.footer_mode ? `margin-bottom: -${headerHeight + 4}px;` : ''}
         }
@@ -138,7 +138,6 @@ export const insertStyleTags = config => {
           ${config.panel_view_css ? config.panel_view_css : ''}
         }
         hui-view {
-          padding-top: 0px;
           ${config.view_css ? config.view_css : ''}
         }
         #view {

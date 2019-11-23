@@ -13,7 +13,7 @@ export const menuButtonObservers = (config, header) => {
         width: 12px;
         height: 12px;
         top: -28px;
-        right: ${config.button_direction == 'rtl' ? '' : '-'}16px;
+        right: ${config.reverse_button_direction ? '' : '-'}16px;
         border-radius: 50%;
     `;
     return dot;

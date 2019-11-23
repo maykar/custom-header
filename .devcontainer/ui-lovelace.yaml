@@ -17,8 +17,8 @@ custom_header:
   kiosk_mode: '{{ states.input_boolean.kiosk_mode.state == "on" }}'
   compact_mode: '{{ states.input_boolean.compact_mode.state == "on" }}'
   disable_sidebar: '{{ states.input_boolean.disable_sidebar.state == "on" }}'
-  tab_direction: '{% if states.input_boolean.tab_direction.state == "on" %}ltr{% else %}rtl{% endif %}'
-  button_direction: '{% if states.input_boolean.button_direction.state == "on" %}ltr{% else %}rtl{% endif %}'
+  reverse_tab_direction: '{{ states.input_boolean.reverse_tab_direction.state == "on" }}'
+  reverse_button_direction: '{{ states.input_boolean.reverse_button_direction.state }}'
   default_tab: '{{ states.input_text.default_tab.state }}'
   disabled_mode: '{{ states.input_boolean.disabled_mode.state == "on" }}'
   active_tab_color: '{{ states.input_text.active_tab_color.state }}'
@@ -53,8 +53,8 @@ views:
           - entity: input_boolean.indicator_top
           - entity: input_boolean.chevrons
           - entity: input_boolean.hidden_tab_redirect
-          - entity: input_boolean.tab_direction
-          - entity: input_boolean.button_direction
+          - entity: input_boolean.reverse_tab_direction
+          - entity: input_boolean.reverse_button_direction
           - entity: input_boolean.icon_changes
           - entity: input_boolean.text_changes
       - type: entities
@@ -84,8 +84,8 @@ views:
           - entity: input_boolean.indicator_top
           - entity: input_boolean.chevrons
           - entity: input_boolean.hidden_tab_redirect
-          - entity: input_boolean.tab_direction
-          - entity: input_boolean.button_direction
+          - entity: input_boolean.reverse_tab_direction
+          - entity: input_boolean.reverse_button_direction
           - entity: input_boolean.icon_changes
           - entity: input_boolean.text_changes
           - entity: input_text.background

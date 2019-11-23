@@ -42,7 +42,7 @@ export const styleHeader = config => {
   else if (header.options.querySelector(`#voice_dropdown`)) header.options.querySelector(`#voice_dropdown`).remove();
 
   // Style overflow menu depending on position.
-  if (config.button_direction == 'rtl') {
+  if (config.reverse_button_direction) {
     header.options.setAttribute('horizontal-align', 'left');
     header.options.querySelector('paper-listbox').setAttribute('dir', 'ltr');
   } else {
@@ -77,8 +77,8 @@ export const styleHeader = config => {
   else header.container.removeAttribute('slot');
 
   // Tabs direction left to right or right to left.
-  header.tabContainer.dir = config.tab_direction;
-  header.container.dir = config.button_direction;
+  header.tabContainer.dir = config.reverse_tab_direction ? 'rtl' : 'ltr';
+  header.container.dir = config.reverse_button_direction ? 'rtl' : 'ltr';
 
   // Tab icon customization.
   if (config.tab_icons && header.tabs.length) {
@@ -122,7 +122,7 @@ export const styleHeader = config => {
         } else {
           buttonElem.shadowRoot.querySelector('.buttonText').innerText = config.button_text[button];
         }
-        if (config.button_direction == 'rtl') {
+        if (config.reverse_button_direction) {
           buttonElem.shadowRoot.querySelector('.buttonText').dir = 'ltr';
         } else {
           buttonElem.shadowRoot.querySelector('.buttonText').dir = '';

@@ -47,7 +47,7 @@ export const buttonToOverflow = (item, mdiIcon, header, config) => {
   paperItem.setAttribute('id', `${item.toLowerCase()}_dropdown`);
   icon.setAttribute('icon', config.button_icons[item.toLowerCase()] || mdiIcon);
   icon.style.pointerEvents = 'none';
-  if (config.button_direction === 'rtl') icon.style.marginLeft = 'auto';
+  if (config.reverse_button_direction) icon.style.marginLeft = 'auto';
   else icon.style.marginRight = 'auto';
   paperItem.innerText = item;
   paperItem.appendChild(icon);

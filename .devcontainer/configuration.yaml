@@ -27,16 +27,16 @@ input_boolean:
     name: 'voice_dropdown:'
     initial: off
     icon: mdi:microphone
-  tab_direction:
-    name: 'tab_direction:'
+  reverse_tab_direction:
+    name: 'reverse_tab_direction:'
     initial: on
     icon: mdi:arrow-left-right-bold
   hidden_tab_redirect:
     name: 'hidden_tab_redirect:'
     initial: on
     icon: mdi:directions
-  button_direction:
-    name: 'button_direction:'
+  reverse_button_direction:
+    name: 'reverse_button_direction:'
     initial: on
     icon: mdi:arrow-left-right-bold
   footer_mode:

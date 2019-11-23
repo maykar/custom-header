@@ -1,19 +1,7 @@
 import { LitElement, html } from 'lit-element';
 import { defaultConfig } from './default-config';
-import { getLovelace } from 'custom-card-helpers';
+import { getLovelace, fireEvent } from 'custom-card-helpers';
 import { hass } from './ha-elements';
-
-const fireEvent = (node, type, detail, options = {}) => {
-  detail = detail === null || detail === undefined ? {} : detail;
-  const event = new Event(type, {
-    bubbles: options.bubbles === undefined ? true : options.bubbles,
-    cancelable: Boolean(options.cancelable),
-    composed: options.composed === undefined ? true : options.composed,
-  });
-  event.detail = detail;
-  node.dispatchEvent(event);
-  return event;
-};
 
 export class CustomHeaderEditor extends LitElement {
   static get properties() {
@@ -245,17 +233,21 @@ class ChConfigEditor extends LitElement {
     else return false;
   }
 
-  switchElement(option, templateWarn, editorWarn, text, title, checked) {
+  haSwitch(option, templateWarn, editorWarn, text, title, checked) {
     const templateIcon = html`
-      <iron-icon icon="mdi:alpha-t-box" class="alert" title="Disabled: The current value is a template."></iron-icon>
+      <iron-icon
+        icon="mdi:alpha-t-box-outline"
+        class="alert"
+        title="Disabled: The current value is a template."
+      ></iron-icon>
     `;
     const editorWarning = html`
-      <iron-icon icon="hass:alert" class="alert" title="Removes ability to edit UI"></iron-icon>
+      <iron-icon icon="mdi:alert-box-outline" class="alert" title="Removes ability to edit UI"></iron-icon>
     `;
     return html`
       <ha-switch
         class="${this.exception && this.config[option] === undefined ? 'inherited' : 'slotted'}"
-        ?checked="${this.getConfig(option) !== false}"
+        ?checked="${this.getConfig(option) !== false && !this.templateExists(this.getConfig(option))}"
         .configValue="${option}"
         @change="${this._valueChanged}"
         title=${title}
@@ -312,35 +304,83 @@ class ChConfigEditor extends LitElement {
               ? html`
                   <br />
                   <div class="warning">
-                    You can temporaily disable Custom-Header by adding "?disable_ch" to the end of your URL. Hover over
-                    any option or icon below for more info.
+                    <p style="padding: 5px; margin: 0;">
+                      You can temporaily disable Custom-Header by adding "?disable_ch" to the end of your URL.
+                      <br /><br />
+                      <ha-icon style="padding-right: 3px;" icon="mdi:alpha-t-box-outline"></ha-icon>Designates items
+                      that are already a template and won't be modified by the editor.<br /><ha-icon
+                        style="padding-right: 3px;"
+                        icon="mdi:alert-box-outline"
+                      ></ha-icon
+                      >Marks items that remove your ability to edit the UI.<br />
+                    </p>
                   </div>
                 `
               : ''}
           `
         : ''}
       ${this.renderStyle()}
-      <div class="side-by-side">
-        ${this.switchElement('disabled_mode', true, false, 'Disabled Mode', 'Completely disable Custom-Header.')}
-        ${this.switchElement('footer_mode', true, false, 'Footer Mode', 'Turn the header into a footer.')}
-        ${this.switchElement('compact_mode', true, false, 'Compact Mode', 'Make header compact.')}
-        ${this.switchElement('kiosk_mode', true, true, 'Kiosk Mode', 'Hide and disable the header and sidebar')}
-        ${this.switchElement('disable_sidebar', true, false, 'Disable Sidebar', 'Disable sidebar and menu button.')}
-        ${this.switchElement('chevrons', true, false, 'Display Tab Chevrons', 'Disable scrolling arrows for tabs.')}
-        ${this.switchElement('hidden_tab_redirect', true, false, 'Hidden Tab Redirect', 'Redirect from hidden tab.')}
+      ${this.getConfig('editor_warnings') && !this.exception
+        ? html`
+            <h4 class="underline">Main Config</h4>
+          `
+        : ''}
+      <div style="padding-bottom:20px;" class="side-by-side">
+        ${this.haSwitch('disabled_mode', true, false, 'Disabled Mode', 'Completely disable Custom-Header.')}
+        ${this.haSwitch('footer_mode', true, false, 'Footer Mode', 'Turn the header into a footer.')}
+        ${this.haSwitch('compact_mode', true, false, 'Compact Mode', 'Make header compact.')}
+        ${this.haSwitch('kiosk_mode', true, true, 'Kiosk Mode', 'Hide and disable the header and sidebar')}
+        ${this.haSwitch('disable_sidebar', true, false, 'Disable Sidebar', 'Disable sidebar and menu button.')}
+        ${this.haSwitch('chevrons', true, false, 'Display Tab Chevrons', 'Disable scrolling arrows for tabs.')}
+        ${this.haSwitch('hidden_tab_redirect', true, false, 'Hidden Tab Redirect', 'Redirect from hidden tab.')}
         ${!this.exception
-          ? this.switchElement('editor_warnings', false, false, 'Display Editor Warnings', 'Toggle editor warnings.')
+          ? this.haSwitch('editor_warnings', false, false, 'Display Editor Warnings', 'Toggle editor warnings.')
           : ''}
+      </div>
+      <hr />
+      <div class="side-by-side">
+        <paper-input
+          style="padding: 10px 10px 0 10px;"
+          class="${this.exception && this.config.header_text === undefined ? 'inherited' : ''}"
+          label="Header text, accepts Jinja."
+          .value="${this.getConfig('header_text')}"
+          .configValue="${'header_text'}"
+          @value-changed="${this._valueChanged}"
+        >
+        </paper-input>
+        <paper-input
+          placeholder="automatic"
+          style="padding: 10px 10px 0 10px;"
+          class="${this.exception && this.config.locale === undefined ? 'inherited' : ''}"
+          label="Locale for default template variables (date/time)."
+          .value="${this.getConfig('locale')}"
+          .configValue="${'locale'}"
+          @value-changed="${this._valueChanged}"
+        >
+        </paper-input>
       </div>
       <h4 class="underline">Menu Items</h4>
       <div class="side-by-side">
-        ${this.switchElement('hide_config', true, true, 'Hide "Configure UI"', 'Hide item in options menu.')}
-        ${this.switchElement('hide_raw', true, true, 'Hide "Raw Config Editor"', 'Hide item in options menu.')}
-        ${this.switchElement('hide_help', true, false, 'Hide "Help"', 'Hide item in options menu.')}
-        ${this.switchElement('hide_unused', true, false, 'Hide "Unused Entities"', 'Hide item in options menu.')}
+        ${this.haSwitch('hide_config', true, true, 'Hide "Configure UI"', 'Hide item in options menu.')}
+        ${this.haSwitch('hide_raw', true, true, 'Hide "Raw Config Editor"', 'Hide item in options menu.')}
+        ${this.haSwitch('hide_help', true, false, 'Hide "Help"', 'Hide item in options menu.')}
+        ${this.haSwitch('hide_unused', true, false, 'Hide "Unused Entities"', 'Hide item in options menu.')}
       </div>
       <h4 class="underline">Buttons</h4>
-
+      <div style="padding-bottom:20px;" class="side-by-side">
+        ${this.haSwitch('menu_hide', true, false, 'Hide Menu Button', 'Hide the menu button.')}
+        ${this.haSwitch('menu_dropdown', true, false, 'Menu in Dropdown Menu', 'Put menu button in options menu.')}
+        ${this.haSwitch('voice_hide', true, false, 'Hide Voice Button', 'Hide the voice button.')}
+        ${this.haSwitch('voice_dropdown', true, false, 'Voice in Dropdown Menu', 'Put voice button in options menu.')}
+        ${this.haSwitch('options_hide', true, true, 'Hide Options Button', 'Hide the options button.')}
+        ${this.haSwitch(
+          'reverse_button_direction',
+          true,
+          false,
+          'Reverse Buttons Orientation',
+          'Reverses all buttons orientation.',
+        )}
+      </div>
       <h4 class="underline">Tabs</h4>
       <paper-dropdown-menu id="tabs" @value-changed="${this._tabVisibility}">
         <paper-listbox slot="dropdown-content" .selected="${this.getConfig('show_tabs').length > 0 ? '1' : '0'}">
@@ -377,6 +417,13 @@ class ChConfigEditor extends LitElement {
           @value-changed="${this._valueChanged}"
         >
         </paper-input>
+        ${this.haSwitch(
+          'reverse_tab_direction',
+          true,
+          false,
+          'Reverse Tab Direction',
+          'Places tabs on right side in reverse order.',
+        )}
       </div>
     `;
   }
@@ -468,9 +515,9 @@ class ChConfigEditor extends LitElement {
           border-radius: 5px;
         }
         .alert {
-          color: #ffcd4c;
-          width: 20px;
-          margin-top: -2px;
+          color: #ff9800;
+          padding-right: 0;
+          margin-right: -5px;
           padding-left: 7px;
         }
         [closed] {
