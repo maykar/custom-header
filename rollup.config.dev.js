@@ -16,7 +16,7 @@ export default {
     babel({
       exclude: 'node_modules/**',
     }),
-    terser(),
+    terser({ keep_fnames: true }),
     serve({
       contentBase: './dist',
       host: '0.0.0.0',

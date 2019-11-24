@@ -1,7 +1,7 @@
 import resolve from 'rollup-plugin-node-resolve';
 import typescript from 'rollup-plugin-typescript2';
 import babel from 'rollup-plugin-babel';
-import { terser } from 'rollup-plugin-terser';
+// import { terser } from 'rollup-plugin-terser';
 
 export default {
   input: ['src/custom-header.ts'],
@@ -15,6 +15,6 @@ export default {
     babel({
       exclude: 'node_modules/**',
     }),
-    terser(),
+    terser({ keep_fnames: true }),
   ],
 };

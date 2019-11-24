@@ -29,7 +29,7 @@ input_boolean:
     icon: mdi:microphone
   reverse_tab_direction:
     name: 'reverse_tab_direction:'
-    initial: on
+    initial: off
     icon: mdi:arrow-left-right-bold
   hidden_tab_redirect:
     name: 'hidden_tab_redirect:'
@@ -37,7 +37,7 @@ input_boolean:
     icon: mdi:directions
   reverse_button_direction:
     name: 'reverse_button_direction:'
-    initial: on
+    initial: off
     icon: mdi:arrow-left-right-bold
   footer_mode:
     name: 'footer_mode:'

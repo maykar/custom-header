@@ -39,6 +39,14 @@ export const menuButtonObservers = (config, header) => {
             !root.shadowRoot.querySelector('[buttonElem="menu"]').shadowRoot.querySelector('.dot')
           ) {
             root.shadowRoot.querySelector('[buttonElem="menu"]').shadowRoot.appendChild(buildDot());
+            if (root.shadowRoot.querySelector('[buttonElem="menu"]').shadowRoot.querySelector('.buttonText')) {
+              root.shadowRoot.querySelector('[buttonElem="menu"]').shadowRoot.querySelector('.dot').style.display = 'none';
+              root.shadowRoot
+                .querySelector('[buttonElem="menu"]')
+                .shadowRoot.querySelector(
+                  '.buttonText',
+                ).style.borderBottom = `3px solid ${window.customHeaderConfig.notification_dot_color}`;
+            }
           }
         }
       }
@@ -52,6 +60,11 @@ export const menuButtonObservers = (config, header) => {
               .querySelector('[buttonElem="menu"]')
               .shadowRoot.querySelector('.dot')
               .remove();
+            if (root.shadowRoot.querySelector('[buttonElem="menu"]').shadowRoot.querySelector('.buttonText')) {
+              root.shadowRoot
+                .querySelector('[buttonElem="menu"]')
+                .shadowRoot.querySelector('.buttonText').style.borderBottom = '';
+            }
           }
         }
       }
@@ -72,7 +85,17 @@ export const menuButtonObservers = (config, header) => {
   const prevDot = header.menu.shadowRoot.querySelector('.dot');
   if (prevDot && prevDot.style.cssText != buildDot().style.cssText) {
     prevDot.remove();
+    if (config.button_text.menu) {
+      header.menu.shadowRoot.querySelector('.buttonText').style.textDecoration = '';
+    }
   }
-  if (!header.menu.shadowRoot.querySelector('.dot') && haElem.menu.shadowRoot.querySelector('.dot'))
+  if (!header.menu.shadowRoot.querySelector('.dot') && haElem.menu.shadowRoot.querySelector('.dot')) {
     header.menu.shadowRoot.appendChild(buildDot());
+    if (config.button_text.menu) {
+      header.menu.shadowRoot.querySelector('.dot').style.display = 'none';
+      header.menu.shadowRoot.querySelector(
+        '.buttonText',
+      ).style.borderBottom = `3px solid ${config.notification_dot_color}`;
+    }
+  }
 };
