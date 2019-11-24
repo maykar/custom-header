@@ -45,7 +45,10 @@ export const buildConfig = config => {
               .replace(/""/, ''),
           );
         } catch (e) {
-          console.log(`[CUSTOM-HEADER] There was an issue with the template: ${getBadTemplate(result, e)}`);
+          templateFailed = true;
+          let err = `[CUSTOM-HEADER] There was an issue with the template: ${getBadTemplate(result, e)}`;
+          if (err.includes('locale')) err = '[CUSTOM-HEADER] There was an issue one of your "template_variables".';
+          console.log(err);
         }
         processAndContinue();
       },
