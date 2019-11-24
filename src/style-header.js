@@ -117,19 +117,25 @@ export const styleHeader = config => {
         continue;
       } else if (config.button_text[button]) {
         if (!buttonElem.shadowRoot.querySelector('.buttonText')) {
-          text.innerText = config.button_text[button];
+          text.innerHTML = config.button_text[button];
           buttonElem.shadowRoot.appendChild(text);
         } else {
-          buttonElem.shadowRoot.querySelector('.buttonText').innerText = config.button_text[button];
+          buttonElem.shadowRoot.querySelector('.buttonText').innerHTML = config.button_text[button];
         }
-        if (config.reverse_button_direction) {
+        if ((config.reverse_button_direction && button !== 'menu') || (!config.reverse_button_direction && button === 'menu')) {
           buttonElem.shadowRoot.querySelector('.buttonText').dir = 'ltr';
         } else {
-          buttonElem.shadowRoot.querySelector('.buttonText').dir = '';
+          buttonElem.shadowRoot.querySelector('.buttonText').dir = 'rtl';
         }
         buttonElem.shadowRoot.querySelector('iron-icon').style.display = 'none';
         buttonElem.style.width = 'auto';
-        buttonElem.shadowRoot.querySelector('.buttonText').style.margin = '5.5px 0px 0px 0px';
+        if (config.button_text[button].includes('<br>')) {
+          buttonElem.shadowRoot.querySelector('.buttonText').style.fontSize = '17px';
+          buttonElem.shadowRoot.querySelector('.buttonText').style.lineHeight = '1.2';
+          buttonElem.shadowRoot.querySelector('.buttonText').style.margin = '-5px 0px 0px 0px';
+        } else {
+          buttonElem.shadowRoot.querySelector('.buttonText').style.margin = '5.5px 0px 0px 0px';
+        }
       }
     }
   }

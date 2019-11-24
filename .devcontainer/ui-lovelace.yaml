@@ -31,9 +31,8 @@ custom_header:
     voice: '{% if states.input_boolean.icon_changes.state == "on" %}mdi:microphone-variant{%else%}mdi:comment-processing{% endif %}'
     options: '{% if states.input_boolean.icon_changes.state == "on" %}mdi:dots-horizontal{% endif %}'
   button_text:
-    voice: '{% if states.input_boolean.text_changes.state == "on" %}VOICE{% endif %}'
     menu: '{% if states.input_boolean.text_changes.state == "on" %}Menu{% endif %}'
-    options: '{% if states.input_boolean.text_changes.state == "on" %}options{% endif %}'
+    options: '{% if states.input_boolean.text_changes.state == "on" %}{{dayNameLong}}<br>{{date}}{% endif %}'
   menu_dropdown: '{{ states.input_boolean.menu_dropdown.state == "on" }}'
   voice_dropdown: '{{ states.input_boolean.voice_dropdown.state == "on" }}'
 background: url('https://bit.ly/375dx0T')
