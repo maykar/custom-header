@@ -310,6 +310,9 @@ class ChConfigEditor extends LitElement {
                     <p style="padding: 5px; margin: 0;">
                       You can temporaily disable Custom-Header by adding "?disable_ch" to the end of your URL.
                     </p>
+                    <p style="padding: 5px; margin: 0;">
+                      After using the "Raw Config Editor" you need to reload the page to restore Custom Header.
+                    </p>
                     <br />
                     <p style="padding: 5px; margin: 0;">
                       <ha-icon style="padding-right: 3px;" icon="mdi:alpha-t-box-outline"></ha-icon>Designates items

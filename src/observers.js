@@ -19,9 +19,11 @@ export const observers = () => {
         }
       } else if (addedNodes.length && target.nodeName == 'PARTIAL-PANEL-RESOLVER') {
         // When returning to lovelace/overview from elsewhere in HA.
+        if (root.querySelector('editor')) root.querySelector('editor').remove();
         buildConfig();
       } else if (target.className === 'edit-mode' && addedNodes.length) {
         // Entered edit mode.
+        if (root.querySelector('editor')) root.querySelector('editor').remove();
         if (!window.customHeaderDisabled) hideMenuItems(config, header, true);
         header.menu.style.display = 'none';
         root.querySelector('ch-header').style.display = 'none';
@@ -29,6 +31,7 @@ export const observers = () => {
         if (root.querySelector('#ch_view_style')) root.querySelector('#ch_view_style').remove();
       } else if (target.nodeName === 'APP-HEADER' && addedNodes.length) {
         // Exited edit mode.
+        haElem.menu = haElem.appHeader.querySelector('ha-menu-button');
         haElem.appHeader.style.display = 'none';
         header.menu.style.display = '';
         root.querySelector('ch-header').style.display = '';
