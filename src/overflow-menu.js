@@ -87,13 +87,13 @@ const showEditor = () => {
   }
 };
 
-// if (lovelace.mode === 'storage') {
-const chSettings = document.createElement('paper-item');
-chSettings.setAttribute('id', 'ch_settings');
-chSettings.addEventListener('click', () => showEditor());
-chSettings.innerHTML = 'Custom Header';
-const paperItems = header.options.querySelector('paper-listbox').querySelectorAll('paper-item');
-if (!header.options.querySelector('paper-listbox').querySelector(`#ch_settings`)) {
-  header.options.querySelector('paper-listbox').insertBefore(chSettings, paperItems[paperItems.length]);
+if (lovelace.mode === 'storage') {
+  const chSettings = document.createElement('paper-item');
+  chSettings.setAttribute('id', 'ch_settings');
+  chSettings.addEventListener('click', () => showEditor());
+  chSettings.innerHTML = 'Custom Header';
+  const paperItems = header.options.querySelector('paper-listbox').querySelectorAll('paper-item');
+  if (!header.options.querySelector('paper-listbox').querySelector(`#ch_settings`)) {
+    header.options.querySelector('paper-listbox').insertBefore(chSettings, paperItems[paperItems.length]);
+  }
 }
-// }
