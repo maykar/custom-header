@@ -123,7 +123,10 @@ export const styleHeader = config => {
         } else {
           buttonElem.shadowRoot.querySelector('.buttonText').innerHTML = config.button_text[button];
         }
-        if ((config.reverse_button_direction && button !== 'menu') || (!config.reverse_button_direction && button === 'menu')) {
+        if (
+          (config.reverse_button_direction && button !== 'menu') ||
+          (!config.reverse_button_direction && button === 'menu')
+        ) {
           buttonElem.shadowRoot.querySelector('.buttonText').dir = 'ltr';
         } else {
           buttonElem.shadowRoot.querySelector('.buttonText').dir = 'rtl';
@@ -157,6 +160,9 @@ export const styleHeader = config => {
         header.options.style.marginTop = '48px';
       } else {
         header.container.style.transition = '0s';
+        header.menu.style.transition = '0s';
+        header.voice.style.transition = '0s';
+        header.options.style.transition = '0s';
         header.container.style.top = `-${window.scrollY}px`;
         header.menu.style.marginTop = `${window.scrollY}px`;
         header.voice.style.marginTop = `${window.scrollY}px`;

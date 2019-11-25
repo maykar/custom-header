@@ -174,7 +174,7 @@ export const insertStyleTags = config => {
   style = document.createElement('style');
   style.setAttribute('id', 'ch_animated');
   style.innerHTML = `
-    ch-header {
+    ch-header, [buttonElem="menu"], [buttonElem="options"], [buttonElem="voice"] {
       transition: all 0.4s ease-in-out;
     }
   `;

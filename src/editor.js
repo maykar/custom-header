@@ -126,6 +126,12 @@ export class CustomHeaderEditor extends LitElement {
     const target = ev.target.index;
     const newExceptions = this._config.exceptions.slice(0);
     newExceptions[target] = ev.detail.exception;
+    for (const exceptions of newExceptions) {
+      for (const key in exceptions.config) {
+        if (this._config[key] == exceptions.config[key]) delete exceptions.config[key];
+        else if (!this._config[key] && defaultConfig[key] == exceptions.config[key]) delete exceptions.config[key];
+      }
+    }
     this._config = { ...this._config, exceptions: newExceptions };
 
     fireEvent(this, 'config-changed', { config: this._config });
@@ -242,22 +248,19 @@ class ChConfigEditor extends LitElement {
       ></iron-icon>
     `;
     const editorWarning = html`
-      <iron-icon icon="mdi:alert-box-outline" class="alert" title="Removes ability to edit UI"></iron-icon>
+      <iron-icon icon="mdi:alert-box-outline" class="alert" title="Removes ability to edit UI."></iron-icon>
     `;
     return html`
       <ha-switch
-        class="${this.exception && this.config[option] === undefined ? 'inherited' : 'slotted'}"
+        class="${this.exception && this.config[option] === undefined ? 'inherited slotted' : 'slotted'}"
         ?checked="${this.getConfig(option) !== false && !this.templateExists(this.getConfig(option))}"
         .configValue="${option}"
         @change="${this._valueChanged}"
         title=${title}
         ?disabled=${this.templateExists(this.getConfig(option))}
       >
-        ${text}
-        ${this.getConfig('editor_warnings') && this.templateExists(this.getConfig(option)) && templateWarn
-          ? templateIcon
-          : ''}
-        ${this.getConfig('editor_warnings') && editorWarn ? editorWarning : ''}
+        ${text} ${this.templateExists(this.getConfig(option)) && templateWarn ? templateIcon : ''}
+        ${editorWarn ? editorWarning : ''}
       </ha-switch>
     `;
   }
@@ -306,7 +309,9 @@ class ChConfigEditor extends LitElement {
                   <div class="warning">
                     <p style="padding: 5px; margin: 0;">
                       You can temporaily disable Custom-Header by adding "?disable_ch" to the end of your URL.
-                      <br /><br />
+                    </p>
+                    <br />
+                    <p style="padding: 5px; margin: 0;">
                       <ha-icon style="padding-right: 3px;" icon="mdi:alpha-t-box-outline"></ha-icon>Designates items
                       that are already a template and won't be modified by the editor.<br /><ha-icon
                         style="padding-right: 3px;"
@@ -314,8 +319,21 @@ class ChConfigEditor extends LitElement {
                       ></ha-icon
                       >Marks items that remove your ability to edit the UI.<br />
                     </p>
+                    <br />
+                    <p style="padding: 5px; margin: 0;">
+                      All text options accept Jinja. Hover over any item for more info.
+                    </p>
                   </div>
                 `
+              : ''}
+            ${!this.exception && this.getConfig('editor_warnings')
+              ? this.haSwitch(
+                  'editor_warnings',
+                  false,
+                  false,
+                  'Display this info and warnings section.',
+                  'Toggle editor warnings.',
+                )
               : ''}
           `
         : ''}
@@ -333,16 +351,16 @@ class ChConfigEditor extends LitElement {
         ${this.haSwitch('disable_sidebar', true, false, 'Disable Sidebar', 'Disable sidebar and menu button.')}
         ${this.haSwitch('chevrons', true, false, 'Display Tab Chevrons', 'Disable scrolling arrows for tabs.')}
         ${this.haSwitch('hidden_tab_redirect', true, false, 'Hidden Tab Redirect', 'Redirect from hidden tab.')}
-        ${!this.exception
-          ? this.haSwitch('editor_warnings', false, false, 'Display Editor Warnings', 'Toggle editor warnings.')
+        ${!this.exception && !this.getConfig('editor_warnings')
+          ? this.haSwitch('editor_warnings', false, false, 'Display Editor Warnings & Info', 'Toggle editor warnings.')
           : ''}
       </div>
       <hr />
       <div class="side-by-side">
         <paper-input
           style="padding: 10px 10px 0 10px;"
-          class="${this.exception && this.config.header_text === undefined ? 'inherited' : ''}"
-          label="Header text, accepts Jinja."
+          class="${this.exception && this.config.header_text === undefined ? 'inherited slotted' : 'slotted'}"
+          label="Header text."
           .value="${this.getConfig('header_text')}"
           .configValue="${'header_text'}"
           @value-changed="${this._valueChanged}"
@@ -351,7 +369,7 @@ class ChConfigEditor extends LitElement {
         <paper-input
           placeholder="automatic"
           style="padding: 10px 10px 0 10px;"
-          class="${this.exception && this.config.locale === undefined ? 'inherited' : ''}"
+          class="${this.exception && this.config.locale === undefined ? 'inherited slotted' : 'slotted'}"
           label="Locale for default template variables (date/time)."
           .value="${this.getConfig('locale')}"
           .configValue="${'locale'}"
@@ -391,7 +409,7 @@ class ChConfigEditor extends LitElement {
       <div class="side-by-side">
         <div id="show" style="display:${this.getConfig('show_tabs').length > 0 ? 'initial' : 'none'}">
           <paper-input
-            class="${this.exception && this.config.show_tabs === undefined ? 'inherited' : ''}"
+            class="${this.exception && this.config.show_tabs === undefined ? 'inherited slotted' : 'slotted'}"
             label="Comma-separated list of tab numbers to show:"
             .value="${this.getConfig('show_tabs')}"
             .configValue="${'show_tabs'}"
@@ -401,7 +419,7 @@ class ChConfigEditor extends LitElement {
         </div>
         <div id="hide" style="display:${this.getConfig('show_tabs').length > 0 ? 'none' : 'initial'}">
           <paper-input
-            class="${this.exception && this.config.hide_tabs === undefined ? 'inherited' : ''}"
+            class="${this.exception && this.config.hide_tabs === undefined ? 'inherited slotted' : 'slotted'}"
             label="Comma-separated list of tab numbers to hide:"
             .value="${this.getConfig('hide_tabs')}"
             .configValue="${'hide_tabs'}"
@@ -410,7 +428,7 @@ class ChConfigEditor extends LitElement {
           </paper-input>
         </div>
         <paper-input
-          class="${this.exception && this.config.default_tab === undefined ? 'inherited' : ''}"
+          class="${this.exception && this.config.default_tab === undefined ? 'inherited slotted' : 'slotted'}"
           label="Default tab:"
           .value="${this.getConfig('default_tab')}"
           .configValue="${'default_tab'}"
