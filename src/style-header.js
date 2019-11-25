@@ -6,6 +6,7 @@ import { menuButtonObservers } from './menu-observers';
 import { insertStyleTags } from './style-tags';
 import { haElem, root, lovelace } from './ha-elements';
 import { redirects } from './redirects';
+import { fireEvent } from 'custom-card-helpers';
 
 export const styleHeader = config => {
   window.customHeaderConfig = config;
@@ -146,5 +147,24 @@ export const styleHeader = config => {
 
   menuButtonObservers(config, header, root);
 
-  window.dispatchEvent(new Event('resize'));
+  if (!window.customHeaderShrink) {
+    window.addEventListener('scroll', function(e) {
+      if (config.footer_mode || config.compact_mode) return;
+      if (window.scrollY > 48) {
+        header.container.style.top = '-48px';
+        header.menu.style.marginTop = '48px';
+        header.voice.style.marginTop = '48px';
+        header.options.style.marginTop = '48px';
+      } else {
+        header.container.style.transition = '0s';
+        header.container.style.top = `-${window.scrollY}px`;
+        header.menu.style.marginTop = `${window.scrollY}px`;
+        header.voice.style.marginTop = `${window.scrollY}px`;
+        header.options.style.marginTop = `${window.scrollY}px`;
+      }
+      header.container.style.transition = '';
+    });
+  }
+
+  fireEvent(header.container, 'iron-resize');
 };

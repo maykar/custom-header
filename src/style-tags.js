@@ -170,4 +170,15 @@ export const insertStyleTags = config => {
   currentStyle = header.tabContainer.shadowRoot.querySelector('#ch_chevron');
   header.tabContainer.shadowRoot.appendChild(style);
   if (currentStyle) currentStyle.remove();
+
+  style = document.createElement('style');
+  style.setAttribute('id', 'ch_animated');
+  style.innerHTML = `
+    ch-header {
+      transition: all 0.4s ease-in-out;
+    }
+  `;
+  setTimeout(() => {
+    if (!root.querySelector('#ch_animated')) root.appendChild(style);
+  }, 1000);
 };
