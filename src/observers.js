@@ -12,10 +12,7 @@ export const observers = () => {
         const haActiveTabIndex = haElem.tabContainer.indexOf(root.querySelector('paper-tab.iron-selected'));
         const chActiveTabIndex = header.tabContainer.querySelector('paper-tab.iron-selected');
         if (chActiveTabIndex !== haActiveTabIndex) {
-          header.tabs.forEach(tab => {
-            if (header.tabContainer.indexOf(tab) !== haActiveTabIndex) tab.classList.remove('iron-selected');
-            else tab.click();
-          });
+          header.tabContainer.setAttribute('selected', haActiveTabIndex);
         }
       } else if (addedNodes.length && target.nodeName == 'PARTIAL-PANEL-RESOLVER') {
         // When returning to lovelace/overview from elsewhere in HA.
