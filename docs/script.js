@@ -5,7 +5,7 @@ const sidebar = document.querySelector(".sidebar");
 resizeSidebarSpacer();
 window.addEventListener("resize", resizeSidebarSpacer());
 
-// Scroll options & voice icons with header.
+// Scroll options & voice icons with header collapse.
 window.addEventListener("scroll", function() {
   const options = document.querySelector("#options");
   const voice = document.querySelector("#voice");

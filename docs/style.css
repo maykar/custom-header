@@ -23,7 +23,7 @@ p {
 a:active, a:focus {
   outline: 0;
   border: none;
-  -moz-outline-style: none;
+  outline-style: none;
 }
 
 app-header {
@@ -123,6 +123,10 @@ paper-icon-item {
   border-radius: 4px;
   color: black;
   white-space: nowrap;
+}
+
+paper-icon-item:focus:before {
+  background: transparent !important;
 }
 
 .iron-selected ::before {
