@@ -1,6 +1,5 @@
 body{
   margin: 0;
-  background: #A0A0A0;
 }
 
 h1 {
@@ -46,7 +45,7 @@ app-toolbar .iconify {
 }
 
 app-header, app-toolbar {
-  background-color: #03a9f4;
+  background-color: var(--primary-color);
   font-weight: 400;
   color: #ffffff;
   transition: all 0.4s ease-in-out !important;
@@ -83,11 +82,13 @@ paper-tab {
   font-size: 14px;
   font-weight: 500;
   height: 100%;
+  color: var(--paper-tab-color);
 }
 
 paper-tab .iconify {
   width: 24px;
   height: 24px;
+  color: var(--paper-tab-color);
 }
 
 paper-tabs {
@@ -128,11 +129,11 @@ paper-icon-item {
 }
 
 .iron-selected .item-text {
-  color: #03a9f4;
+  color: var(--primary-color);
 }
 
-.iron-selected .iconify {
-  color: #03a9f4;
+paper-listbox .iron-selected .iconify {
+  color: var(--primary-color);
 }
 
 #contentContainer {
@@ -149,17 +150,15 @@ paper-icon-item {
   display: flex;
   margin-left:64px;
   padding-top: 110px;
+  background-color: var(--background-color)
 }
 
-.content {
+paper-card {
   padding: 0 30px 0 30px;
-  background: white;
+  background: var(--paper-card-background-color);
   max-width:1000px;
   margin: 20px auto 20px auto;
-  border-radius: 10px;
-  box-shadow: 5px 5px 4px -1px rgba(0,0,0,0.34);
-  box-sizing: border-box;
-  font-family: Roboto, sans-serif;
+  border-radius: 10px !important;
   overflow: hidden;
   height: 1000px;
   width: 85%;
@@ -198,7 +197,7 @@ pre {
   top: 0;
   left: 0;
   margin: 0;
-  background: white;
+  background: var(--sidebar-background-color);
   width: 64px;
   height: 100%;
   text-align: left;
@@ -212,7 +211,7 @@ pre {
 
 .sidebarText {
   font: 400 1.3em Roboto, sans-serif;
-  color: white;
+  color: var(--sidebar-text-color);
   padding-left:3px;
   padding-bottom:-5px;
   text-align:left;
@@ -235,4 +234,5 @@ pre {
   width: 24px;
   height: 24px;
   min-width: 24px;
+  color: var(--sidebar-icon-color);
 }
