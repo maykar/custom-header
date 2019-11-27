@@ -25,11 +25,15 @@ ch-header {
   position: sticky; top: 0px;
 }
 app-header {
-  position: var(--layout-fixed-top_-_position);
-  top: var(--layout-fixed-top_-_top);
+  position: fixed !important;
+  top: 0;
+  left: 0;
   display: block;
   transition-timing-function: linear;
   z-index: 1;
+  width: -webkit-fill-available;
+  width: -moz-available;
+  width: stretch;
 }
 app-header, app-toolbar {
   background-color: #1aba92;
@@ -129,7 +133,7 @@ paper-tab {
   padding: 0 30px 0 30px;
   background: white;
   max-width:1000px;
-  margin: 20px auto 20px auto;
+  margin: 130px auto 20px auto;
   border-radius: 10px;
   box-shadow: 5px 5px 4px -1px rgba(0,0,0,0.34);
   box-sizing: border-box;
