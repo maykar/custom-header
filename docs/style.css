@@ -20,6 +20,12 @@ p {
   font-size: 1em;
 }
 
+a:active, a:focus {
+  outline: 0;
+  border: none;
+  -moz-outline-style: none;
+}
+
 app-header {
   position: fixed !important;
   top: 0;
@@ -48,7 +54,11 @@ app-header, app-toolbar {
   background-color: var(--primary-color);
   font-weight: 400;
   color: #ffffff;
-  transition: all 0.4s ease-in-out !important;
+}
+
+app-header {
+  transition: margin-top 0s !important;
+  transition: margin-left 0.4s ease-in-out !important;
 }
 
 #mainTitle {
