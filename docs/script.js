@@ -1,9 +1,23 @@
 const header = document.querySelector("app-header");
 const view = document.querySelector(".view");
 const sidebar = document.querySelector(".sidebar");
+const options = document.querySelector("#options");
+const voice = document.querySelector("#voice");
 
 resizeSidebarSpacer();
 window.addEventListener("resize", resizeSidebarSpacer());
+
+// Scroll options & voice icons with header.
+window.addEventListener("scroll", function() {
+  if (window.scrollY > 60) {
+    options.style.marginTop = "60px";
+    voice.style.marginTop = "60px";
+  } else {
+    options.style.marginTop = `${window.scrollY}px`;
+    voice.style.marginTop = `${window.scrollY}px`;
+  }
+});
+window.scrollBy(0, -1);
 
 // Expand animation after 1s.
 setTimeout(() => {
@@ -23,7 +37,7 @@ function resizeSidebarSpacer() {
       space += parseInt(window.getComputedStyle(element).getPropertyValue('height').replace('px','')) + 4;
     }
   }
-  document.querySelector(".spacer").style.height = `calc(100vh - ${space + 200}px)`;
+  document.querySelector(".spacer").style.height = `calc(100vh - ${space + 184}px)`;
 }
 
 // Expand/shrink sidebar.
