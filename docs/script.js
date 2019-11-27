@@ -2,7 +2,8 @@ const header = document.querySelector("app-header");
 const view = document.querySelector(".view");
 const sidebar = document.querySelector(".sidebar");
 
-let options, voice;
+// Animation for header on scroll.
+// let options, voice;
 // window.addEventListener("scroll", function() {
 //   if (!options) options = document.querySelector("#options");
 //   if (!voice) voice = document.querySelector("#voice");
@@ -19,9 +20,7 @@ let options, voice;
 //   header.style.transition = "";
 // });
 
-resizeSidebarSpacer();
-window.addEventListener("resize", resizeSidebarSpacer());
-
+// Sidebar slide open animation at load.
 setTimeout(() => {
   if (screen.width > 500) {
     header.style.marginLeft = "256px";
@@ -30,6 +29,10 @@ setTimeout(() => {
   }
 }, 1000);
 
+resizeSidebarSpacer();
+window.addEventListener("resize", resizeSidebarSpacer());
+
+// Space in between top sidebar items and bottom needs calculated and run on resize.
 function resizeSidebarSpacer() {
   let space = 0;
   const sidebarContents = document.querySelector("paper-listbox").querySelectorAll("*")
