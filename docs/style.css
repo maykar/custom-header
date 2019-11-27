@@ -93,11 +93,8 @@ paper-icon-item {
   width: 48px;
   margin: 4px 8px;
   border-radius: 4px;
-
-
-    color: black;
-    white-space: nowrap;
-
+  color: black;
+  white-space: nowrap;
 }
 
 ch-stack {
@@ -128,12 +125,13 @@ paper-tab {
 .view {
   display: flex;
   margin-left:64px;
+  padding-top: 110px;
 }
 .content {
   padding: 0 30px 0 30px;
   background: white;
   max-width:1000px;
-  margin: 130px auto 20px auto;
+  margin: 20px auto 20px auto;
   border-radius: 10px;
   box-shadow: 5px 5px 4px -1px rgba(0,0,0,0.34);
   box-sizing: border-box;
