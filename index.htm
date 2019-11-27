@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Header</title>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <script src="https://cdn.rawgit.com/download/polymer-cdn/1.8.0/lib/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/1.8.0/lib/polymer/polymer.html">
+    <link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/1.8.0/lib/paper-tabs/paper-tabs.html">
+    <link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/1.8.0/lib/paper-listbox/paper-listbox.html">
+    <link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/1.8.0/lib/paper-menu-button/paper-menu-button.html">
+    <link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/1.8.0/lib/app-layout/app-scroll-effects/effects/waterfall.html">
+    <link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/1.8.0/lib/paper-item/paper-icon-item.html">
+    <link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/1.8.0/lib/iron-icon/iron-icon.html">
+    <link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/1.8.0/lib/app-layout/app-header/app-header.html">
+    <link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/1.8.0/lib/app-layout/app-toolbar/app-toolbar.html">
+</head>
+<style>body{font-family:Roboto,Noto,sans-serif;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;font-weight:400;height:100vh;margin:0;padding:0}</style>
+<body>
+    <script src="https://code.iconify.design/1/1.0.3/iconify.min.js"></script>
+    <div class="sidebar">
+    <div class="menu">
+        <span onclick="expandSidebar()" class="iconify" data-icon="mdi:menu"></span>
+        <span class="title">Home Assistant</span>
+    </div>
+    <paper-listbox>
+      <a href=""><paper-icon-item role="option"><span class="iconify" data-icon="mdi:apps"></span><span class="item-text">Overview</span></paper-icon-item></a>
+      <a href=""><paper-icon-item role="option"><span class="iconify" data-icon="mdi:poll-box"></span><span class="item-text">History</span></paper-icon-item></a>
+      <a href=""><paper-icon-item role="option"><span class="iconify" data-icon="mdi:alpha-c-box"></span><span class="item-text">Community</span></paper-icon-item></a>
+      <div class="spacer" disabled="" tabindex="-1" aria-selected="false"></div>
+      <a href=""><paper-icon-item role="option"><span class="iconify" data-icon="mdi:settings"></span><span class="item-text">Configuration</span></paper-icon-item></a>
+    </paper-listbox>
+    <div class="divider"></div>
+    <paper-icon-item class="sidebarBottom notifications" aria-role="option" role="option" aria-disabled="false">
+        <span class="iconify" data-icon="mdi:bell"></span>
+        <span class="item-text">Notifications</span>
+    </paper-icon-item>
+    <paper-icon-item class="sidebarBottom" aria-role="option" role="option" aria-disabled="false">
+        <span class="iconify" data-icon="mdi:pac-man"></span>
+        <span class="item-text">Pac-Man</span>
+    </paper-icon-item>
+  </div>
+    <app-header  slot="header" effects="waterfall" fixed="" condenses="" style="margin-left: 64px;">
+      <app-toolbar>
+          <div id="mainTitle" main-title="">Home Assistant</div>
+          <span class="iconify" data-icon="mdi:microphone"></span>
+          <span class="iconify" data-icon="mdi:dots-vertical"></span>
+      </app-toolbar>
+      <div sticky id="sticky">
+          <paper-tabs scrollable="" dir="ltr" role="tablist" >
+            <paper-tab role="tab">tab1</paper-tab>
+            <paper-tab role="tab">tab2</span></paper-tab>
+            <paper-tab role="tab"><span class="iconify" data-icon="mdi:skull"></span></paper-tab>
+          </paper-tabs>
+        </div>
+    </app-header>
+    <div class="view">
+        <div class="content"></div>
+    </div>
+    <script src="./script.js"></script>
+
+</body>
+
+</html>
