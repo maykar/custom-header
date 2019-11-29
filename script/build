@@ -1,0 +1,5 @@
+rm -R dist
+mkdir dist
+bash script/fixNestings.sh
+yarn gulp generate || exit 1
+yarn rollup -c

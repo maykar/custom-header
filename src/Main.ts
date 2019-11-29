@@ -1,3 +1,30 @@
+import { LitElement, html, customElement, TemplateResult, property, CSSResult, css } from 'lit-element';
+
+import './docs';
+
+//import { markdown } from './markdown/markdown';
+
+const fetchDocs = (): Promise<[]> => fetch('http://127.0.0.1:5000/jsonfeed.json').then(r => r.json());
+
+@customElement('docs-main')
+export class Main extends LitElement {
+  @property() public docs?;
+  protected render(): TemplateResult | void {
+    return html`
+  <docs-panel class="view" .docs=${this.docs}></docs-panel>
+
+    `;
+  }
+
+  firstUpdated(changedProps) {
+    super.firstUpdated(changedProps);
+    fetchDocs().then(docs => {
+      this.docs = docs;
+    });
+  }
+
+  static get styles(): CSSResult {
+    return css`
 body{
   margin: 0;
 }
@@ -111,7 +138,7 @@ paper-tabs {
 }
 
 .paper-tab-0 paper-ripple.paper-tab {
-  color: white; 
+  color: white;
 }
 
 paper-icon-item {
@@ -161,9 +188,12 @@ paper-listbox .iron-selected .iconify {
   display:none;
 }
 
+docs-panel {
+  width: 90%;
+  margin-left: 5%
+}
 .view {
   display: flex;
-  margin-left:64px;
   padding-top: 110px;
   background-color: var(--background-color)
 }
@@ -250,4 +280,8 @@ pre {
   height: 24px;
   min-width: 24px;
   color: var(--sidebar-icon-color);
+}
+
+    `;
+  }
 }
