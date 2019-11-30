@@ -1,5 +1,5 @@
-rm -R dist || echo ""
-mkdir dist
+rm -R docs || echo ""
+mkdir docs
 bash script/fixNestings.sh
 yarn gulp generate || exit 1
 yarn rollup -c

@@ -7,7 +7,7 @@ import serve from 'rollup-plugin-serve';
 const dev = process.env.ROLLUP_WATCH;
 
 const serveopts = {
-  contentBase: ['./dist'],
+  contentBase: ['./docs'],
   host: '0.0.0.0',
   port: 5000,
   allowCrossOrigin: true,
@@ -22,7 +22,7 @@ export default [
   {
     input: ['src/Main.ts'],
     output: {
-      dir: 'dist/',
+      dir: 'docs/',
       format: 'es',
     },
     plugins: [...plugins],

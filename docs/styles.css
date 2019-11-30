@@ -1,0 +1,14 @@
+
+  body {
+    --accent-color: #fb8c00;
+    --text-color: #212121;
+    --primary-color: #03a9f4;
+  }
+  docs-main {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+  }
+  

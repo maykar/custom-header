@@ -1,5 +1,5 @@
-rm -R dist
-mkdir dist
+rm -R docs
+mkdir docs
 yarn gulp generate || exit 1
 yarn rollup -c --watch
 wait

@@ -5,8 +5,8 @@ const gulp = require('gulp');
 
 const settings = require('../src/docSettings');
 
-const buildDir = path.resolve(__dirname, '../dist');
-const docsDir = path.resolve(__dirname, '../docs');
+const buildDir = path.resolve(__dirname, '../docs');
+const docsDir = path.resolve(__dirname, '../src/docs');
 const srcDir = path.resolve(__dirname, '../src');
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
