@@ -134,6 +134,7 @@ export class Main extends LitElement {
   resizeSidebarSpacer() {
     let space = 0;
     const main = document.querySelector('docs-main')!.shadowRoot;
+    if (!main!.querySelector('paper-listbox')) return;
     const sidebarContents = (main!.querySelector('paper-listbox') as HTMLElement).querySelectorAll('*');
     for (const element of sidebarContents) {
       if (element.nodeName == 'PAPER-ICON-ITEM') space += this.getHeightInt(element) + 4;
