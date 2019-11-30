@@ -3,6 +3,8 @@ import "@polymer/app-layout/app-header-layout/app-header-layout";
 import "@polymer/app-layout/app-header/app-header";
 import "@polymer/app-layout/app-toolbar/app-toolbar";
 import "@polymer/paper-icon-button/paper-icon-button";
+import '@polymer/iron-icon/iron-icon.js';
+import '@polymer/iron-icons/iron-icons.js';
 import "@polymer/paper-tabs/paper-tab";
 import "@polymer/paper-tabs/paper-tabs";
 import "@polymer/paper-item/paper-icon-item";
@@ -59,15 +61,16 @@ export class Main extends LitElement {
         </app-header>
 
         <div class="sidebar">
-          <div class="menu">
-              <span onclick="expandSidebar()" class="iconify" data-icon="mdi:menu"></span>
-              <span class="title">${settings.siteName}</span>
-          </div>
+          <paper-icon-item class="menu" tabindex="0" role="option">
+            <iron-icon class="iconify" icon="menu"></iron-icon>
+            <span class="item-text wrap">${settings.siteName}</span>
+          </paper-icon-item>
           <paper-listbox selected="0">
             ${settings.sideBar.map(element => {
       return html`
               <paper-icon-item tabindex="0" role="option" @click=${this.changeCategory}>
-                <span class="item-text">${element.toUpperCase()}</span>
+                <iron-icon class="iconify" icon=${element.icon}></iron-icon>
+                <span class="item-text">${element.category.toUpperCase()}</span>
               </paper-icon-item>
               `
     })}
@@ -78,7 +81,8 @@ export class Main extends LitElement {
           ${settings.sideBarBottom.map(element => {
       return html`
               <paper-icon-item tabindex="0" role="option" @click=${this.changeCategory}>
-                <span class="item-text">${element.toUpperCase()}</span>
+              <iron-icon class="iconify" icon=${element.icon}></iron-icon>
+                <span class="item-text">${element.category.toUpperCase()}</span>
               </paper-icon-item>
               `
     })}
@@ -144,6 +148,9 @@ export class Main extends LitElement {
       margin-top: -5px;
     }
 
+    .wrap {
+      white-space: pre-wrap;
+    }
     .menu {
       box-sizing: border-box;
       height: 48px;

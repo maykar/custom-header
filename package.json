@@ -24,6 +24,7 @@
     "@polymer/app-layout": "^3.0.2",
     "@polymer/app-route": "^3.0.2",
     "@polymer/iron-icon": "^3.0.1",
+    "@polymer/iron-icons": "^3.0.1",
     "@polymer/paper-card": "^3.0.1",
     "@polymer/paper-item": "^3.0.1",
     "@polymer/paper-listbox": "^3.0.1",
