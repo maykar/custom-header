@@ -1,4 +1,4 @@
-rm -R dist
+rm -R dist || echo ""
 mkdir dist
 bash script/fixNestings.sh
 yarn gulp generate || exit 1

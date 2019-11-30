@@ -2,3 +2,4 @@ rm -R dist
 mkdir dist
 yarn gulp generate || exit 1
 yarn rollup -c --watch
+wait
