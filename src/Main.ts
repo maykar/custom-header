@@ -19,6 +19,7 @@ export class Main extends LitElement {
   @property() public docs?;
   @property() private page?: string;
   @property() private category?: string;
+  @property() private expanded?: boolean;
 
   firstUpdated(changedProps) {
     const hash = window.location.hash;
@@ -93,7 +94,11 @@ export class Main extends LitElement {
         ${this.docs[this.category!].map(element => {
           if (element.title === this.page)
             return html`
-              <docs-card class="view" .content=${element}></docs-card>
+              <docs-card
+                class="view"
+                style="margin-left: ${this.expanded ? '254px' : '55px'};"
+                .content=${element}
+              ></docs-card>
             `;
           else return;
         })}
@@ -121,10 +126,12 @@ export class Main extends LitElement {
     const view = main!.querySelector('docs-card');
     const sidebar = main!.querySelector('.sidebar');
     if (sidebar!.classList.contains('expanded')) {
+      this.expanded = false;
       sidebar!.classList.remove('expanded');
       header!.classList.remove('sidebarExpanded');
       view!.classList.remove('sidebarExpanded');
     } else {
+      this.expanded = true;
       sidebar!.classList.add('expanded');
       header!.classList.add('sidebarExpanded');
       view!.classList.add('sidebarExpanded');

@@ -38804,7 +38804,11 @@ let Main = class Main extends LitElement {
         ${this.docs[this.category].map(element => {
             if (element.title === this.page)
                 return html `
-              <docs-card class="view" .content=${element}></docs-card>
+              <docs-card
+                class="view"
+                style="margin-left: ${this.expanded ? '254px' : '55px'};"
+                .content=${element}
+              ></docs-card>
             `;
             else
                 return;
@@ -38830,11 +38834,13 @@ let Main = class Main extends LitElement {
         const view = main.querySelector('docs-card');
         const sidebar = main.querySelector('.sidebar');
         if (sidebar.classList.contains('expanded')) {
+            this.expanded = false;
             sidebar.classList.remove('expanded');
             header.classList.remove('sidebarExpanded');
             view.classList.remove('sidebarExpanded');
         }
         else {
+            this.expanded = true;
             sidebar.classList.add('expanded');
             header.classList.add('sidebarExpanded');
             view.classList.add('sidebarExpanded');
@@ -39098,6 +39104,9 @@ __decorate([
 __decorate([
     property()
 ], Main.prototype, "category", void 0);
+__decorate([
+    property()
+], Main.prototype, "expanded", void 0);
 Main = __decorate([
     customElement('docs-main')
 ], Main);
