@@ -4,7 +4,7 @@
   "image": "ludeeus/devcontainer:frontend-stable",
   "context": "..",
   "appPort": ["5000:5000"],
-  "postCreateCommand": "yarn install; bash script/fixNesting.sh",
+  "postCreateCommand": "yarn install; bash script/fixNestings.sh",
   "runArgs": [
     "-v",
     "${env:HOME}${env:USERPROFILE}/.ssh:/tmp/.ssh" // This is added so you can push from inside the container
