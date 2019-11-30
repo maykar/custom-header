@@ -38,11 +38,11 @@ export class Main extends LitElement {
     if (this.docs === undefined) return html``;
     if (this.category === undefined) {
       this.category = settings!.welcomeCategory
-      window.history.pushState(null, "", `/#${this.category}`)
+      window.history.pushState(null, "", `./#${this.category}`)
     }
     if (this.page === undefined) {
       this.page = this.docs[this.category!][0].title
-      window.history.pushState(null, "", `/#${this.category}/${this.page}`)
+      window.history.pushState(null, "", `./#${this.category}/${this.page}`)
     }
     return html`
         <app-header  slot="header" effects="waterfall" fixed="" condenses="">
@@ -99,12 +99,12 @@ export class Main extends LitElement {
 
   changePage(e: any) {
     this.page = e.detail.selected;
-    window.history.pushState(null, "", `/#${this.category}/${this.page}`)
+    window.history.pushState(null, "", `./#${this.category}/${this.page}`)
   }
   changeCategory(e: any) {
     this.category = e.composedPath()[0].innerText.toLowerCase()
     this.page = undefined
-    window.history.pushState(null, "", `/#${this.category}`)
+    window.history.pushState(null, "", `./#${this.category}`)
   }
 
   static get styles(): CSSResult {
