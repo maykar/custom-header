@@ -38,8 +38,8 @@ gulp.task('generate', done => {
     <meta charset="UTF-8">
     <title>${settings.siteName}</title>
     <link rel="shortcut icon" type="image/jpg" href="${settings.favicon}"/>
-    <script type="module" src="/Main.js"></script>
-    <link rel="stylesheet" href="/styles.css">
+    <script type="module" src="./Main.js"></script>
+    <link rel="stylesheet" href="./styles.css">
   </head>
   <body>
     <docs-main></docs-main>
