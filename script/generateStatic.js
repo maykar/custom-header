@@ -37,7 +37,7 @@ gulp.task('generate', done => {
   <head>
     <meta charset="UTF-8">
     <title>${settings.siteName}</title>
-    <link rel="shortcut icon" type="image/jpg" href="${settings.favicon}"/>
+    <link rel="shortcut icon" type="image/jpg" href="./img/favicon.ico"/>
     <script type="module" src="./Main.js"></script>
     <link rel="stylesheet" href="./styles.css">
   </head>
@@ -48,8 +48,6 @@ gulp.task('generate', done => {
   `;
   const CSS = `
   body {
-    --accent-color: #fb8c00;
-    --text-color: #212121;
     --primary-color: ${settings.primaryColor};
   }
   docs-main {

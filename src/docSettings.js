@@ -2,9 +2,8 @@
 // Global settings for the documentation website
 
 module.exports = {
-  siteName: 'Demo',
+  siteName: 'Documentation Demo Site',
   primaryColor: '#03a9f4',
-  favicon: '',
   welcomeCategory: 'installation',
   sideBar: [
     {
@@ -19,7 +18,7 @@ module.exports = {
   sideBarBottom: [
     {
       category: 'developer-tools',
-      icon: 'icons:build',
+      icon: 'build',
     },
   ],
 };
