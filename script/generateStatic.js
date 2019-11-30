@@ -15,7 +15,7 @@ function docsToJson() {
   const jsonfeed = {};
   dirs.map(dir => {
     files = fs.readdirSync(path.join(docsDir, dir));
-    jsonfeed[dir] = []
+    jsonfeed[dir] = [];
     jsonfeed[dir] = files.map(file => {
       const text = fs.readFileSync(path.join(docsDir, dir, file), 'utf-8');
       return {

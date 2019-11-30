@@ -21,7 +21,7 @@ interface dict {
 }
 
 marked.setOptions({
-  highlight: function (code: string, lang: string) {
+  highlight: function(code: string, lang: string) {
     return hljs.highlight(lang, code).value;
   },
   breaks: true,
