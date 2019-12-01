@@ -97,7 +97,7 @@ export class Main extends LitElement {
 
             ${settings.sideBarLinks.map(element => {
               return html`
-                <a href="${element.link}" target="_blank">
+                <a class="sidebarLinkItems" href="${element.link}" target="_blank">
                   <paper-item title=${element.caption}>
                     <iron-icon class="iconify" icon="open-in-new"></iron-icon>
                     <span class="item-text">${element.caption}</span>

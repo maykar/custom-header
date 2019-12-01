@@ -8,6 +8,9 @@ export const SideBar = css`
     position: absolute;
   }
 
+  .sidebarLinkItems {
+  }
+
   .menu {
     height: 48px;
     display: flex;
@@ -20,8 +23,8 @@ export const SideBar = css`
     border-bottom: 1px solid var(--light-theme-divider-color);
   }
 
-  paper-listbox a {
-    text-decoration: none;
+  .sidebarLinkItems {
+    text-decoration: none !important;
   }
 
   paper-listbox .iconify {

@@ -25113,6 +25113,9 @@ const SideBar = css `
     position: absolute;
   }
 
+  .sidebarLinkItems {
+  }
+
   .menu {
     height: 48px;
     display: flex;
@@ -25125,8 +25128,8 @@ const SideBar = css `
     border-bottom: 1px solid var(--light-theme-divider-color);
   }
 
-  paper-listbox a {
-    text-decoration: none;
+  .sidebarLinkItems {
+    text-decoration: none !important;
   }
 
   paper-listbox .iconify {
@@ -45764,7 +45767,7 @@ let Main$1 = class Main extends LitElement {
 
             ${docSettings_8.map(element => {
             return html `
-                <a href="${element.link}" target="_blank">
+                <a class="sidebarLinkItems" href="${element.link}" target="_blank">
                   <paper-item title=${element.caption}>
                     <iron-icon class="iconify" icon="open-in-new"></iron-icon>
                     <span class="item-text">${element.caption}</span>
