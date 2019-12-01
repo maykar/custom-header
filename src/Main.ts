@@ -76,7 +76,7 @@ export class Main extends LitElement {
           </div>
           <div class="sidebarTopItems">
             ${settings.sideBar.map(element => {
-              return html`
+      return html`
                 <paper-item
                   @click=${this.changeCategory}
                   title=${element.category}
@@ -89,13 +89,13 @@ export class Main extends LitElement {
                   <span class="item-text">${element.category}</span>
                 </paper-item>
               `;
-            })}
+    })}
 
           </div>
 
           <div class="sidebarBottomItems">
           ${settings.sideBarBottom.map(element => {
-            return html`
+      return html`
               <paper-item
                 @click=${this.changeCategory}
                 title=${element.category}
@@ -108,10 +108,10 @@ export class Main extends LitElement {
                 <span class="item-text">${element.category}</span>
               </paper-item>
             `;
-          })}
+    })}
           <div class="divider"></div>
             ${settings.sideBarLinks.map(element => {
-              return html`
+      return html`
                 <a class="sidebarLinkItems" href="${element.link}" target="_blank">
                   <paper-item title=${element.caption}>
                     <iron-icon class="iconify" icon="icons:open-in-new"></iron-icon>
@@ -119,7 +119,7 @@ export class Main extends LitElement {
                   </paper-item>
                 </a>
               `;
-            })}
+    })}
           </div>
         </div>
 
@@ -137,26 +137,26 @@ export class Main extends LitElement {
                     scrollable
                   >
           ${
-            this.docs[this.category!].length > 1
-              ? html`
+      this.docs[this.category!].length > 1
+        ? html`
                   ${this.docs[this.category!].map(element => {
-                    return html`
+          return html`
                       <paper-tab page-name="${element.title.toLowerCase()}">${element.title}</paper-tab>
                     `;
-                  })}
+        })}
                 `
-              : ''
-          }
+        : ''
+      }
           </paper-tabs>
         </app-header>
 
         ${this.docs[this.category!].map(element => {
-          if (element.title === this.page)
-            return html`
+        if (element.title === this.page)
+          return html`
               <docs-card class="view ${this.expanded ? 'sidebarExpanded' : ''}" .content=${element}> </docs-card>
             `;
-          else return;
-        })}
+        else return;
+      })}
   </docs-panel>
   </app-header-layout>
         `;

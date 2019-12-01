@@ -43,10 +43,24 @@ export const SideBar = css`
     white-space: nowrap;
   }
 
+  .sidebar .iconify {
+    margin-right: 23px;
+    margin-left: -5px;
+    margin-top: -2px;
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    color: var(--sidebar-icon-color, var(--primary-text-color));
+  }
+
   .selected {
-    color: var(--primary-color) !important;
+    color: var(--sidebar-selected-text-color, var(--primary-color));
     background: transparent !important;
     font-weight: bold;
+  }
+
+  iron-icon.selected {
+    color: var(--sidebar-selected-icon-color, var(--primary-color)) !important;
   }
 
   paper-item:focus:before {
@@ -65,7 +79,7 @@ export const SideBar = css`
     content: ' ';
     display: block;
     height: 1px;
-    background-color: var(--light-theme-divider-color);
+    background-color: var(--divider-color);
   }
 
   .sidebar {
@@ -74,7 +88,8 @@ export const SideBar = css`
     top: 0;
     left: 0;
     margin: 0;
-    background: var(--primary-background-color);
+    background-color: var(--paper-listbox-background-color);
+    border-right: 1px solid var(--divider-color);
     width: 55px;
     height: 100%;
     text-align: left;
@@ -87,7 +102,7 @@ export const SideBar = css`
   }
 
   .sidebarText {
-    color: var(--primary-text-color);
+    color: var(--sidebar-text-color, var(--primary-text-color));
     padding-left: 3px;
     padding-bottom: -5px;
     text-align: left;
@@ -101,15 +116,5 @@ export const SideBar = css`
   .sidebarBottom {
     margin: 0;
     margin-left: -4px;
-  }
-
-  .sidebar .iconify {
-    margin-right: 23px;
-    margin-left: -5px;
-    margin-top: -2px;
-    width: 24px;
-    height: 24px;
-    min-width: 24px;
-    color: var(--primary-text-color);
   }
 `;

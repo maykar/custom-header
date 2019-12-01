@@ -30,7 +30,7 @@ export const Header = css`
   app-toolbar {
     background-color: var(--primary-color);
     font-weight: 400;
-    color: var(--light-theme-background-color);
+    color: var(--text-primary-color);
   }
 
   app-header {

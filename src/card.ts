@@ -23,6 +23,7 @@ export class Card extends LitElement {
       paper-card {
         position: relative;
         width: 100%;
+        height: fit-content;
       }
     `;
   }

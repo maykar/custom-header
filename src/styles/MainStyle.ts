@@ -19,7 +19,7 @@ const Main = css`
     background-color: var(--primary-background-color);
     font-size: 20px;
     align-items: center;
-    border-bottom: 1px solid var(--light-theme-divider-color);
+    border-bottom: 1px solid var(--divider-color);
   }
 
   .expanded {
@@ -34,7 +34,8 @@ const Main = css`
     display: flex;
     margin-left: 55px;
     padding-top: 24px;
-    background-color: var(--primary-background-color);
+    background: var(--lovelace-background, var(--primary-background-color));
+    height: calc(100vh - 96px);
   }
 
   docs-card {

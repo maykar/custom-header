@@ -25452,7 +25452,7 @@ const Header = css `
   app-toolbar {
     background-color: var(--primary-color);
     font-weight: 400;
-    color: var(--light-theme-background-color);
+    color: var(--text-primary-color);
   }
 
   app-header {
@@ -25509,10 +25509,24 @@ const SideBar = css `
     white-space: nowrap;
   }
 
+  .sidebar .iconify {
+    margin-right: 23px;
+    margin-left: -5px;
+    margin-top: -2px;
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    color: var(--sidebar-icon-color, var(--primary-text-color));
+  }
+
   .selected {
-    color: var(--primary-color) !important;
+    color: var(--sidebar-selected-text-color, var(--primary-color));
     background: transparent !important;
     font-weight: bold;
+  }
+
+  iron-icon.selected {
+    color: var(--sidebar-selected-icon-color, var(--primary-color)) !important;
   }
 
   paper-item:focus:before {
@@ -25531,7 +25545,7 @@ const SideBar = css `
     content: ' ';
     display: block;
     height: 1px;
-    background-color: var(--light-theme-divider-color);
+    background-color: var(--divider-color);
   }
 
   .sidebar {
@@ -25540,7 +25554,8 @@ const SideBar = css `
     top: 0;
     left: 0;
     margin: 0;
-    background: var(--primary-background-color);
+    background-color: var(--paper-listbox-background-color);
+    border-right: 1px solid var(--divider-color);
     width: 55px;
     height: 100%;
     text-align: left;
@@ -25553,7 +25568,7 @@ const SideBar = css `
   }
 
   .sidebarText {
-    color: var(--primary-text-color);
+    color: var(--sidebar-text-color, var(--primary-text-color));
     padding-left: 3px;
     padding-bottom: -5px;
     text-align: left;
@@ -25567,16 +25582,6 @@ const SideBar = css `
   .sidebarBottom {
     margin: 0;
     margin-left: -4px;
-  }
-
-  .sidebar .iconify {
-    margin-right: 23px;
-    margin-left: -5px;
-    margin-top: -2px;
-    width: 24px;
-    height: 24px;
-    min-width: 24px;
-    color: var(--primary-text-color);
   }
 `;
 
@@ -25596,7 +25601,7 @@ const Main = css `
     background-color: var(--primary-background-color);
     font-size: 20px;
     align-items: center;
-    border-bottom: 1px solid var(--light-theme-divider-color);
+    border-bottom: 1px solid var(--divider-color);
   }
 
   .expanded {
@@ -25611,7 +25616,8 @@ const Main = css `
     display: flex;
     margin-left: 55px;
     padding-top: 24px;
-    background-color: var(--primary-background-color);
+    background: var(--lovelace-background, var(--primary-background-color));
+    height: calc(100vh - 96px);
   }
 
   docs-card {
@@ -39432,6 +39438,7 @@ let Card = class Card extends LitElement {
       paper-card {
         position: relative;
         width: 100%;
+        height: fit-content;
       }
     `;
     }
