@@ -41,6 +41,7 @@ gulp.task('generate', done => {
     <link rel="shortcut icon" href="${settings.siteURL}/img/favicon.ico"/>
     <script type="module" src="./Main.js"></script>
     <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./theme.css">
   </head>
   <body>
     <docs-main></docs-main>
@@ -48,9 +49,6 @@ gulp.task('generate', done => {
   </html>
   `;
   const CSS = `
-  body {
-    --primary-color: ${settings.primaryColor};
-  }
   docs-main {
     position: absolute;
     height: 100%;

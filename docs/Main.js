@@ -25381,7 +25381,6 @@ Polymer({
 var docSettings = {
   siteName: 'Documentation Demo Site',
   siteDescription: '',
-  primaryColor: '#03a9f4',
   welcomeCategory: 'installation',
   siteURL: 'https://maykar.github.io/polymer-docs-template',
   github: 'https://github.com/maykar/polymer-docs-template',
@@ -25417,11 +25416,11 @@ var docSettings = {
   ],
 };
 var docSettings_1 = docSettings.siteName;
-var docSettings_4 = docSettings.welcomeCategory;
-var docSettings_6 = docSettings.github;
-var docSettings_7 = docSettings.sideBar;
-var docSettings_8 = docSettings.sideBarLinks;
-var docSettings_9 = docSettings.sideBarBottom;
+var docSettings_3 = docSettings.welcomeCategory;
+var docSettings_5 = docSettings.github;
+var docSettings_6 = docSettings.sideBar;
+var docSettings_7 = docSettings.sideBarLinks;
+var docSettings_8 = docSettings.sideBarBottom;
 
 const Header = css `
   app-header {
@@ -46035,7 +46034,7 @@ let DotMenu = class DotMenu extends LitElement {
     editOnGithub() {
         const category = window.location.hash.replace('#', '').split('/')[0];
         const page = window.location.hash.split('/')[1];
-        window.open(`${docSettings_6}/edit/master/src/docs/${category}/${page}.md`, '_blank');
+        window.open(`${docSettings_5}/edit/master/src/docs/${category}/${page}.md`, '_blank');
     }
     static get styles() {
         return [
@@ -46089,7 +46088,7 @@ let Main$1 = class Main extends LitElement {
         if (this.docs === undefined)
             return html ``;
         if (this.category === undefined) {
-            this.category = docSettings_4;
+            this.category = docSettings_3;
             window.history.pushState(null, '', `./#${this.category}`);
         }
         if (this.page === undefined) {
@@ -46106,7 +46105,7 @@ let Main$1 = class Main extends LitElement {
             </paper-item>
           </div>
           <div class="sidebarTopItems">
-            ${docSettings_7.map(element => {
+            ${docSettings_6.map(element => {
             return html `
                 <paper-item
                   @click=${this.changeCategory}
@@ -46125,7 +46124,7 @@ let Main$1 = class Main extends LitElement {
           </div>
 
           <div class="sidebarBottomItems">
-          ${docSettings_9.map(element => {
+          ${docSettings_8.map(element => {
             return html `
               <paper-item
                 @click=${this.changeCategory}
@@ -46141,7 +46140,7 @@ let Main$1 = class Main extends LitElement {
             `;
         })}
           <div class="divider"></div>
-            ${docSettings_8.map(element => {
+            ${docSettings_7.map(element => {
             return html `
                 <a class="sidebarLinkItems" href="${element.link}" target="_blank">
                   <paper-item title=${element.caption}>
