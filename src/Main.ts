@@ -39,11 +39,11 @@ export class Main extends LitElement {
   }
 
   updated(): void {
-    const tabs = Array.from(document.querySelector("docs-main")!.shadowRoot!.querySelectorAll("paper-tab"));
+    const tabs = Array.from(document.querySelector('docs-main')!.shadowRoot!.querySelectorAll('paper-tab'));
     if (tabs.length < 2) return;
     for (const tab of tabs) if (tab.classList.contains('iron-selected')) return;
-    tabs[1].click()
-    tabs[0].click()
+    tabs[1].click();
+    tabs[0].click();
     window.dispatchEvent(new Event('resize'));
   }
 
@@ -85,7 +85,7 @@ export class Main extends LitElement {
           </div>
           <div class="sidebarTopItems">
             ${settings.sideBar.map(element => {
-      return html`
+              return html`
                 <paper-item
                   @click=${this.changeCategory}
                   title=${element.category}
@@ -98,13 +98,13 @@ export class Main extends LitElement {
                   <span class="item-text">${element.category}</span>
                 </paper-item>
               `;
-    })}
+            })}
 
           </div>
 
           <div class="sidebarBottomItems">
           ${settings.sideBarBottom.map(element => {
-      return html`
+            return html`
               <paper-item
                 @click=${this.changeCategory}
                 title=${element.category}
@@ -117,10 +117,10 @@ export class Main extends LitElement {
                 <span class="item-text">${element.category}</span>
               </paper-item>
             `;
-    })}
+          })}
           <div class="divider"></div>
             ${settings.sideBarLinks.map(element => {
-      return html`
+              return html`
                 <a class="sidebarLinkItems" href="${element.link}" target="_blank">
                   <paper-item title=${element.caption}>
                     <iron-icon class="iconify" icon="icons:open-in-new"></iron-icon>
@@ -128,7 +128,7 @@ export class Main extends LitElement {
                   </paper-item>
                 </a>
               `;
-    })}
+            })}
           </div>
         </div>
 
@@ -146,26 +146,28 @@ export class Main extends LitElement {
                     scrollable
                   >
           ${
-      this.docs[this.category!].length > 1
-        ? html`
-                  ${this.docs[this.category!].map(element => {
-          return html`
-                      <paper-tab page-name="${element.title.toLowerCase()}">${element.title}</paper-tab>
-                    `;
-        })}
+            this.docs[this.category!].length > 1
+              ? html`
+                  ${this.docs[this.category!]
+                    .sort((a, b) => (a.index > b.index ? 1 : -1))
+                    .map(element => {
+                      return html`
+                        <paper-tab tabindex=${element.index} page-name="${element.id}">${element.title}</paper-tab>
+                      `;
+                    })}
                 `
-        : ''
-      }
+              : ''
+          }
           </paper-tabs>
         </app-header>
 
         ${this.docs[this.category!].map(element => {
-        if (element.title === this.page)
-          return html`
+          if (element.id === this.page)
+            return html`
               <docs-card class="view ${this.expanded ? 'sidebarExpanded' : ''}" .content=${element}> </docs-card>
             `;
-        else return;
-      })}
+          else return;
+        })}
   </docs-panel>
   </app-header-layout>
         `;

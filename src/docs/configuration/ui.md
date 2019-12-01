@@ -1,5 +1,6 @@
 ---
 title: UI Configuration
+index: 0
 ---
 
 # Step 1
