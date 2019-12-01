@@ -38,6 +38,15 @@ export class Main extends LitElement {
     });
   }
 
+  updated(): void {
+    const tabs = Array.from(document.querySelector("docs-main")!.shadowRoot!.querySelectorAll("paper-tab"));
+    if (tabs.length < 2) return;
+    for (const tab of tabs) if (tab.classList.contains('iron-selected')) return;
+    tabs[1].click()
+    tabs[0].click()
+    window.dispatchEvent(new Event('resize'));
+  }
+
   changePage(e: any) {
     this.page = e.detail.selected.toLowerCase();
     window.history.pushState(null, '', `./#${this.category}/${this.page}`);
