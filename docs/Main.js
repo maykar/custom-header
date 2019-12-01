@@ -25145,13 +25145,10 @@ const SideBar = css `
     white-space: nowrap;
   }
 
-  paper-item:focus {
-    color: var(--primary-color);
-  }
-
-  paper-item:focus .iconify {
-    color: var(--primary-color);
+  .selected {
+    color: var(--primary-color) !important;
     background: transparent !important;
+    font-weight: bold;
   }
 
   paper-item:focus:before {
@@ -45746,8 +45743,15 @@ let Main$1 = class Main extends LitElement {
           <div class="sidebarTopItems">
             ${docSettings_7.map(element => {
             return html `
-                <paper-item @click=${this.changeCategory} title=${element.category}>
-                  <iron-icon class="iconify" icon=${element.icon}></iron-icon>
+                <paper-item
+                  @click=${this.changeCategory}
+                  title=${element.category}
+                  class="${this.category === element.category ? 'selected' : ''}"
+                >
+                  <iron-icon
+                    class="iconify ${this.category === element.category ? 'selected' : ''}"
+                    icon=${element.icon}
+                  ></iron-icon>
                   <span class="item-text">${element.category}</span>
                 </paper-item>
               `;
@@ -45774,8 +45778,15 @@ let Main$1 = class Main extends LitElement {
           <div class="divider"></div>
           ${docSettings_9.map(element => {
             return html `
-              <paper-item @click=${this.changeCategory} title=${element.category}>
-                <iron-icon class="iconify" icon=${element.icon}></iron-icon>
+              <paper-item
+                @click=${this.changeCategory}
+                title=${element.category}
+                class="${this.category === element.category ? 'selected' : ''}"
+              >
+                <iron-icon
+                  class="iconify ${this.category === element.category ? 'selected' : ''}"
+                  icon=${element.icon}
+                ></iron-icon>
                 <span class="item-text">${element.category}</span>
               </paper-item>
             `;

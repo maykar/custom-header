@@ -76,8 +76,15 @@ export class Main extends LitElement {
           <div class="sidebarTopItems">
             ${settings.sideBar.map(element => {
               return html`
-                <paper-item @click=${this.changeCategory} title=${element.category}>
-                  <iron-icon class="iconify" icon=${element.icon}></iron-icon>
+                <paper-item
+                  @click=${this.changeCategory}
+                  title=${element.category}
+                  class="${this.category === element.category ? 'selected' : ''}"
+                >
+                  <iron-icon
+                    class="iconify ${this.category === element.category ? 'selected' : ''}"
+                    icon=${element.icon}
+                  ></iron-icon>
                   <span class="item-text">${element.category}</span>
                 </paper-item>
               `;
@@ -104,8 +111,15 @@ export class Main extends LitElement {
           <div class="divider"></div>
           ${settings.sideBarBottom.map(element => {
             return html`
-              <paper-item @click=${this.changeCategory} title=${element.category}>
-                <iron-icon class="iconify" icon=${element.icon}></iron-icon>
+              <paper-item
+                @click=${this.changeCategory}
+                title=${element.category}
+                class="${this.category === element.category ? 'selected' : ''}"
+              >
+                <iron-icon
+                  class="iconify ${this.category === element.category ? 'selected' : ''}"
+                  icon=${element.icon}
+                ></iron-icon>
                 <span class="item-text">${element.category}</span>
               </paper-item>
             `;

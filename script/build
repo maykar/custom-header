@@ -1,6 +1,7 @@
 rm -R docs || echo ""
 mkdir -p docs/img
 cp -R src/img/* docs/img/
+yarn install
 echo "Fixing dependency links"
 bash script/fixNestings.sh
 yarn gulp generate || exit 1

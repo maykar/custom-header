@@ -40,13 +40,10 @@ export const SideBar = css`
     white-space: nowrap;
   }
 
-  paper-item:focus {
-    color: var(--primary-color);
-  }
-
-  paper-item:focus .iconify {
-    color: var(--primary-color);
+  .selected {
+    color: var(--primary-color) !important;
     background: transparent !important;
+    font-weight: bold;
   }
 
   paper-item:focus:before {
