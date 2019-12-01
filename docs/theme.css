@@ -7,6 +7,6 @@
     --paper-listbox-background-color: #ffffff;
     --sidebar-icon-color: #212121;
     --sidebar-text-color: #212121;
-    --sidebar-selected-icon-color: green;
+    --sidebar-selected-icon-color: var(--primary-color);
     --sidebar-selected-text-color: var(--primary-color);
 }
