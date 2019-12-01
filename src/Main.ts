@@ -128,7 +128,7 @@ export class Main extends LitElement {
           <app-toolbar>
             <div main-title class="main-title">${settings.siteName}</div>
             <iron-icon class="iconify" icon="av:mic"></iron-icon>
-            <docs-dot-menu></docs-dot-menu>
+            <docs-dot-menu .category=${this.category} .page=${this.page}></docs-dot-menu>
           </app-toolbar>
           <paper-tabs
                     .selected=${this.page}

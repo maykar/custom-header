@@ -1,4 +1,4 @@
-import { LitElement, customElement, html, TemplateResult, CSSResultArray, css } from 'lit-element';
+import { LitElement, customElement, html, TemplateResult, CSSResultArray, css, property } from 'lit-element';
 import '@polymer/paper-dropdown-menu/paper-dropdown-menu';
 import '@polymer/paper-icon-button/paper-icon-button';
 import '@polymer/paper-listbox/paper-listbox';
@@ -9,6 +9,8 @@ import * as settings from './docSettings';
 
 @customElement('docs-dot-menu')
 export class DotMenu extends LitElement {
+  @property() public category?: string;
+  @property() public page?: string;
   protected render(): TemplateResult | void {
     return html`
       <paper-menu-button
@@ -30,9 +32,7 @@ export class DotMenu extends LitElement {
   }
 
   editOnGithub() {
-    const category = window.location.hash.replace('#', '').split('/')[0];
-    const page = window.location.hash.split('/')[1];
-    window.open(`${settings.github}/edit/master/src/docs/${category}/${page}.md`, '_blank');
+    window.open(`${settings.github}/edit/master/src/docs/${this.category}/${this.page}.md`, '_blank');
   }
 
   static get styles(): CSSResultArray {

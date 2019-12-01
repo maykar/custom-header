@@ -46032,9 +46032,7 @@ let DotMenu = class DotMenu extends LitElement {
     `;
     }
     editOnGithub() {
-        const category = window.location.hash.replace('#', '').split('/')[0];
-        const page = window.location.hash.split('/')[1];
-        window.open(`${docSettings_5}/edit/master/src/docs/${category}/${page}.md`, '_blank');
+        window.open(`${docSettings_5}/edit/master/src/docs/${this.category}/${this.page}.md`, '_blank');
     }
     static get styles() {
         return [
@@ -46049,6 +46047,12 @@ let DotMenu = class DotMenu extends LitElement {
         ];
     }
 };
+__decorate([
+    property()
+], DotMenu.prototype, "category", void 0);
+__decorate([
+    property()
+], DotMenu.prototype, "page", void 0);
 DotMenu = __decorate([
     customElement('docs-dot-menu')
 ], DotMenu);
@@ -46158,7 +46162,7 @@ let Main$1 = class Main extends LitElement {
           <app-toolbar>
             <div main-title class="main-title">${docSettings_1}</div>
             <iron-icon class="iconify" icon="av:mic"></iron-icon>
-            <docs-dot-menu></docs-dot-menu>
+            <docs-dot-menu .category=${this.category} .page=${this.page}></docs-dot-menu>
           </app-toolbar>
           <paper-tabs
                     .selected=${this.page}
