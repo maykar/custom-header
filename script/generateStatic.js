@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const fs = require('fs');
+const jsonfeedToAtom = require('jsonfeed-to-atom');
 const gulp = require('gulp');
 
 const settings = require('../src/docSettings');
@@ -13,6 +14,12 @@ const srcDir = path.resolve(__dirname, '../src');
 function docsToJson() {
   const dirs = fs.readdirSync(docsDir);
   const jsonfeed = {};
+  const xmlfeed = {
+    title: settings.siteName,
+    version: 'https://jsonfeed.org/version/1',
+    feed_url: `${settings.siteURL}/feed.xml`,
+    items: [],
+  };
   dirs.map(dir => {
     files = fs.readdirSync(path.join(docsDir, dir));
     jsonfeed[dir] = [];
@@ -21,11 +28,16 @@ function docsToJson() {
       return {
         title: file.replace('_', ' ').split('.')[0],
         id: file,
-        content: text,
+        url: `${settings.siteURL}/#${dir}/${file.split('.')[0]}`,
+        content_html: text,
       };
+    });
+    jsonfeed[dir].forEach(element => {
+      xmlfeed.items.push(element);
     });
   });
   fs.writeFileSync(`${buildDir}/jsonfeed.json`, JSON.stringify(jsonfeed));
+  fs.writeFileSync(`${buildDir}/feed.xml`, jsonfeedToAtom(xmlfeed));
 }
 
 gulp.task('generate', done => {
@@ -38,7 +50,7 @@ gulp.task('generate', done => {
     <meta charset="UTF-8">
     <title>${settings.siteName}</title>
     <description>${settings.siteDescription}</description>
-    <link rel="shortcut icon" href="${settings.siteURL}/img/favicon.ico"/>
+    <link rel="shortcut icon" href="./favicon.ico"/>
     <script type="module" src="./Main.js"></script>
     <link rel="stylesheet" href="./styles.css">
     <link rel="stylesheet" href="./theme.css">

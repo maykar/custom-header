@@ -8,7 +8,7 @@ export class Card extends LitElement {
   @property() public content: any;
 
   protected render() {
-    const content = markdown.html(this.content.content);
+    const content = markdown.html(this.content.content_html);
     return html`
       <paper-card>
         <div class="card-content">

@@ -3,9 +3,7 @@
   "name": "polymer-docs-template",
   "image": "ludeeus/devcontainer:frontend-stable",
   "context": "..",
-  "appPort": [
-    "5000:5000"
-  ],
+  "appPort": ["5000:5000"],
   "postCreateCommand": "yarn install; bash script/fixNestings.sh",
   "runArgs": [
     "-v",
