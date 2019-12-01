@@ -42,9 +42,11 @@ export class Main extends LitElement {
   }
 
   changeCategory(e: any) {
-    this.category = e.composedPath()[3].innerText.toLowerCase();
-    this.page = undefined;
-    window.history.pushState(null, '', `./#${this.category}`);
+    if (e.composedPath()[0].localName !== 'paper-icon-item') {
+      this.category = e.composedPath()[3].innerText.toLowerCase();
+      this.page = undefined;
+      window.history.pushState(null, '', `./#${this.category}`);
+    }
   }
 
   toggleSidebar(): void {
@@ -74,10 +76,26 @@ export class Main extends LitElement {
           <paper-listbox>
             ${settings.sideBar.map(element => {
               return html`
-                <paper-icon-item @click=${this.changeCategory}>
+                <paper-icon-item @click=${this.changeCategory} title=${element.category}>
                   <iron-icon class="iconify" icon=${element.icon}></iron-icon>
                   <span class="item-text">${element.category}</span>
                 </paper-icon-item>
+              `;
+            })}
+          </paper-listbox>
+          </div>
+
+          <div class="sidebarLinkItems">
+          <div class="divider"></div>
+          <paper-listbox>
+            ${settings.sideBarLinks.map(element => {
+              return html`
+                <a href="${element.link}" target="_blank">
+                  <paper-icon-item title=${element.caption}>
+                    <iron-icon class="iconify" icon="open-in-new"></iron-icon>
+                    <span class="item-text">${element.caption}</span>
+                  </paper-icon-item>
+                </a>
               `;
             })}
           </paper-listbox>
@@ -88,7 +106,7 @@ export class Main extends LitElement {
           <paper-listbox>
           ${settings.sideBarBottom.map(element => {
             return html`
-              <paper-icon-item @click=${this.changeCategory}>
+              <paper-icon-item @click=${this.changeCategory} title=${element.category}>
                 <iron-icon class="iconify" icon=${element.icon}></iron-icon>
                 <span class="item-text">${element.category}</span>
               </paper-icon-item>

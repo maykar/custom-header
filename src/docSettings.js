@@ -1,24 +1,42 @@
 /* eslint-disable prettier/prettier */
 // Global settings for the documentation website
 
+// Icons from https://www.webcomponents.org/element/@polymer/iron-icons/demo/demo/index.html
+
 module.exports = {
   siteName: 'Documentation Demo Site',
+  siteDescription: '',
   primaryColor: '#03a9f4',
   welcomeCategory: 'installation',
+  github: 'https://github.com/maykar/polymer-docs-template',
   sideBar: [
     {
       category: 'installation',
-      icon: 'arrow-downward',
+      icon: 'icons:arrow-downward',
     },
     {
       category: 'configuration',
-      icon: 'create',
+      icon: 'icons:create',
+    },
+  ],
+  sideBarLinks: [
+    {
+      link: 'https://github.com/maykar/polymer-docs-template',
+      caption: 'GitHub',
+    },
+    {
+      link: 'https://github.com/maykar/polymer-docs-template/issues',
+      caption: 'Issues',
     },
   ],
   sideBarBottom: [
     {
       category: 'developer-tools',
-      icon: 'build',
+      icon: 'icons:build',
+    },
+    {
+      category: 'faq',
+      icon: 'icons:help',
     },
   ],
 };
