@@ -8,6 +8,7 @@ module.exports = {
   siteDescription: '',
   primaryColor: '#03a9f4',
   welcomeCategory: 'installation',
+  siteURL: 'https://maykar.github.io/polymer-docs-template',
   github: 'https://github.com/maykar/polymer-docs-template',
   sideBar: [
     {

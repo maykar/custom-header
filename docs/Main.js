@@ -24921,21 +24921,46 @@ part of the polymer project is also subject to an additional IP rights grant
 found at http://polymer.github.io/PATENTS.txt
 */
 
-/*
-`<paper-icon-item>` is a convenience element to make an item with icon. It is an
-interactive list item with a fixed-width icon area, according to Material
-Design. This is useful if the icons are of varying widths, but you want the item
-bodies to line up. Use this like a `<paper-item>`. The child node with the slot
-name `item-icon` is placed in the icon area.
+/**
+Material design:
+[Lists](https://www.google.com/design/spec/components/lists.html)
 
-    <paper-icon-item>
-      <iron-icon icon="favorite" slot="item-icon"></iron-icon>
-      Favorite
-    </paper-icon-item>
-    <paper-icon-item>
-      <div class="avatar" slot="item-icon"></div>
-      Avatar
-    </paper-icon-item>
+`<paper-item>` is an interactive list item. By default, it is a horizontal
+flexbox.
+
+    <paper-item>Item</paper-item>
+
+Use this element with `<paper-item-body>` to make Material Design styled
+two-line and three-line items.
+
+    <paper-item>
+      <paper-item-body two-line>
+        <div>Show your status</div>
+        <div secondary>Your status is visible to everyone</div>
+      </paper-item-body>
+      <iron-icon icon="warning"></iron-icon>
+    </paper-item>
+
+To use `paper-item` as a link, wrap it in an anchor tag. Since `paper-item` will
+already receive focus, you may want to prevent the anchor tag from receiving
+focus as well by setting its tabindex to -1.
+
+    <a href="https://www.polymer-project.org/" tabindex="-1">
+      <paper-item raised>Polymer Project</paper-item>
+    </a>
+
+If you are concerned about performance and want to use `paper-item` in a
+`paper-listbox` with many items, you can just use a native `button` with the
+`paper-item` class applied (provided you have correctly included the shared
+styles):
+
+    <style is="custom-style" include="paper-item-shared-styles"></style>
+
+    <paper-listbox>
+      <button class="paper-item" role="option">Inbox</button>
+      <button class="paper-item" role="option">Starred</button>
+      <button class="paper-item" role="option">Sent mail</button>
+    </paper-listbox>
 
 ### Styling
 
@@ -24943,9 +24968,8 @@ The following custom properties and mixins are available for styling:
 
 Custom property | Description | Default
 ----------------|-------------|----------
-`--paper-item-icon-width` | Width of the icon area | `56px`
-`--paper-item-icon` | Mixin applied to the icon area | `{}`
-`--paper-icon-item` | Mixin applied to the item | `{}`
+`--paper-item-min-height` | Minimum height of the item | `48px`
+`--paper-item` | Mixin applied to the item | `{}`
 `--paper-item-selected-weight` | The font weight of a selected item | `bold`
 `--paper-item-selected` | Mixin applied to selected paper-items | `{}`
 `--paper-item-disabled-color` | The color for disabled paper-items | `--disabled-text-color`
@@ -24953,36 +24977,38 @@ Custom property | Description | Default
 `--paper-item-focused` | Mixin applied to focused paper-items | `{}`
 `--paper-item-focused-before` | Mixin applied to :before focused paper-items | `{}`
 
+### Accessibility
+
+This element has `role="listitem"` by default. Depending on usage, it may be
+more appropriate to set `role="menuitem"`, `role="menuitemcheckbox"` or
+`role="menuitemradio"`.
+
+    <paper-item role="menuitemcheckbox">
+      <paper-item-body>
+        Show your status
+      </paper-item-body>
+      <paper-checkbox></paper-checkbox>
+    </paper-item>
+
+@group Paper Elements
+@element paper-item
+@demo demo/index.html
 */
 Polymer({
   _template: html$1`
-    <style include="paper-item-shared-styles"></style>
-    <style>
+    <style include="paper-item-shared-styles">
       :host {
         @apply --layout-horizontal;
         @apply --layout-center;
         @apply --paper-font-subhead;
 
         @apply --paper-item;
-        @apply --paper-icon-item;
-      }
-
-      .content-icon {
-        @apply --layout-horizontal;
-        @apply --layout-center;
-
-        width: var(--paper-item-icon-width, 56px);
-        @apply --paper-item-icon;
       }
     </style>
-
-    <div id="contentIcon" class="content-icon">
-      <slot name="item-icon"></slot>
-    </div>
     <slot></slot>
 `,
 
-  is: 'paper-icon-item',
+  is: 'paper-item',
   behaviors: [PaperItemBehavior]
 });
 
@@ -24996,6 +25022,7 @@ var docSettings = {
   siteDescription: '',
   primaryColor: '#03a9f4',
   welcomeCategory: 'installation',
+  siteURL: 'https://maykar.github.io/polymer-docs-template',
   github: 'https://github.com/maykar/polymer-docs-template',
   sideBar: [
     {
@@ -25030,10 +25057,10 @@ var docSettings = {
 };
 var docSettings_1 = docSettings.siteName;
 var docSettings_4 = docSettings.welcomeCategory;
-var docSettings_5 = docSettings.github;
-var docSettings_6 = docSettings.sideBar;
-var docSettings_7 = docSettings.sideBarLinks;
-var docSettings_8 = docSettings.sideBarBottom;
+var docSettings_6 = docSettings.github;
+var docSettings_7 = docSettings.sideBar;
+var docSettings_8 = docSettings.sideBarLinks;
+var docSettings_9 = docSettings.sideBarBottom;
 
 const Header = css `
   app-header {
@@ -25106,7 +25133,7 @@ const SideBar = css `
     margin-left: -5px !important;
   }
 
-  paper-icon-item {
+  paper-item {
     box-sizing: border-box;
     padding-left: 12px;
     cursor: pointer;
@@ -25118,34 +25145,21 @@ const SideBar = css `
     white-space: nowrap;
   }
 
-  paper-icon-item:focus:before {
+  paper-item:focus {
+    color: var(--primary-color);
+  }
+
+  paper-item:focus .iconify {
+    color: var(--primary-color);
     background: transparent !important;
   }
 
-  .iron-selected ::before {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    left: 0px;
-    pointer-events: none;
-    content: '';
-    opacity: 0.12;
-    will-change: opacity;
-    border-radius: 4px;
-    transition: opacity 15ms linear 0s;
+  paper-item:focus:before {
+    background: transparent !important;
   }
 
   .item-text {
     text-transform: uppercase;
-  }
-
-  paper-listbox .iron-selected {
-    color: var(--primary-color);
-  }
-
-  paper-listbox .iron-selected .iconify {
-    color: var(--primary-color);
   }
 
   .divider {
@@ -45636,108 +45650,6 @@ Polymer({
   hostAttributes: {role: 'listbox'}
 });
 
-/**
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at
-http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
-http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
-found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
-part of the polymer project is also subject to an additional IP rights grant
-found at http://polymer.github.io/PATENTS.txt
-*/
-
-/**
-Material design:
-[Lists](https://www.google.com/design/spec/components/lists.html)
-
-`<paper-item>` is an interactive list item. By default, it is a horizontal
-flexbox.
-
-    <paper-item>Item</paper-item>
-
-Use this element with `<paper-item-body>` to make Material Design styled
-two-line and three-line items.
-
-    <paper-item>
-      <paper-item-body two-line>
-        <div>Show your status</div>
-        <div secondary>Your status is visible to everyone</div>
-      </paper-item-body>
-      <iron-icon icon="warning"></iron-icon>
-    </paper-item>
-
-To use `paper-item` as a link, wrap it in an anchor tag. Since `paper-item` will
-already receive focus, you may want to prevent the anchor tag from receiving
-focus as well by setting its tabindex to -1.
-
-    <a href="https://www.polymer-project.org/" tabindex="-1">
-      <paper-item raised>Polymer Project</paper-item>
-    </a>
-
-If you are concerned about performance and want to use `paper-item` in a
-`paper-listbox` with many items, you can just use a native `button` with the
-`paper-item` class applied (provided you have correctly included the shared
-styles):
-
-    <style is="custom-style" include="paper-item-shared-styles"></style>
-
-    <paper-listbox>
-      <button class="paper-item" role="option">Inbox</button>
-      <button class="paper-item" role="option">Starred</button>
-      <button class="paper-item" role="option">Sent mail</button>
-    </paper-listbox>
-
-### Styling
-
-The following custom properties and mixins are available for styling:
-
-Custom property | Description | Default
-----------------|-------------|----------
-`--paper-item-min-height` | Minimum height of the item | `48px`
-`--paper-item` | Mixin applied to the item | `{}`
-`--paper-item-selected-weight` | The font weight of a selected item | `bold`
-`--paper-item-selected` | Mixin applied to selected paper-items | `{}`
-`--paper-item-disabled-color` | The color for disabled paper-items | `--disabled-text-color`
-`--paper-item-disabled` | Mixin applied to disabled paper-items | `{}`
-`--paper-item-focused` | Mixin applied to focused paper-items | `{}`
-`--paper-item-focused-before` | Mixin applied to :before focused paper-items | `{}`
-
-### Accessibility
-
-This element has `role="listitem"` by default. Depending on usage, it may be
-more appropriate to set `role="menuitem"`, `role="menuitemcheckbox"` or
-`role="menuitemradio"`.
-
-    <paper-item role="menuitemcheckbox">
-      <paper-item-body>
-        Show your status
-      </paper-item-body>
-      <paper-checkbox></paper-checkbox>
-    </paper-item>
-
-@group Paper Elements
-@element paper-item
-@demo demo/index.html
-*/
-Polymer({
-  _template: html$1`
-    <style include="paper-item-shared-styles">
-      :host {
-        @apply --layout-horizontal;
-        @apply --layout-center;
-        @apply --paper-font-subhead;
-
-        @apply --paper-item;
-      }
-    </style>
-    <slot></slot>
-`,
-
-  is: 'paper-item',
-  behaviors: [PaperItemBehavior]
-});
-
 let DotMenu = class DotMenu extends LitElement {
     render() {
         return html `
@@ -45761,7 +45673,7 @@ let DotMenu = class DotMenu extends LitElement {
     editOnGithub() {
         const category = window.location.hash.replace('#', '').split('/')[0];
         const page = window.location.hash.split('/')[1];
-        window.open(`${docSettings_5}/edit/master/src/docs/${category}/${page}.md`, '_blank');
+        window.open(`${docSettings_6}/edit/master/src/docs/${category}/${page}.md`, '_blank');
     }
     static get styles() {
         return [
@@ -45798,11 +45710,11 @@ let Main$1 = class Main extends LitElement {
         });
     }
     changePage(e) {
-        this.page = e.detail.selected;
+        this.page = e.detail.selected.toLowerCase();
         window.history.pushState(null, '', `./#${this.category}/${this.page}`);
     }
     changeCategory(e) {
-        if (e.composedPath()[0].localName !== 'paper-icon-item') {
+        if (e.composedPath()[0].localName !== 'paper-item') {
             this.category = e.composedPath()[3].innerText.toLowerCase();
             this.page = undefined;
             window.history.pushState(null, '', `./#${this.category}`);
@@ -45826,52 +45738,49 @@ let Main$1 = class Main extends LitElement {
     <app-header-layout has-scrolling-region>
         <div class="sidebar ${this.expanded ? 'expanded' : ''}">
           <div class="menu" @click=${this.toggleSidebar}>
-            <paper-icon-item>
+            <paper-item>
               <iron-icon class="iconify" icon="menu"></iron-icon>
               <span>MENU</span>
-            </paper-icon-item>
+            </paper-item>
           </div>
           <div class="sidebarTopItems">
-          <paper-listbox>
-            ${docSettings_6.map(element => {
+            ${docSettings_7.map(element => {
             return html `
-                <paper-icon-item @click=${this.changeCategory} title=${element.category}>
+                <paper-item @click=${this.changeCategory} title=${element.category}>
                   <iron-icon class="iconify" icon=${element.icon}></iron-icon>
                   <span class="item-text">${element.category}</span>
-                </paper-icon-item>
+                </paper-item>
               `;
         })}
-          </paper-listbox>
+
           </div>
 
           <div class="sidebarLinkItems">
           <div class="divider"></div>
-          <paper-listbox>
-            ${docSettings_7.map(element => {
+
+            ${docSettings_8.map(element => {
             return html `
                 <a href="${element.link}" target="_blank">
-                  <paper-icon-item title=${element.caption}>
+                  <paper-item title=${element.caption}>
                     <iron-icon class="iconify" icon="open-in-new"></iron-icon>
                     <span class="item-text">${element.caption}</span>
-                  </paper-icon-item>
+                  </paper-item>
                 </a>
               `;
         })}
-          </paper-listbox>
           </div>
 
           <div class="sidebarBottomItems">
           <div class="divider"></div>
-          <paper-listbox>
-          ${docSettings_8.map(element => {
+          ${docSettings_9.map(element => {
             return html `
-              <paper-icon-item @click=${this.changeCategory} title=${element.category}>
+              <paper-item @click=${this.changeCategory} title=${element.category}>
                 <iron-icon class="iconify" icon=${element.icon}></iron-icon>
                 <span class="item-text">${element.category}</span>
-              </paper-icon-item>
+              </paper-item>
             `;
         })}
-              </paper-listbox>
+
           </div>
         </div>
 
@@ -45882,13 +45791,22 @@ let Main$1 = class Main extends LitElement {
             <iron-icon class="iconify" icon="av:mic"></iron-icon>
             <docs-dot-menu></docs-dot-menu>
           </app-toolbar>
-            <paper-tabs .selected=${this.page} @iron-activate=${this.changePage} attr-for-selected="page-name" scrollable >
-            ${this.docs[this.category].map(element => {
-            return html `
-                <paper-tab page-name="${element.title}">${element.title}</paper-tab>
-              `;
-        })}
-            </paper-tabs>
+          <paper-tabs
+                    .selected=${this.page}
+                    @iron-activate=${this.changePage}
+                    attr-for-selected="page-name"
+                    scrollable
+                  >
+          ${this.docs[this.category].length > 1
+            ? html `
+                  ${this.docs[this.category].map(element => {
+                return html `
+                      <paper-tab page-name="${element.title}">${element.title}</paper-tab>
+                    `;
+            })}
+                `
+            : ''}
+          </paper-tabs>
         </app-header>
 
         ${this.docs[this.category].map(element => {

@@ -8,7 +8,7 @@ import '@polymer/iron-icons/iron-icons';
 import '@polymer/iron-icons/av-icons';
 import '@polymer/paper-tabs/paper-tab';
 import '@polymer/paper-tabs/paper-tabs';
-import '@polymer/paper-item/paper-icon-item';
+import '@polymer/paper-item/paper-item';
 
 import * as settings from './docSettings';
 import { MainStyle } from './styles/MainStyle';
@@ -38,12 +38,12 @@ export class Main extends LitElement {
   }
 
   changePage(e: any) {
-    this.page = e.detail.selected;
+    this.page = e.detail.selected.toLowerCase();
     window.history.pushState(null, '', `./#${this.category}/${this.page}`);
   }
 
   changeCategory(e: any) {
-    if (e.composedPath()[0].localName !== 'paper-icon-item') {
+    if (e.composedPath()[0].localName !== 'paper-item') {
       this.category = e.composedPath()[3].innerText.toLowerCase();
       this.page = undefined;
       window.history.pushState(null, '', `./#${this.category}`);
@@ -68,52 +68,49 @@ export class Main extends LitElement {
     <app-header-layout has-scrolling-region>
         <div class="sidebar ${this.expanded ? 'expanded' : ''}">
           <div class="menu" @click=${this.toggleSidebar}>
-            <paper-icon-item>
+            <paper-item>
               <iron-icon class="iconify" icon="menu"></iron-icon>
               <span>MENU</span>
-            </paper-icon-item>
+            </paper-item>
           </div>
           <div class="sidebarTopItems">
-          <paper-listbox>
             ${settings.sideBar.map(element => {
               return html`
-                <paper-icon-item @click=${this.changeCategory} title=${element.category}>
+                <paper-item @click=${this.changeCategory} title=${element.category}>
                   <iron-icon class="iconify" icon=${element.icon}></iron-icon>
                   <span class="item-text">${element.category}</span>
-                </paper-icon-item>
+                </paper-item>
               `;
             })}
-          </paper-listbox>
+
           </div>
 
           <div class="sidebarLinkItems">
           <div class="divider"></div>
-          <paper-listbox>
+
             ${settings.sideBarLinks.map(element => {
               return html`
                 <a href="${element.link}" target="_blank">
-                  <paper-icon-item title=${element.caption}>
+                  <paper-item title=${element.caption}>
                     <iron-icon class="iconify" icon="open-in-new"></iron-icon>
                     <span class="item-text">${element.caption}</span>
-                  </paper-icon-item>
+                  </paper-item>
                 </a>
               `;
             })}
-          </paper-listbox>
           </div>
 
           <div class="sidebarBottomItems">
           <div class="divider"></div>
-          <paper-listbox>
           ${settings.sideBarBottom.map(element => {
             return html`
-              <paper-icon-item @click=${this.changeCategory} title=${element.category}>
+              <paper-item @click=${this.changeCategory} title=${element.category}>
                 <iron-icon class="iconify" icon=${element.icon}></iron-icon>
                 <span class="item-text">${element.category}</span>
-              </paper-icon-item>
+              </paper-item>
             `;
           })}
-              </paper-listbox>
+
           </div>
         </div>
 
@@ -124,15 +121,24 @@ export class Main extends LitElement {
             <iron-icon class="iconify" icon="av:mic"></iron-icon>
             <docs-dot-menu></docs-dot-menu>
           </app-toolbar>
-            <paper-tabs .selected=${this.page} @iron-activate=${
-      this.changePage
-    } attr-for-selected="page-name" scrollable >
-            ${this.docs[this.category!].map(element => {
-              return html`
-                <paper-tab page-name="${element.title}">${element.title}</paper-tab>
-              `;
-            })}
-            </paper-tabs>
+          <paper-tabs
+                    .selected=${this.page}
+                    @iron-activate=${this.changePage}
+                    attr-for-selected="page-name"
+                    scrollable
+                  >
+          ${
+            this.docs[this.category!].length > 1
+              ? html`
+                  ${this.docs[this.category!].map(element => {
+                    return html`
+                      <paper-tab page-name="${element.title}">${element.title}</paper-tab>
+                    `;
+                  })}
+                `
+              : ''
+          }
+          </paper-tabs>
         </app-header>
 
         ${this.docs[this.category!].map(element => {

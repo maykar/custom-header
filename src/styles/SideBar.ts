@@ -28,7 +28,7 @@ export const SideBar = css`
     margin-left: -5px !important;
   }
 
-  paper-icon-item {
+  paper-item {
     box-sizing: border-box;
     padding-left: 12px;
     cursor: pointer;
@@ -40,34 +40,21 @@ export const SideBar = css`
     white-space: nowrap;
   }
 
-  paper-icon-item:focus:before {
+  paper-item:focus {
+    color: var(--primary-color);
+  }
+
+  paper-item:focus .iconify {
+    color: var(--primary-color);
     background: transparent !important;
   }
 
-  .iron-selected ::before {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    left: 0px;
-    pointer-events: none;
-    content: '';
-    opacity: 0.12;
-    will-change: opacity;
-    border-radius: 4px;
-    transition: opacity 15ms linear 0s;
+  paper-item:focus:before {
+    background: transparent !important;
   }
 
   .item-text {
     text-transform: uppercase;
-  }
-
-  paper-listbox .iron-selected {
-    color: var(--primary-color);
-  }
-
-  paper-listbox .iron-selected .iconify {
-    color: var(--primary-color);
   }
 
   .divider {
