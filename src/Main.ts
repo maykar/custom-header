@@ -1,6 +1,7 @@
 import { LitElement, html, customElement, TemplateResult, property, CSSResultArray } from 'lit-element';
 import '@polymer/app-layout/app-header-layout/app-header-layout';
 import '@polymer/app-layout/app-header/app-header';
+import '@polymer/app-layout/app-scroll-effects/app-scroll-effects';
 import '@polymer/app-layout/app-toolbar/app-toolbar';
 import '@polymer/paper-icon-button/paper-icon-button';
 import '@polymer/iron-icon/iron-icon';
@@ -45,7 +46,7 @@ export class Main extends LitElement {
   changeCategory(e: any) {
     if (e.composedPath()[0].localName !== 'paper-item') {
       this.category = e.composedPath()[3].innerText.toLowerCase();
-      this.page = undefined;
+      this.page = this.docs[this.category!][0].title;
       window.history.pushState(null, '', `./#${this.category}`);
     }
   }
@@ -65,11 +66,11 @@ export class Main extends LitElement {
       window.history.pushState(null, '', `./#${this.category}/${this.page}`);
     }
     return html`
-    <app-header-layout has-scrolling-region>
+    <app-header-layout has-scrolling-region fullbleed>
         <div class="sidebar ${this.expanded ? 'expanded' : ''}">
           <div class="menu" @click=${this.toggleSidebar}>
             <paper-item>
-              <iron-icon class="iconify" icon="menu"></iron-icon>
+              <iron-icon class="iconify" icon="icons:menu"></iron-icon>
               <span>MENU</span>
             </paper-item>
           </div>
@@ -92,23 +93,7 @@ export class Main extends LitElement {
 
           </div>
 
-          <div class="sidebarLinkItems">
-          <div class="divider"></div>
-
-            ${settings.sideBarLinks.map(element => {
-              return html`
-                <a class="sidebarLinkItems" href="${element.link}" target="_blank">
-                  <paper-item title=${element.caption}>
-                    <iron-icon class="iconify" icon="open-in-new"></iron-icon>
-                    <span class="item-text">${element.caption}</span>
-                  </paper-item>
-                </a>
-              `;
-            })}
-          </div>
-
           <div class="sidebarBottomItems">
-          <div class="divider"></div>
           ${settings.sideBarBottom.map(element => {
             return html`
               <paper-item
@@ -124,14 +109,24 @@ export class Main extends LitElement {
               </paper-item>
             `;
           })}
-
+          <div class="divider"></div>
+            ${settings.sideBarLinks.map(element => {
+              return html`
+                <a class="sidebarLinkItems" href="${element.link}" target="_blank">
+                  <paper-item title=${element.caption}>
+                    <iron-icon class="iconify" icon="icons:open-in-new"></iron-icon>
+                    <span class="item-text">${element.caption}</span>
+                  </paper-item>
+                </a>
+              `;
+            })}
           </div>
         </div>
 
 
         <app-header class="${this.expanded ? 'sidebarExpanded' : ''}" fixed slot="header">
           <app-toolbar>
-            <div main-title>${settings.siteName}</div>
+            <div main-title class="main-title">${settings.siteName}</div>
             <iron-icon class="iconify" icon="av:mic"></iron-icon>
             <docs-dot-menu></docs-dot-menu>
           </app-toolbar>
@@ -146,7 +141,7 @@ export class Main extends LitElement {
               ? html`
                   ${this.docs[this.category!].map(element => {
                     return html`
-                      <paper-tab page-name="${element.title}">${element.title}</paper-tab>
+                      <paper-tab page-name="${element.title.toLowerCase()}">${element.title}</paper-tab>
                     `;
                   })}
                 `

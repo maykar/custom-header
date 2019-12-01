@@ -18,12 +18,14 @@ export const Header = css`
   }
 
   app-toolbar .iconify {
-    margin-left: 16px;
     width: 24px;
     height: 24px;
     z-index: 2;
   }
 
+  .main-title {
+    margin-left: 48px;
+  }
   app-header,
   app-toolbar {
     background-color: var(--primary-color);
@@ -38,7 +40,6 @@ export const Header = css`
 
   paper-tabs {
     --paper-tabs-selection-bar-color: var(--primary-background-color);
-    margin-left: 12px;
     text-transform: uppercase;
   }
 `;

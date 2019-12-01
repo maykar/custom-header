@@ -18112,6 +18112,20 @@ found at http://polymer.github.io/PATENTS.txt
 const _scrollEffects = {};
 
 /**
+ * Registers a scroll effect to be used in elements that implement the
+ * `Polymer.AppScrollEffectsBehavior` behavior.
+ *
+ * @param {string} effectName The effect name.
+ * @param {Object} effectDef The effect definition.
+ */
+const registerEffect = function registerEffect(effectName, effectDef) {
+  if (_scrollEffects[effectName] != null) {
+    throw new Error('effect `' + effectName + '` is already registered.');
+  }
+  _scrollEffects[effectName] = effectDef;
+};
+
+/**
 @license
 Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
 This code may only be used under the BSD style license found at
@@ -19181,6 +19195,353 @@ Polymer({
    */
   getScrollState: function() {
     return {progress: this._progress, top: this._top};
+  }
+});
+
+/**
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at
+http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
+http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
+found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
+part of the polymer project is also subject to an additional IP rights grant
+found at http://polymer.github.io/PATENTS.txt
+*/
+
+/**
+ * While scrolling down, fade in the rear background layer and fade out the
+ * front background layer (opacity interpolated based on scroll position).
+ */
+registerEffect('blend-background', {
+  /** @this {BlendBackground} */
+  setUp: function setUp() {
+    var fx = {};
+    fx.backgroundFrontLayer = this._getDOMRef('backgroundFrontLayer');
+    fx.backgroundRearLayer = this._getDOMRef('backgroundRearLayer');
+    fx.backgroundFrontLayer.style.willChange = 'opacity';
+    fx.backgroundFrontLayer.style.transform = 'translateZ(0)';
+    fx.backgroundRearLayer.style.willChange = 'opacity';
+    fx.backgroundRearLayer.style.transform = 'translateZ(0)';
+    fx.backgroundRearLayer.style.opacity = 0;
+    this._fxBlendBackground = fx;
+  },
+  /** @this {BlendBackground} */
+  run: function run(p, y) {
+    var fx = this._fxBlendBackground;
+    fx.backgroundFrontLayer.style.opacity = 1 - p;
+    fx.backgroundRearLayer.style.opacity = p;
+  },
+  /** @this {BlendBackground} */
+  tearDown: function tearDown() {
+    delete this._fxBlendBackground;
+  }
+});
+
+/**
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at
+http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
+http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
+found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
+part of the polymer project is also subject to an additional IP rights grant
+found at http://polymer.github.io/PATENTS.txt
+*/
+
+/**
+ * Upon scrolling past a threshold, fade in the rear background layer and fade
+ * out the front background layer (opacity CSS transitioned over time).
+ */
+registerEffect('fade-background', {
+  /** @this {FadeBackground} */
+  setUp: function setUp(config) {
+    var fx = {};
+    var duration = config.duration || '0.5s';
+    fx.backgroundFrontLayer = this._getDOMRef('backgroundFrontLayer');
+    fx.backgroundRearLayer = this._getDOMRef('backgroundRearLayer');
+    fx.backgroundFrontLayer.style.willChange = 'opacity';
+    fx.backgroundFrontLayer.style.webkitTransform = 'translateZ(0)';
+    fx.backgroundFrontLayer.style.transitionProperty = 'opacity';
+    fx.backgroundFrontLayer.style.transitionDuration = duration;
+    fx.backgroundRearLayer.style.willChange = 'opacity';
+    fx.backgroundRearLayer.style.webkitTransform = 'translateZ(0)';
+    fx.backgroundRearLayer.style.transitionProperty = 'opacity';
+    fx.backgroundRearLayer.style.transitionDuration = duration;
+    this._fxFadeBackground = fx;
+  },
+  /** @this {FadeBackground} */
+  run: function run(p, y) {
+    var fx = this._fxFadeBackground;
+    if (p >= 1) {
+      fx.backgroundFrontLayer.style.opacity = 0;
+      fx.backgroundRearLayer.style.opacity = 1;
+    } else {
+      fx.backgroundFrontLayer.style.opacity = 1;
+      fx.backgroundRearLayer.style.opacity = 0;
+    }
+  },
+  /** @this {FadeBackground} */
+  tearDown: function tearDown() {
+    delete this._fxFadeBackground;
+  }
+});
+
+/**
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at
+http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
+http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
+found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
+part of the polymer project is also subject to an additional IP rights grant
+found at http://polymer.github.io/PATENTS.txt
+*/
+
+/**
+ * Toggles the shadow property in app-header when content is scrolled to create
+ * a sense of depth between the element and the content underneath.
+ */
+registerEffect('waterfall', {
+  /** @this {Waterfall} */
+  run: function run() {
+    this.shadow = this.isOnScreen() && this.isContentBelow();
+  }
+});
+
+/**
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at
+http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
+http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
+found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
+part of the polymer project is also subject to an additional IP rights grant
+found at http://polymer.github.io/PATENTS.txt
+*/
+
+function interpolate(progress, points, fn, ctx) {
+  fn.apply(ctx, points.map(function(point) {
+    return point[0] + (point[1] - point[0]) * progress;
+  }));
+}
+
+/**
+ * Transform the font size of a designated title element between two values
+ * based on the scroll position.
+ */
+registerEffect('resize-title', {
+  /** @this {ResizeTitle} */
+  setUp: function setUp() {
+    var title = this._getDOMRef('mainTitle');
+    var condensedTitle = this._getDOMRef('condensedTitle');
+
+    if (!condensedTitle) {
+      console.warn('Scroll effect `resize-title`: undefined `condensed-title`');
+      return false;
+    }
+    if (!title) {
+      console.warn('Scroll effect `resize-title`: undefined `main-title`');
+      return false;
+    }
+
+    condensedTitle.style.willChange = 'opacity';
+    condensedTitle.style.webkitTransform = 'translateZ(0)';
+    condensedTitle.style.transform = 'translateZ(0)';
+    condensedTitle.style.webkitTransformOrigin = 'left top';
+    condensedTitle.style.transformOrigin = 'left top';
+
+    title.style.willChange = 'opacity';
+    title.style.webkitTransformOrigin = 'left top';
+    title.style.transformOrigin = 'left top';
+    title.style.webkitTransform = 'translateZ(0)';
+    title.style.transform = 'translateZ(0)';
+
+    var titleClientRect = title.getBoundingClientRect();
+    var condensedTitleClientRect = condensedTitle.getBoundingClientRect();
+    var fx = {};
+
+    fx.scale =
+        parseInt(window.getComputedStyle(condensedTitle)['font-size'], 10) /
+        parseInt(window.getComputedStyle(title)['font-size'], 10);
+    fx.titleDX = titleClientRect.left - condensedTitleClientRect.left;
+    fx.titleDY = titleClientRect.top - condensedTitleClientRect.top;
+    fx.condensedTitle = condensedTitle;
+    fx.title = title;
+
+    this._fxResizeTitle = fx;
+  },
+  /** @this {ResizeTitle} */
+  run: function run(p, y) {
+    var fx = this._fxResizeTitle;
+    if (!this.condenses) {
+      y = 0;
+    }
+    if (p >= 1) {
+      fx.title.style.opacity = 0;
+      fx.condensedTitle.style.opacity = 1;
+    } else {
+      fx.title.style.opacity = 1;
+      fx.condensedTitle.style.opacity = 0;
+    }
+    interpolate(
+        Math.min(1, p),
+        [[1, fx.scale], [0, -fx.titleDX], [y, y - fx.titleDY]],
+        function(scale, translateX, translateY) {
+          this.transform(
+              'translate(' + translateX + 'px, ' + translateY + 'px) ' +
+                  'scale3d(' + scale + ', ' + scale + ', 1)',
+              fx.title);
+        },
+        this);
+  },
+  /** @this {ResizeTitle} */
+  tearDown: function tearDown() {
+    delete this._fxResizeTitle;
+  }
+});
+
+/**
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at
+http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
+http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
+found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
+part of the polymer project is also subject to an additional IP rights grant
+found at http://polymer.github.io/PATENTS.txt
+*/
+
+/**
+ * Vertically translate the background based on a factor of the scroll position.
+ */
+registerEffect('parallax-background', {
+  /**
+   * @param {{scalar: string}} config
+   * @this {ParallaxBackground}
+   */
+  setUp: function setUp(config) {
+    var fx = {};
+    var scalar = parseFloat(config.scalar);
+    fx.background = this._getDOMRef('background');
+    fx.backgroundFrontLayer = this._getDOMRef('backgroundFrontLayer');
+    fx.backgroundRearLayer = this._getDOMRef('backgroundRearLayer');
+    fx.deltaBg =
+        fx.backgroundFrontLayer.offsetHeight - fx.background.offsetHeight;
+    if (fx.deltaBg === 0) {
+      if (isNaN(scalar)) {
+        scalar = 0.8;
+      }
+      fx.deltaBg = (this._dHeight || 0) * scalar;
+    } else {
+      if (isNaN(scalar)) {
+        scalar = 1;
+      }
+      fx.deltaBg = fx.deltaBg * scalar;
+    }
+    this._fxParallaxBackground = fx;
+  },
+  /** @this {ParallaxBackground} */
+  run: function run(p, y) {
+    var fx = this._fxParallaxBackground;
+    this.transform(
+        'translate3d(0px, ' + (fx.deltaBg * Math.min(1, p)) + 'px, 0px)',
+        fx.backgroundFrontLayer);
+    if (fx.backgroundRearLayer) {
+      this.transform(
+          'translate3d(0px, ' + (fx.deltaBg * Math.min(1, p)) + 'px, 0px)',
+          fx.backgroundRearLayer);
+    }
+  },
+  /** @this {ParallaxBackground} */
+  tearDown: function tearDown() {
+    delete this._fxParallaxBackground;
+  }
+});
+
+/**
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at
+http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
+http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
+found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
+part of the polymer project is also subject to an additional IP rights grant
+found at http://polymer.github.io/PATENTS.txt
+*/
+
+/**
+ * Shorthand for the waterfall, resize-title, blend-background, and
+ * parallax-background effects.
+ */
+registerEffect('material', {
+  /** @this {Material} */
+  setUp: function setUp() {
+    this.effects =
+        'waterfall resize-title blend-background parallax-background';
+    return false;
+  }
+});
+
+/**
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at
+http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
+http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
+found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
+part of the polymer project is also subject to an additional IP rights grant
+found at http://polymer.github.io/PATENTS.txt
+*/
+
+/**
+ * Upon scrolling past a threshold, CSS transition the font size of a designated
+ * title element between two values.
+ */
+registerEffect('resize-snapped-title', {
+  /** @this {ResizeSnappedTitle} */
+  setUp: function setUp(config) {
+    var title = this._getDOMRef('mainTitle');
+    var condensedTitle = this._getDOMRef('condensedTitle');
+    var duration = config.duration || '0.2s';
+    var fx = {};
+
+    if (!condensedTitle) {
+      console.warn(
+          'Scroll effect `resize-snapped-title`: undefined `condensed-title`');
+      return false;
+    }
+    if (!title) {
+      console.warn(
+          'Scroll effect `resize-snapped-title`: undefined `main-title`');
+      return false;
+    }
+
+    title.style.transitionProperty = 'opacity';
+    title.style.transitionDuration = duration;
+    condensedTitle.style.transitionProperty = 'opacity';
+    condensedTitle.style.transitionDuration = duration;
+    fx.condensedTitle = condensedTitle;
+    fx.title = title;
+    this._fxResizeSnappedTitle = fx;
+  },
+  /** @this {ResizeSnappedTitle} */
+  run: function run(p, y) {
+    var fx = this._fxResizeSnappedTitle;
+    if (p > 0) {
+      fx.title.style.opacity = 0;
+      fx.condensedTitle.style.opacity = 1;
+    } else {
+      fx.title.style.opacity = 1;
+      fx.condensedTitle.style.opacity = 0;
+    }
+  },
+  /** @this {ResizeSnappedTitle} */
+  tearDown: function tearDown() {
+    var fx = this._fxResizeSnappedTitle;
+    fx.title.style.transition = '';
+    fx.condensedTitle.style.transition = '';
+    delete this._fxResizeSnappedTitle;
   }
 });
 
@@ -25080,12 +25441,14 @@ const Header = css `
   }
 
   app-toolbar .iconify {
-    margin-left: 16px;
     width: 24px;
     height: 24px;
     z-index: 2;
   }
 
+  .main-title {
+    margin-left: 48px;
+  }
   app-header,
   app-toolbar {
     background-color: var(--primary-color);
@@ -25100,7 +25463,6 @@ const Header = css `
 
   paper-tabs {
     --paper-tabs-selection-bar-color: var(--primary-background-color);
-    margin-left: 12px;
     text-transform: uppercase;
   }
 `;
@@ -45716,7 +46078,7 @@ let Main$1 = class Main extends LitElement {
     changeCategory(e) {
         if (e.composedPath()[0].localName !== 'paper-item') {
             this.category = e.composedPath()[3].innerText.toLowerCase();
-            this.page = undefined;
+            this.page = this.docs[this.category][0].title;
             window.history.pushState(null, '', `./#${this.category}`);
         }
     }
@@ -45735,11 +46097,11 @@ let Main$1 = class Main extends LitElement {
             window.history.pushState(null, '', `./#${this.category}/${this.page}`);
         }
         return html `
-    <app-header-layout has-scrolling-region>
+    <app-header-layout has-scrolling-region fullbleed>
         <div class="sidebar ${this.expanded ? 'expanded' : ''}">
           <div class="menu" @click=${this.toggleSidebar}>
             <paper-item>
-              <iron-icon class="iconify" icon="menu"></iron-icon>
+              <iron-icon class="iconify" icon="icons:menu"></iron-icon>
               <span>MENU</span>
             </paper-item>
           </div>
@@ -45762,23 +46124,7 @@ let Main$1 = class Main extends LitElement {
 
           </div>
 
-          <div class="sidebarLinkItems">
-          <div class="divider"></div>
-
-            ${docSettings_8.map(element => {
-            return html `
-                <a class="sidebarLinkItems" href="${element.link}" target="_blank">
-                  <paper-item title=${element.caption}>
-                    <iron-icon class="iconify" icon="open-in-new"></iron-icon>
-                    <span class="item-text">${element.caption}</span>
-                  </paper-item>
-                </a>
-              `;
-        })}
-          </div>
-
           <div class="sidebarBottomItems">
-          <div class="divider"></div>
           ${docSettings_9.map(element => {
             return html `
               <paper-item
@@ -45794,14 +46140,24 @@ let Main$1 = class Main extends LitElement {
               </paper-item>
             `;
         })}
-
+          <div class="divider"></div>
+            ${docSettings_8.map(element => {
+            return html `
+                <a class="sidebarLinkItems" href="${element.link}" target="_blank">
+                  <paper-item title=${element.caption}>
+                    <iron-icon class="iconify" icon="icons:open-in-new"></iron-icon>
+                    <span class="item-text">${element.caption}</span>
+                  </paper-item>
+                </a>
+              `;
+        })}
           </div>
         </div>
 
 
         <app-header class="${this.expanded ? 'sidebarExpanded' : ''}" fixed slot="header">
           <app-toolbar>
-            <div main-title>${docSettings_1}</div>
+            <div main-title class="main-title">${docSettings_1}</div>
             <iron-icon class="iconify" icon="av:mic"></iron-icon>
             <docs-dot-menu></docs-dot-menu>
           </app-toolbar>
@@ -45815,7 +46171,7 @@ let Main$1 = class Main extends LitElement {
             ? html `
                   ${this.docs[this.category].map(element => {
                 return html `
-                      <paper-tab page-name="${element.title}">${element.title}</paper-tab>
+                      <paper-tab page-name="${element.title.toLowerCase()}">${element.title}</paper-tab>
                     `;
             })}
                 `
