@@ -3,9 +3,9 @@ import '@polymer/app-layout/app-header-layout/app-header-layout';
 import '@polymer/app-layout/app-header/app-header';
 import '@polymer/app-layout/app-toolbar/app-toolbar';
 import '@polymer/paper-icon-button/paper-icon-button';
-import '@polymer/iron-icon/iron-icon.js';
-import '@polymer/iron-icons/iron-icons.js';
-import '@polymer/iron-icons/av-icons.js';
+import '@polymer/iron-icon/iron-icon';
+import '@polymer/iron-icons/iron-icons';
+import '@polymer/iron-icons/av-icons';
 import '@polymer/paper-tabs/paper-tab';
 import '@polymer/paper-tabs/paper-tabs';
 import '@polymer/paper-item/paper-icon-item';
@@ -13,6 +13,7 @@ import '@polymer/paper-item/paper-icon-item';
 import * as settings from './docSettings';
 import { MainStyle } from './styles/MainStyle';
 import './card';
+import './DotMenu';
 
 const fetchDocs = (): Promise<[]> =>
   fetch(`${window.location.origin}${window.location.pathname}jsonfeed.json`).then(r => r.json());
@@ -121,7 +122,7 @@ export class Main extends LitElement {
           <app-toolbar>
             <div main-title>${settings.siteName}</div>
             <iron-icon class="iconify" icon="av:mic"></iron-icon>
-            <iron-icon class="iconify" icon="more-vert"></iron-icon>
+            <docs-dot-menu></docs-dot-menu>
           </app-toolbar>
             <paper-tabs .selected=${this.page} @iron-activate=${
       this.changePage
