@@ -1,5 +1,6 @@
-rm -R docs
-mkdir docs
+rm -R docs || echo ""
+mkdir -p docs/img
+cp -R src/img/* docs/img/
 yarn gulp generate || exit 1
 yarn rollup -c --watch
 wait
