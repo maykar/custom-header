@@ -26,7 +26,7 @@ function docsToJson() {
       return {
         title: settings.title || file.replace('_', ' ').split('.')[0],
         id: file.split('.')[0],
-        url: `${settings.siteURL}/#${dir}/${file.split('.')[0]}`,
+        url: `./#${dir}/${file.split('.')[0]}`,
         content_html: text,
         index: settings.index || index,
       };

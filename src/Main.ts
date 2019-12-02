@@ -15,6 +15,7 @@ import * as settings from './docSettings';
 import { MainStyle } from './styles/MainStyle';
 import './card';
 import './DotMenu';
+import './Search';
 
 const fetchDocs = (): Promise<[]> =>
   fetch(`${window.location.origin}${window.location.pathname}jsonfeed.json`).then(r => r.json());
@@ -25,7 +26,6 @@ export class Main extends LitElement {
   @property() private page?: string;
   @property() private category?: string;
   @property() private expanded?: boolean = false;
-  @property() private search?: boolean = false;
 
   firstUpdated(changedProps) {
     const hash = window.location.hash;
@@ -64,10 +64,6 @@ export class Main extends LitElement {
 
   toggleSidebar(): void {
     this.expanded = !this.expanded;
-  }
-
-  toggleSearch(): void {
-    this.search = !this.search;
   }
 
   protected render(): TemplateResult | void {
@@ -140,12 +136,7 @@ export class Main extends LitElement {
         <app-header class="${this.expanded ? 'sidebarExpanded' : ''}" fixed slot="header">
           <app-toolbar>
             <div main-title class="main-title">${settings.siteName}</div>
-            <div class="search ${this.search ? '' : 'searchClosed'}">
-              <form class="search-form">
-                <input type="text" class="searchbox ${this.search ? '' : 'searchClosed'}" />
-              </form>
-            </div>
-            <iron-icon @click=${this.toggleSearch} class="iconify" icon="icons:search"></iron-icon>
+            <docs-search .docs=${this.docs}></docs-search>
             <docs-dot-menu .category=${this.category} .page=${this.page}></docs-dot-menu>
           </app-toolbar>
           <paper-tabs .selected=${this.page} @iron-activate=${this.changePage} attr-for-selected="page-name" scrollable>

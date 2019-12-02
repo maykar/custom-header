@@ -46,31 +46,8 @@ const Main = css`
     padding-bottom: 24px;
   }
 
-  .search {
-    width: 25%;
-    max-width: 250px;
-    background: white;
-    z-index: 2;
-    border-radius: 20px;
-    margin-right: 10px;
-    height: 25px;
-    opacity: 1;
-    overflow: hidden;
-    transition: all 0.4s ease-in-out;
-  }
-
-  .searchbox {
-    width: 90%;
-    margin: -2px 5px 5px 10px;
-    border-width: 0;
-    outline: none;
-    opacity: 1;
-    transition-delay: 0.4s;
-  }
-
-  .searchClosed {
-    width: 0px !important;
-    opacity: 0;
+  docs-search {
+    display: contents;
   }
 `;
 
