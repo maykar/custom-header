@@ -1,9 +1,5 @@
 import { LitElement, customElement, html, TemplateResult, CSSResultArray, css, property } from 'lit-element';
-import '@polymer/paper-dropdown-menu/paper-dropdown-menu';
-import '@polymer/paper-icon-button/paper-icon-button';
-import '@polymer/paper-listbox/paper-listbox';
-import '@polymer/iron-icons/iron-icons';
-import '@polymer/paper-item/paper-item';
+import '@polymer/paper-card/paper-card';
 
 import { MainStyle } from './styles/MainStyle';
 import { markdown } from './markdown/markdown';
@@ -12,7 +8,7 @@ import { markdown } from './markdown/markdown';
 export class Search extends LitElement {
   @property() public docs;
   @property() private search?: boolean = false;
-  @property() private searchterm?: string = undefined;
+  @property() private searchterm?: string = '';
 
   protected render(): TemplateResult | void {
     return html`
@@ -25,9 +21,9 @@ export class Search extends LitElement {
         : ''}
 
       <iron-icon @click=${this.toggleSearch} class="iconify" icon="icons:search"></iron-icon>
-      ${this.searchterm !== undefined
+      ${this.searchterm!.length > 0
         ? html`
-            <div class="result-container">
+            <paper-card class="result-container">
               <div class="result">
                 <p>${markdown.html('### Search results:')}</p>
                 ${Object.entries(this.docs).map(category => {
@@ -40,7 +36,7 @@ export class Search extends LitElement {
                   });
                 })}
               </div>
-            </div>
+            </paper-card>
           `
         : ''}
     `;
@@ -70,11 +66,11 @@ export class Search extends LitElement {
         }
         .result-container {
           position: absolute;
-          right: 16px;
+          right: 32px;
           top: 42px;
           max-width: 320px;
           width: 90%;
-          background: var(--paper-listbox-background-color);
+          background: var(--primary-background-color);
           color: var(--primary-text-color);
           z-index: 1337;
           border-radius: 20px;
