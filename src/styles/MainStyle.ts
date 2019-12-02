@@ -30,6 +30,7 @@ const Main = css`
   .view {
     transition: all 0.4s ease-in-out;
   }
+
   .view {
     display: flex;
     margin-left: 55px;
@@ -38,8 +39,8 @@ const Main = css`
     height: calc(100vh - 96px);
   }
 
-  docs-card {
-    width: calc(100% - 254);
+  .content {
+    width: 90%;
     padding-left: 5%;
     padding-right: 5%;
     padding-bottom: 24px;
@@ -47,6 +48,7 @@ const Main = css`
 
   .search {
     width: 25%;
+    max-width: 250px;
     background: white;
     z-index: 2;
     border-radius: 20px;
