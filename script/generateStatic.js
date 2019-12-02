@@ -17,16 +17,18 @@ function docsToJson() {
   const jsonfeed = {};
   dirs.map(dir => {
     files = fs.readdirSync(path.join(docsDir, dir));
+    let index = 1337;
     jsonfeed[dir] = [];
     jsonfeed[dir] = files.map(file => {
       const text = fs.readFileSync(path.join(docsDir, dir, file), 'utf-8');
       const settings = yaml.parse(text.split('---\n')[1]);
+      index++;
       return {
         title: settings.title || file.replace('_', ' ').split('.')[0],
         id: file.split('.')[0],
         url: `${settings.siteURL}/#${dir}/${file.split('.')[0]}`,
         content_html: text,
-        index: settings.index || 0,
+        index: settings.index || index,
       };
     });
   });

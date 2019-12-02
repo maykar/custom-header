@@ -1,5 +1,6 @@
 ---
 title: HACS
+index: 2
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut iaculis nisi. Etiam lobortis hendrerit mauris, ac bibendum orci facilisis vel. Nullam ut lacus nec velit tincidunt porttitor ut non est. Nullam sit amet turpis sem. Sed neque lorem, vehicula sed tristique eu, fermentum vitae est. Maecenas non nisi urna. Ut efficitur ante ut ullamcorper cursus. Vestibulum ultricies porta arcu, a posuere sapien luctus eget. Maecenas facilisis risus sit amet hendrerit tristique. Cras vestibulum gravida sem, vel ullamcorper leo imperdiet ut. In efficitur pellentesque blandit.

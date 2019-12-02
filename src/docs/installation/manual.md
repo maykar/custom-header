@@ -1,5 +1,6 @@
 ---
 title: Manual
+index: 1
 ---
 
 ```yaml

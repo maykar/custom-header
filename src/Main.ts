@@ -56,7 +56,7 @@ export class Main extends LitElement {
   changeCategory(e: any) {
     if (e.composedPath()[0].localName !== 'paper-item') {
       this.category = e.composedPath()[3].innerText.toLowerCase();
-      this.page = this.docs[this.category!][0].title;
+      this.page = this.docs[this.category!].sort((a, b) => (a.index > b.index ? 1 : -1))[0].id;
       window.history.pushState(null, '', `./#${this.category}`);
     }
   }
@@ -76,11 +76,11 @@ export class Main extends LitElement {
       window.history.pushState(null, '', `./#${this.category}`);
     }
     if (this.page === undefined) {
-      this.page = this.docs[this.category!][0].title;
+      this.page = this.docs[this.category!].sort((a, b) => (a.index > b.index ? 1 : -1))[0].id;
       window.history.pushState(null, '', `./#${this.category}/${this.page}`);
     }
     return html`
-    <app-header-layout has-scrolling-region fullbleed>
+      <app-header-layout has-scrolling-region fullbleed>
         <div class="sidebar ${this.expanded ? 'expanded' : ''}">
           <div class="menu" @click=${this.toggleSidebar}>
             <paper-item>
@@ -90,7 +90,7 @@ export class Main extends LitElement {
           </div>
           <div class="sidebarTopItems">
             ${settings.sideBar.map(element => {
-      return html`
+              return html`
                 <paper-item
                   @click=${this.changeCategory}
                   title=${element.category}
@@ -103,29 +103,28 @@ export class Main extends LitElement {
                   <span class="item-text">${element.category}</span>
                 </paper-item>
               `;
-    })}
-
+            })}
           </div>
 
           <div class="sidebarBottomItems">
-          ${settings.sideBarBottom.map(element => {
-      return html`
-              <paper-item
-                @click=${this.changeCategory}
-                title=${element.category}
-                class="${this.category === element.category ? 'selected' : ''}"
-              >
-                <iron-icon
-                  class="iconify ${this.category === element.category ? 'selected' : ''}"
-                  icon=${element.icon}
-                ></iron-icon>
-                <span class="item-text">${element.category}</span>
-              </paper-item>
-            `;
-    })}
-          <div class="divider"></div>
+            ${settings.sideBarBottom.map(element => {
+              return html`
+                <paper-item
+                  @click=${this.changeCategory}
+                  title=${element.category}
+                  class="${this.category === element.category ? 'selected' : ''}"
+                >
+                  <iron-icon
+                    class="iconify ${this.category === element.category ? 'selected' : ''}"
+                    icon=${element.icon}
+                  ></iron-icon>
+                  <span class="item-text">${element.category}</span>
+                </paper-item>
+              `;
+            })}
+            <div class="divider"></div>
             ${settings.sideBarLinks.map(element => {
-      return html`
+              return html`
                 <a class="sidebarLinkItems" href="${element.link}" target="_blank">
                   <paper-item title=${element.caption}>
                     <iron-icon class="iconify" icon="icons:open-in-new"></iron-icon>
@@ -133,56 +132,48 @@ export class Main extends LitElement {
                   </paper-item>
                 </a>
               `;
-    })}
+            })}
           </div>
         </div>
-
 
         <app-header class="${this.expanded ? 'sidebarExpanded' : ''}" fixed slot="header">
           <app-toolbar>
             <div main-title class="main-title">${settings.siteName}</div>
             <div class="search ${this.search ? '' : 'searchClosed'}">
               <form class="search-form">
-                <input type="text" class="searchbox ${this.search ? '' : 'searchClosed'}">
+                <input type="text" class="searchbox ${this.search ? '' : 'searchClosed'}" />
               </form>
             </div>
             <iron-icon @click=${this.toggleSearch} class="iconify" icon="icons:search"></iron-icon>
             <docs-dot-menu .category=${this.category} .page=${this.page}></docs-dot-menu>
           </app-toolbar>
-          <paper-tabs
-                    .selected=${this.page}
-                    @iron-activate=${this.changePage}
-                    attr-for-selected="page-name"
-                    scrollable
-                  >
-          ${
-      this.docs[this.category!].length > 1
-        ? html`
+          <paper-tabs .selected=${this.page} @iron-activate=${this.changePage} attr-for-selected="page-name" scrollable>
+            ${this.docs[this.category!].length > 1
+              ? html`
                   ${this.docs[this.category!]
-            .sort((a, b) => (a.index > b.index ? 1 : -1))
-            .map(element => {
-              return html`
-                        <paper-tab tabindex=${element.index} page-name="${element.id}">${element.title}</paper-tab>
+                    .sort((a, b) => (a.index > b.index ? 1 : -1))
+                    .map(element => {
+                      return html`
+                        <paper-tab page-name="${element.id}">${element.title}</paper-tab>
                       `;
-            })}
+                    })}
                 `
-        : ''
-      }
+              : ''}
           </paper-tabs>
         </app-header>
         <div class="view ${this.expanded ? 'sidebarExpanded' : ''}">
           <div class="content">
             ${this.docs[this.category!].map(element => {
-        if (element.id === this.page)
-          return html`
-                    <docs-card .content=${element}> </docs-card>
-                  `;
-        else return;
-      })}
+              if (element.id === this.page)
+                return html`
+                  <docs-card .content=${element}> </docs-card>
+                `;
+              else return;
+            })}
           </div>
         </div>
-  </app-header-layout>
-        `;
+      </app-header-layout>
+    `;
   }
 
   static get styles(): CSSResultArray {
