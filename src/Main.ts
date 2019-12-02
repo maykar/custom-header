@@ -131,12 +131,18 @@ export class Main extends LitElement {
               `;
             })}
           </div>
-          <div class="footer">
-            <i
-              >Made with
-              <a href="https://maykar.github.io/polymer-docs-template" target="_blank">polymer-docs-template</a></i
-            >
-          </div>
+          ${this.expanded
+            ? html`
+                <div class="footer">
+                  <i
+                    >Made with
+                    <a href="https://maykar.github.io/polymer-docs-template" target="_blank"
+                      >polymer-docs-template</a
+                    ></i
+                  >
+                </div>
+              `
+            : ''}
         </div>
 
         <app-header class="${this.expanded ? 'sidebarExpanded' : ''}" fixed slot="header">
