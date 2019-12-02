@@ -117,4 +117,18 @@ export const SideBar = css`
     margin: 0;
     margin-left: -4px;
   }
+  .footer {
+    position: absolute;
+    bottom: 12px;
+    width: 100%;
+    margin-left: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .footer a,
+  i {
+    color: var(--secondary-text-color);
+    text-decoration: none;
+  }
 `;

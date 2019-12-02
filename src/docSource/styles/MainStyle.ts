@@ -50,17 +50,6 @@ const Main = css`
   docs-search {
     display: contents;
   }
-  .footer {
-    position: absolute;
-    bottom: 12px;
-    width: 100%;
-    margin-left: 16px;
-  }
-  .footer a,
-  i {
-    color: var(--secondary-text-color);
-    text-decoration: none;
-  }
 `;
 
 export const MainStyle: CSSResultArray = [Main, Header, SideBar];
