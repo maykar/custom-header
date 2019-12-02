@@ -5,7 +5,7 @@ import '@polymer/paper-listbox/paper-listbox';
 import '@polymer/iron-icons/iron-icons';
 import '@polymer/paper-item/paper-item';
 
-import * as settings from './docSettings';
+import * as settings from '../docSettings';
 
 @customElement('docs-dot-menu')
 export class DotMenu extends LitElement {

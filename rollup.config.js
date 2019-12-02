@@ -20,7 +20,7 @@ const plugins = [nodeResolve({}), commonjs(), typescript(), !dev && terser(), de
 
 export default [
   {
-    input: ['src/Main.ts'],
+    input: ['src/docSource/Main.ts'],
     output: {
       dir: 'dist/',
       format: 'es',

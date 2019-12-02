@@ -11,7 +11,7 @@ import '@polymer/paper-tabs/paper-tab';
 import '@polymer/paper-tabs/paper-tabs';
 import '@polymer/paper-item/paper-item';
 
-import * as settings from './docSettings';
+import * as settings from '../docSettings';
 import { MainStyle } from './styles/MainStyle';
 import './card';
 import './DotMenu';
