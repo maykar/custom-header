@@ -29,6 +29,7 @@ export class Main extends LitElement {
 
   firstUpdated(changedProps) {
     const hash = window.location.hash;
+    if (window.screen.width > 800) this.expanded = true;
     if (hash.includes('#')) {
       this.page = hash.split('/')[1];
       this.category = hash.replace('#', '').split('/')[0];
