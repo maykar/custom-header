@@ -5,7 +5,8 @@ import { SideBar } from './SideBar';
 
 const Main = css`
   .sidebarBottomItems {
-    bottom: 0px;
+    bottom: 16px;
+    margin-bottom: 24px;
     width: 100%;
     position: absolute;
   }
@@ -48,6 +49,17 @@ const Main = css`
 
   docs-search {
     display: contents;
+  }
+  .footer {
+    position: absolute;
+    bottom: 12px;
+    width: 100%;
+    margin-left: 16px;
+  }
+  .footer a,
+  i {
+    color: var(--secondary-text-color);
+    text-decoration: none;
   }
 `;
 
