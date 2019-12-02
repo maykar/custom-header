@@ -1,7 +1,7 @@
 name: Build and Deploy to GitHub pages
 on:
-  push:	
-    branches:	
+  push:
+    branches:
       - master
 jobs:
   build-and-deploy:
@@ -9,7 +9,7 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v1
-    
+
     - name: Build
       run: "bash script/build"
 
@@ -19,5 +19,5 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BASE_BRANCH: master
         BRANCH: gh-pages
-        FOLDER: docs
+        FOLDER: dist
         CLEAN: True

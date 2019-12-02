@@ -2,5 +2,4 @@
 /.rpt2_cache/
 package-lock.json
 yarn*
-docs/
-!src/docs
+dist/
