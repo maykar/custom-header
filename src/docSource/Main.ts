@@ -135,15 +135,9 @@ export class Main extends LitElement {
               `;
             })}
           </div>
-          ${this.expanded
-            ? html`
-                <div class="footer">
-                  <a href="https://maykar.github.io/polymer-docs-template" target="_blank"
-                    >Made with polymer-docs-template</a
-                  >
-                </div>
-              `
-            : ''}
+          <div class="footer" style=${this.expanded ? '' : 'opacity: 0;'}>
+            <a href="https://maykar.github.io/polymer-docs-template" target="_blank">Made with polymer-docs-template</a>
+          </div>
         </div>
 
         <app-header class="${this.expanded ? 'sidebarExpanded' : ''}" fixed slot="header">
@@ -153,7 +147,7 @@ export class Main extends LitElement {
             <docs-dot-menu .category=${this.category} .page=${this.page}></docs-dot-menu>
           </app-toolbar>
           <paper-tabs
-            style=${this.tabs ? '' : 'height: 0;'}
+            style=${this.tabs ? '' : 'display: none;'}
             .selected=${this.page}
             @iron-activate=${this.changePage}
             attr-for-selected="page-name"

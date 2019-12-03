@@ -131,6 +131,8 @@ export const SideBar = css`
     bottom: 0;
     padding: 5px 0 5px 0;
     background: var(--primary-background-color);
+    transition: all 0.4s ease-in-out;
+    opacity: 1;
   }
   .footer a,
   i {
