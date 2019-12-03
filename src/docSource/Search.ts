@@ -46,7 +46,7 @@ export class Search extends LitElement {
       if (!this.search) return;
       for (const elem of (e as any).path) {
         if ((elem as HTMLElement).nodeName === 'DOCS-SEARCH') return;
-        else if ((elem as HTMLElement).nodeName === 'APP-TOOLBAR') continue;
+        else if ((elem as HTMLElement).nodeName === 'APP-TOOLBAR') break;
       }
       this.search = false;
     };
@@ -60,6 +60,13 @@ export class Search extends LitElement {
 
   updated() {
     if (!this.search) this.searchterm = '';
+    if (this.search) {
+      document
+        .querySelector('docs-main')!
+        .shadowRoot!.querySelector('docs-search')!
+        .shadowRoot!.querySelector('input')!
+        .focus();
+    }
   }
 
   toggleSearch(): void {
