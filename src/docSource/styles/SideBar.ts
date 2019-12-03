@@ -124,20 +124,19 @@ export const SideBar = css`
     width: 100%;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
     font-size: 14px;
     border-top: 1px solid var(--divider-color);
     width: 100%;
     bottom: 0;
     padding: 5px 0 5px 0;
     background: var(--primary-background-color);
-    transition: all 0.4s ease-in-out;
-    opacity: 1;
   }
   .footer a,
   i {
     color: var(--secondary-text-color);
     text-decoration: none;
     margin-left: 16px;
+    opacity: 1;
+    transition: all 0.4s ease-in-out;
   }
 `;

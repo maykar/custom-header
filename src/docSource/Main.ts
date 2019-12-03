@@ -135,8 +135,13 @@ export class Main extends LitElement {
               `;
             })}
           </div>
-          <div class="footer" style=${this.expanded ? '' : 'opacity: 0;'}>
-            <a href="https://maykar.github.io/polymer-docs-template" target="_blank">Made with polymer-docs-template</a>
+          <div class="footer">
+            <a
+              href="https://maykar.github.io/polymer-docs-template"
+              target="_blank"
+              style=${this.expanded ? '' : 'opacity: 0;'}
+              >Made with polymer-docs-template</a
+            >
           </div>
         </div>
 
