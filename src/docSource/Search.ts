@@ -24,7 +24,7 @@ export class Search extends LitElement {
         ? html`
             <paper-card class="result-container">
               <div class="result">
-                <p>${markdown.html('### Search results:')}</p>
+                <p>${markdown.html('## Search results:')}</p>
                 ${Object.entries(this.docs).map(category => {
                   return (category as any)[1].map(element => {
                     if (element.content_html.toLowerCase().includes(this.searchterm!.toLowerCase())) {

@@ -153,7 +153,7 @@ export class Main extends LitElement {
             <docs-dot-menu .category=${this.category} .page=${this.page}></docs-dot-menu>
           </app-toolbar>
           <paper-tabs
-            style=${this.tabs ? '' : 'display:none;'}
+            style=${this.tabs ? '' : 'height: 0;'}
             .selected=${this.page}
             @iron-activate=${this.changePage}
             attr-for-selected="page-name"

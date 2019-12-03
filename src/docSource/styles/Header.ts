@@ -24,7 +24,7 @@ export const Header = css`
   }
 
   .main-title {
-    margin-left: 48px;
+    margin-left: 51px;
     white-space: nowrap;
   }
 
