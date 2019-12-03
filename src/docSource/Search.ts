@@ -41,6 +41,26 @@ export class Search extends LitElement {
     `;
   }
 
+  firstUpdated() {
+    const searchCheck = e => {
+      for (const elem of (e as any).path) {
+        if ((elem as HTMLElement).nodeName === 'DOCS-SEARCH') {
+          console.log('inside');
+          return;
+        } else if ((elem as HTMLElement).nodeName === 'APP-TOOLBAR') {
+          continue;
+        }
+      }
+      this.search = false;
+    };
+    document.addEventListener(
+      'click',
+      function(e) {
+        searchCheck(e);
+      }.bind(this),
+    );
+  }
+
   updated() {
     if (!this.search) this.searchterm = '';
   }
