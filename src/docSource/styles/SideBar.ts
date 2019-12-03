@@ -8,19 +8,16 @@ export const SideBar = css`
     position: absolute;
   }
 
-  .sidebarLinkItems {
-  }
-
   .menu {
     height: 48px;
     display: flex;
     white-space: nowrap;
     font-weight: 400;
-    color: #212121;
-    background-color: #fafafa;
+    color: var(--primary-text-color);
+    background-color: var(--primary-background-color);
     font-size: 20px;
     align-items: center;
-    border-bottom: 1px solid var(--light-theme-divider-color);
+    border-bottom: 1px solid var(--divider-color);
   }
 
   .sidebarLinkItems {
@@ -118,6 +115,7 @@ export const SideBar = css`
     margin: 0;
     margin-left: -4px;
   }
+
   .footer {
     position: absolute;
     bottom: 12px;
@@ -131,6 +129,7 @@ export const SideBar = css`
     padding: 5px 0 5px 0;
     background: var(--primary-background-color);
   }
+
   .footer a,
   i {
     color: var(--secondary-text-color);

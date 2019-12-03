@@ -86,6 +86,7 @@ export class Search extends LitElement {
           text-decoration: none;
           color: var(--primary-color);
         }
+
         .result-container {
           position: absolute;
           top: 43px;
@@ -114,7 +115,6 @@ export class Search extends LitElement {
           height: 25px;
           opacity: 1;
           overflow: hidden;
-          transition: all 0.4s ease-in-out;
         }
 
         .collapse {
@@ -131,14 +131,14 @@ export class Search extends LitElement {
           border-width: 0;
           outline: none;
           opacity: 1;
-          transition-delay: 0.4s;
         }
 
         .iconify {
           min-width: 24px;
         }
 
-        paper-card {
+        paper-card,
+        .search {
           transition: all 0.4s ease-in-out;
         }
       `,

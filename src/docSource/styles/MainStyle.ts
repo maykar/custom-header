@@ -11,18 +11,6 @@ const Main = css`
     position: absolute;
   }
 
-  .menu {
-    height: 48px;
-    display: flex;
-    white-space: nowrap;
-    font-weight: 400;
-    color: var(--primary-text-color);
-    background-color: var(--primary-background-color);
-    font-size: 20px;
-    align-items: center;
-    border-bottom: 1px solid var(--divider-color);
-  }
-
   .expanded {
     width: 254px !important;
   }

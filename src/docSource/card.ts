@@ -25,6 +25,7 @@ export class Card extends LitElement {
         width: 100%;
         height: fit-content;
         border-radius: 3px;
+        background: #ffffff;
       }
     `;
   }
