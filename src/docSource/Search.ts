@@ -50,12 +50,7 @@ export class Search extends LitElement {
       }
       this.search = false;
     };
-    document.addEventListener(
-      'click',
-      function(e) {
-        searchCheck(e);
-      }.bind(this),
-    );
+    document.addEventListener('click', searchCheck.bind(this));
   }
 
   updated() {
