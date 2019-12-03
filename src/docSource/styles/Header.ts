@@ -14,7 +14,7 @@ export const Header = css`
   }
 
   app-toolbar {
-    height: 48px !important;
+    height: 48.5px !important;
   }
 
   app-toolbar .iconify {
@@ -25,7 +25,9 @@ export const Header = css`
 
   .main-title {
     margin-left: 48px;
+    white-space: nowrap;
   }
+
   app-header,
   app-toolbar {
     background-color: var(--primary-color);

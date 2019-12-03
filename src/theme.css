@@ -9,4 +9,5 @@
     --sidebar-text-color: #212121;
     --sidebar-selected-icon-color: var(--primary-color);
     --sidebar-selected-text-color: var(--primary-color);
+    font-family: var(--paper-font-common-base_-_font-family);
 }

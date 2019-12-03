@@ -11,35 +11,38 @@ export class Search extends LitElement {
   @property() private searchterm?: string = '';
 
   protected render(): TemplateResult | void {
-    if (!this.search) this.searchterm = '';
     return html`
       <div class="search ${this.search ? '' : 'collapse fade'}">
-      ${this.search
-        ? html`
+        ${this.search
+          ? html`
               <input @input=${this.Search} type="text" class="searchbox" autofocus />
-          `
-        : ''}
+            `
+          : ''}
       </div>
       <iron-icon @click=${this.toggleSearch} class="iconify" icon="icons:search"></iron-icon>
-      ${this.searchterm!.length > 0
+      ${this.searchterm!.length
         ? html`
-            <paper-card class="result-container ${this.search ? '' : 'fade'}">
+            <paper-card class="result-container">
               <div class="result">
                 <p>${markdown.html('### Search results:')}</p>
                 ${Object.entries(this.docs).map(category => {
-          return (category as any)[1].map(element => {
-            if (element.content_html.toLowerCase().includes(this.searchterm!.toLowerCase())) {
-              return html`
+                  return (category as any)[1].map(element => {
+                    if (element.content_html.toLowerCase().includes(this.searchterm!.toLowerCase())) {
+                      return html`
                         <a class="result-item" href="${element.url}" @click=${this.searchClick}>${element.title}</a></br>
                       `;
-            } else return;
-          });
-        })}
+                    } else return;
+                  });
+                })}
               </div>
             </paper-card>
           `
         : ''}
     `;
+  }
+
+  updated() {
+    if (!this.search) this.searchterm = '';
   }
 
   toggleSearch(): void {
@@ -66,14 +69,13 @@ export class Search extends LitElement {
         }
         .result-container {
           position: absolute;
-          right: 10px;
-          top: 50px;
-          width: 295px;
+          top: 43px;
+          right: 27px;
+          width: 278px;
           background: var(--primary-background-color);
           color: var(--primary-text-color);
           z-index: 1337;
           border-radius: 20px;
-          transition: all 0.4s ease-in-out;
           border: 1px solid var(--divider-color);
         }
 
@@ -81,6 +83,7 @@ export class Search extends LitElement {
           padding-right: 16px;
           padding-left: 16px;
           padding-bottom: 16px;
+          height: fit-content;
         }
 
         .search {
@@ -114,6 +117,10 @@ export class Search extends LitElement {
 
         .iconify {
           min-width: 24px;
+        }
+
+        paper-card {
+          transition: all 0.4s ease-in-out;
         }
       `,
     ];

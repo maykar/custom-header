@@ -40,6 +40,10 @@ const Main = css`
     height: calc(100vh - 96px);
   }
 
+  .no-tabs {
+    height: calc(100vh - 48px);
+  }
+
   .content {
     width: 90%;
     padding-left: 5%;

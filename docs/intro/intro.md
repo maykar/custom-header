@@ -12,5 +12,5 @@ To get started click on the "Installation" entry in the sidebar.
 
 This documentation template was created by:
 
-- [Ryan Meek (@maykar)](https://github.com/maykar)
 - [Joakim Sørensen (@ludeeus)](https://github.com/ludeeus)
+- [Ryan Meek (@maykar)](https://github.com/maykar)

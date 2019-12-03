@@ -69,6 +69,7 @@ export const SideBar = css`
 
   .item-text {
     text-transform: uppercase;
+    white-space: nowrap;
   }
 
   .divider {
@@ -121,14 +122,20 @@ export const SideBar = css`
     position: absolute;
     bottom: 12px;
     width: 100%;
-    margin-left: 16px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-size: 14px;
+    border-top: 1px solid var(--divider-color);
+    width: 100%;
+    bottom: 0;
+    padding: 5px 0 5px 0;
+    background: var(--primary-background-color);
   }
   .footer a,
   i {
     color: var(--secondary-text-color);
     text-decoration: none;
+    margin-left: 16px;
   }
 `;

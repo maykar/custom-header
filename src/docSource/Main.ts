@@ -26,6 +26,7 @@ export class Main extends LitElement {
   @property() private page?: string;
   @property() private category?: string;
   @property() private expanded?: boolean = false;
+  @property() private tabs?: boolean = false;
 
   firstUpdated(changedProps) {
     const hash = window.location.hash;
@@ -37,6 +38,7 @@ export class Main extends LitElement {
     super.firstUpdated(changedProps);
     fetchDocs().then(docs => {
       this.docs = docs;
+      this.tabs = this.docs[this.category!].length > 1;
     });
   }
 
@@ -59,6 +61,8 @@ export class Main extends LitElement {
       this.category = e.composedPath()[3].innerText.toLowerCase();
       this.page = this.docs[this.category!].sort((a, b) => (a.index > b.index ? 1 : -1))[0].id;
       window.history.pushState(null, '', `./#${this.category}`);
+      this.tabs = this.docs[this.category!].length > 1;
+      window.dispatchEvent(new Event('resize'));
     }
   }
 
@@ -134,11 +138,8 @@ export class Main extends LitElement {
           ${this.expanded
             ? html`
                 <div class="footer">
-                  <i
-                    >Made with
-                    <a href="https://maykar.github.io/polymer-docs-template" target="_blank"
-                      >polymer-docs-template</a
-                    ></i
+                  <a href="https://maykar.github.io/polymer-docs-template" target="_blank"
+                    >Made with polymer-docs-template</a
                   >
                 </div>
               `
@@ -151,7 +152,13 @@ export class Main extends LitElement {
             <docs-search .docs=${this.docs}></docs-search>
             <docs-dot-menu .category=${this.category} .page=${this.page}></docs-dot-menu>
           </app-toolbar>
-          <paper-tabs .selected=${this.page} @iron-activate=${this.changePage} attr-for-selected="page-name" scrollable>
+          <paper-tabs
+            style=${this.tabs ? '' : 'display:none;'}
+            .selected=${this.page}
+            @iron-activate=${this.changePage}
+            attr-for-selected="page-name"
+            scrollable
+          >
             ${this.docs[this.category!].length > 1
               ? html`
                   ${this.docs[this.category!]
@@ -165,7 +172,7 @@ export class Main extends LitElement {
               : ''}
           </paper-tabs>
         </app-header>
-        <div class="view ${this.expanded ? 'sidebarExpanded' : ''}">
+        <div class="view ${this.expanded ? 'sidebarExpanded' : ''} ${this.tabs ? '' : 'no-tabs'}">
           <div class="content">
             ${this.docs[this.category!].map(element => {
               if (element.id === this.page)
