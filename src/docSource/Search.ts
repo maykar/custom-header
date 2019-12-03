@@ -43,6 +43,7 @@ export class Search extends LitElement {
 
   firstUpdated() {
     const searchCheck = e => {
+      if (!this.search) return;
       for (const elem of (e as any).path) {
         if ((elem as HTMLElement).nodeName === 'DOCS-SEARCH') return;
         else if ((elem as HTMLElement).nodeName === 'APP-TOOLBAR') continue;
