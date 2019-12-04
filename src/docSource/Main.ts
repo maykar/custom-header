@@ -140,7 +140,7 @@ export class Main extends LitElement {
               href="https://maykar.github.io/polymer-docs-template"
               target="_blank"
               style=${this.expanded ? '' : 'opacity: 0;'}
-              >Made with polymer-docs-template</a
+              >Made with polymer-docs-template.</a
             >
           </div>
         </div>

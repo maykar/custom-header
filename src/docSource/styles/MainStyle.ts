@@ -9,6 +9,7 @@ const Main = css`
     margin-bottom: 24px;
     width: 100%;
     position: absolute;
+    background: var(--paper-listbox-background-color);
   }
 
   .expanded {
