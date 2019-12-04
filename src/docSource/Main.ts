@@ -42,18 +42,23 @@ export class Main extends LitElement {
   }
 
   updated(): void {
-    const tabs = Array.from(document.querySelector('docs-main')!.shadowRoot!.querySelectorAll('paper-tab'));
+    const main = document.querySelector('docs-main')!.shadowRoot;
+    const tabs = Array.from(main!.querySelectorAll('paper-tab'));
+    if (
+      main!.querySelector('.sidebarBottomItems') &&
+      !(main!.querySelector('.sidebarTopItems') as HTMLElement).style.height
+    ) {
+      const space = window
+        .getComputedStyle(main!.querySelector('.sidebarBottomItems') as HTMLElement)
+        .getPropertyValue('height');
+      (main!.querySelector('.sidebarTopItems') as HTMLElement).style.cssText = `height: calc(100% - ${space} - 77px);`;
+    }
     if (tabs.length < 2) return;
     for (const tab of tabs) if (tab.classList.contains('iron-selected')) return;
     tabs[1].click();
     tabs[0].click();
     window.dispatchEvent(new Event('resize'));
     this.tabs = this.docs[this.category!].length > 1;
-    const main = document.querySelector('docs-main')!.shadowRoot;
-    const space = window
-      .getComputedStyle(main!.querySelector('.sidebarBottomItems') as HTMLElement)
-      .getPropertyValue('height');
-    (main!.querySelector('.sidebarTopItems') as HTMLElement).style.cssText = `height: calc(100% - ${space} - 77px);`;
   }
 
   changePage(e: any) {
