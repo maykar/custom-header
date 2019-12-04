@@ -51,7 +51,7 @@ export class Main extends LitElement {
       const space = window
         .getComputedStyle(main!.querySelector('.sidebarBottomItems') as HTMLElement)
         .getPropertyValue('height');
-      (main!.querySelector('.sidebarTopItems') as HTMLElement).style.cssText = `height: calc(100% - ${space} - 77px);`;
+      (main!.querySelector('.sidebarTopItems') as HTMLElement).style.cssText = `height: calc(100% - ${space} - 82px);`;
     }
     if (tabs.length < 2) return;
     for (const tab of tabs) if (tab.classList.contains('iron-selected')) return;

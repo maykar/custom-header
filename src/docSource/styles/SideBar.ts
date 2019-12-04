@@ -6,6 +6,19 @@ export const SideBar = css`
     overflow-x: hidden;
   }
 
+  .sidebarTopItems::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+
+  .sidebarTopItems::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .sidebarTopItems::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: var(--divider-color);
+  }
+
   .sidebarBottomItems {
     bottom: 0px;
     padding-bottom: 8px;
