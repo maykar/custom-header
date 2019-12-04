@@ -1,6 +1,11 @@
 import { css } from 'lit-element';
 
 export const SideBar = css`
+  .sidebarTopItems {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
   .sidebarBottomItems {
     bottom: 0px;
     padding-bottom: 8px;

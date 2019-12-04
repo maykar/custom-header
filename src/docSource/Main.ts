@@ -49,6 +49,11 @@ export class Main extends LitElement {
     tabs[0].click();
     window.dispatchEvent(new Event('resize'));
     this.tabs = this.docs[this.category!].length > 1;
+    const main = document.querySelector('docs-main')!.shadowRoot;
+    const space = window
+      .getComputedStyle(main!.querySelector('.sidebarBottomItems') as HTMLElement)
+      .getPropertyValue('height');
+    (main!.querySelector('.sidebarTopItems') as HTMLElement).style.cssText = `height: calc(100% - ${space} - 77px);`;
   }
 
   changePage(e: any) {
