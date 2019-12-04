@@ -38,7 +38,6 @@ export class Main extends LitElement {
     super.firstUpdated(changedProps);
     fetchDocs().then(docs => {
       this.docs = docs;
-      this.tabs = this.docs[this.category!].length > 1;
     });
   }
 
@@ -49,6 +48,7 @@ export class Main extends LitElement {
     tabs[1].click();
     tabs[0].click();
     window.dispatchEvent(new Event('resize'));
+    this.tabs = this.docs[this.category!].length > 1;
   }
 
   changePage(e: any) {
