@@ -45,9 +45,10 @@ export class Search extends LitElement {
     const searchCheck = e => {
       if (!this.search) return;
       const path = e.path || (e.composedPath && e.composedPath());
+      const stops = ['APP-HEADER-LAYOUT', 'APP-TOOLBAR', 'DOCS-CARD', 'APP-HEADER'];
       for (const elem of path) {
-        if ((elem as HTMLElement).nodeName === 'DOCS-SEARCH') return;
-        else if ((elem as HTMLElement).nodeName === 'APP-TOOLBAR') break;
+        if (elem.nodeName === 'DOCS-SEARCH') return;
+        else if (stops.indexOf(elem.nodeName) > -1) break;
       }
       this.search = false;
     };
