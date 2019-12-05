@@ -21,8 +21,12 @@ interface dict {
 }
 
 marked.setOptions({
-  highlight: function(code: string, lang: string) {
-    return hljs.highlight(lang, code).value;
+  highlight: function(code, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      return hljs.highlight(lang, code, true).value;
+    } else {
+      return hljs.highlightAuto(code).value;
+    }
   },
   breaks: true,
   gfm: true,
@@ -42,7 +46,7 @@ export class markdown {
   static html(input: string, options: dict = {}): TemplateResult | void {
     if (input.includes('---\n')) {
       var split: string[] = input.split('---\n');
-      input = split[split.length - 1];
+      input = split.slice(2).join('---\n');
     }
 
     input = input.replace(/\:.+?\:/, ''); // Remove emoji codes

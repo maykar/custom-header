@@ -1,6 +1,6 @@
 ---
 title: YAML Configuration
-index: 1
+index: 2
 ---
 
 # Step 2
