@@ -44,14 +44,11 @@ export class Main extends LitElement {
   updated(): void {
     const main = document.querySelector('docs-main')!.shadowRoot;
     const tabs = Array.from(main!.querySelectorAll('paper-tab'));
-    if (
-      main!.querySelector('.sidebarBottomItems') &&
-      !(main!.querySelector('.sidebarTopItems') as HTMLElement).style.height
-    ) {
-      const space = window
-        .getComputedStyle(main!.querySelector('.sidebarBottomItems') as HTMLElement)
-        .getPropertyValue('height');
-      (main!.querySelector('.sidebarTopItems') as HTMLElement).style.cssText = `height: calc(100% - ${space} - 82px);`;
+    const topItems = main!.querySelector('.sidebarTopItems') as HTMLElement;
+    const bottomItems = main!.querySelector('.sidebarBottomItems');
+    if (topItems && !topItems.style.height) {
+      const space = bottomItems ? window.getComputedStyle(bottomItems).getPropertyValue('height') : '0px';
+      topItems.style.cssText = `height: calc((100% - 82px) - ${space});`;
     }
     if (tabs.length < 2) return;
     for (const tab of tabs) if (tab.classList.contains('iron-selected')) return;
