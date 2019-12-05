@@ -7,11 +7,11 @@ index: 1
 
 Each folder inside your /docs directory will be a category in the sidebar and each MD file inside those folders will be a selection in the header.
 
-```
+```txt
 docs/
 └── configuration/         <-- Sidebar category
       ├── dir.md           <-- Header sub category
-      └── docSettings.md
+      └── siteSettings.md
 
 ```
 

@@ -5,7 +5,7 @@ const gulp = require('gulp');
 
 const yaml = require('yaml');
 
-const settings = require('../src/docSettings');
+const settings = require('../src/siteSettings');
 
 const buildDir = path.resolve(__dirname, '../dist');
 const docsDir = path.resolve(__dirname, '../docs');

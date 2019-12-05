@@ -5,7 +5,7 @@ import '@polymer/paper-listbox/paper-listbox';
 import '@polymer/iron-icons/iron-icons';
 import '@polymer/paper-item/paper-item';
 
-import * as settings from '../docSettings';
+import * as settings from '../siteSettings';
 
 @customElement('docs-dot-menu')
 export class DotMenu extends LitElement {
@@ -32,7 +32,7 @@ export class DotMenu extends LitElement {
   }
 
   editOnGithub() {
-    window.open(`${settings.github}/edit/master/docs/${this.category}/${this.page}.md`, '_blank');
+    window.open(`${settings.github}/edit/${settings.branch || "master"}/docs/${this.category}/${this.page}.md`, '_blank');
   }
 
   static get styles(): CSSResultArray {
