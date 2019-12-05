@@ -20,7 +20,7 @@ export const SideBar = css`
   }
 
   .sidebarBottomItems {
-    bottom: 0px;
+    bottom: 0;
     padding-bottom: 8px;
     width: 100%;
     position: absolute;
@@ -71,7 +71,7 @@ export const SideBar = css`
   .selected {
     color: var(--sidebar-selected-text-color, var(--primary-color));
     background: transparent !important;
-    font-weight: bold;
+    font-weight: 700;
   }
 
   iron-icon.selected {
@@ -88,7 +88,7 @@ export const SideBar = css`
   }
 
   .divider {
-    padding: 8px 0px;
+    padding: 8px 0;
   }
 
   .divider::before {
@@ -144,7 +144,7 @@ export const SideBar = css`
     border-top: 1px solid var(--divider-color);
     width: 100%;
     bottom: 0;
-    padding: 5px 0 5px 0;
+    padding: 5px 0;
     background: var(--primary-background-color);
   }
 

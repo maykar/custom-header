@@ -22,7 +22,7 @@ const fetchDocs = (): Promise<[]> =>
 
 @customElement('docs-main')
 export class Main extends LitElement {
-  @property() public docs?;
+  @property() public docs?: any;
   @property() private page?: string;
   @property() private category?: string;
   @property() private expanded?: boolean = false;
@@ -45,8 +45,8 @@ export class Main extends LitElement {
     const main = document.querySelector('docs-main')!.shadowRoot;
     const tabs = Array.from(main!.querySelectorAll('paper-tab'));
     const topItems = main!.querySelector('.sidebarTopItems') as HTMLElement;
-    const bottomItems = main!.querySelector('.sidebarBottomItems');
     if (topItems && !topItems.style.height) {
+      const bottomItems = main!.querySelector('.sidebarBottomItems');
       const space = bottomItems ? window.getComputedStyle(bottomItems).getPropertyValue('height') : '0px';
       topItems.style.cssText = `height: calc((100% - 82px) - ${space});`;
     }
@@ -54,8 +54,7 @@ export class Main extends LitElement {
     for (const tab of tabs) if (tab.classList.contains('iron-selected')) return;
     tabs[1].click();
     tabs[0].click();
-    window.dispatchEvent(new Event('resize'));
-    this.tabs = this.docs[this.category!].length > 1;
+    this.tabCountAndResize();
   }
 
   changePage(e: any) {
@@ -68,9 +67,13 @@ export class Main extends LitElement {
       this.category = e.composedPath()[3].innerText.toLowerCase();
       this.page = this.docs[this.category!].sort((a, b) => (a.index > b.index ? 1 : -1))[0].id;
       window.history.pushState(null, '', `./#${this.category}`);
-      this.tabs = this.docs[this.category!].length > 1;
-      window.dispatchEvent(new Event('resize'));
+      this.tabCountAndResize();
     }
+  }
+
+  tabCountAndResize(): void {
+    this.tabs = this.docs[this.category!].length > 1;
+    window.dispatchEvent(new Event('resize'));
   }
 
   toggleSidebar(): void {

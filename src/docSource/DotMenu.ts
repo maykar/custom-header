@@ -41,6 +41,7 @@ export class DotMenu extends LitElement {
         paper-menu-button {
           float: right;
         }
+
         paper-item {
           cursor: pointer;
         }

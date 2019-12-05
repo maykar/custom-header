@@ -8,8 +8,6 @@ export const Header = css`
     display: block;
     transition-timing-function: linear;
     z-index: 1;
-    width: -webkit-fill-available;
-    width: -moz-available;
     width: stretch;
   }
 
@@ -36,7 +34,7 @@ export const Header = css`
   }
 
   app-header {
-    transition: margin-top 0s !important;
+    transition: margin-top 0 !important;
     transition: margin-left 0.4s ease-in-out !important;
   }
 

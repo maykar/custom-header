@@ -6,7 +6,7 @@ import { markdown } from './markdown/markdown';
 
 @customElement('docs-search')
 export class Search extends LitElement {
-  @property() public docs;
+  @property() public docs?: any;
   @property() private search?: boolean = false;
   @property() private searchterm?: string = '';
 
@@ -56,13 +56,14 @@ export class Search extends LitElement {
   }
 
   updated() {
-    if (!this.search) this.searchterm = '';
     if (this.search) {
       document
         .querySelector('docs-main')!
         .shadowRoot!.querySelector('docs-search')!
         .shadowRoot!.querySelector('input')!
         .focus();
+    } else {
+      this.searchterm = '';
     }
   }
 
