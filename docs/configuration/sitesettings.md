@@ -19,17 +19,17 @@ Icons are from [iron-icons](https://www.webcomponents.org/element/@polymer/iron-
 |branch|Branch your docs exist in.
 |sideBar|List of the categories for the top of the sidebar.
 |sideBarBottom|List of the categories for the bottom of the sidebar.
-|sideBarLinks|List of external links you want to list at footer of the sidebar.
+|sideBarLinks|List of external links you want to list at the footer of the sidebar.
 
 **This sites siteSettings.js file:**
 
-```
+```txt
   siteName: 'Documentation Demo Site',
   siteDescription: '',
   welcomeCategory: 'intro',
-  branch: "master",
   siteURL: 'https://maykar.github.io/polymer-docs-template',
   github: 'https://github.com/maykar/polymer-docs-template',
+  branch: 'master',
   sideBar: [
     {
       category: 'intro',
