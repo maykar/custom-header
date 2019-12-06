@@ -21,7 +21,7 @@ Icons are from [iron-icons](https://www.webcomponents.org/element/@polymer/iron-
 |sideBarBottom|List of the categories for the bottom of the sidebar.
 |sideBarLinks|List of external links you want to list at footer of the sidebar.
 
-**example:**
+**This sites siteSettings.js file:**
 
 ```js
 module.exports = {
