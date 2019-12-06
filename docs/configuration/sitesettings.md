@@ -3,37 +3,34 @@ title: siteSettings.js
 index: 3
 ---
 
-## siteName
+## Site Settings
 
-_This is the name of your site_
+Use the siteSettings.js file to setup your docs site's general settings. See example below for the siteSettings.js for this site.
 
-## siteDescription
+Icons are from [iron-icons](https://www.webcomponents.org/element/@polymer/iron-icons/demo/demo/index.html).
 
-_This is the description of your site_
-
-## welcomeCategory
-
-_This is the default category of your site_
-
-## siteURL
-
-_This is the full URL that you access your site_
-
-## github
-
-_This is the URL to your GitHub repo_
-
-## branch
-
-_This is the name of the branch your docs are in_
-
-## sideBar
-
-_This a list of categories you want to list at the main part (top) of the sidebar_
+|SETTING|DESCRIPTION
+|-|-|
+|siteName|Name of the site.
+|siteDescription|Description of the site.
+|welcomeCategory|Default category.
+|siteURL|Full URL to access the site.
+|github|URL to GitHub repo
+|branch|Branch your docs exist in.
+|sideBar|List of the categories for the top of the sidebar.
+|sideBarBottom|List of the categories for the bottom of the sidebar.
+|sideBarLinks|List of external links you want to list at footer of the sidebar.
 
 **example:**
 
-```txt
+```js
+module.exports = {
+  siteName: 'Documentation Demo Site',
+  siteDescription: '',
+  welcomeCategory: 'intro',
+  siteURL: 'https://maykar.github.io/polymer-docs-template',
+  github: 'https://github.com/maykar/polymer-docs-template',
+  branch: "master",
   sideBar: [
     {
       category: 'intro',
@@ -48,32 +45,12 @@ _This a list of categories you want to list at the main part (top) of the sideba
       icon: 'icons:create',
     },
   ],
-
-```
-
-## sideBarBottom
-
-_This a list of categories you want to list at the bottom part of the sidebar_
-
-**example:**
-
-```txt
   sideBarBottom: [
     {
       category: 'faq',
       icon: 'icons:help',
     },
   ],
-
-```
-
-## sideBarLinks
-
-_This a list of external links you want to list at the bottom part of the sidebar_
-
-**example:**
-
-```txt
   sideBarLinks: [
     {
       link: 'https://github.com/maykar/polymer-docs-template',
@@ -84,5 +61,6 @@ _This a list of external links you want to list at the bottom part of the sideba
       caption: 'Issues',
     },
   ],
+};
 
 ```
