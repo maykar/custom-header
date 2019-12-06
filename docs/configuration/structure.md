@@ -1,9 +1,7 @@
 ---
-title: Dir & Files
+title: structure
 index: 1
 ---
-
-# Directory and File Structure
 
 Each folder inside your /docs directory will be a category in the sidebar and each MD file inside those folders will be a selection in the header.
 
