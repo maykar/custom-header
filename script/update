@@ -1,0 +1,14 @@
+echo "Starting update sequence"
+echo
+echo "This will overwrite ./src/docSource and ./script"
+
+echo -n "Do you want to update the docbase? (y/n)? "
+read answer
+
+if [ "$answer" != "${answer#[Yy]}" ] ;then
+    rm -R /tmp/polymer-docs-template > /dev/null 2>&1
+    git clone https://github.com/maykar/polymer-docs-template.git /tmp/polymer-docs-template || exit 1
+    cp -r /tmp/polymer-docs-template/src/docSource ./src/
+    cp -r /tmp/polymer-docs-template/script ./
+    rm -R /tmp/polymer-docs-template
+fi
