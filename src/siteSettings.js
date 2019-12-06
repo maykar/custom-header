@@ -9,7 +9,7 @@ module.exports = {
   welcomeCategory: 'intro',
   siteURL: 'https://maykar.github.io/polymer-docs-template',
   github: 'https://github.com/maykar/polymer-docs-template',
-  branch: "master",
+  branch: 'master',
   sideBar: [
     {
       category: 'intro',

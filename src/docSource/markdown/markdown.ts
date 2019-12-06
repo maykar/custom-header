@@ -49,7 +49,7 @@ export class markdown {
       input = split.slice(2).join('---\n');
     }
 
-    input = input.replace(/\:.+?\:/, ''); // Remove emoji codes
+    input = input.replace(/\:\S+:/, ''); // Remove emoji codes
 
     return html`
       <style>

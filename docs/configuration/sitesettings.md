@@ -1,5 +1,5 @@
 ---
-title: siteSettings.js
+title: Site Settings
 index: 3
 ---
 
@@ -23,14 +23,13 @@ Icons are from [iron-icons](https://www.webcomponents.org/element/@polymer/iron-
 
 **This sites siteSettings.js file:**
 
-```js
-module.exports = {
+```
   siteName: 'Documentation Demo Site',
   siteDescription: '',
   welcomeCategory: 'intro',
+  branch: "master",
   siteURL: 'https://maykar.github.io/polymer-docs-template',
   github: 'https://github.com/maykar/polymer-docs-template',
-  branch: "master",
   sideBar: [
     {
       category: 'intro',
@@ -61,6 +60,5 @@ module.exports = {
       caption: 'Issues',
     },
   ],
-};
 
 ```

@@ -1,5 +1,5 @@
 ---
-title: structure
+title: dir structure
 index: 1
 ---
 
