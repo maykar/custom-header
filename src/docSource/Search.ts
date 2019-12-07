@@ -19,7 +19,7 @@ export class Search extends LitElement {
             `
           : ''}
       </div>
-      <iron-icon @click=${this.toggleSearch} class="iconify" icon="icons:search"></iron-icon>
+      <iron-icon @click=${this.toggleSearch} class="icon" icon="icons:search"></iron-icon>
       ${this.searchterm!.length
         ? html`
             <paper-card class="result-container">
@@ -95,8 +95,8 @@ export class Search extends LitElement {
           top: 43px;
           right: 27px;
           width: 278px;
-          background: var(--primary-background-color);
-          color: var(--primary-text-color);
+          background: var(--primary-background);
+          color: var(--text-color);
           z-index: 1337;
           border-radius: 20px;
           border: 1px solid var(--divider-color);
@@ -111,7 +111,7 @@ export class Search extends LitElement {
 
         .search {
           width: 200px;
-          background: var(--paper-listbox-background-color);
+          background: var(--search-results-background);
           z-index: 2;
           border-radius: 20px;
           margin-right: 8px;
@@ -136,7 +136,7 @@ export class Search extends LitElement {
           opacity: 1;
         }
 
-        .iconify {
+        .icon {
           min-width: 24px;
         }
 

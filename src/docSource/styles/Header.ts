@@ -15,7 +15,7 @@ export const Header = css`
     height: 48.5px !important;
   }
 
-  app-toolbar .iconify {
+  app-toolbar .icon {
     width: 24px;
     height: 24px;
     z-index: 2;
@@ -30,7 +30,7 @@ export const Header = css`
   app-toolbar {
     background-color: var(--primary-color);
     font-weight: 400;
-    color: var(--text-primary-color);
+    color: var(--header-text-color);
   }
 
   app-header {
@@ -39,7 +39,11 @@ export const Header = css`
   }
 
   paper-tabs {
-    --paper-tabs-selection-bar-color: var(--primary-background-color);
+    --paper-tabs-selection-bar-color: var(--primary-background);
     text-transform: uppercase;
+  }
+
+  paper-tab {
+    font-family: var(--primary-font-family);
   }
 `;

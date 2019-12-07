@@ -95,7 +95,7 @@ export class Main extends LitElement {
         <div class="sidebar ${this.expanded ? 'expanded' : ''}">
           <div class="menu" @click=${this.toggleSidebar}>
             <paper-item>
-              <iron-icon class="iconify" icon="icons:menu"></iron-icon>
+              <iron-icon class="icon" icon="icons:menu"></iron-icon>
               <span>${settings.menuTitle || 'MENU'}</span>
             </paper-item>
           </div>
@@ -108,7 +108,7 @@ export class Main extends LitElement {
                   class="${this.category === element.category ? 'selected' : ''}"
                 >
                   <iron-icon
-                    class="iconify ${this.category === element.category ? 'selected' : ''}"
+                    class="icon ${this.category === element.category ? 'selected' : ''}"
                     icon=${element.icon}
                   ></iron-icon>
                   <span class="item-text">${element.category}</span>
@@ -126,7 +126,7 @@ export class Main extends LitElement {
                   class="${this.category === element.category ? 'selected' : ''}"
                 >
                   <iron-icon
-                    class="iconify ${this.category === element.category ? 'selected' : ''}"
+                    class="icon ${this.category === element.category ? 'selected' : ''}"
                     icon=${element.icon}
                   ></iron-icon>
                   <span class="item-text">${element.category}</span>
@@ -138,7 +138,7 @@ export class Main extends LitElement {
               return html`
                 <a class="sidebarLinkItems" href="${element.link}" target="_blank">
                   <paper-item title=${element.caption}>
-                    <iron-icon class="iconify" icon=${element.icon || 'icons:open-in-new'}></iron-icon>
+                    <iron-icon class="icon" icon=${element.icon || 'icons:open-in-new'}></iron-icon>
                     <span class="item-text">${element.caption}</span>
                   </paper-item>
                 </a>

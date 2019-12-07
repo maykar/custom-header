@@ -32,7 +32,10 @@ export class DotMenu extends LitElement {
   }
 
   editOnGithub() {
-    window.open(`${settings.github}/edit/${settings.branch || "master"}/docs/${this.category}/${this.page}.md`, '_blank');
+    window.open(
+      `${settings.github}/edit/${settings.branch || 'master'}/docs/${this.category}/${this.page}.md`,
+      '_blank',
+    );
   }
 
   static get styles(): CSSResultArray {

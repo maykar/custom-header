@@ -31,8 +31,8 @@ export const SideBar = css`
     display: flex;
     white-space: nowrap;
     font-weight: 400;
-    color: var(--primary-text-color);
-    background-color: var(--primary-background-color);
+    color: var(--text-color);
+    background-color: var(--sidebar-secondary-background);
     font-size: 20px;
     align-items: center;
     border-bottom: 1px solid var(--divider-color);
@@ -42,11 +42,12 @@ export const SideBar = css`
     text-decoration: none !important;
   }
 
-  paper-listbox .iconify {
+  paper-listbox .icon {
     margin-left: -5px !important;
   }
 
   paper-item {
+    font-family: var(--primary-font-family);
     box-sizing: border-box;
     padding-left: 12px;
     cursor: pointer;
@@ -54,18 +55,18 @@ export const SideBar = css`
     width: 48px;
     margin: 4px 8px;
     border-radius: 4px;
-    color: var(--primary-text-color);
+    color: var(--text-color);
     white-space: nowrap;
   }
 
-  .sidebar .iconify {
+  .sidebar .icon {
     margin-right: 23px;
     margin-left: -5px;
     margin-top: -2px;
     width: 24px;
     height: 24px;
     min-width: 24px;
-    color: var(--sidebar-icon-color, var(--primary-text-color));
+    color: var(--sidebar-icon-color, var(--text-color));
   }
 
   .selected {
@@ -104,7 +105,7 @@ export const SideBar = css`
     top: 0;
     left: 0;
     margin: 0;
-    background-color: var(--paper-listbox-background-color);
+    background-color: var(--sidebar-background);
     border-right: 1px solid var(--divider-color);
     width: 55px;
     height: 100%;
@@ -118,7 +119,7 @@ export const SideBar = css`
   }
 
   .sidebarText {
-    color: var(--sidebar-text-color, var(--primary-text-color));
+    color: var(--sidebar-text-color, var(--text-color));
     padding-left: 3px;
     padding-bottom: -5px;
     text-align: left;
@@ -145,7 +146,7 @@ export const SideBar = css`
     width: 100%;
     bottom: 0;
     padding: 5px 0;
-    background: var(--primary-background-color);
+    background: var(--sidebar-secondary-background);
   }
 
   .footer a,

@@ -9,7 +9,7 @@ const Main = css`
     margin-bottom: 24px;
     width: 100%;
     position: absolute;
-    background: var(--paper-listbox-background-color);
+    background: var(--sidebar-background);
   }
 
   .expanded {
@@ -25,7 +25,7 @@ const Main = css`
     display: flex;
     margin-left: 55px;
     padding-top: 24px;
-    background: var(--lovelace-background, var(--primary-background-color));
+    background: var(--content-container-background);
     height: calc(100vh - 96px);
   }
 

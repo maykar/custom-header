@@ -1,13 +1,16 @@
 :root {
+    --primary-font-family: 'Roboto', 'Noto', sans-serif;
     --primary-color: #03a9f4;
-    --text-primary-color: #ffffff;
-    --primary-text-color: #212121;
-    --primary-background-color: #fafafa;
-    /* --lovelace-background: #fafafa; */
-    --paper-listbox-background-color: #ffffff;
-    --sidebar-icon-color: #212121;
-    --sidebar-text-color: #212121;
+    --header-text-color: #fff;
+    --text-color: #212121;
+    --primary-background: #fafafa;
+    --card-background: #fff;
+    --content-container-background: var(--primary-background);
+    --search-results-background: var(--card-background);
+    --sidebar-background: var(--card-background);
+    --sidebar-secondary-background: var(--primary-background);
+    --sidebar-icon-color: var(--text-color);
+    --sidebar-text-color: var(--text-color);
     --sidebar-selected-icon-color: var(--primary-color);
     --sidebar-selected-text-color: var(--primary-color);
-    font-family: var(--paper-font-common-base_-_font-family);
 }
