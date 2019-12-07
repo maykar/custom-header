@@ -13,4 +13,5 @@
     --sidebar-text-color: var(--text-color);
     --sidebar-selected-icon-color: var(--primary-color);
     --sidebar-selected-text-color: var(--primary-color);
+    --paper-tab-ink: var(--header-text-color); /* Tab highlight on click */
 }

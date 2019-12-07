@@ -95,7 +95,7 @@ export class Search extends LitElement {
           top: 43px;
           right: 27px;
           width: 278px;
-          background: var(--primary-background);
+          background: var(--search-results-background);
           color: var(--text-color);
           z-index: 1337;
           border-radius: 20px;
