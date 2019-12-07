@@ -7,6 +7,7 @@ module.exports = {
   siteName: 'Documentation Demo Site',
   siteDescription: '',
   welcomeCategory: 'intro',
+  menuTitle: '',
   siteURL: 'https://maykar.github.io/polymer-docs-template',
   github: 'https://github.com/maykar/polymer-docs-template',
   branch: 'master',
