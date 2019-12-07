@@ -5,12 +5,14 @@
   "author": "maykar",
   "license": "MIT",
   "dependencies": {
+    "@rollup/plugin-json": "^4.0.0",
     "fs": "0.0.1-security",
     "highlight.js": "^9.16.2",
     "js-yaml": "^3.13.1",
     "lit-element": "^2.2.1",
     "lit-html": "^1.1.2",
     "marked": "^0.7.0",
+    "node-emoji": "^1.10.0",
     "xss": "^1.0.6",
     "yaml": "^1.7.2"
   },

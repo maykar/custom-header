@@ -3,6 +3,7 @@ import commonjs from 'rollup-plugin-commonjs';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
 import serve from 'rollup-plugin-serve';
+import json from '@rollup/plugin-json';
 
 const dev = process.env.ROLLUP_WATCH;
 
@@ -16,7 +17,7 @@ const serveopts = {
   },
 };
 
-const plugins = [nodeResolve({}), commonjs(), typescript(), !dev && terser(), dev && serve(serveopts)];
+const plugins = [nodeResolve({}), commonjs(), typescript(), !dev && terser(), dev && serve(serveopts), json()];
 
 export default [
   {

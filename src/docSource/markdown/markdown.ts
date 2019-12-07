@@ -1,5 +1,7 @@
 import { html, TemplateResult } from 'lit-element';
 import marked_ from 'marked';
+import emoji from 'node-emoji';
+
 import { filterXSS } from 'xss';
 //@ts-ignore
 import YAML from 'yaml';
@@ -49,7 +51,8 @@ export class markdown {
       input = split.slice(2).join('---\n');
     }
 
-    input = input.replace(/\:\S+:/, ''); // Remove emoji codes
+    const replacer = match => emoji.emojify(match);
+    input = input.replace(/\:\w+:/g, replacer);
 
     return html`
       <style>
