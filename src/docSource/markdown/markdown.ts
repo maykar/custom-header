@@ -51,8 +51,8 @@ export class markdown {
       input = split.slice(2).join('---\n');
     }
 
-    const replacer = match => emoji.emojify(match);
-    input = input.replace(/\:\w+:/g, replacer);
+    const replaceWithEmoji = match => emoji.emojify(match);
+    input = input.replace(/\:\w+:/g, replaceWithEmoji);
 
     return html`
       <style>
