@@ -1,5 +1,5 @@
 ---
-title: dir structure
+title: Dir Structure
 index: 1
 ---
 
@@ -11,7 +11,7 @@ Each folder inside the docs directory is a category in the sidebar and each MD f
 ```txt
 docs/
 │
-├── configuration/         <-- Sidebar category
+├── configuration/          <-- Sidebar category
 │    ├── dir.md             <-- Header sub category
 │    └── siteSettings.md
 │

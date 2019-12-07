@@ -51,13 +51,12 @@ export class markdown {
       input = split.slice(2).join('---\n');
     }
 
-    const replaceWithEmoji = match => emoji.emojify(match);
-    input = input.replace(/\:\w+:/g, replaceWithEmoji);
+    const getEmoji = match => emoji.emojify(match);
+    input = input.replace(/\:\w+:/g, getEmoji);
 
     return html`
-      <style>
-        ${GFM} ${HLJS}
-      </style>
+      <!-- prettier-ignore -->
+      <style>${GFM} ${HLJS}</style>
       <div class="markdown-body">
         ${unsafeHTML(filterXSS(marked(input, options)))}
       </div>

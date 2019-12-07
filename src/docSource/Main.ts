@@ -138,7 +138,7 @@ export class Main extends LitElement {
               return html`
                 <a class="sidebarLinkItems" href="${element.link}" target="_blank">
                   <paper-item title=${element.caption}>
-                    <iron-icon class="iconify" icon="icons:open-in-new"></iron-icon>
+                    <iron-icon class="iconify" icon=${element.icon || 'icons:open-in-new'}></iron-icon>
                     <span class="item-text">${element.caption}</span>
                   </paper-item>
                 </a>
