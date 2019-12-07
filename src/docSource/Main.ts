@@ -96,7 +96,7 @@ export class Main extends LitElement {
           <div class="menu" @click=${this.toggleSidebar}>
             <paper-item>
               <iron-icon class="iconify" icon="icons:menu"></iron-icon>
-              <span>MENU</span>
+              <span>${settings.menuTitle || 'MENU'}</span>
             </paper-item>
           </div>
           <div class="sidebarTopItems">
