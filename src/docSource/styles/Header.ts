@@ -39,7 +39,6 @@ export const Header = css`
   }
 
   paper-tabs {
-    --paper-tabs-selection-bar-color: var(--secondary-background);
     text-transform: uppercase;
   }
 

@@ -691,7 +691,7 @@ export const GFM3 = css`
     height: 1px;
     padding: 0;
     margin: 24px 0;
-    background-color: var(--markdown--divider-color);
+    background: var(--markdown--divider-color);
     border: 0;
   }
 
@@ -811,12 +811,12 @@ export const GFM3 = css`
   }
 
   .markdown-body table tr {
-    background-color: var(--markdown-primary-background);
+    background: var(--markdown-primary-background);
     border-top: 1px solid var(--markdown--divider-color);
   }
 
   .markdown-body table tr:nth-child(2n) {
-    background-color: var(--markdown-secondary-background);
+    background: var(--markdown-secondary-background);
   }
 
   .markdown-body img {
@@ -870,7 +870,7 @@ export const GFM3 = css`
     overflow: auto;
     font-size: 85%;
     line-height: 1.45;
-    background-color: var(--markdown-secondary-background);
+    background: var(--markdown-secondary-background);
     border-radius: 3px;
     border: 1px solid var(--markdown--divider-color);
   }
