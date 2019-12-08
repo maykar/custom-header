@@ -3,15 +3,24 @@
     --primary-color: #03a9f4;
     --header-text-color: #fff;
     --text-color: #212121;
-    --primary-background: #fafafa;
-    --card-background: #fff;
-    --content-container-background: var(--primary-background);
-    --search-results-background: var(--card-background);
-    --sidebar-background: var(--card-background);
-    --sidebar-secondary-background: var(--primary-background);
+    --primary-background: #fff;
+    --secondary-background: #fafafa;
+    --divider-color: #dbdbdb;
+    --card-background: var(--primary-background);
+    --content-container-background: var(--secondary-background);
+    --search-results-background: var(--primary-background);
+    --sidebar-background: var(--primary-background);
+    --sidebar-secondary-background: var(--secondary-background);
     --sidebar-icon-color: var(--text-color);
     --sidebar-text-color: var(--text-color);
     --sidebar-selected-icon-color: var(--primary-color);
     --sidebar-selected-text-color: var(--primary-color);
     --paper-tab-ink: var(--header-text-color); /* Tab highlight on click */
+
+    --markdown-font-family: var(--primary-font-family);
+    --markdown-primary-color: var(--primary-color);
+    --markdown-text-color: var(--text-color);
+    --markdown--divider-color: var(--divider-color);
+    --markdown-primary-background: var(--primary-background);
+    --markdown-secondary-background: var(--secondary-background);
 }

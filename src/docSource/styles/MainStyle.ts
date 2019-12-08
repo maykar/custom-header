@@ -27,6 +27,7 @@ const Main = css`
     padding-top: 24px;
     background: var(--content-container-background);
     height: calc(100vh - 96px);
+    min-height: fit-content;
   }
 
   .no-tabs {

@@ -161,9 +161,8 @@ const GFM2 = css`
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     line-height: 1.5;
-    color: #24292e;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji,
-      Segoe UI Emoji;
+    color: var(--markdown-text-color);
+    font-family: var(--markdown-font-family);
     font-size: 16px;
     line-height: 1.5;
     word-wrap: break-word;
@@ -362,7 +361,7 @@ const GFM2 = css`
   }
 
   .markdown-body a {
-    color: #0366d6;
+    color: var(--markdown-primary-color);
     text-decoration: none;
   }
 
@@ -380,7 +379,7 @@ const GFM2 = css`
     overflow: hidden;
     background: transparent;
     border: 0;
-    border-bottom: 1px solid #dfe2e5;
+    border-bottom: 1px solid var(--markdown--divider-color);
   }
 
   .markdown-body hr:after,
@@ -689,10 +688,10 @@ export const GFM3 = css`
   }
 
   .markdown-body hr {
-    height: 0.25em;
+    height: 1px;
     padding: 0;
     margin: 24px 0;
-    background-color: #e1e4e8;
+    background-color: var(--markdown--divider-color);
     border: 0;
   }
 
@@ -729,7 +728,7 @@ export const GFM3 = css`
   .markdown-body h1,
   .markdown-body h2 {
     padding-bottom: 0.3em;
-    border-bottom: 1px solid #eaecef;
+    border-bottom: 1px solid var(--markdown--divider-color);
   }
 
   .markdown-body h2 {
@@ -808,16 +807,16 @@ export const GFM3 = css`
   .markdown-body table td,
   .markdown-body table th {
     padding: 6px 13px;
-    border: 1px solid #dfe2e5;
+    border: 1px solid var(--markdown--divider-color);
   }
 
   .markdown-body table tr {
-    background-color: #fff;
-    border-top: 1px solid #c6cbd1;
+    background-color: var(--markdown-primary-background);
+    border-top: 1px solid var(--markdown--divider-color);
   }
 
   .markdown-body table tr:nth-child(2n) {
-    background-color: #f6f8fa;
+    background-color: var(--markdown-secondary-background);
   }
 
   .markdown-body img {
@@ -871,8 +870,9 @@ export const GFM3 = css`
     overflow: auto;
     font-size: 85%;
     line-height: 1.45;
-    background-color: #f6f8fa;
+    background-color: var(--markdown-secondary-background);
     border-radius: 3px;
+    border: 1px solid var(--markdown--divider-color);
   }
 
   .markdown-body pre code {
