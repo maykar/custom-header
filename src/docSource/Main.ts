@@ -109,8 +109,8 @@ export class Main extends LitElement {
                 >
                   <iron-icon
                     class="icon ${this.category === element.category ? 'selected' : ''}"
-                    icon=${!element.svc ? element.icon || 'icons:open-in-new' : ''}
-                    src=${element.svc || ''}
+                    icon=${!element.svg ? element.icon || 'icons:open-in-new' : ''}
+                    src=${element.svg || ''}
                   ></iron-icon>
                   <span class="item-text">${element.category}</span>
                 </paper-item>
@@ -128,8 +128,8 @@ export class Main extends LitElement {
                 >
                   <iron-icon
                     class="icon ${this.category === element.category ? 'selected' : ''}"
-                    icon=${!element.svc ? element.icon || 'icons:open-in-new' : ''}
-                    src=${element.svc || ''}
+                    icon=${!element.svg ? element.icon || 'icons:open-in-new' : ''}
+                    src=${element.svg || ''}
                   ></iron-icon>
                   <span class="item-text">${element.category}</span>
                 </paper-item>
@@ -142,8 +142,8 @@ export class Main extends LitElement {
                   <paper-item title=${element.caption}>
                     <iron-icon
                       class="icon"
-                      icon=${!element.svc ? element.icon || 'icons:open-in-new' : ''}
-                      src=${element.svc || ''}
+                      icon=${!element.svg ? element.icon || 'icons:open-in-new' : ''}
+                      src=${element.svg || ''}
                     ></iron-icon>
                     <span class="item-text">${element.caption}</span>
                   </paper-item>
