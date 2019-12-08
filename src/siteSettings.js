@@ -35,7 +35,6 @@ module.exports = {
     {
       link: 'https://github.com/maykar/polymer-docs-template',
       caption: 'GitHub',
-      // svg: 'https://unpkg.com/simple-icons@latest/icons/github.svg',
     },
     {
       link: 'https://github.com/maykar/polymer-docs-template/issues',
