@@ -10,7 +10,7 @@ Use the siteSettings.js file to setup your docs site's general settings. See exa
 You can use icons from [Iron Icons](https://www.webcomponents.org/element/@polymer/iron-icons/demo/demo/index.html) or [Material Design Icons](https://materialdesignicons.com/).
 
 |SETTING|DESCRIPTION
-|-|-|
+|:-|:-|
 |siteName|Name of the site.
 |siteDescription|Description of the site.
 |welcomeCategory|Default category.
