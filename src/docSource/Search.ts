@@ -144,6 +144,11 @@ export class Search extends LitElement {
         .search {
           transition: all 0.4s ease-in-out;
         }
+
+        .search input {
+          background: var(--search-results-background);
+          color: var(--text-color);
+        }
       `,
     ];
   }
