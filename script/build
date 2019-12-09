@@ -7,6 +7,6 @@ cp src/img/favicon.ico dist/
 yarn install
 echo "Fixing dependency links"
 bash script/fixNestings.sh
-yarn gulp generate || exit 1
 yarn gulp gen-icons-mdi || exit 1
+yarn gulp generate || exit 1
 yarn rollup -c

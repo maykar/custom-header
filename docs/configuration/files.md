@@ -11,7 +11,7 @@ At the top of each MD file you may use a table to set the title and index (start
 
 ```md
 ---
-title: files
+title: MD Files
 index: 2
 ---
 

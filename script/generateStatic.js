@@ -9,7 +9,6 @@ const settings = require('../src/siteSettings');
 
 const buildDir = path.resolve(__dirname, '../dist');
 const docsDir = path.resolve(__dirname, '../docs');
-const srcDir = path.resolve(__dirname, '../src');
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function docsToJson() {

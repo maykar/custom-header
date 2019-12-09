@@ -12,16 +12,14 @@ Each folder inside the docs directory is a category in the sidebar and each MD f
 docs/
 │
 ├── configuration/          <-- Sidebar category
-│    ├── dir.md             <-- Header sub category
-│    └── siteSettings.md
+│    ├── files.md           <-- Header sub category
+│    ├── sitesettings.md
+│    └── structure.md
 │
 ├── faq/
 │    └── info.md
 │
 ├── installation/
-│    ├── hacs.md
-│    ├── manual.md
-│    └── test.md
 │
 └── intro/
      └── intro.md

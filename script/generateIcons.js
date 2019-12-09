@@ -47,6 +47,6 @@ gulp.task('gen-icons-mdi', done => {
   if (!fs.existsSync(OUTPUT_DIR)) {
     fs.mkdirSync(OUTPUT_DIR);
   }
-  fs.writeFileSync(MDI_OUTPUT_PATH, 'export const iconSetContent = `' + generateIconset('mdi', iconNames) + '`');
+  fs.writeFileSync(MDI_OUTPUT_PATH, `export const mdiIconSet = '${generateIconset('mdi', iconNames)}';`);
   done();
 });

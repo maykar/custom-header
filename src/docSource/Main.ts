@@ -13,7 +13,7 @@ import '@polymer/paper-item/paper-item';
 
 import * as settings from '../siteSettings';
 import { MainStyle } from './styles/MainStyle';
-import { iconSetContent } from './mdi.js';
+import { mdiIconSet } from './mdi.js';
 import './card';
 import './DotMenu';
 import './Search';
@@ -40,10 +40,9 @@ export class Main extends LitElement {
     fetchDocs().then(docs => {
       this.docs = docs;
     });
-    const documentContainer = document.createElement('template');
-    documentContainer.setAttribute('style', 'display: none;');
-    documentContainer.innerHTML = iconSetContent;
-    document.head.appendChild(documentContainer.content);
+    const mdiTemplate = document.createElement('template');
+    mdiTemplate.innerHTML = mdiIconSet;
+    document.head.appendChild(mdiTemplate.content);
   }
 
   updated(): void {
