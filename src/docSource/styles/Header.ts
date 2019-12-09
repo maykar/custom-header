@@ -9,6 +9,7 @@ export const Header = css`
     transition-timing-function: linear;
     z-index: 1;
     width: stretch;
+    font-family: var(--primary-font-family);
   }
 
   app-toolbar {

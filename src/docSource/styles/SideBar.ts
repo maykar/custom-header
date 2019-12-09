@@ -147,6 +147,7 @@ export const SideBar = css`
     bottom: 0;
     padding: 5px 0;
     background: var(--sidebar-secondary-background);
+    font-family: var(--primary-font-family);
   }
 
   .footer a,
