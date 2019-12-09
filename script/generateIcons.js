@@ -6,8 +6,8 @@ const gulp = require('gulp');
 const ICON_PACKAGE_PATH = path.resolve(__dirname, '../node_modules/@mdi/svg/');
 const META_PATH = path.resolve(ICON_PACKAGE_PATH, 'meta.json');
 const ICON_PATH = path.resolve(ICON_PACKAGE_PATH, 'svg');
-const OUTPUT_DIR = path.resolve(__dirname, '../dist');
-const MDI_OUTPUT_PATH = path.resolve(OUTPUT_DIR, 'mdi.html');
+const OUTPUT_DIR = path.resolve(__dirname, '../src/docSource');
+const MDI_OUTPUT_PATH = path.resolve(OUTPUT_DIR, 'mdi.js');
 
 // Given an icon name, load the SVG file
 function loadIcon(name) {
@@ -47,6 +47,6 @@ gulp.task('gen-icons-mdi', done => {
   if (!fs.existsSync(OUTPUT_DIR)) {
     fs.mkdirSync(OUTPUT_DIR);
   }
-  fs.writeFileSync(MDI_OUTPUT_PATH, generateIconset('mdi', iconNames));
+  fs.writeFileSync(MDI_OUTPUT_PATH, 'export const iconSetContent = `' + generateIconset('mdi', iconNames) + '`');
   done();
 });

@@ -4,7 +4,7 @@ cp -R src/img/* dist/img/
 cp src/theme.css dist/
 cp src/script.js dist/
 cp src/img/favicon.ico dist/
-yarn gulp generate || exit 1
 yarn gulp gen-icons-mdi || exit 1
+yarn gulp generate || exit 1
 yarn rollup -c --watch
 wait
