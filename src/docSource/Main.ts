@@ -109,7 +109,7 @@ export class Main extends LitElement {
                 >
                   <iron-icon
                     class="icon ${this.category === element.category ? 'selected' : ''}"
-                    icon=${element.icon}
+                    icon=${element.icon || 'mdi:page-next'}
                   ></iron-icon>
                   <span class="item-text">${element.category}</span>
                 </paper-item>
@@ -127,7 +127,7 @@ export class Main extends LitElement {
                 >
                   <iron-icon
                     class="icon ${this.category === element.category ? 'selected' : ''}"
-                    icon=${element.icon}
+                    icon=${element.icon || 'mdi:page-next'}
                   ></iron-icon>
                   <span class="item-text">${element.category}</span>
                 </paper-item>

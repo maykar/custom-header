@@ -35,10 +35,12 @@ module.exports = {
     {
       link: 'https://github.com/maykar/polymer-docs-template',
       caption: 'GitHub',
+      icon: 'mdi:github-circle',
     },
     {
       link: 'https://github.com/maykar/polymer-docs-template/issues',
       caption: 'Issues',
+      icon: 'mdi:alert-circle',
     },
   ],
 };
