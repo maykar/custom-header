@@ -5,6 +5,7 @@
   "author": "maykar",
   "license": "MIT",
   "dependencies": {
+    "@mdi/svg": "^4.7.95",
     "@rollup/plugin-json": "^4.0.0",
     "fs": "0.0.1-security",
     "highlight.js": "^9.16.2",

@@ -14,7 +14,7 @@ module.exports = {
   sideBar: [
     {
       category: 'intro',
-      icon: 'icons:home',
+      icon: 'mdi:home',
     },
     {
       category: 'installation',
