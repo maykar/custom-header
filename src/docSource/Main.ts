@@ -95,7 +95,7 @@ export class Main extends LitElement {
         <div class="sidebar ${this.expanded ? 'expanded' : ''}">
           <div class="menu" @click=${this.toggleSidebar}>
             <paper-item>
-              <iron-icon class="icon" icon="icons:menu"></iron-icon>
+              <iron-icon class="icon" icon=${this.expanded ? 'mdi:menu-open' : 'mdi:menu'}></iron-icon>
               <span>${settings.menuTitle || 'MENU'}</span>
             </paper-item>
           </div>
