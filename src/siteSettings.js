@@ -4,41 +4,29 @@
 // Icons from https://www.webcomponents.org/element/@polymer/iron-icons/demo/demo/index.html
 
 module.exports = {
-  siteName: 'Documentation Demo Site',
+  siteName: 'Custom-Header',
   siteDescription: '',
   welcomeCategory: 'intro',
   menuTitle: '',
-  siteURL: 'https://maykar.github.io/polymer-docs-template',
-  github: 'https://github.com/maykar/polymer-docs-template',
+  siteURL: 'https://maykar.github.io/custom-header',
+  github: 'https://github.com/maykar/custom-header',
   branch: 'master',
   sideBar: [
     {
       category: 'intro',
       icon: 'mdi:home',
     },
-    {
-      category: 'installation',
-      icon: 'icons:arrow-downward',
-    },
-    {
-      category: 'configuration',
-      icon: 'icons:create',
-    },
   ],
   sideBarBottom: [
-    {
-      category: 'faq',
-      icon: 'icons:help',
-    },
   ],
   sideBarLinks: [
     {
-      link: 'https://github.com/maykar/polymer-docs-template',
+      link: 'https://github.com/maykar/custom-header',
       caption: 'GitHub',
       icon: 'mdi:github-circle',
     },
     {
-      link: 'https://github.com/maykar/polymer-docs-template/issues',
+      link: 'https://github.com/maykar/custom-header/issues',
       caption: 'Issues',
       icon: 'mdi:alert-circle',
     },
