@@ -10,7 +10,7 @@ module.exports = {
   menuTitle: '',
   siteURL: 'https://maykar.github.io/custom-header',
   github: 'https://github.com/maykar/custom-header',
-  branch: 'gh-pages',
+  branch: 'docs',
   sideBar: [
     {
       category: 'intro',
