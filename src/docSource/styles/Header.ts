@@ -34,6 +34,10 @@ export const Header = css`
     color: var(--header-text-color);
   }
 
+  app-toolbar {
+    transform: initial !important;
+  }
+
   app-header {
     transition: margin-top 0 !important;
     transition: margin-left 0.4s ease-in-out !important;

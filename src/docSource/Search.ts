@@ -118,6 +118,7 @@ export class Search extends LitElement {
           height: 25px;
           opacity: 1;
           overflow: hidden;
+          padding-bottom: 6px;
         }
 
         .collapse {

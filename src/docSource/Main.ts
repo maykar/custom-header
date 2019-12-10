@@ -160,7 +160,7 @@ export class Main extends LitElement {
         </div>
 
         <app-header class="${this.expanded ? 'sidebarExpanded' : ''}" fixed slot="header">
-          <app-toolbar>
+          <app-toolbar scroll="false">
             <div main-title class="main-title">${settings.siteName}</div>
             <docs-search .docs=${this.docs}></docs-search>
             <docs-dot-menu .category=${this.category} .page=${this.page}></docs-dot-menu>
