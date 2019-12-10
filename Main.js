@@ -2833,7 +2833,7 @@ ZV({_template:YV`
       }
     </style>
     <slot></slot>
-`,is:"paper-item",behaviors:[[Ea,pa,{hostAttributes:{role:"option",tabindex:"0"}}]]});var Wa="Custom Header",Qa="intro",Ja="https://github.com/maykar/custom-header",Ga="gh-pages",Xa=[{category:"intro",icon:"mdi:home"}],tC=[],eC=[{link:"https://github.com/maykar/custom-header",caption:"GitHub",icon:"mdi:github-circle"},{link:"https://github.com/maykar/custom-header/issues",caption:"Issues",icon:"mdi:alert-circle"}];const iC=rt`
+`,is:"paper-item",behaviors:[[Ea,pa,{hostAttributes:{role:"option",tabindex:"0"}}]]});var Wa="Custom Header",Qa="intro",Ja="https://github.com/maykar/custom-header",Ga="gh-pages",Xa=[{category:"intro",icon:"mdi:home"}],tC=[{category:"development",icon:"mdi:code-braces-box"}],eC=[{link:"https://github.com/maykar/custom-header",caption:"GitHub",icon:"mdi:github-circle"},{link:"https://github.com/maykar/custom-header/issues",caption:"Issues",icon:"mdi:alert-circle"}];const iC=rt`
   app-header {
     position: fixed !important;
     top: 0;
@@ -2846,7 +2846,7 @@ ZV({_template:YV`
   }
 
   app-toolbar {
-    height: 48.5px !important;
+    height: 49px !important;
   }
 
   app-toolbar .icon {
@@ -5056,7 +5056,7 @@ ZV({is:"paper-input",_template:YV`
 
       <!-- Need to bind maxlength so that the paper-input-char-counter works correctly -->
       <iron-input bind-value="{{value}}" slot="input" class="input-element" id$="[[_inputId]]" maxlength$="[[maxlength]]" allowed-pattern="[[allowedPattern]]" invalid="{{invalid}}" validator="[[validator]]">
-        <input aria-labelledby$="[[_ariaLabelledBy]]" aria-describedby$="[[_ariaDescribedBy]]" disabled$="[[disabled]]" title$="[[title]]" type$="[[type]]" pattern$="[[pattern]]" required$="[[required]]" autocomplete$="[[autocomplete]]" autofocus$="[[autofocus]]" inputmode$="[[inputmode]]" minlength$="[[minlength]]" maxlength$="[[maxlength]]" min$="[[min]]" max$="[[max]]" step$="[[step]]" name$="[[name]]" placeholder$="[[placeholder]]" readonly$="[[readonly]]" list$="[[list]]" size$="[[size]]" autocapitalize$="[[autocapitalize]]" autocorrect$="[[autocorrect]]" on-change="_onChange" tabindex$="[[tabIndex]]" autosave$="[[autosave]]" results$="[[results]]" accept$="[[accept]]" multiple$="[[multiple]]">
+        <input aria-labelledby$="[[_ariaLabelledBy]]" aria-describedby$="[[_ariaDescribedBy]]" disabled$="[[disabled]]" title$="[[title]]" type$="[[type]]" pattern$="[[pattern]]" required$="[[required]]" autocomplete$="[[autocomplete]]" autofocus$="[[autofocus]]" inputmode$="[[inputmode]]" minlength$="[[minlength]]" maxlength$="[[maxlength]]" min$="[[min]]" max$="[[max]]" step$="[[step]]" name$="[[name]]" placeholder$="[[placeholder]]" readonly$="[[readonly]]" list$="[[list]]" size$="[[size]]" autocapitalize$="[[autocapitalize]]" autocorrect$="[[autocorrect]]" on-change="_onChange" tabindex$="[[tabIndex]]" autosave$="[[autosave]]" results$="[[results]]" accept$="[[accept]]" multiple$="[[multiple]]" role$="[[inputRole]]" aria-haspopup$="[[inputAriaHaspopup]]">
       </iron-input>
 
       <slot name="suffix" slot="suffix"></slot>
@@ -5070,7 +5070,7 @@ ZV({is:"paper-input",_template:YV`
       </template>
 
     </paper-input-container>
-  `,behaviors:[[pa,Sa,Qr],Kr],properties:{value:{type:String}},get _focusableElement(){return this.inputElement._inputElement},listeners:{"iron-input-ready":"_onIronInputReady"},_onIronInputReady:function(){this.$.nativeInput||(this.$.nativeInput=this.$$("input")),this.inputElement&&-1!==this._typesThatHaveText.indexOf(this.$.nativeInput.type)&&(this.alwaysFloatLabel=!0),this.inputElement.bindValue&&this.$.container._handleValueAndAutoValidate(this.inputElement)}});
+  `,behaviors:[[pa,Sa,Qr],Kr],properties:{value:{type:String},inputRole:{type:String,value:void 0},inputAriaHaspopup:{type:String,value:void 0}},get _focusableElement(){return this.inputElement._inputElement},listeners:{"iron-input-ready":"_onIronInputReady"},_onIronInputReady:function(){this.$.nativeInput||(this.$.nativeInput=this.$$("input")),this.inputElement&&-1!==this._typesThatHaveText.indexOf(this.$.nativeInput.type)&&(this.alwaysFloatLabel=!0),this.inputElement.bindValue&&this.$.container._handleValueAndAutoValidate(this.inputElement)}});
 /**
 @license
 Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
