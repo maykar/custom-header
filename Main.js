@@ -2867,6 +2867,10 @@ ZV({_template:YV`
     color: var(--header-text-color);
   }
 
+  app-toolbar {
+    transform: initial !important;
+  }
+
   app-header {
     transition: margin-top 0 !important;
     transition: margin-left 0.4s ease-in-out !important;
@@ -5448,6 +5452,7 @@ ZV({_template:YV`
           height: 25px;
           opacity: 1;
           overflow: hidden;
+          padding-bottom: 6px;
         }
 
         .collapse {
@@ -5539,7 +5544,7 @@ ZV({_template:YV`
         </div>
 
         <app-header class="${this.expanded?"sidebarExpanded":""}" fixed slot="header">
-          <app-toolbar>
+          <app-toolbar scroll="false">
             <div main-title class="main-title">${Wa}</div>
             <docs-search .docs=${this.docs}></docs-search>
             <docs-dot-menu .category=${this.category} .page=${this.page}></docs-dot-menu>
