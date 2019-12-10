@@ -2833,7 +2833,7 @@ ZV({_template:YV`
       }
     </style>
     <slot></slot>
-`,is:"paper-item",behaviors:[[Ea,pa,{hostAttributes:{role:"option",tabindex:"0"}}]]});var Wa="Custom Header",Qa="intro",Ja="https://github.com/maykar/custom-header",Ga="gh-pages",Xa=[{category:"intro",icon:"mdi:home"}],tC=[{category:"development",icon:"mdi:code-braces-box"}],eC=[{link:"https://github.com/maykar/custom-header",caption:"GitHub",icon:"mdi:github-circle"},{link:"https://github.com/maykar/custom-header/issues",caption:"Issues",icon:"mdi:alert-circle"}];const iC=rt`
+`,is:"paper-item",behaviors:[[Ea,pa,{hostAttributes:{role:"option",tabindex:"0"}}]]});var Wa="Custom Header",Qa="intro",Ja="https://github.com/maykar/custom-header",Ga="docs",Xa=[{category:"intro",icon:"mdi:home"}],tC=[{category:"development",icon:"mdi:code-braces-box"}],eC=[{link:"https://github.com/maykar/custom-header",caption:"GitHub",icon:"mdi:github-circle"},{link:"https://github.com/maykar/custom-header/issues",caption:"Issues",icon:"mdi:alert-circle"}];const iC=rt`
   app-header {
     position: fixed !important;
     top: 0;
