@@ -4,21 +4,20 @@
 // Icons from https://www.webcomponents.org/element/@polymer/iron-icons/demo/demo/index.html
 
 module.exports = {
-  siteName: 'Custom-Header',
-  siteDescription: '',
+  siteName: 'Custom Header',
+  siteDescription: "Custom Header adds enhancements and customization options to Home Assistant's Lovelace header.",
   welcomeCategory: 'intro',
   menuTitle: '',
   siteURL: 'https://maykar.github.io/custom-header',
   github: 'https://github.com/maykar/custom-header',
-  branch: 'master',
+  branch: 'gh-pages',
   sideBar: [
     {
       category: 'intro',
       icon: 'mdi:home',
     },
   ],
-  sideBarBottom: [
-  ],
+  sideBarBottom: [],
   sideBarLinks: [
     {
       link: 'https://github.com/maykar/custom-header',

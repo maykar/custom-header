@@ -1,22 +1,22 @@
 :root {
     --primary-font-family: 'Roboto', 'Noto', sans-serif;
 
-    /* Light Mode */
+    /* Light Mode
     --primary-color: #03a9f4;
     --header-text-color: #fff;
     --text-color: #212121;
     --primary-background: #fff;
     --secondary-background: #fafafa;
     --divider-color: #dbdbdb;
+    */
 
-    /* Dark Mode
+    /* Dark Mode */
     --primary-color: #38a2d2;
     --header-text-color: #fff;
     --text-color: #fafafa;
     --primary-background: rgb(70, 70, 70);
     --secondary-background: #383838;
     --divider-color: #5f5f5f;
-    */
 
     --card-background: var(--primary-background);
     --content-container-background: var(--secondary-background);
