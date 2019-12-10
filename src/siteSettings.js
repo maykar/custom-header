@@ -17,7 +17,12 @@ module.exports = {
       icon: 'mdi:home',
     },
   ],
-  sideBarBottom: [],
+  sideBarBottom: [
+    {
+      category: 'development',
+      icon: 'mdi:code-braces-box',
+    },
+  ],
   sideBarLinks: [
     {
       link: 'https://github.com/maykar/custom-header',
