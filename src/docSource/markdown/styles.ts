@@ -361,7 +361,7 @@ const GFM2 = css`
   }
 
   .markdown-body a {
-    color: var(--markdown-primary-color);
+    color: var(--markdown-link-color);
     text-decoration: none;
   }
 
@@ -379,7 +379,7 @@ const GFM2 = css`
     overflow: hidden;
     background: transparent;
     border: 0;
-    border-bottom: 1px solid var(--markdown--divider-color);
+    border-bottom: 1px solid var(--markdown-divider-color);
   }
 
   .markdown-body hr:after,
@@ -691,7 +691,7 @@ export const GFM3 = css`
     height: 1px;
     padding: 0;
     margin: 24px 0;
-    background: var(--markdown--divider-color);
+    background: var(--markdown-divider-color);
     border: 0;
   }
 
@@ -728,7 +728,7 @@ export const GFM3 = css`
   .markdown-body h1,
   .markdown-body h2 {
     padding-bottom: 0.3em;
-    border-bottom: 1px solid var(--markdown--divider-color);
+    border-bottom: 1px solid var(--markdown-divider-color);
   }
 
   .markdown-body h2 {
@@ -808,12 +808,12 @@ export const GFM3 = css`
   .markdown-body table td,
   .markdown-body table th {
     padding: 6px 13px;
-    border: 1px solid var(--markdown--divider-color);
+    border: 1px solid var(--markdown-divider-color);
   }
 
   .markdown-body table tr {
     background: var(--markdown-primary-background);
-    border-top: 1px solid var(--markdown--divider-color);
+    border-top: 1px solid var(--markdown-divider-color);
   }
 
   .markdown-body table tr:nth-child(2n) {
@@ -873,7 +873,7 @@ export const GFM3 = css`
     line-height: 1.45;
     background: var(--markdown-secondary-background);
     border-radius: 3px;
-    border: 1px solid var(--markdown--divider-color);
+    border: 1px solid var(--markdown-divider-color);
   }
 
   .markdown-body pre code {

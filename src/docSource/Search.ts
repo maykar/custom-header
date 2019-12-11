@@ -111,7 +111,7 @@ export class Search extends LitElement {
 
         .search {
           width: 200px;
-          background: var(--search-results-background);
+          background: var(--search-input-background);
           z-index: 2;
           border-radius: 20px;
           margin-right: 8px;
@@ -147,8 +147,12 @@ export class Search extends LitElement {
         }
 
         .search input {
-          background: var(--search-results-background);
-          color: var(--text-color);
+          background: var(--search-input-background);
+          color: var(--search-input-text-color);
+        }
+
+        .result-item {
+          color: var(--search-result-item-color);
         }
       `,
     ];

@@ -66,17 +66,17 @@ export const SideBar = css`
     width: 24px;
     height: 24px;
     min-width: 24px;
-    color: var(--sidebar-icon-color, var(--text-color));
+    color: var(--sidebar-icon-color);
   }
 
   .selected {
-    color: var(--sidebar-selected-text-color, var(--primary-color));
+    color: var(--sidebar-selected-text-color);
     background: transparent !important;
     font-weight: 700;
   }
 
   iron-icon.selected {
-    color: var(--sidebar-selected-icon-color, var(--primary-color)) !important;
+    color: var(--sidebar-selected-icon-color) !important;
   }
 
   paper-item:focus:before {
@@ -119,7 +119,7 @@ export const SideBar = css`
   }
 
   .sidebarText {
-    color: var(--sidebar-text-color, var(--text-color));
+    color: var(--sidebar-text-color);
     padding-left: 3px;
     padding-bottom: -5px;
     text-align: left;
