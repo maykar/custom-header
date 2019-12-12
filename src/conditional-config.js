@@ -9,8 +9,8 @@ export const conditionalConfig = config => {
     let count = 0;
     for (const cond in conditions) {
       if (cond == 'user' && conditions[cond].includes(',')) {
-        conditions[cond].split(/[ ,]+/).forEach(user => {
-          if (userVars[cond] == user) count++;
+        conditions[cond].split(/,+/).forEach(user => {
+          if (userVars[cond].trim() == user) count++;
         });
       } else {
         if (
