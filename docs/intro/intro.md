@@ -3,17 +3,17 @@ title: Intro
 index: 1
 ---
 
-# CUSTOM HEADER
+## CUSTOM HEADER
 
-Custom Header adds enhancements and customization options to Home Assistant's Lovelace header. Custom Header is the successor to "Compact Custom Header".
+Custom Header adds enhancements and customization options to Home Assistant's Lovelace header. Custom Header is the replacement and successor of [Compact Custom Header](https://github.com/maykar/compact-custom-header).
 
-## Features
+### Features
 
 * Per user/device configs.
+* Every config item can be templated with Jinja.
 * Style and hide any element in the header.
 * Dynamically style header elements based on entity states/attributes.
-* Every config item can be templated with Jinja.
-* Buttons can be hidden, turned into custom or templated text, and be placed in the options menu.
-* Compact mode, a kiosk mode to remove header and sidebar, and footer mode to turn the header into a footer.
+* Buttons can be hidden, made into custom or templated text, or be placed in the options menu.
+* Compact mode, kiosk mode, and footer mode.
 * Default/starting view.
-* And much more.
+* But wait, there's more...

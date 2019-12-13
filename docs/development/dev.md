@@ -4,7 +4,7 @@ title: Development
 
 ## Development
 
-If you'd like to help with development follow the instructions below to setup a devcontaner to work from.
+If you'd like to help with development follow the instructions below to setup a devcontainer to work from.
 
 1. Fork and clone the repository.
 2. Open the [devcontainer][devcontainer] and run `npm start`.

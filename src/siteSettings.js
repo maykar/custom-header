@@ -17,6 +17,10 @@ module.exports = {
       category: 'intro',
       icon: 'mdi:home',
     },
+    {
+      category: 'installation',
+      icon: 'mdi:download',
+    },
   ],
   sideBarBottom: [
     {
@@ -33,11 +37,6 @@ module.exports = {
       link: 'https://github.com/maykar/custom-header',
       caption: 'GitHub',
       icon: 'mdi:github-circle',
-    },
-    {
-      link: 'https://github.com/maykar/custom-header/issues',
-      caption: 'Issues',
-      icon: 'mdi:alert-circle',
     },
   ],
 };

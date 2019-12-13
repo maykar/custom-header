@@ -16,8 +16,7 @@ const Main = css`
     width: 254px !important;
   }
 
-  .sidebar,
-  .view {
+  .sidebar {
     transition: all 0.4s ease-in-out;
   }
 
@@ -28,6 +27,7 @@ const Main = css`
     background: var(--content-container-background);
     height: calc(100vh - 96px);
     min-height: fit-content;
+    transition: margin-left 0.4s ease-in-out;
   }
 
   .no-tabs {

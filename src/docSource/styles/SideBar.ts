@@ -152,7 +152,7 @@ export const SideBar = css`
 
   .footer a,
   i {
-    color: var(--secondary-text-color);
+    color: #939393;
     text-decoration: none;
     margin-left: 16px;
     opacity: 1;

@@ -47,15 +47,18 @@ function generateIconset(iconsetName, iconNames) {
 }
 
 gulp.task('gen-icons-mdi', done => {
-  if (mdi.version === mdiInstalled) done();
-  const meta = JSON.parse(fs.readFileSync(path.resolve(ICON_PACKAGE_PATH, META_PATH), 'UTF-8'));
-  const iconNames = meta.map(iconInfo => iconInfo.name);
-  if (!fs.existsSync(OUTPUT_DIR)) {
-    fs.mkdirSync(OUTPUT_DIR);
+  if (mdi.version === mdiInstalled) {
+    done();
+  } else {
+    const meta = JSON.parse(fs.readFileSync(path.resolve(ICON_PACKAGE_PATH, META_PATH), 'UTF-8'));
+    const iconNames = meta.map(iconInfo => iconInfo.name);
+    if (!fs.existsSync(OUTPUT_DIR)) {
+      fs.mkdirSync(OUTPUT_DIR);
+    }
+    fs.writeFileSync(
+      MDI_OUTPUT_PATH,
+      `//${mdi.version}\n/* eslint-disable */\nexport const mdiIconSet = '${generateIconset('mdi', iconNames)}';`,
+    );
+    done();
   }
-  fs.writeFileSync(
-    MDI_OUTPUT_PATH,
-    `//${mdi.version}\n/* eslint-disable */\nexport const mdiIconSet = '${generateIconset('mdi', iconNames)}';`,
-  );
-  done();
 });

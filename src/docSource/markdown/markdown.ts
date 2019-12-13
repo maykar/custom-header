@@ -56,7 +56,7 @@ export class markdown {
 
     return html`
       <!-- prettier-ignore -->
-      <style>${GFM} ${HLJS}</style>
+      <style>${GFM} ${settings.highlightStyle ? '' : HLJS}</style>
       ${settings.highlightStyle
         ? html`
             <link
