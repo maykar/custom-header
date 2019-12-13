@@ -1,8 +1,8 @@
 import { html, TemplateResult } from 'lit-element';
 import marked_ from 'marked';
 import emoji from 'node-emoji';
+import * as settings from '../../siteSettings';
 
-import { filterXSS } from 'xss';
 //@ts-ignore
 import YAML from 'yaml';
 import hljs_ from 'highlight.js/lib/highlight';
@@ -57,8 +57,17 @@ export class markdown {
     return html`
       <!-- prettier-ignore -->
       <style>${GFM} ${HLJS}</style>
+      ${settings.highlightStyle
+        ? html`
+            <link
+              rel="stylesheet"
+              type="text/css"
+              href=${`https://cdn.jsdelivr.net/npm/highlightjs/styles/${settings.highlightStyle.toLowerCase()}.css`}
+            />
+          `
+        : ''}
       <div class="markdown-body">
-        ${unsafeHTML(filterXSS(marked(input, options)))}
+        ${unsafeHTML(marked(input, options))}
       </div>
     `;
   }

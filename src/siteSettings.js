@@ -11,6 +11,7 @@ module.exports = {
   siteURL: 'https://maykar.github.io/custom-header',
   github: 'https://github.com/maykar/custom-header',
   branch: 'docs',
+  highlightStyle: 'monokai', // https://highlightjs.org/static/demo/
   sideBar: [
     {
       category: 'intro',
@@ -21,6 +22,10 @@ module.exports = {
     {
       category: 'development',
       icon: 'mdi:code-braces-box',
+    },
+    {
+      category: 'support',
+      icon: 'mdi:cards-heart',
     },
   ],
   sideBarLinks: [

@@ -1,6 +1,5 @@
 ---
 title: Supporting Dev
-index: 3
 ---
 
 ## Supporting Development:

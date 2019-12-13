@@ -11,14 +11,14 @@
     */
 
     /* Dark Mode */
-    --primary-color: #38a2d2;
+    --primary-color: #cc5544;
     --header-text-color: #fff;
     --text-color: #fafafa;
-    --primary-background: rgb(70, 70, 70);
-    --secondary-background: #383838;
-    --divider-color: #5f5f5f;
+    --primary-background: #5d6163;
+    --secondary-background: #57464e;
+    --divider-color: #929090;
 
-    --header-background: var(--primary-color);
+    --header-background: #cc5544;
     --card-background: var(--primary-background);
     --content-container-background: var(--secondary-background);
 
@@ -26,22 +26,25 @@
     --sidebar-secondary-background: var(--secondary-background);
     --sidebar-icon-color: var(--text-color);
     --sidebar-text-color: var(--text-color);
-    --sidebar-selected-icon-color: var(--primary-color);
-    --sidebar-selected-text-color: var(--primary-color);
+    --sidebar-selected-icon-color: #ecb77a;
+    --sidebar-selected-text-color: #ecb77a;
 
     --paper-tabs-selection-bar-color: var(--header-text-color);
-    --paper-tab-ink: var(--header-text-color); /* Tab highlight on click */
+    --paper-tab-ink: var(--header-text-color);
 
     --search-results-background: var(--primary-background);
     --search-input-background: var(--primary-background);
     --search-input-text-color: var(--text-color);
-    --search-result-item-color: var(--primary-color);
+    --search-result-item-color: #ecb77a;
 
     --markdown-font-family: var(--primary-font-family);
     --markdown-primary-color: var(--primary-color);
+    --markdown-heading-color: #ecb77a;
     --markdown-text-color: var(--text-color);
-    --markdown-link-color: var(--primary-color);
+    --markdown-link-color: #ecb77a;
     --markdown-divider-color: var(--divider-color);
     --markdown-primary-background: var(--primary-background);
     --markdown-secondary-background: var(--secondary-background);
+    --markdown-pre-background: var(--secondary-background);
+    --markdown-code-background: #525556;
 }

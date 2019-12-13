@@ -7,7 +7,7 @@ index: 1
 
 Custom Header adds enhancements and customization options to Home Assistant's Lovelace header. Custom Header is the successor to "Compact Custom Header".
 
-## Features:
+## Features
 
 * Per user/device configs.
 * Style and hide any element in the header.

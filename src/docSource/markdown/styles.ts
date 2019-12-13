@@ -427,6 +427,7 @@ const GFM2 = css`
   .markdown-body h6 {
     margin-top: 0;
     margin-bottom: 0;
+    color: var(--markdown-heading-color);
   }
 
   .markdown-body h1 {
@@ -509,6 +510,7 @@ const GFM2 = css`
   .markdown-body pre {
     margin-top: 0;
     margin-bottom: 0;
+    background: var(--markdown-pre-background) !important;
   }
 
   .markdown-body input::-webkit-inner-spin-button,
@@ -838,7 +840,7 @@ export const GFM3 = css`
     padding: 0.2em 0.4em;
     margin: 0;
     font-size: 85%;
-    background-color: rgba(27, 31, 35, 0.05);
+    background-color: var(--markdown-code-background);
     border-radius: 3px;
   }
 
