@@ -11,14 +11,14 @@
     */
 
     /* Dark Mode */
-    --primary-color: #cc5544;
+    --primary-color: #2d8942;
     --header-text-color: #fff;
     --text-color: #fafafa;
-    --primary-background: #5d6163;
-    --secondary-background: #57464e;
+    --primary-background: #5b5b5b;
+    --secondary-background: #393838;
     --divider-color: #929090;
 
-    --header-background: #cc5544;
+    --header-background: #0b0b0b;
     --card-background: var(--primary-background);
     --content-container-background: var(--secondary-background);
 
@@ -26,8 +26,8 @@
     --sidebar-secondary-background: var(--secondary-background);
     --sidebar-icon-color: var(--text-color);
     --sidebar-text-color: var(--text-color);
-    --sidebar-selected-icon-color: #ecb77a;
-    --sidebar-selected-text-color: #ecb77a;
+    --sidebar-selected-icon-color: #a6e22e;
+    --sidebar-selected-text-color: #a6e22e;
 
     --paper-tabs-selection-bar-color: var(--header-text-color);
     --paper-tab-ink: var(--header-text-color);
@@ -35,16 +35,16 @@
     --search-results-background: var(--primary-background);
     --search-input-background: var(--primary-background);
     --search-input-text-color: var(--text-color);
-    --search-result-item-color: #ecb77a;
+    --search-result-item-color: #a6e22e;
 
     --markdown-font-family: var(--primary-font-family);
     --markdown-primary-color: var(--primary-color);
-    --markdown-heading-color: #ecb77a;
+    --markdown-heading-color: #ffffff;
     --markdown-text-color: var(--text-color);
-    --markdown-link-color: #ecb77a;
+    --markdown-link-color: #a6e22e;
     --markdown-divider-color: var(--divider-color);
     --markdown-primary-background: var(--primary-background);
     --markdown-secondary-background: var(--secondary-background);
-    --markdown-pre-background: var(--secondary-background);
-    --markdown-code-background: #525556;
+    --markdown-pre-background: var(--markdown-secondary-background);
+    --markdown-code-background: #414344;
 }
