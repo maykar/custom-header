@@ -19,7 +19,7 @@
     --divider-color: #929090;
 
     --header-background: #0b0b0b;
-    --card-background: var(--primary-background);
+    --card-background: var(--header-background);
     --content-container-background: var(--secondary-background);
 
     --sidebar-background: var(--primary-background);
@@ -43,8 +43,8 @@
     --markdown-text-color: var(--text-color);
     --markdown-link-color: #a6e22e;
     --markdown-divider-color: var(--divider-color);
-    --markdown-primary-background: var(--primary-background);
-    --markdown-secondary-background: var(--secondary-background);
-    --markdown-pre-background: var(--markdown-secondary-background);
-    --markdown-code-background: #414344;
+    --markdown-primary-background: #454444;
+    --markdown-secondary-background: #343333;
+    --markdown-pre-background: #121212;
+    --markdown-code-background: #242525;
 }
