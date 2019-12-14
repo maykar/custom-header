@@ -1,6 +1,6 @@
 ---
 name: Bug or Issue
-about: Submit a new issue or bug report.
+about: Be sure to read the issues section of the docs before submitting.
 title: ''
 labels: bug
 assignees: ''
