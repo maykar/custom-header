@@ -16,4 +16,4 @@ jobs:
         respondableId: ${{ github.event.issue.node_id }}
         response: "Please, be sure to read the [issues section]() of the docs and provide the required information. You may not recieve a response until you have done so."
         author: ${{ github.event.issue.user.login }}
-        exemptedAuthors: ''
+        exemptedAuthors: 'maykar'
