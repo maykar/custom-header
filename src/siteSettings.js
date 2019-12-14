@@ -37,7 +37,7 @@ module.exports = {
   sideBarBottom: [
     {
       category: 'development',
-      icon: 'mdi:code-braces-box',
+      icon: 'mdi:code-tags',
     },
     {
       category: 'support',
