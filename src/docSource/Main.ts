@@ -43,6 +43,8 @@ export class Main extends LitElement {
     const mdiTemplate = document.createElement('template');
     mdiTemplate.innerHTML = mdiIconSet;
     document.head.appendChild(mdiTemplate.content);
+    const locationHashChanged = () => location.reload();
+    window.onhashchange = locationHashChanged;
   }
 
   updated(): void {

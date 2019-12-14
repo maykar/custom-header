@@ -10,6 +10,24 @@ const settings = require('../src/siteSettings');
 const buildDir = path.resolve(__dirname, '../dist');
 const docsDir = path.resolve(__dirname, '../docs');
 
+const HLJSstyle = settings.highlightJsStyle.toLowerCase() || 'github';
+const HLJS_OUTPUT_PATH = path.resolve(path.resolve(__dirname, '../src/docSource'), 'HLJSstyle.js');
+const HLJScssFile = fs.readFileSync(
+  path.resolve(__dirname, `../node_modules/highlight.js/styles/${HLJSstyle}.css`),
+  'UTF-8',
+);
+const HLJSinstalled = fs
+  .readFileSync(path.resolve(HLJS_OUTPUT_PATH), 'UTF-8')
+  .split('\n')[0]
+  .replace('//', '');
+
+if (HLJSstyle != HLJSinstalled) {
+  fs.writeFileSync(
+    HLJS_OUTPUT_PATH,
+    `//${HLJSstyle}\n/* eslint-disable */\nimport { css } from 'lit-element';\nexport const HLJS = css\`\n${HLJScssFile}\`;`,
+  );
+}
+
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function docsToJson() {
   const dirs = fs.readdirSync(docsDir);
