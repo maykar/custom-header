@@ -23,7 +23,7 @@ Options with a :warning: remove the ability to edit from the UI. See [important 
 You can set any of the button's icons using `button_icons`.
 
 ```yaml
-custom-header:
+custom_header:
   button_icons:
     menu: mdi:skull
     voice: mdi:home
@@ -36,7 +36,7 @@ You can set any of the button's as text instead of icons using `button_text`.
 The text may be 2 lines by using `<br>` to separate.
 
 ```yaml
-custom-header:
+custom_header:
   button_text:
     menu: 'menu'
     voice: 'voice<br>button'

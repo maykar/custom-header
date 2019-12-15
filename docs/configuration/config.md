@@ -9,7 +9,7 @@ Much of the config can be done by using the UI editor which can be found by sele
 
 Everything else is handled in YAML which would either be set in the raw config by selecting "Configure UI" and then "Raw Config Editor" or in the file `ui-lovelace.yaml` if you're using YAML mode.
 
-The YAML configuration happens at the root of your Lovelace config under `custom-header:` at the same level as `resources:` and `views:`. Example:
+The YAML configuration happens at the root of your Lovelace config under `custom_header:` at the same level as `resources:` and `views:`. Example:
 
 ```yaml
 custom_header:

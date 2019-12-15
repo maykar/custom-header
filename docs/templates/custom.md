@@ -10,7 +10,7 @@ To create your own template variables use the `template_variables:` config optio
 In the following example we set a variable "home" to return true if the input_boolean called "home" is "on". So compact mode will be on when that input_boolean is on.
 
 ```yaml
-custom-header:
+custom_header:
   template_variables: '{% set home = states.input_boolean.home.state  == "on" %}'
   compact_mode: '{{ home }}'
 ```

@@ -24,7 +24,7 @@ Options with a :warning: remove the ability to edit from the UI. See [important 
 ### Example
 
 ```yaml
-custom-header:
+custom_header:
   header_text: '{{ time }}' # See templates section for more on this.
   compact_mode: true
   footer_mode: true
@@ -34,20 +34,20 @@ custom-header:
 ### Header Text
 
 ```yaml
-custom-header:
+custom_header:
   header_text: 'Custom Header'
 ```
 
 The text may be 2 lines by using `<br>` to separate.
 
 ```yaml
-custom-header:
+custom_header:
   header_text: 'Custom<br>Header'
 ```
 
 The next example uses [templates](#templates).
 
 ```yaml
-custom-header:
+custom_header:
   header_text: '{{ time }}<br>{{ date }}'
 ```

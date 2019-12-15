@@ -15,7 +15,7 @@ You can have different settings depending on username, user agent, and media que
 Under exceptions set your conditions and then set up the config to use below that. If a config item is left out of an exception's config the main config's value is used.
 
 ```yaml
-custom-header:
+custom_header:
   compact_mode: true
   exceptions:
     - conditions:

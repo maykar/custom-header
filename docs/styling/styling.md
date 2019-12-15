@@ -25,7 +25,7 @@ All color items accept [valid CSS colors](https://developer.mozilla.org/en-US/do
 tabs_color accepts a tab/view's index number, title, or path.
 
 ```yaml
-custom-header:
+custom_header:
   tabs_color:
     0: green
     home: 'rgb(214, 122, 127)'

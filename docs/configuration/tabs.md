@@ -23,14 +23,14 @@ hide_tabs and show_tabs accept a tab/views index number, title, or path. They ca
 hide_tabs and show_tabs accept a comma separated list of tabs:
 
 ```yaml
-custom-header:
+custom_header:
   hide_tabs: '5 to 9, 0, home'
 ```
 
 or an array of tabs:
 
 ```yaml
-custom-header:
+custom_header:
   hide_tabs:
     - 5 to 9
     - 0
@@ -42,7 +42,7 @@ custom-header:
 The tab_icons option accepts a tab/views index number, title, or path. This option is mostly useful when used with [templates](#templates).
 
 ```yaml
-custom-header:
+custom_header:
   tab_icons:
     0: mdi:skull
     home: mdi:home

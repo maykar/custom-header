@@ -30,7 +30,7 @@ These default styles are also subject to change when there are updates to HA or 
 Full example including all the available elements below. This example is untested and will most likely look pretty crazy if used.
 
 ```yaml
-custom-header:
+custom_header:
   header_css: 'background: green; padding: 5px'
   stack_css: 'padding: 0; background: purple;' # This is the container that holds the header text and tabs.
   header_text_css: 'font-family: "Times New Roman", Times, serif;'
