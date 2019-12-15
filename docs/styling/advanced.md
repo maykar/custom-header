@@ -31,20 +31,20 @@ Full example including all the available elements below. The example is untested
 
 ```yaml
 custom-header:
-  header_css: 'background: green; padding: 5px'
-  stack_css: 'padding: 0; background: purple;' # This is the container that holds the header text and tabs.
-  header_text_css: 'font-family: "Times New Roman", Times, serif;'
-  active_tab_css: 'background: blue; color: #fff;'
-  options_list_css: 'background: #fff;' # CSS of the options dropdown menu.
-  menu_css: 'background: dimgrey;'
-  options_css: 'padding: 0 10px 0 15px;'
-  voice_css: 'color: pink;'
-  view_css: 'padding-top: 20px;' # This is the container that holds the cards under the header.
-  panel_view_css: 'padding-top: 20px;' # Same as view_css only when using panel view.
-  tab_container_css: 'background: pink;'
-  all_tabs_css: 'color: purple;'
-  tabs_css:
-    0: 'color: green;'
-    home: 'color: rgb(214, 122, 127)'
-    7: 'color: #fafafa; padding: 0 15px;'
+  header_css: 'background: green; padding: 5px'
+  stack_css: 'padding: 0; background: purple;' # This is the container that holds the header text and tabs.
+  header_text_css: 'font-family: "Times New Roman", Times, serif;'
+  active_tab_css: 'background: blue; color: #fff;'
+  options_list_css: 'background: #fff;' # CSS of the options drop-down menu.
+  menu_css: 'background: dimgrey;'
+  options_css: 'padding: 0 10px 0 15px;'
+  voice_css: 'color: pink;'
+  view_css: 'padding-top: 20px;' # This is the container that holds the cards under the header.
+  panel_view_css: 'padding-top: 20px;' # Same as view_css only when using panel view.
+  tab_container_css: 'background: pink;'
+  all_tabs_css: 'color: purple;'
+  tabs_css:
+    0: 'color: green;'
+    home: 'color: rgb(214, 122, 127)'
+    7: 'color: #fafafa; padding: 0 15px;'
 ```

@@ -9,24 +9,45 @@ Options with a :warning: remove the ability to edit from the UI. See [important 
 
 |NAME|TYPE|DEFAULT|DESCRIPTION|
 |:-|:-|:-|:-|
-|header_text|string|'Home Assistant'|Replace the main header text.
-|disabled_mode|boolean|false|Disables Custom Header and returns the default HA header.
-|kiosk_mode|boolean|false|Hides the header and sidebar completely. :warning:
-|compact_mode|boolean|false|Compacts the header to about half the size while keeping all functionality.
-|footer_mode|boolean|false|Places the header at the bottom of the page.
-|disable_sidebar|boolean|false|Disables and hides the sidebar and menu button.
-|hide_help|boolean|false|Hides the "Help" option in the options menu.
-|hide_unused|boolean|false|Hides the "Unused Entities" option in the options menu.
-|hide_refresh|boolean|false|Hides the "Refresh" option in the options menu.
-|hide_config|boolean|false|Hides the "Configure UI" option in the options menu. :warning:
-|hide_raw|boolean|false|Hides the "Raw Config Editor" option in the options menu. :warning:
+|header_text|string|'Home Assistant'|Replace the main header text. More info below.
+|disabled_mode|Boolean|false|Disables Custom Header and returns the default HA header.
+|kiosk_mode|Boolean|false|Hides the header and sidebar completely. :warning:
+|compact_mode|Boolean|false|Compacts the header to about half the size while keeping all functionality.
+|footer_mode|Boolean|false|Places the header at the bottom of the page.
+|disable_sidebar|Boolean|false|Disables and hides the sidebar and menu button.
+|hide_help|Boolean|false|Hides the "Help" option in the options menu.
+|hide_unused|Boolean|false|Hides the "Unused Entities" option in the options menu.
+|hide_refresh|Boolean|false|Hides the "Refresh" option in the options menu.
+|hide_config|Boolean|false|Hides the "Configure UI" option in the options menu. :warning:
+|hide_raw|Boolean|false|Hides the "Raw Config Editor" option in the options menu. :warning:
 
 ### Example
 
 ```yaml
 custom-header:
-  header_text: '{{ time }}' # See templates section for more on this.
-  compact_mode: true
-  footer_mode: true
-  hide_help: true
+  header_text: '{{ time }}' # See templates section for more on this.
+  compact_mode: true
+  footer_mode: true
+  hide_help: true
+```
+
+### Header Text
+
+```yaml
+custom-header:
+  header_text: 'Custom Header'
+```
+
+The text may be 2 lines by using `<br>` to separate.
+
+```yaml
+custom-header:
+  header_text: 'Custom<br>Header'
+```
+
+The next example uses [templates](#templates).
+
+```yaml
+custom-header:
+  header_text: '{{ time }}<br>{{ date }}'
 ```

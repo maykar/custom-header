@@ -5,11 +5,11 @@ index: 3
 
 ## Built-in Variables
 
-There are pre-built variables for you to use in the table below. The format of the date/time items is automatically detected by default, but you may use the config variable `locale:` to set a different one if needed. [Here is a list of locale codes](http://download1.parallels.com/SiteBuilder/Windows/docs/3.2/en_US/sitebulder-3.2-win-sdk-localization-pack-creation-guide/30801.htm) to be used like this:
+There are prebuilt variables for you to use in the table below. The format of the date/time items is automatically detected by default, but you may use the config variable `locale:` to set a different one if needed. [Here is a list of locale codes](http://download1.parallels.com/SiteBuilder/Windows/docs/3.2/en_US/sitebulder-3.2-win-sdk-localization-pack-creation-guide/30801.htm) to be used like this:
 
 ```yaml
 custom-header:
-  locale: en-gb
+  locale: en-gb
 ```
 
 |VARIABLE|DESCRIPTION|

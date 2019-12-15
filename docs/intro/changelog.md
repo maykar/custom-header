@@ -9,6 +9,6 @@ Added features and breaking changes
 
 ---
 
-### Dec. 25th 2019
+### Dec. 15th 2019
 
 * Initial release.
