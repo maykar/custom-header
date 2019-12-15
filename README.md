@@ -2,6 +2,8 @@
 
 Custom Header adds enhancements and customization options to Home Assistant's Lovelace header. Custom Header is the replacement and successor of [Compact Custom Header](https://github.com/maykar/compact-custom-header).
 
+### [Docs (installation, config, and issues)](https://maykar.github.io/custom-header)
+
 ### Features
 
 - Per user/device configs
