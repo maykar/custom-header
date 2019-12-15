@@ -4,7 +4,7 @@ title: Issues
 
 ## Issues
 
-Issues should be posted to the GitHub page and never the forums. This makes tracking the issues easier and they will be resolved quicker.
+Issues should be posted to the GitHub page and preferably not on the forums. This makes tracking the issues easier and they will be resolved quicker.
 
 In order for me to investigate issues, please provide the following information when submitting:
 
