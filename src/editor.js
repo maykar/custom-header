@@ -290,15 +290,15 @@ class ChConfigEditor extends LitElement {
               Custom Header
             </h1>
             <h4 style="margin-top:-5px;padding-top:10px;font-size:12pt;" class="underline">
-              <a href="https://maykar.github.io/compact-custom-header/" target="_blank">
+              <a href="https://maykar.github.io/custom-header/" target="_blank">
                 <ha-icon icon="mdi:help-circle" style="margin-top:-5px;"> </ha-icon>
                 Docs&nbsp;&nbsp;&nbsp;</a
               >
-              <a href="https://github.com/maykar/compact-custom-header" target="_blank">
+              <a href="https://github.com/maykar/custom-header" target="_blank">
                 <ha-icon icon="mdi:github-circle" style="margin-top:-5px;"> </ha-icon>
                 Github&nbsp;&nbsp;&nbsp;</a
               >
-              <a href="https://community.home-assistant.io/t/compact-custom-header" target="_blank">
+              <a href="https://community.home-assistant.io/t/custom-header/" target="_blank">
                 <ha-icon icon="hass:home-assistant" style="margin-top:-5px;"> </ha-icon>
                 Forums</a
               >
