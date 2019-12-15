@@ -43,5 +43,8 @@ custom-header:
   panel_view_css: 'padding-top: 20px;' # Same as view_css only when using panel view.
   tab_container_css: 'background: pink;'
   all_tabs_css: 'color: purple;'
-  tabs_css: []
+  tabs_css:
+    0: 'color: green;'
+    home: 'color: rgb(214, 122, 127)'
+    7: 'color: #fafafa; padding: 0 15px;'
 ```

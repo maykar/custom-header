@@ -11,7 +11,40 @@ index: 4
 |indicator_top|boolean|false|Places the current tab indicator on top of the tab.
 |default_tab|number/string|| The default starting tab when entering Lovelace.
 |reverse_tab_direction|boolean|false|Places tabs at opposite side of the window in reverse order.
-|hide_tabs|array/string||An array or comma seperated string of tabs to hide. More info below.
-|show_tabs|array/string||An array or comma seperated string of tabs to hide. More info below.
+|hide_tabs|string||An array or comma seperated string of tabs to hide. More info below.
+|show_tabs|string||An array or comma seperated string of tabs to hide. More info below.
 |hidden_tab_redirect|boolean|true|Automatically redirects off hidden tabs to either the default tab or the first visible tab.
 |tab_icons|string||Set the icon of each tab, useful for templates. More info below.
+
+### Hide/Show Tabs
+
+hide_tabs and show_tabs accept a tab/views index number, title, or path. They can also accept ranges like so: `5 to 9`
+
+hide_tabs and show_tabs accept a comma seperated list of tabs:
+
+```yaml
+custom-header:
+  hide_tabs: '5 to 9, 0, home'
+```
+
+or an array of tabs:
+
+```yaml
+custom-header:
+  hide_tabs:
+    - 5 to 9
+    - 0
+    - home
+```
+
+### Tab Icons
+
+The tab_icons option accepts a tab/views index number, title, or path. This option is mostly useful when used with [templates](#templates).
+
+```yaml
+custom-header:
+  tab_icons:
+    0: mdi:skull
+    home: mdi:home
+    7: mdi:death-star-variant
+```

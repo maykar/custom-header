@@ -15,4 +15,16 @@ Options with a :warning: remove the ability to edit from the UI. See [important 
 |menu_dropdown|boolean|false|Places menu button in the options dropdown.
 |voice_dropdown|boolean|false|Places voice button in the options dropdown.
 |reverse_button_direction|boolean|false|Places buttons at opposite side of the window.
-|button_icons|string||Set the icon of each button. More info below.
+|button_icons|||Set the icon of each button. More info below.
+
+### Button Icons
+
+You can set any of the button's icons using `button_icons`.
+
+```yaml
+custom-header:
+  button_icons:
+    menu: mdi:skull
+    voice: mdi:home
+    options: mdi:death-star-variant
+```

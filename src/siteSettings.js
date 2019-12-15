@@ -33,6 +33,10 @@ module.exports = {
       category: 'templates',
       icon: 'mdi:code-braces-box',
     },
+    {
+      category: 'issues',
+      icon: 'mdi:alert',
+    },
   ],
   sideBarBottom: [
     {

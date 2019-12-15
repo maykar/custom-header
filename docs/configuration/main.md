@@ -20,3 +20,13 @@ Options with a :warning: remove the ability to edit from the UI. See [important 
 |hide_refresh|boolean|false|Hides the "Refresh" option in the options menu.
 |hide_config|boolean|false|Hides the "Configure UI" option in the options menu. :warning:
 |hide_raw|boolean|false|Hides the "Raw Config Editor" option in the options menu. :warning:
+
+### Example
+
+```yaml
+custom-header:
+  header_text: '{{ time }}' # See templates section for more on this.
+  compact_mode: true
+  footer_mode: true
+  hide_help: true
+```

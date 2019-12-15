@@ -1,6 +1,6 @@
 ---
 title: HACS
-index: 2
+index: 1
 ---
 
 ## Installation with HACS

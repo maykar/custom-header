@@ -1,6 +1,6 @@
 ---
 title: Manual
-index: 1
+index: 2
 ---
 
 ## Manual Installation

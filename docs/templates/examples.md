@@ -12,11 +12,10 @@ custom-header:
   default_tab: '{% if is_state("device_tracker.paulus", "home") %}0{% else %}5{% endif %}'
 ```
 
-Return true for compact mode if input_boolean.home is "on".
+Return true for compact mode if `input_boolean.home` is "on".
 
 ```yaml
 custom-header:
-  # returns true if state is "on", false otherwise.
   compact_mode: '{{ states.input_boolean.home.state  == "on" }}'
 ```
 
