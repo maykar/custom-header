@@ -3,7 +3,7 @@ title: Templates
 index: 1
 ---
 
-# Jinja Templates
+## Jinja Templates
 
 * Every config item can be templated using Jinja templates.
 * If the template is using an entity then Custom Header will update dynamically when that entity changes.

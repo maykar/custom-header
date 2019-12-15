@@ -3,7 +3,7 @@ title: Custom Vars
 index: 2
 ---
 
-# Custom Variables
+## Custom Variables
 
 To create your own template variables use the `template_variables:` config option. Then you can use that variable in any of your config.
 
