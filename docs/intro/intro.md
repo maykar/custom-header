@@ -17,3 +17,5 @@ Custom Header adds enhancements and customization options to Home Assistant's Lo
 - Compact mode, kiosk mode, and footer mode
 - Default/starting view
 - But wait, there's more...
+
+<img style="border: 5px solid #767676;border-radius: 10px;max-width: 350px;width: 100%;box-sizing: border-box;" src="https://github.com/maykar/custom-header/blob/master/demo.gif?raw=true" alt="Demo">
