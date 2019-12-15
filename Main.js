@@ -2833,7 +2833,7 @@ ZV({_template:YV`
       }
     </style>
     <slot></slot>
-`,is:"paper-item",behaviors:[[Ea,pa,{hostAttributes:{role:"option",tabindex:"0"}}]]});var Wa="Custom Header",Qa="intro",Ga="https://github.com/maykar/custom-header",Ja="docs",Xa=[{category:"intro",icon:"mdi:home"},{category:"installation",icon:"mdi:download"},{category:"configuration",icon:"mdi:lead-pencil"},{category:"styling",icon:"mdi:palette"},{category:"templates",icon:"mdi:code-braces-box"}],tC=[{category:"development",icon:"mdi:code-tags"},{category:"support",icon:"mdi:cards-heart"}],eC=[{link:"https://github.com/maykar/custom-header",caption:"GitHub",icon:"mdi:github-circle"}];const iC=rt`
+`,is:"paper-item",behaviors:[[Ea,pa,{hostAttributes:{role:"option",tabindex:"0"}}]]});var Wa="Custom Header",Qa="intro",Ga="https://github.com/maykar/custom-header",Ja="docs",Xa=[{category:"intro",icon:"mdi:home"},{category:"installation",icon:"mdi:download"},{category:"configuration",icon:"mdi:lead-pencil"},{category:"styling",icon:"mdi:palette"},{category:"templates",icon:"mdi:code-braces-box"},{category:"issues",icon:"mdi:alert"}],tC=[{category:"development",icon:"mdi:code-tags"},{category:"support",icon:"mdi:cards-heart"}],eC=[{link:"https://github.com/maykar/custom-header",caption:"GitHub",icon:"mdi:github-circle"}];const iC=rt`
   app-header {
     position: fixed !important;
     top: 0;
@@ -5511,11 +5511,8 @@ ZV({_template:YV`
               `)}
           </div>
           <div class="footer">
-            <a
-              href="https://maykar.github.io/polymer-docs-template"
-              target="_blank"
-              style=${this.expanded?"":"opacity: 0;"}
-              >Made with polymer-docs-template.</a
+            <a href="" title="To be released soon!" style=${this.expanded?"":"opacity: 0;"}
+              >Docs site by @ludeeus & @maykar</a
             >
           </div>
         </div>
