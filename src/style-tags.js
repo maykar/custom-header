@@ -45,11 +45,15 @@ export const insertStyleTags = config => {
       #contentContainer {
         padding: 12px 6px 12px 6px;
         ${config.compact_mode ? 'display: none;' : ''}
-        ${config.header_text.includes('<br>') ? `
+        ${
+          config.header_text.includes('<br>')
+            ? `
           font-size: 17px;
           line-height: 1.2;
           margin: -9px 0px 0px;
-        ` : ''}
+        `
+            : ''
+        }
         ${config.header_text_css ? config.header_text_css : ''}
 
       }
@@ -175,7 +179,8 @@ export const insertStyleTags = config => {
   style.setAttribute('id', 'ch_animated');
   style.innerHTML = `
     ch-header, [buttonElem="menu"], [buttonElem="options"], [buttonElem="voice"] {
-      transition: all 0.4s ease-in-out;
+      transition: margin-top 0.4s ease-in-out;
+      transition: top 0.4s ease-in-out;
     }
   `;
   setTimeout(() => {
