@@ -7,17 +7,17 @@ index: 2
 
 You can use these custom CSS variables in your HA theme to style Custom-Header.
 
-|CSS Var|DESCRIPTION|
-|:-|:-|
-|--ch-background|Background of the header.
-|--ch-elements-color|Color of all elements in header.
-|--ch-menu-color|Color of menu button.
-|--ch-voice-color|Color of voice button.
-|--ch-options-color|Color of options button.
-|--ch-all-tabs-color|Color of all tabs.
-|--ch-notification-dot-color|Color of new notification indicator.
-|--ch-tab-indicator-color|Color of the current tab indicator.
-|--ch-active-tab-color|Color of the current tab's icon/text.
+| CSS Var                     | DESCRIPTION                          |
+| :-------------------------- | :----------------------------------- |
+| --ch-background             | Background of the header             |
+| --ch-elements-color         | Color of all elements in header      |
+| --ch-menu-color             | Color of menu button                 |
+| --ch-voice-color            | Color of voice button                |
+| --ch-options-color          | Color of options button              |
+| --ch-all-tabs-color         | Color of all tabs                    |
+| --ch-notification-dot-color | Color of new notification indicator  |
+| --ch-tab-indicator-color    | Color of the current tab indicator   |
+| --ch-active-tab-color       | Color of the current tab's icon/text |
 
 ## Custom CSS
 
@@ -25,9 +25,9 @@ You can add your own custom CSS to elements using the config options below.
 
 Keep in mind that this will be trial and error as these items already have CSS applied to them that you'll be overriding. Be sure to inspect the elements you're modifying to see the existing CSS.
 
-These default styles are also subject to change when there are updates to HA or Custom Header. I cannot really provide support for these options.
+These default styles are also subject to change when there are updates to HA or Custom Header. I cannot provide support for these options.
 
-Full example including all the available elements below. The example is untested and will most likely look pretty crazy if used.
+Full example including all the available elements below. This example is untested and will most likely look pretty crazy if used.
 
 ```yaml
 custom-header:

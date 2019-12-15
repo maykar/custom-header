@@ -9,11 +9,11 @@ Custom Header adds enhancements and customization options to Home Assistant's Lo
 
 ### Features
 
-* Per user/device configs.
-* Every config item can be templated with Jinja.
-* Style and hide any element in the header.
-* Dynamically style header elements based on entity states/attributes.
-* Buttons can be hidden, made into custom or templated text, or be placed in the options menu.
-* Compact mode, kiosk mode, and footer mode.
-* Default/starting view.
-* But wait, there's more...
+- Per user/device configs
+- Every config item can be templated with Jinja
+- Style and hide any element in the header
+- Dynamically style header elements based on entity states/attributes
+- Buttons can be hidden, made into custom or templated text, or be placed in the options menu
+- Compact mode, kiosk mode, and footer mode
+- Default/starting view
+- But wait, there's more...
