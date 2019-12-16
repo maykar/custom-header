@@ -33,5 +33,5 @@ This will make the menu button display the date like this `Wed. Dec. 25 2019`.
 ```yaml
 custom_header:
   button_text:
-    menu: '{{ dayNameShort }}. {{ monthNameShort }}. {{ monthNum }} {{ year4d }}'
+    menu: '{{ dayNameShort }}. {{ monthNameShort }}. {{ dayNum }} {{ year4d }}'
 ```
