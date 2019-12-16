@@ -1627,7 +1627,7 @@ rollup-plugin-terser@^5.1.2:
     "@babel/code-frame" "^7.0.0"
     jest-worker "^24.6.0"
     rollup-pluginutils "^2.8.1"
-    serialize-javascript "^1.7.0"
+    serialize-javascript@^2.1.1
     terser "^4.1.0"
 
 rollup-plugin-typescript2@^0.24.3:
@@ -1648,7 +1648,7 @@ rollup-plugin-uglify@^6.0.3:
   dependencies:
     "@babel/code-frame" "^7.0.0"
     jest-worker "^24.0.0"
-    serialize-javascript "^1.9.0"
+    serialize-javascript@^2.1.1
     uglify-js "^3.4.9"
 
 rollup-pluginutils@2.8.1, rollup-pluginutils@^2.8.1:

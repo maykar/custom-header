@@ -100,7 +100,7 @@ export const styleHeader = config => {
     for (const button in config.button_icons) {
       if (!config.button_icons[button]) {
         if (button === 'menu') header.menu.icon = 'mdi:menu';
-        else if (button === 'voice') header.voice.icon = 'mdi:microphone';
+        else if (button === 'voice' && header.voice) header.voice.icon = 'mdi:microphone';
         else if (button === 'options') header[button].querySelector('paper-icon-button').icon = 'mdi:dots-vertical';
       } else {
         if (button === 'options') header[button].querySelector('paper-icon-button').icon = config.button_icons[button];
@@ -159,16 +159,16 @@ export const styleHeader = config => {
         if (window.scrollY > 48) {
           header.container.style.top = '-48px';
           header.menu.style.marginTop = '48px';
-          header.voice.style.marginTop = '48px';
+          if (header.voice) header.voice.style.marginTop = '48px';
           header.options.style.marginTop = '48px';
         } else {
           header.container.style.transition = '0s';
           header.menu.style.transition = '0s';
-          header.voice.style.transition = '0s';
+          if (header.voice) header.voice.style.transition = '0s';
           header.options.style.transition = '0s';
           header.container.style.top = `-${window.scrollY}px`;
           header.menu.style.marginTop = `${window.scrollY}px`;
-          header.voice.style.marginTop = `${window.scrollY}px`;
+          if (header.voice) header.voice.style.marginTop = `${window.scrollY}px`;
           header.options.style.marginTop = `${window.scrollY}px`;
         }
         header.container.style.transition = '';

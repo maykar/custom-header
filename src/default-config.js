@@ -31,12 +31,13 @@ export const defaultConfig = {
   // Tabs
   hide_tabs: [],
   show_tabs: [],
-  default_tab: 0,
+  default_tab: '',
   tab_icons: [],
   reverse_tab_direction: false,
 
   // Buttons
   button_icons: [],
+  button_text: [],
   reverse_button_direction: false,
   menu_dropdown: false,
   menu_hide: false,

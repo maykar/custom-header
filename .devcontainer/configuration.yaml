@@ -1,7 +1,7 @@
 default_config:
 lovelace:
   mode: yaml
-conversation:
+# conversation:
 input_boolean:
   kiosk_mode:
     name: 'kiosk_mode:'
