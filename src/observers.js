@@ -16,6 +16,21 @@ export const observers = () => {
         }
       } else if (addedNodes.length && target.nodeName == 'PARTIAL-PANEL-RESOLVER') {
         // When returning to lovelace/overview from elsewhere in HA.
+        if (haElem.main.shadowRoot.querySelector(' ha-panel-lovelace')) {
+          if (config.compact_mode && !config.footer_mode) {
+            haElem.sidebar.main.shadowRoot.querySelector('.menu').style = 'height:49px;';
+            haElem.sidebar.main.shadowRoot.querySelector('paper-listbox').style = 'height:calc(100% - 175px);';
+            haElem.sidebar.main.shadowRoot.querySelector('div.divider').style = '';
+          } else if (config.footer_mode) {
+            haElem.sidebar.main.shadowRoot.querySelector('.menu').style = '';
+            haElem.sidebar.main.shadowRoot.querySelector('paper-listbox').style = 'height: calc(100% - 170px);';
+            haElem.sidebar.main.shadowRoot.querySelector('div.divider').style = 'margin-bottom: -10px;';
+          }
+        } else {
+          haElem.sidebar.main.shadowRoot.querySelector('.menu').style = '';
+          haElem.sidebar.main.shadowRoot.querySelector('paper-listbox').style = '';
+          haElem.sidebar.main.shadowRoot.querySelector('div.divider').style = '';
+        }
         if (root.querySelector('editor')) root.querySelector('editor').remove();
         buildConfig();
       } else if (target.className === 'edit-mode' && addedNodes.length) {

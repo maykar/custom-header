@@ -52,6 +52,18 @@ export const styleHeader = config => {
     header.options.querySelector('paper-listbox').setAttribute('dir', 'rtl');
   }
 
+  const style = document.createElement('style');
+  style.setAttribute('id', 'ch_header_style');
+  style.innerHTML = `
+    .menu, paper-listbox {
+      transition: height 0.1s ease-in-out 0s;
+    }
+    .divider {
+      transition: margin-bottom 0.1s ease-in-out 0s;
+    }
+  `;
+  haElem.sidebar.main.shadowRoot.appendChild(style);
+
   // Disable sidebar or style it to fit header's new sizing/placement.
   if (config.disable_sidebar) {
     kioskMode(true, false);
@@ -61,9 +73,19 @@ export const styleHeader = config => {
     kioskMode(false, true);
   } else if (!config.disable_sidebar && !config.kiosk_mode && !config.hide_header) {
     removeKioskMode();
-    haElem.sidebar.main.shadowRoot.querySelector('.menu').style = 'height:49px;';
-    haElem.sidebar.main.shadowRoot.querySelector('paper-listbox').style = 'height:calc(100% - 155px);';
-    haElem.sidebar.main.shadowRoot.querySelector('div.divider').style = 'margin-bottom: -10px;';
+    if (config.compact_mode && !config.footer_mode) {
+      haElem.sidebar.main.shadowRoot.querySelector('.menu').style = 'height:49px;';
+      haElem.sidebar.main.shadowRoot.querySelector('paper-listbox').style = 'height:calc(100% - 175px);';
+      haElem.sidebar.main.shadowRoot.querySelector('div.divider').style = '';
+    } else if (config.footer_mode) {
+      haElem.sidebar.main.shadowRoot.querySelector('.menu').style = '';
+      haElem.sidebar.main.shadowRoot.querySelector('paper-listbox').style = 'height: calc(100% - 170px);';
+      haElem.sidebar.main.shadowRoot.querySelector('div.divider').style = 'margin-bottom: -10px;';
+    } else {
+      haElem.sidebar.main.shadowRoot.querySelector('.menu').style = '';
+      haElem.sidebar.main.shadowRoot.querySelector('paper-listbox').style = '';
+      haElem.sidebar.main.shadowRoot.querySelector('div.divider').style = '';
+    }
     insertStyleTags(config);
   }
 
@@ -98,10 +120,13 @@ export const styleHeader = config => {
   // Button icon customization.
   if (config.button_icons) {
     for (const button in config.button_icons) {
+      if (!header[button]) continue;
       if (!config.button_icons[button]) {
         if (button === 'menu') header.menu.icon = 'mdi:menu';
         else if (button === 'voice' && header.voice) header.voice.icon = 'mdi:microphone';
-        else if (button === 'options') header[button].querySelector('paper-icon-button').icon = 'mdi:dots-vertical';
+        else if (button === 'options') {
+          header[button].querySelector('paper-icon-button').icon = 'mdi:dots-vertical';
+        }
       } else {
         if (button === 'options') header[button].querySelector('paper-icon-button').icon = config.button_icons[button];
         else header[button].icon = config.button_icons[button];
