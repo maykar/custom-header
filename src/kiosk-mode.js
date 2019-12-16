@@ -1,17 +1,19 @@
 import { haElem, root } from './ha-elements';
 
 // Kiosk mode is used to hide sidebar only as well.
-export const kioskMode = sidebarOnly => {
+export const kioskMode = (sidebarOnly, headerOnly) => {
   if (window.location.href.includes('disable_ch')) return;
 
   // Kiosk mode styling.
   let style = document.createElement('style');
   style.setAttribute('id', 'ch_header_style');
-  style.innerHTML += `
+  if (!headerOnly) {
+    style.innerHTML += `
         #drawer {
           display: none;
         }
       `;
+  }
   if (!sidebarOnly) {
     style.innerHTML += `
         ch-header {
@@ -20,8 +22,13 @@ export const kioskMode = sidebarOnly => {
         app-header {
           display: none;
         }
+        hui-view {
+          padding-top: 100px;
+        }
         hui-view, hui-panel-view {
-          min-height: 100vh;
+          min-height: calc(100vh + 96px);
+          margin-top: -96px;
+          margin-bottom: -16px;
         }
       `;
   }
@@ -33,20 +40,22 @@ export const kioskMode = sidebarOnly => {
     if (oldStyle) oldStyle.remove();
   }
 
-  haElem.drawer.style.display = 'none';
+  if (!headerOnly) {
+    haElem.drawer.style.display = 'none';
 
-  // Style sidebar to close immediately and prevent opening.
-  if (!haElem.sidebar.main.shadowRoot.querySelector('#ch_sidebar_style')) {
-    style = document.createElement('style');
-    style.setAttribute('id', 'ch_sidebar_style');
-    style.innerHTML = ':host(:not([expanded])) {width: 0px !important;}';
-    haElem.sidebar.main.shadowRoot.appendChild(style);
-  }
-  if (!haElem.main.shadowRoot.querySelector('#ch_sidebar_style')) {
-    style = document.createElement('style');
-    style.setAttribute('id', 'ch_sidebar_style');
-    style.innerHTML = ':host {--app-drawer-width: 0px !important;}';
-    haElem.main.shadowRoot.appendChild(style);
+    // Style sidebar to close immediately and prevent opening.
+    if (!haElem.sidebar.main.shadowRoot.querySelector('#ch_sidebar_style')) {
+      style = document.createElement('style');
+      style.setAttribute('id', 'ch_sidebar_style');
+      style.innerHTML = ':host(:not([expanded])) {width: 0px !important;}';
+      haElem.sidebar.main.shadowRoot.appendChild(style);
+    }
+    if (!haElem.main.shadowRoot.querySelector('#ch_sidebar_style')) {
+      style = document.createElement('style');
+      style.setAttribute('id', 'ch_sidebar_style');
+      style.innerHTML = ':host {--app-drawer-width: 0px !important;}';
+      haElem.main.shadowRoot.appendChild(style);
+    }
   }
   window.dispatchEvent(new Event('resize'));
 };

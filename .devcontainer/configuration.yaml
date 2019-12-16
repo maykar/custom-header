@@ -96,3 +96,7 @@ input_text:
     name: 'tab_indicator_color:'
     initial: 'grey'
     icon: 'mdi:minus'
+  header_text:
+    name: 'header_text:'
+    initial: 'Home Assistant'
+    icon: 'mdi:arrow-up-bold-box-outline'

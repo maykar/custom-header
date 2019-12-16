@@ -68,16 +68,19 @@ export const insertStyleTags = config => {
         ${config.menu_color ? `color: ${config.menu_color};` : ''}
         ${config.menu_hide ? `display: none;` : ''}
         ${config.menu_css ? config.menu_css : ''}
+        ${config.footer_mode && config.compact_mode ? 'margin-top:0 !important;' : ''}
       }
       [buttonElem="options"] {
         ${config.options_color ? `color: ${config.options_color};` : ''}
         ${config.options_hide ? `display: none;` : ''}
         ${config.options_css ? config.options_css : ''}
+        ${config.footer_mode && config.compact_mode ? 'margin-top:0 !important;' : ''}
       }
       [buttonElem="voice"] {
         ${config.voice_color ? `color: ${config.voice_color};` : ''}
         ${config.voice_hide ? `display: none;` : ''}
         ${config.voice_css ? config.voice_css : ''}
+        ${config.footer_mode && config.compact_mode ? 'margin-top:0 !important;' : ''}
       }
       paper-tab {
         ${config.all_tabs_color ? `color: ${config.all_tabs_color};` : ''}
@@ -137,20 +140,26 @@ export const insertStyleTags = config => {
   style.setAttribute('id', 'ch_view_style');
   style.innerHTML = `
         hui-view, hui-panel-view {
-          min-height: calc(100vh - ${headerHeight}px);
-          padding-top: 3px;
+          min-height: calc(100vh - 112px);
+          margin-top: -96px;
           ${config.footer_mode ? `padding-bottom: ${headerHeight}px;` : ''}
-          ${config.footer_mode ? `margin-bottom: -${headerHeight + 4}px;` : ''}
+          ${config.footer_mode ? `margin-bottom: -${headerHeight + 4}px;` : 'margin-bottom: -16px;'}
         }
         hui-panel-view {
-          padding-top: 0px;
+          padding-top: 100px;
           ${config.panel_view_css ? config.panel_view_css : ''}
         }
         hui-view {
+          padding-top: 100px;
           ${config.view_css ? config.view_css : ''}
         }
         #view {
           ${config.footer_mode ? `min-height: calc(100vh - ${headerHeight + 4}px) !important;` : ''}
+          ${
+            config.compact_mode && !config.footer_mode
+              ? `min-height: calc(100vh - ${headerHeight + 16}px) !important;`
+              : ''
+          }
         }
       `;
 

@@ -3,7 +3,8 @@ resources:
     type: module
 custom_header:
   template_variables: '{% set clock = (now().strftime("%I")|int)~now().strftime(":%M") %}'
-  header_text: '{{ clock }}'
+  # hide_header: true;
+  header_text: '{{ states.input_text.header_text.state }}'
   background: '{{ states.input_text.background.state }}'
   menu_color: '{{ states.input_text.menu_color.state }}'
   voice_color: '{{ states.input_text.voice_color.state }}'
@@ -98,6 +99,18 @@ views:
           - entity: input_text.default_tab
   - icon: mdi:skull
     title: skull
+    cards:
+      - type: entities
+        entities:
+          - entity: input_text.header_text
+            icon: 'mdi:arrow-up-bold-box-outline'
+          - entity: input_boolean.kiosk_mode
+          - entity: input_boolean.compact_mode
+          - entity: input_boolean.footer_mode
+          - entity: input_boolean.icon_changes
+          - entity: input_boolean.text_changes
+          - entity: input_boolean.reverse_tab_direction
+          - entity: input_boolean.reverse_button_direction
   - icon: mdi:bomb
     title: bomb
   - icon: mdi:death-star-variant

@@ -53,15 +53,18 @@ export const styleHeader = config => {
 
   // Disable sidebar or style it to fit header's new sizing/placement.
   if (config.disable_sidebar) {
-    kioskMode(true);
-  } else if (!config.disable_sidebar && !config.kiosk_mode) {
+    kioskMode(true, false);
+    insertStyleTags(config);
+  } else if (config.hide_header) {
+    insertStyleTags(config);
+    kioskMode(false, true);
+  } else if (!config.disable_sidebar && !config.kiosk_mode && !config.hide_header) {
     removeKioskMode();
     haElem.sidebar.main.shadowRoot.querySelector('.menu').style = 'height:49px;';
     haElem.sidebar.main.shadowRoot.querySelector('paper-listbox').style = 'height:calc(100% - 155px);';
     haElem.sidebar.main.shadowRoot.querySelector('div.divider').style = 'margin-bottom: -10px;';
+    insertStyleTags(config);
   }
-
-  insertStyleTags(config);
 
   // Remove chevrons.
   if (!config.chevrons) header.tabContainer.hideScrollButtons = true;
@@ -152,23 +155,30 @@ export const styleHeader = config => {
 
   if (!window.customHeaderShrink) {
     window.addEventListener('scroll', function(e) {
-      if (config.footer_mode || config.compact_mode) return;
-      if (window.scrollY > 48) {
-        header.container.style.top = '-48px';
-        header.menu.style.marginTop = '48px';
-        header.voice.style.marginTop = '48px';
-        header.options.style.marginTop = '48px';
+      const compact_mode =
+        window.getComputedStyle(header.container.querySelector('#contentContainer')).getPropertyValue('display') ===
+        'none';
+      const footer_mode = window.getComputedStyle(header.container).getPropertyValue('bottom') === '0px';
+      if (footer_mode || compact_mode) {
+        return;
       } else {
-        header.container.style.transition = '0s';
-        header.menu.style.transition = '0s';
-        header.voice.style.transition = '0s';
-        header.options.style.transition = '0s';
-        header.container.style.top = `-${window.scrollY}px`;
-        header.menu.style.marginTop = `${window.scrollY}px`;
-        header.voice.style.marginTop = `${window.scrollY}px`;
-        header.options.style.marginTop = `${window.scrollY}px`;
+        if (window.scrollY > 48) {
+          header.container.style.top = '-48px';
+          header.menu.style.marginTop = '48px';
+          header.voice.style.marginTop = '48px';
+          header.options.style.marginTop = '48px';
+        } else {
+          header.container.style.transition = '0s';
+          header.menu.style.transition = '0s';
+          header.voice.style.transition = '0s';
+          header.options.style.transition = '0s';
+          header.container.style.top = `-${window.scrollY}px`;
+          header.menu.style.marginTop = `${window.scrollY}px`;
+          header.voice.style.marginTop = `${window.scrollY}px`;
+          header.options.style.marginTop = `${window.scrollY}px`;
+        }
+        header.container.style.transition = '';
       }
-      header.container.style.transition = '';
     });
   }
 
