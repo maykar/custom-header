@@ -5,6 +5,12 @@ index: 3
 
 ## Change Log
 
+### Dec. 16th 2019 - v1.0.3
+
+- Fix default_tab's default so it's not 0 when not set
+- Make sure voice icon exists even if voice options are set in config
+- Resize header only in Lovelace view and only when needed
+
 ### Dec. 16th 2019 - v1.0.2
 
 - Adds localization to editor
