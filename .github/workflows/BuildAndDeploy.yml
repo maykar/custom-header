@@ -17,7 +17,7 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        BASE_BRANCH: docs
+        BASE_BRANCH: docs --
         BRANCH: gh-pages
         FOLDER: dist
         CLEAN: True
