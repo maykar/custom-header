@@ -12,6 +12,7 @@ export const styleHeader = config => {
   window.customHeaderConfig = config;
 
   if (window.location.href.includes('disable_ch')) config.disabled_mode = true;
+  if (config.kiosk_mode && !config.disabled_mode) kioskMode(false, false);
   if (config.disabled_mode) {
     window.customHeaderDisabled = true;
     removeKioskMode();
@@ -126,14 +127,7 @@ export const styleHeader = config => {
         } else {
           buttonElem.shadowRoot.querySelector('.buttonText').innerHTML = config.button_text[button];
         }
-        if (
-          (config.reverse_button_direction && button !== 'menu') ||
-          (!config.reverse_button_direction && button === 'menu')
-        ) {
-          buttonElem.shadowRoot.querySelector('.buttonText').dir = 'ltr';
-        } else {
-          buttonElem.shadowRoot.querySelector('.buttonText').dir = 'rtl';
-        }
+        buttonElem.shadowRoot.querySelector('.buttonText').dir = 'ltr';
         buttonElem.shadowRoot.querySelector('iron-icon').style.display = 'none';
         buttonElem.style.width = 'auto';
         if (config.button_text[button].includes('<br>')) {

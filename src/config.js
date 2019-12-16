@@ -2,7 +2,6 @@ import { invertNumArray, subscribeRenderTemplate, processTabArray } from './help
 import { lovelace, root } from './ha-elements';
 import { conditionalConfig } from './conditional-config';
 import { styleHeader } from './style-header';
-import { kioskMode } from './kiosk-mode';
 import { defaultConfig } from './default-config';
 
 export const buildConfig = config => {
@@ -24,8 +23,7 @@ export const buildConfig = config => {
     if (config.show_tabs && config.show_tabs.length) config.hide_tabs = invertNumArray(config.show_tabs);
     if (config.disable_sidebar || config.menu_dropdown) config.menu_hide = true;
     if (config.voice_dropdown) config.voice_hide = true;
-    if (config.kiosk_mode && !config.disabled_mode) kioskMode(false, false);
-    else styleHeader(config);
+    styleHeader(config);
   };
 
   const configString = JSON.stringify(config);
