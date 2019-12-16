@@ -2,6 +2,7 @@ import { LitElement, html } from 'lit-element';
 import { defaultConfig } from './default-config';
 import { getLovelace, fireEvent } from 'custom-card-helpers';
 import { hass } from './ha-elements';
+import { localize } from './localize/localize';
 
 export class CustomHeaderEditor extends LitElement {
   static get properties() {
@@ -27,7 +28,7 @@ export class CustomHeaderEditor extends LitElement {
         @ch-config-changed="${this._configChanged}"
       >
       </ch-config-editor>
-      <h4 class="underline">Exceptions</h4>
+      <h4 class="underline">${localize('editor.exceptions')}</h4>
       <br />
       ${this._config.exceptions
         ? this._config.exceptions.map(
@@ -44,10 +45,10 @@ export class CustomHeaderEditor extends LitElement {
           )
         : ''}
       <br />
-      <mwc-button @click="${this._addException}">Add Exception </mwc-button>
-      <h4 class="underline">Current User</h4>
+      <mwc-button @click="${this._addException}">${localize('editor.add_exception')}</mwc-button>
+      <h4 class="underline">${localize('editor.current_user')}</h4>
       <p style="font-size:16pt">${hass.user.name}</p>
-      <h4 class="underline">Current User Agent</h4>
+      <h4 class="underline">${localize('editor.current_user_agent')}</h4>
       <br />
       ${navigator.userAgent}
       <br />
@@ -85,12 +86,12 @@ export class CustomHeaderEditor extends LitElement {
         window.location.href = window.location.href;
       });
     } catch (e) {
-      alert(`Save failed: ${e}`);
+      alert(`${localize('editor.save_failed')}: ${e}`);
     }
   }
 
   get _save_button() {
-    const text = 'Save and Reload';
+    const text = localize('editor.save_and_reload');
     return html`
       <mwc-button raised @click="${this._save}">${text}</mwc-button>
     `;
@@ -98,7 +99,7 @@ export class CustomHeaderEditor extends LitElement {
 
   get _cancel_button() {
     return html`
-      <mwc-button raised @click="${this._close}">Cancel</mwc-button>
+      <mwc-button raised @click="${this._close}">${localize('editor.cancel')}</mwc-button>
     `;
   }
 
@@ -244,11 +245,11 @@ class ChConfigEditor extends LitElement {
       <iron-icon
         icon="mdi:alpha-t-box-outline"
         class="alert"
-        title="Disabled: The current value is a template."
+        title="${localize('editor.disabled_template')}"
       ></iron-icon>
     `;
     const editorWarning = html`
-      <iron-icon icon="mdi:alert-box-outline" class="alert" title="Removes ability to edit UI."></iron-icon>
+      <iron-icon icon="mdi:alert-box-outline" class="alert" title="${localize('editor.removes_edit_ui')}"></iron-icon>
     `;
     return html`
       <ha-switch
@@ -292,15 +293,15 @@ class ChConfigEditor extends LitElement {
             <h4 style="margin-top:-5px;padding-top:10px;font-size:12pt;" class="underline">
               <a href="https://maykar.github.io/custom-header/" target="_blank">
                 <ha-icon icon="mdi:help-circle" style="margin-top:-5px;"> </ha-icon>
-                Docs&nbsp;&nbsp;&nbsp;</a
+                ${localize('links.docs')}&nbsp;&nbsp;&nbsp;</a
               >
               <a href="https://github.com/maykar/custom-header" target="_blank">
                 <ha-icon icon="mdi:github-circle" style="margin-top:-5px;"> </ha-icon>
-                Github&nbsp;&nbsp;&nbsp;</a
+                GitHub&nbsp;&nbsp;&nbsp;</a
               >
               <a href="https://community.home-assistant.io/t/custom-header/" target="_blank">
                 <ha-icon icon="hass:home-assistant" style="margin-top:-5px;"> </ha-icon>
-                Forums</a
+                ${localize('links.forums')}</a
               >
             </h4>
             ${this.getConfig('editor_warnings')
@@ -308,23 +309,22 @@ class ChConfigEditor extends LitElement {
                   <br />
                   <div class="warning">
                     <p style="padding: 5px; margin: 0;">
-                      You can temporaily disable Custom-Header by adding "?disable_ch" to the end of your URL.
+                      ${localize('editor.warning_disable_ch')}
                     </p>
                     <p style="padding: 5px; margin: 0;">
-                      After using the "Raw Config Editor" you need to reload the page to restore Custom Header.
-                    </p>
-                    <br />
-                    <p style="padding: 5px; margin: 0;">
-                      <ha-icon style="padding-right: 3px;" icon="mdi:alpha-t-box-outline"></ha-icon>Designates items
-                      that are already a template and won't be modified by the editor.<br /><ha-icon
-                        style="padding-right: 3px;"
-                        icon="mdi:alert-box-outline"
-                      ></ha-icon
-                      >Marks items that remove your ability to edit the UI.<br />
+                      ${localize('editor.warning_raw_editor_reload')}
                     </p>
                     <br />
                     <p style="padding: 5px; margin: 0;">
-                      All text options accept Jinja. Hover over any item for more info.
+                      <ha-icon style="padding-right: 3px;" icon="mdi:alpha-t-box-outline"></ha-icon>
+                      ${localize('editor.warning_allready_a_template')}
+                      <br /><ha-icon style="padding-right: 3px;" icon="mdi:alert-box-outline"></ha-icon> ${localize(
+                        'editor.warning_edit_ui',
+                      )}<br />
+                    </p>
+                    <br />
+                    <p style="padding: 5px; margin: 0;">
+                      ${localize('editor.warning_jinja_info')}
                     </p>
                   </div>
                 `
@@ -334,8 +334,8 @@ class ChConfigEditor extends LitElement {
                   'editor_warnings',
                   false,
                   false,
-                  'Display this info and warnings section.',
-                  'Toggle editor warnings.',
+                  localize('editor.editor_warnings_title'),
+                  localize('editor.editor_warnings_tip'),
                 )
               : ''}
           `
@@ -347,15 +347,57 @@ class ChConfigEditor extends LitElement {
           `
         : ''}
       <div style="padding-bottom:20px;" class="side-by-side">
-        ${this.haSwitch('disabled_mode', true, false, 'Disabled Mode', 'Completely disable Custom-Header.')}
-        ${this.haSwitch('footer_mode', true, false, 'Footer Mode', 'Turn the header into a footer.')}
-        ${this.haSwitch('compact_mode', true, false, 'Compact Mode', 'Make header compact.')}
-        ${this.haSwitch('kiosk_mode', true, true, 'Kiosk Mode', 'Hide and disable the header and sidebar')}
-        ${this.haSwitch('disable_sidebar', true, false, 'Disable Sidebar', 'Disable sidebar and menu button.')}
-        ${this.haSwitch('chevrons', true, false, 'Display Tab Chevrons', 'Disable scrolling arrows for tabs.')}
-        ${this.haSwitch('hidden_tab_redirect', true, false, 'Hidden Tab Redirect', 'Redirect from hidden tab.')}
+        ${this.haSwitch(
+          'disabled_mode',
+          true,
+          false,
+          localize('editor.disabled_mode_title'),
+          localize('editor.disabled_mode_tip'),
+        )}
+        ${this.haSwitch(
+          'footer_mode',
+          true,
+          false,
+          localize('editor.footer_mode_title'),
+          localize('editor.footer_mode_tip'),
+        )}
+        ${this.haSwitch(
+          'compact_mode',
+          true,
+          false,
+          localize('editor.compact_mode_title'),
+          localize('editor.compact_mode_tip'),
+        )}
+        ${this.haSwitch(
+          'kiosk_mode',
+          true,
+          true,
+          localize('editor.kiosk_mode_title'),
+          localize('editor.kiosk_mode_tip'),
+        )}
+        ${this.haSwitch(
+          'disable_sidebar',
+          true,
+          false,
+          localize('editor.disable_sidebar_title'),
+          localize('editor.disable_sidebar_tip'),
+        )}
+        ${this.haSwitch('chevrons', true, false, localize('editor.chevrons_title'), localize('editor.chevrons_tip'))}
+        ${this.haSwitch(
+          'hidden_tab_redirect',
+          true,
+          false,
+          localize('editor.hidden_tab_redirect_title'),
+          localize('editor.hidden_tab_redirect_tip'),
+        )}
         ${!this.exception && !this.getConfig('editor_warnings')
-          ? this.haSwitch('editor_warnings', false, false, 'Display Editor Warnings & Info', 'Toggle editor warnings.')
+          ? this.haSwitch(
+              'editor_warnings',
+              false,
+              false,
+              localize('editor.editor_warnings_second_title'),
+              localize('editor.editor_warnings_tip'),
+            )
           : ''}
       </div>
       <hr />
@@ -363,57 +405,99 @@ class ChConfigEditor extends LitElement {
         <paper-input
           style="padding: 10px 10px 0 10px;"
           class="${this.exception && this.config.header_text === undefined ? 'inherited slotted' : 'slotted'}"
-          label="Header text."
+          label="${localize('editor.header_text')}"
           .value="${this.getConfig('header_text')}"
           .configValue="${'header_text'}"
           @value-changed="${this._valueChanged}"
         >
         </paper-input>
         <paper-input
-          placeholder="automatic"
+          placeholder="${localize('editor.automatic')}"
           style="padding: 10px 10px 0 10px;"
           class="${this.exception && this.config.locale === undefined ? 'inherited slotted' : 'slotted'}"
-          label="Locale for default template variables (date/time)."
+          label="${localize('editor.locale_desc')}"
           .value="${this.getConfig('locale')}"
           .configValue="${'locale'}"
           @value-changed="${this._valueChanged}"
         >
         </paper-input>
       </div>
-      <h4 class="underline">Menu Items</h4>
+      <h4 class="underline">${localize('editor.menu_items')}</h4>
       <div class="side-by-side">
-        ${this.haSwitch('hide_config', true, true, 'Hide "Configure UI"', 'Hide item in options menu.')}
-        ${this.haSwitch('hide_raw', true, true, 'Hide "Raw Config Editor"', 'Hide item in options menu.')}
-        ${this.haSwitch('hide_help', true, false, 'Hide "Help"', 'Hide item in options menu.')}
-        ${this.haSwitch('hide_unused', true, false, 'Hide "Unused Entities"', 'Hide item in options menu.')}
+        ${this.haSwitch(
+          'hide_config',
+          true,
+          true,
+          localize('editor.hide_configure_ui_title'),
+          localize('editor.hide_configure_ui_tip'),
+        )}
+        ${this.haSwitch(
+          'hide_raw',
+          true,
+          true,
+          localize('editor.hide_raw_editor_title'),
+          localize('editor.hide_raw_editor_tip'),
+        )}
+        ${this.haSwitch('hide_help', true, false, localize('editor.hide_help_title'), localize('editor.hide_help_tip'))}
+        ${this.haSwitch(
+          'hide_unused',
+          true,
+          false,
+          localize('editor.hide_unused_title'),
+          localize('editor.hide_unused_tip'),
+        )}
       </div>
-      <h4 class="underline">Buttons</h4>
+      <h4 class="underline">${localize('editor.buttons')}</h4>
       <div style="padding-bottom:20px;" class="side-by-side">
-        ${this.haSwitch('menu_hide', true, false, 'Hide Menu Button', 'Hide the menu button.')}
-        ${this.haSwitch('menu_dropdown', true, false, 'Menu in Dropdown Menu', 'Put menu button in options menu.')}
-        ${this.haSwitch('voice_hide', true, false, 'Hide Voice Button', 'Hide the voice button.')}
-        ${this.haSwitch('voice_dropdown', true, false, 'Voice in Dropdown Menu', 'Put voice button in options menu.')}
-        ${this.haSwitch('options_hide', true, true, 'Hide Options Button', 'Hide the options button.')}
+        ${this.haSwitch('menu_hide', true, false, localize('editor.menu_hide_title'), localize('editor.menu_hide_tip'))}
+        ${this.haSwitch(
+          'menu_dropdown',
+          true,
+          false,
+          localize('editor.menu_dropdown_title'),
+          localize('editor.menu_dropdown_tip'),
+        )}
+        ${this.haSwitch(
+          'voice_hide',
+          true,
+          false,
+          localize('editor.voice_hide_title'),
+          localize('editor.voice_hide_tip'),
+        )}
+        ${this.haSwitch(
+          'voice_dropdown',
+          true,
+          false,
+          localize('editor.voice_dropdown_title'),
+          localize('editor.voice_dropdown_tip'),
+        )}
+        ${this.haSwitch(
+          'options_hide',
+          true,
+          true,
+          localize('editor.options_hide_title'),
+          localize('editor.options_hide_tip'),
+        )}
         ${this.haSwitch(
           'reverse_button_direction',
           true,
           false,
-          'Reverse Buttons Orientation',
-          'Reverses all buttons orientation.',
+          localize('editor.reverse_button_title'),
+          localize('editor.reverse_button_tip'),
         )}
       </div>
-      <h4 class="underline">Tabs</h4>
+      <h4 class="underline">${localize('editor.tabs')}</h4>
       <paper-dropdown-menu id="tabs" @value-changed="${this._tabVisibility}">
         <paper-listbox slot="dropdown-content" .selected="${this.getConfig('show_tabs').length > 0 ? '1' : '0'}">
-          <paper-item>Hide Tabs</paper-item>
-          <paper-item>Show Tabs</paper-item>
+          <paper-item>${localize('editor.tabs_hide')}</paper-item>
+          <paper-item>${localize('editor.tabs_show')}</paper-item>
         </paper-listbox>
       </paper-dropdown-menu>
       <div class="side-by-side">
         <div id="show" style="display:${this.getConfig('show_tabs').length > 0 ? 'initial' : 'none'}">
           <paper-input
             class="${this.exception && this.config.show_tabs === undefined ? 'inherited slotted' : 'slotted'}"
-            label="Comma-separated list of tab numbers to show:"
+            label="${localize('editor.show_tab_list')}:"
             .value="${this.getConfig('show_tabs')}"
             .configValue="${'show_tabs'}"
             @value-changed="${this._valueChanged}"
@@ -423,7 +507,7 @@ class ChConfigEditor extends LitElement {
         <div id="hide" style="display:${this.getConfig('show_tabs').length > 0 ? 'none' : 'initial'}">
           <paper-input
             class="${this.exception && this.config.hide_tabs === undefined ? 'inherited slotted' : 'slotted'}"
-            label="Comma-separated list of tab numbers to hide:"
+            label="${localize('editor.hide_tab_list')}:"
             .value="${this.getConfig('hide_tabs')}"
             .configValue="${'hide_tabs'}"
             @value-changed="${this._valueChanged}"
@@ -432,7 +516,7 @@ class ChConfigEditor extends LitElement {
         </div>
         <paper-input
           class="${this.exception && this.config.default_tab === undefined ? 'inherited slotted' : 'slotted'}"
-          label="Default tab:"
+          label="${localize('editor.default_tab')}:"
           .value="${this.getConfig('default_tab')}"
           .configValue="${'default_tab'}"
           @value-changed="${this._valueChanged}"
@@ -442,8 +526,8 @@ class ChConfigEditor extends LitElement {
           'reverse_tab_direction',
           true,
           false,
-          'Reverse Tab Direction',
-          'Places tabs on right side in reverse order.',
+          localize('editor.reverse_tab_title'),
+          localize('editor.reverse_tab_tip'),
         )}
       </div>
     `;
@@ -607,13 +691,13 @@ class ChExceptionEditor extends LitElement {
             <paper-icon-button ?hidden=${this._closed} icon="mdi:delete" @click="${this._deleteException}">
             </paper-icon-button>
           </div>
-          <h4 class="underline">Conditions</h4>
+          <h4 class="underline">${localize('editor.conditions')}</h4>
           <ch-conditions-editor
             .conditions="${this.exception.conditions}"
             @ch-conditions-changed="${this._conditionsChanged}"
           >
           </ch-conditions-editor>
-          <h4 class="underline">Config</h4>
+          <h4 class="underline">${localize('editor.config')}</h4>
           <ch-config-editor
             exception
             .defaultConfig="${{ ...defaultConfig, ...this.config }}"
@@ -702,28 +786,28 @@ class ChConditionsEditor extends LitElement {
     if (!this.conditions) return html``;
     return html`
       <paper-input
-        label="User (Seperate multiple users with a comma.)"
+        label="${localize('editor.user_list')}"
         .value="${this._user}"
         .configValue="${'user'}"
         @value-changed="${this._valueChanged}"
       >
       </paper-input>
       <paper-input
-        label="User Agent"
+        label="${localize('editor.user_agent')}"
         .value="${this._user_agent}"
         .configValue="${'user_agent'}"
         @value-changed="${this._valueChanged}"
       >
       </paper-input>
       <paper-input
-        label="Media Query"
+        label="${localize('editor.media_query')}"
         .value="${this._media_query}"
         .configValue="${'media_query'}"
         @value-changed="${this._valueChanged}"
       >
       </paper-input>
       <paper-input
-        label="Query String"
+        label="${localize('editor.query_string')}"
         .value="${this._query_string}"
         .configValue="${'query_string'}"
         @value-changed="${this._valueChanged}"
