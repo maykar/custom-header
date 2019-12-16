@@ -382,6 +382,13 @@ class ChConfigEditor extends LitElement {
           localize('editor.disable_sidebar_title'),
           localize('editor.disable_sidebar_tip'),
         )}
+        ${this.haSwitch(
+          'hide_header',
+          true,
+          false,
+          localize('editor.hide_header_title'),
+          localize('editor.hide_header_tip'),
+        )}
         ${this.haSwitch('chevrons', true, false, localize('editor.chevrons_title'), localize('editor.chevrons_tip'))}
         ${this.haSwitch(
           'hidden_tab_redirect',

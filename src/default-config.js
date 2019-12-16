@@ -11,6 +11,7 @@ export const defaultConfig = {
   compact_mode: false,
   footer_mode: false,
   disable_sidebar: false,
+  hide_header: false,
   chevrons: true,
   indicator_top: false,
   hidden_tab_redirect: true,

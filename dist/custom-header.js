@@ -2973,6 +2973,7 @@ const defaultConfig = {
   compact_mode: false,
   footer_mode: false,
   disable_sidebar: false,
+  hide_header: false,
   chevrons: true,
   indicator_top: false,
   hidden_tab_redirect: true,
@@ -3064,6 +3065,8 @@ var editor = {
 	hidden_tab_redirect_title: "Hidden Tab Redirect",
 	hide_configure_ui_tip: "Hide item in options menu.",
 	hide_configure_ui_title: "Hide 'Configure UI'",
+	hide_header_tip: "Hide header, but still swipe out sidebar.",
+	hide_header_title: "Disable Header",
 	hide_help_tip: "Hide item in options menu.",
 	hide_help_title: "Hide 'Help'",
 	hide_raw_editor_tip: "Hide item in options menu.",
@@ -3594,6 +3597,7 @@ class ChConfigEditor extends LitElement {
         ${this.haSwitch('compact_mode', true, false, localize('editor.compact_mode_title'), localize('editor.compact_mode_tip'))}
         ${this.haSwitch('kiosk_mode', true, true, localize('editor.kiosk_mode_title'), localize('editor.kiosk_mode_tip'))}
         ${this.haSwitch('disable_sidebar', true, false, localize('editor.disable_sidebar_title'), localize('editor.disable_sidebar_tip'))}
+        ${this.haSwitch('hide_header', true, false, localize('editor.hide_header_title'), localize('editor.hide_header_tip'))}
         ${this.haSwitch('chevrons', true, false, localize('editor.chevrons_title'), localize('editor.chevrons_tip'))}
         ${this.haSwitch('hidden_tab_redirect', true, false, localize('editor.hidden_tab_redirect_title'), localize('editor.hidden_tab_redirect_tip'))}
         ${!this.exception && !this.getConfig('editor_warnings') ? this.haSwitch('editor_warnings', false, false, localize('editor.editor_warnings_second_title'), localize('editor.editor_warnings_tip')) : ''}
