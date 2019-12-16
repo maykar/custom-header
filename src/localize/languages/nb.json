@@ -67,7 +67,7 @@
     "editor_warnings_second_title": "Vis editor advarser of informasjon",
     "editor_warnings_tip": "Veksle editor advarsler.",
     "editor_warnings_title": "Vis denne informasjonen og advarsel seksjoner.",
-    "warning_disable_ch": "Du kan deaktivere Custom-Header midlertidig ved å legge til '? Disable_ch' på slutten av nettadressen.",
+    "warning_disable_ch": "Du kan deaktivere Custom-Header midlertidig ved å legge til '?disable_ch' på slutten av nettadressen.",
     "warning_raw_editor_reload": "After using the 'Tekstbasert konfigurasjonsredigering' you need to reload the page to restore Custom Header.",
     "warning_allready_a_template": "Etter å ha brukt 'Tekstbasert konfigurasjonsredigering', må du laste inn siden på nytt for å gjenopprette Custom Header.",
     "warning_edit_ui": "Markerer elementer som fjerner muligheten til å redigere brukergrensesnittet.",
