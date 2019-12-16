@@ -15,6 +15,7 @@ Options with a :warning: remove the ability to edit from the UI. See [important 
 | compact_mode    | Boolean | false            | Compacts the header to about half the size while keeping all functionality |
 | footer_mode     | Boolean | false            | Places the header at the bottom of the page                                |
 | disable_sidebar | Boolean | false            | Disables and hides the sidebar and menu button                             |
+| hide_header     | Boolean | false            | Hides the header, but still allows sidebar to be swiped on from left.      |
 | hide_help       | Boolean | false            | Hides the "Help" option in the options menu                                |
 | hide_unused     | Boolean | false            | Hides the "Unused Entities" option in the options menu                     |
 | hide_refresh    | Boolean | false            | Hides the "Refresh" option in the options menu                             |
