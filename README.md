@@ -1,71 +1,24 @@
-# Lovelace custom-header
+## CUSTOM HEADER
 
-Current config options. Place at root of lovelace yaml (the following config
-will result in one ugly header/footer):
+Custom Header adds enhancements and customization options to Home Assistant's Lovelace header. Custom Header is the replacement and successor of [Compact Custom Header](https://github.com/maykar/compact-custom-header).
 
-- EVERY Config item can be templated with Jinja and updates dynamically with entity changes as well as once a minute.
-- Can use exception config just like CCH: https://maykar.github.io/compact-custom-header/Exception-Config/
-- hide_tabs and show_tabs can also be written as `hide_tabs: 1, home, 10`
-- Ranges may also be used for hide/show tabs: `show_tabs: 0 to 10`
+### [Docs (installation, config, and issues)](https://maykar.github.io/custom-header)
 
-```yaml
-custom_header:
-  footer_mode: true
-  kiosk_mode: false
-  disabled_mode: false
-  compact_mode: false
-  mobile_mode: false # Turns on footer_mode & compact_mode. Makes button & tab directions right to left
-  disable_sidebar: false
-  tab_direction: 'ltr' # "ltr" left to right or "rtl" right to left
-  button_direction: 'ltr'
-  template_variables: '{% set clock = (now().strftime("%I")|int)~now().strftime(":%M") %}'
-  header_text: '{{ clock }}'
-  hidden_tab_redirect: true
-  default_tab: 0
-  background: black
-  elements_color: '#fff' # Color of all buttons and tabs
-  tab_indicator_color: yellow
-  active_tab_color: yellow
-  menu_color: red
-  voice_color: rgb(255, 99, 71)
-  options_color: var(--text-primary-color)
-  all_tabs_color: pink
-  tabs_color:
-    5: yellow
-    home: '#fff'
-  chevrons: false # Scroll buttons for tabs
-  indicator_top: true # Current tab indicator can be on top or bottom
-  hide_tabs: # Can be show_tabs if you prefer
-    - 1
-    - home # View's title or path may be used
-    - 10
-```
+### Features
 
-## Development
+- Per user/device configs
+- Every config item can be templated with Jinja
+- Style and hide any element in the header
+- Dynamically style header elements based on entity states/attributes
+- Buttons can be hidden, made into custom or templated text, or be placed in the options menu
+- Compact mode, kiosk mode, and footer mode
+- Default/starting view
+- But wait, there's more...
 
-1. Fork and clone the repository.
-2. Open the [devcontainer][devcontainer] and run `npm start` when it's ready or
-   run `npm start`.
-3. The compiled `.js` file will be accessible on
-   `http://127.0.0.1:5000/custom-header.js`.
-   - It will also be located in the `dist` directory,
-4. On a running Home Assistant installation add this to your Lovelace
-   `resources:`
+<img style="border: 5px solid #767676;border-radius: 10px;max-width: 350px;width: 100%;box-sizing: border-box;" src="https://github.com/maykar/custom-header/blob/master/demo.gif?raw=true" alt="Demo">
 
 ```yaml
-- url: 'http://127.0.0.1:5000/custom-header.js'
-  type: module
+resources:
+  - url: /community_plugin/custom-header/custom-header.js
+    type: module
 ```
-
-_Change "127.0.0.1" to the IP of your development machine._
-
-### Bonus
-
-If you need a fresh test instance you can install a fresh Home Assistant instance inside the devcontainer as well.
-
-1. Run the command `dc start`.
-2. Home Assistant will install and will eventually be running on port `9123`
-
-<!--Links -->
-
-[devcontainer]: https://code.visualstudio.com/docs/remote/containers
