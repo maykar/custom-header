@@ -1,4 +1,3 @@
-import commonjs from 'rollup-plugin-commonjs';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import typescript from 'rollup-plugin-typescript2';
 import babel from 'rollup-plugin-babel';
@@ -20,7 +19,6 @@ const serveopts = {
 
 const plugins = [
   nodeResolve({}),
-  commonjs(),
   typescript(),
   json(),
   babel({

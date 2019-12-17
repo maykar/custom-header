@@ -10,7 +10,6 @@ import { fireEvent } from 'custom-card-helpers';
 
 export const styleHeader = config => {
   window.customHeaderConfig = config;
-
   insertSettings();
 
   if (window.location.href.includes('disable_ch')) config.disabled_mode = true;
@@ -35,6 +34,7 @@ export const styleHeader = config => {
     hideMenuItems(config, header, false);
     header.menu.style.display = '';
     if (header.container) header.container.style.visibility = 'visible';
+    insertSettings();
   }
 
   if (!header.tabs.length) config.compact_mode = false;

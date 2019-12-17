@@ -4066,20 +4066,27 @@ const showEditor = () => {
     container.appendChild(nest);
     nest.appendChild(document.createElement('custom-header-editor'));
   }
-}; ///// Add
-
+};
 
 const insertSettings = () => {
+  function insertAfter(el, referenceNode) {
+    referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
+  }
+
   if (lovelace.mode === 'storage') {
     const chSettings = document.createElement('paper-item');
     chSettings.setAttribute('id', 'ch_settings');
     chSettings.addEventListener('click', () => showEditor());
     chSettings.innerHTML = 'Custom Header';
     const paperItems = header.options.querySelector('paper-listbox').querySelectorAll('paper-item');
+    const paperItemsHA = haElem.options.querySelector('paper-listbox').querySelectorAll('paper-item');
 
-    if (!header.options.querySelector('paper-listbox').querySelector(`#ch_settings`)) {
-      header.options.querySelector('paper-listbox').insertBefore(chSettings, paperItems[paperItems.length]);
-      haElem.options.querySelector('paper-listbox').insertBefore(chSettings, paperItems[paperItems.length]);
+    if (!header.options.querySelector('paper-listbox').querySelector('#ch_settings')) {
+      insertAfter(chSettings, paperItems[paperItems.length - 1]);
+    }
+
+    if (!haElem.options.querySelector('paper-listbox').querySelector('#ch_settings')) {
+      insertAfter(chSettings, paperItemsHA[paperItemsHA.length - 1]);
     }
   }
 };
@@ -4503,6 +4510,7 @@ const styleHeader = config => {
     hideMenuItems(config, header, false);
     header.menu.style.display = '';
     if (header.container) header.container.style.visibility = 'visible';
+    insertSettings();
   }
 
   if (!header.tabs.length) config.compact_mode = false;
