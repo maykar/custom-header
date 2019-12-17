@@ -5,6 +5,12 @@ index: 3
 
 ## Change Log
 
+### Dec. 17th 2019 - v1.0.4
+
+- View style fixes
+- Panel mode style fixes
+- Insert custom header option in disabled mode
+
 ### Dec. 16th 2019 - v1.0.3
 
 - Fix default_tab's default so it's not 0 when not set
