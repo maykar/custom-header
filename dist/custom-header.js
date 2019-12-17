@@ -4397,6 +4397,7 @@ const insertStyleTags = config => {
           ${config.footer_mode ? `margin-bottom: -${headerHeight + 4}px;` : 'margin-bottom: -16px;'}
         }
         hui-panel-view {
+          margin-top: 0;
           ${config.hide_header || config.kiosk_mode ? 'padding-top: 96px; min-height: 100vh !important;' : ''}
           ${config.panel_view_css ? config.panel_view_css : ''}
         }
@@ -4415,7 +4416,6 @@ const insertStyleTags = config => {
 
   if (!currentStyle || style.innerHTML != currentStyle.innerHTML) {
     root.appendChild(style);
-    console.log('view style');
     if (currentStyle) currentStyle.remove();
   } // Hide cheverons completely when not visible.
 
