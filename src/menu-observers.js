@@ -40,7 +40,8 @@ export const menuButtonObservers = (config, header) => {
           ) {
             root.shadowRoot.querySelector('[buttonElem="menu"]').shadowRoot.appendChild(buildDot());
             if (root.shadowRoot.querySelector('[buttonElem="menu"]').shadowRoot.querySelector('.buttonText')) {
-              root.shadowRoot.querySelector('[buttonElem="menu"]').shadowRoot.querySelector('.dot').style.display = 'none';
+              root.shadowRoot.querySelector('[buttonElem="menu"]').shadowRoot.querySelector('.dot').style.display =
+                'none';
               root.shadowRoot
                 .querySelector('[buttonElem="menu"]')
                 .shadowRoot.querySelector(

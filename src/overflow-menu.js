@@ -1,6 +1,6 @@
 import './editor';
 import { header } from './build-header';
-import { root, lovelace } from './ha-elements';
+import { root, lovelace, haElem } from './ha-elements';
 
 export const hideMenuItems = (config, header, editMode) => {
   const localized = (item, string) => {
@@ -87,13 +87,17 @@ const showEditor = () => {
   }
 };
 
-if (lovelace.mode === 'storage') {
-  const chSettings = document.createElement('paper-item');
-  chSettings.setAttribute('id', 'ch_settings');
-  chSettings.addEventListener('click', () => showEditor());
-  chSettings.innerHTML = 'Custom Header';
-  const paperItems = header.options.querySelector('paper-listbox').querySelectorAll('paper-item');
-  if (!header.options.querySelector('paper-listbox').querySelector(`#ch_settings`)) {
-    header.options.querySelector('paper-listbox').insertBefore(chSettings, paperItems[paperItems.length]);
+///// Add
+export const insertSettings = () => {
+  if (lovelace.mode === 'storage') {
+    const chSettings = document.createElement('paper-item');
+    chSettings.setAttribute('id', 'ch_settings');
+    chSettings.addEventListener('click', () => showEditor());
+    chSettings.innerHTML = 'Custom Header';
+    const paperItems = header.options.querySelector('paper-listbox').querySelectorAll('paper-item');
+    if (!header.options.querySelector('paper-listbox').querySelector(`#ch_settings`)) {
+      header.options.querySelector('paper-listbox').insertBefore(chSettings, paperItems[paperItems.length]);
+      haElem.options.querySelector('paper-listbox').insertBefore(chSettings, paperItems[paperItems.length]);
+    }
   }
-}
+};

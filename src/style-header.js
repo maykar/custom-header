@@ -1,6 +1,6 @@
 import { header } from './build-header';
 import { tabIndexByName } from './helpers';
-import { hideMenuItems, buttonToOverflow } from './overflow-menu';
+import { hideMenuItems, buttonToOverflow, insertSettings } from './overflow-menu';
 import { kioskMode, removeKioskMode } from './kiosk-mode';
 import { menuButtonObservers } from './menu-observers';
 import { insertStyleTags } from './style-tags';
@@ -11,8 +11,9 @@ import { fireEvent } from 'custom-card-helpers';
 export const styleHeader = config => {
   window.customHeaderConfig = config;
 
+  insertSettings();
+
   if (window.location.href.includes('disable_ch')) config.disabled_mode = true;
-  if (config.kiosk_mode && !config.disabled_mode) kioskMode(false, false);
   if (config.disabled_mode) {
     window.customHeaderDisabled = true;
     removeKioskMode();
@@ -65,7 +66,10 @@ export const styleHeader = config => {
   haElem.sidebar.main.shadowRoot.appendChild(style);
 
   // Disable sidebar or style it to fit header's new sizing/placement.
-  if (config.disable_sidebar) {
+  if (config.kiosk_mode && !config.disabled_mode) {
+    insertStyleTags(config);
+    kioskMode(false, false);
+  } else if (config.disable_sidebar) {
     kioskMode(true, false);
     insertStyleTags(config);
   } else if (config.hide_header) {

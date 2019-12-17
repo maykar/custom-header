@@ -4082,19 +4082,23 @@ const showEditor = () => {
     container.appendChild(nest);
     nest.appendChild(document.createElement('custom-header-editor'));
   }
-};
+}; ///// Add
 
-if (lovelace.mode === 'storage') {
-  const chSettings = document.createElement('paper-item');
-  chSettings.setAttribute('id', 'ch_settings');
-  chSettings.addEventListener('click', () => showEditor());
-  chSettings.innerHTML = 'Custom Header';
-  const paperItems = header.options.querySelector('paper-listbox').querySelectorAll('paper-item');
 
-  if (!header.options.querySelector('paper-listbox').querySelector(`#ch_settings`)) {
-    header.options.querySelector('paper-listbox').insertBefore(chSettings, paperItems[paperItems.length]);
+const insertSettings = () => {
+  if (lovelace.mode === 'storage') {
+    const chSettings = document.createElement('paper-item');
+    chSettings.setAttribute('id', 'ch_settings');
+    chSettings.addEventListener('click', () => showEditor());
+    chSettings.innerHTML = 'Custom Header';
+    const paperItems = header.options.querySelector('paper-listbox').querySelectorAll('paper-item');
+
+    if (!header.options.querySelector('paper-listbox').querySelector(`#ch_settings`)) {
+      header.options.querySelector('paper-listbox').insertBefore(chSettings, paperItems[paperItems.length]);
+      haElem.options.querySelector('paper-listbox').insertBefore(chSettings, paperItems[paperItems.length]);
+    }
   }
-}
+};
 
 const kioskMode = (sidebarOnly, headerOnly) => {
   if (window.location.href.includes('disable_ch')) return; // Kiosk mode styling.
@@ -4393,7 +4397,7 @@ const insertStyleTags = config => {
           ${config.footer_mode ? `margin-bottom: -${headerHeight + 4}px;` : 'margin-bottom: -16px;'}
         }
         hui-panel-view {
-          padding-top: 100px;
+          ${config.hide_header || config.kiosk_mode ? 'padding-top: 96px; min-height: 100vh !important;' : ''}
           ${config.panel_view_css ? config.panel_view_css : ''}
         }
         hui-view {
@@ -4411,6 +4415,7 @@ const insertStyleTags = config => {
 
   if (!currentStyle || style.innerHTML != currentStyle.innerHTML) {
     root.appendChild(style);
+    console.log('view style');
     if (currentStyle) currentStyle.remove();
   } // Hide cheverons completely when not visible.
 
@@ -4488,8 +4493,8 @@ const redirects = (config, header) => {
 
 const styleHeader = config => {
   window.customHeaderConfig = config;
+  insertSettings();
   if (window.location.href.includes('disable_ch')) config.disabled_mode = true;
-  if (config.kiosk_mode && !config.disabled_mode) kioskMode(false, false);
 
   if (config.disabled_mode) {
     window.customHeaderDisabled = true;
@@ -4540,7 +4545,10 @@ const styleHeader = config => {
   `;
   haElem.sidebar.main.shadowRoot.appendChild(style); // Disable sidebar or style it to fit header's new sizing/placement.
 
-  if (config.disable_sidebar) {
+  if (config.kiosk_mode && !config.disabled_mode) {
+    insertStyleTags(config);
+    kioskMode(false, false);
+  } else if (config.disable_sidebar) {
     kioskMode(true, false);
     insertStyleTags(config);
   } else if (config.hide_header) {
