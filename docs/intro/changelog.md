@@ -5,7 +5,7 @@ index: 3
 
 ## Change Log
 
-### Dec. 17th 2019 - v1.0.6
+### Dec. 18th 2019 - v1.0.6
 
 Fixes for:
 - View sizing
