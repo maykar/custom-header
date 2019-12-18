@@ -11,7 +11,7 @@ export const redirects = (config, header) => {
         break;
       }
     }
-  } else if (config.hide_tabs.includes(0)) {
+  } else if (config.default_tab) {
     overview.setAttribute('href', `/lovelace/${tabIndexByName(config.default_tab)}`);
   }
 

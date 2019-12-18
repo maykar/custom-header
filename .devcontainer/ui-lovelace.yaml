@@ -34,7 +34,7 @@ custom_header:
     options: '{% if states.input_boolean.text_changes.state == "on" %}{{dayNameLong}}<br>{{date}}{% endif %}'
   menu_dropdown: '{{ states.input_boolean.menu_dropdown.state == "on" }}'
   voice_dropdown: '{{ states.input_boolean.voice_dropdown.state == "on" }}'
-background: black #url('https://bit.ly/375dx0T')
+background: url('https://bit.ly/375dx0T')
 views:
   - icon: mdi:pac-man
     title: pacman

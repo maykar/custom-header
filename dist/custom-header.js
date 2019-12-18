@@ -22,8 +22,8 @@ const defaultVariables = locale => {
     dayNameLong: d.toLocaleDateString(locale, {
       weekday: 'long'
     }),
-    hours12: d.getHours() > 12 ? d.getHours() - 12 : d.getHours(),
-    hours12LZ: String(d.getHours() > 12 ? d.getHours() - 12 : d.getHours()).padStart(2, 0),
+    hours12: String((d.getHours() + 24) % 12 || 12),
+    hours12LZ: String((d.getHours() + 24) % 12 || 12).padStart(2, 0),
     hours24: d.getHours(),
     hours24LZ: String(d.getHours()).padStart(2, 0),
     minutes: d.getMinutes(),
@@ -4252,6 +4252,75 @@ const menuButtonObservers = (config, header) => {
   }
 };
 
+const selectTab = () => {
+  const haActiveTabIndex = haElem.tabContainer.indexOf(root.querySelector('paper-tab.iron-selected'));
+  const chActiveTabIndex = header.tabContainer.querySelector('paper-tab.iron-selected');
+
+  if (chActiveTabIndex !== haActiveTabIndex) {
+    header.tabContainer.setAttribute('selected', haActiveTabIndex);
+  }
+};
+const observers = () => {
+  const callback = mutations => {
+    const config = window.customHeaderConfig;
+    mutations.forEach(({
+      addedNodes,
+      target
+    }) => {
+      if (target.id == 'view' && addedNodes.length && header.tabs.length) {
+        // Navigating to new tab/view.
+        selectTab();
+      } else if (addedNodes.length && target.nodeName == 'PARTIAL-PANEL-RESOLVER') {
+        // When returning to lovelace/overview from elsewhere in HA.
+        if (haElem.main.shadowRoot.querySelector(' ha-panel-lovelace')) {
+          if (config.compact_mode && !config.footer_mode) {
+            haElem.sidebar.main.shadowRoot.querySelector('.menu').style = 'height:49px;';
+            haElem.sidebar.main.shadowRoot.querySelector('paper-listbox').style = 'height:calc(100% - 175px);';
+            haElem.sidebar.main.shadowRoot.querySelector('div.divider').style = '';
+          } else if (config.footer_mode) {
+            haElem.sidebar.main.shadowRoot.querySelector('.menu').style = '';
+            haElem.sidebar.main.shadowRoot.querySelector('paper-listbox').style = 'height: calc(100% - 170px);';
+            haElem.sidebar.main.shadowRoot.querySelector('div.divider').style = 'margin-bottom: -10px;';
+          }
+        } else {
+          haElem.sidebar.main.shadowRoot.querySelector('.menu').style = '';
+          haElem.sidebar.main.shadowRoot.querySelector('paper-listbox').style = '';
+          haElem.sidebar.main.shadowRoot.querySelector('div.divider').style = '';
+        }
+
+        if (root.querySelector('editor')) root.querySelector('editor').remove();
+        buildConfig();
+      } else if (target.className === 'edit-mode' && addedNodes.length) {
+        // Entered edit mode.
+        if (root.querySelector('editor')) root.querySelector('editor').remove();
+        if (!window.customHeaderDisabled) hideMenuItems(config, header, true);
+        header.menu.style.display = 'none';
+        root.querySelector('ch-header').style.display = 'none';
+        haElem.appHeader.style.display = 'block';
+        if (root.querySelector('#ch_view_style')) root.querySelector('#ch_view_style').remove();
+      } else if (target.nodeName === 'APP-HEADER' && addedNodes.length) {
+        // Exited edit mode.
+        haElem.menu = haElem.appHeader.querySelector('ha-menu-button');
+        haElem.appHeader.style.display = 'none';
+        header.menu.style.display = '';
+        root.querySelector('ch-header').style.display = '';
+        buildConfig();
+      }
+    });
+  };
+
+  const observer = new MutationObserver(callback);
+  observer.observe(haElem.partialPanelResolver, {
+    childList: true
+  });
+  observer.observe(haElem.appHeader, {
+    childList: true
+  });
+  observer.observe(root.querySelector('#view'), {
+    childList: true
+  });
+};
+
 const insertStyleTags = config => {
   let headerHeight = 48;
 
@@ -4385,7 +4454,7 @@ const insertStyleTags = config => {
           min-height: calc(100vh - 112px);
           margin-top: -96px;
           ${config.footer_mode ? `padding-bottom: ${headerHeight}px;` : ''}
-          ${config.footer_mode ? `margin-bottom: -${headerHeight + 4}px;` : 'margin-bottom: -16px;'}
+          ${config.footer_mode ? `margin-bottom: -${headerHeight}px;` : ''}
         }
         hui-panel-view {
           margin-top: 0;
@@ -4397,8 +4466,9 @@ const insertStyleTags = config => {
           ${config.view_css ? config.view_css : ''}
         }
         #view {
-          ${config.footer_mode ? `min-height: calc(100vh - ${headerHeight + 4}px) !important;` : ''}
-          ${config.compact_mode && !config.footer_mode ? `min-height: calc(100vh - ${headerHeight + 16}px) !important;` : ''}
+          min-height: calc(100vh - 96px) !important;
+          ${config.footer_mode ? `min-height: calc(100vh - ${headerHeight}px) !important;` : ''}
+          ${config.compact_mode && !config.footer_mode ? `min-height: calc(100vh - ${headerHeight}px) !important;` : ''}
         }
       `; // Add updated view style if changed.
   // Prevents background images flashing on every change.
@@ -4446,7 +4516,7 @@ const redirects = (config, header) => {
         break;
       }
     }
-  } else if (config.hide_tabs.includes(0)) {
+  } else if (config.default_tab) {
     overview.setAttribute('href', `/lovelace/${tabIndexByName(config.default_tab)}`);
   } // Redirect off hidden tab to first not hidden tab or default tab.
 
@@ -4668,6 +4738,7 @@ const styleHeader = config => {
     });
   }
 
+  selectTab();
   A(header.container, 'iron-resize');
 };
 
@@ -4751,72 +4822,6 @@ const buildConfig = config => {
       buildConfig();
     }, (60 - new Date().getSeconds()) * 1000);
   }
-};
-
-const observers = () => {
-  const callback = mutations => {
-    const config = window.customHeaderConfig;
-    mutations.forEach(({
-      addedNodes,
-      target
-    }) => {
-      if (target.id == 'view' && addedNodes.length && header.tabs.length) {
-        // Navigating to new tab/view.
-        const haActiveTabIndex = haElem.tabContainer.indexOf(root.querySelector('paper-tab.iron-selected'));
-        const chActiveTabIndex = header.tabContainer.querySelector('paper-tab.iron-selected');
-
-        if (chActiveTabIndex !== haActiveTabIndex) {
-          header.tabContainer.setAttribute('selected', haActiveTabIndex);
-        }
-      } else if (addedNodes.length && target.nodeName == 'PARTIAL-PANEL-RESOLVER') {
-        // When returning to lovelace/overview from elsewhere in HA.
-        if (haElem.main.shadowRoot.querySelector(' ha-panel-lovelace')) {
-          if (config.compact_mode && !config.footer_mode) {
-            haElem.sidebar.main.shadowRoot.querySelector('.menu').style = 'height:49px;';
-            haElem.sidebar.main.shadowRoot.querySelector('paper-listbox').style = 'height:calc(100% - 175px);';
-            haElem.sidebar.main.shadowRoot.querySelector('div.divider').style = '';
-          } else if (config.footer_mode) {
-            haElem.sidebar.main.shadowRoot.querySelector('.menu').style = '';
-            haElem.sidebar.main.shadowRoot.querySelector('paper-listbox').style = 'height: calc(100% - 170px);';
-            haElem.sidebar.main.shadowRoot.querySelector('div.divider').style = 'margin-bottom: -10px;';
-          }
-        } else {
-          haElem.sidebar.main.shadowRoot.querySelector('.menu').style = '';
-          haElem.sidebar.main.shadowRoot.querySelector('paper-listbox').style = '';
-          haElem.sidebar.main.shadowRoot.querySelector('div.divider').style = '';
-        }
-
-        if (root.querySelector('editor')) root.querySelector('editor').remove();
-        buildConfig();
-      } else if (target.className === 'edit-mode' && addedNodes.length) {
-        // Entered edit mode.
-        if (root.querySelector('editor')) root.querySelector('editor').remove();
-        if (!window.customHeaderDisabled) hideMenuItems(config, header, true);
-        header.menu.style.display = 'none';
-        root.querySelector('ch-header').style.display = 'none';
-        haElem.appHeader.style.display = 'block';
-        if (root.querySelector('#ch_view_style')) root.querySelector('#ch_view_style').remove();
-      } else if (target.nodeName === 'APP-HEADER' && addedNodes.length) {
-        // Exited edit mode.
-        haElem.menu = haElem.appHeader.querySelector('ha-menu-button');
-        haElem.appHeader.style.display = 'none';
-        header.menu.style.display = '';
-        root.querySelector('ch-header').style.display = '';
-        buildConfig();
-      }
-    });
-  };
-
-  const observer = new MutationObserver(callback);
-  observer.observe(haElem.partialPanelResolver, {
-    childList: true
-  });
-  observer.observe(haElem.appHeader, {
-    childList: true
-  });
-  observer.observe(root.querySelector('#view'), {
-    childList: true
-  });
 };
 
 buildConfig();

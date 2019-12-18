@@ -3,17 +3,21 @@ import { hideMenuItems } from './overflow-menu';
 import { buildConfig } from './config.js';
 import { haElem, root } from './ha-elements';
 
+export const selectTab = () => {
+  const haActiveTabIndex = haElem.tabContainer.indexOf(root.querySelector('paper-tab.iron-selected'));
+  const chActiveTabIndex = header.tabContainer.querySelector('paper-tab.iron-selected');
+  if (chActiveTabIndex !== haActiveTabIndex) {
+    header.tabContainer.setAttribute('selected', haActiveTabIndex);
+  }
+};
+
 export const observers = () => {
   const callback = mutations => {
     const config = window.customHeaderConfig;
     mutations.forEach(({ addedNodes, target }) => {
       if (target.id == 'view' && addedNodes.length && header.tabs.length) {
         // Navigating to new tab/view.
-        const haActiveTabIndex = haElem.tabContainer.indexOf(root.querySelector('paper-tab.iron-selected'));
-        const chActiveTabIndex = header.tabContainer.querySelector('paper-tab.iron-selected');
-        if (chActiveTabIndex !== haActiveTabIndex) {
-          header.tabContainer.setAttribute('selected', haActiveTabIndex);
-        }
+        selectTab();
       } else if (addedNodes.length && target.nodeName == 'PARTIAL-PANEL-RESOLVER') {
         // When returning to lovelace/overview from elsewhere in HA.
         if (haElem.main.shadowRoot.querySelector(' ha-panel-lovelace')) {

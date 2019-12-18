@@ -3,6 +3,7 @@ import { tabIndexByName } from './helpers';
 import { hideMenuItems, buttonToOverflow, insertSettings } from './overflow-menu';
 import { kioskMode, removeKioskMode } from './kiosk-mode';
 import { menuButtonObservers } from './menu-observers';
+import { selectTab } from './observers';
 import { insertStyleTags } from './style-tags';
 import { haElem, root, lovelace } from './ha-elements';
 import { redirects } from './redirects';
@@ -204,6 +205,8 @@ export const styleHeader = config => {
       }
     });
   }
+
+  selectTab();
 
   fireEvent(header.container, 'iron-resize');
 };

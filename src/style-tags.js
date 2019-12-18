@@ -143,7 +143,7 @@ export const insertStyleTags = config => {
           min-height: calc(100vh - 112px);
           margin-top: -96px;
           ${config.footer_mode ? `padding-bottom: ${headerHeight}px;` : ''}
-          ${config.footer_mode ? `margin-bottom: -${headerHeight + 4}px;` : 'margin-bottom: -16px;'}
+          ${config.footer_mode ? `margin-bottom: -${headerHeight}px;` : ''}
         }
         hui-panel-view {
           margin-top: 0;
@@ -155,12 +155,9 @@ export const insertStyleTags = config => {
           ${config.view_css ? config.view_css : ''}
         }
         #view {
-          ${config.footer_mode ? `min-height: calc(100vh - ${headerHeight + 4}px) !important;` : ''}
-          ${
-            config.compact_mode && !config.footer_mode
-              ? `min-height: calc(100vh - ${headerHeight + 16}px) !important;`
-              : ''
-          }
+          min-height: calc(100vh - 96px) !important;
+          ${config.footer_mode ? `min-height: calc(100vh - ${headerHeight}px) !important;` : ''}
+          ${config.compact_mode && !config.footer_mode ? `min-height: calc(100vh - ${headerHeight}px) !important;` : ''}
         }
       `;
 
