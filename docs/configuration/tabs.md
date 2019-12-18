@@ -12,7 +12,7 @@ index: 4
 | default_tab           | number/string |         | The default starting tab when entering Lovelace                                            |
 | reverse_tab_direction | Boolean       | false   | Places tabs at opposite side of the window in reverse order                                |
 | hide_tabs             | string        |         | An array or comma separated string of tabs to hide, more info below                        |
-| show_tabs             | string        |         | An array or comma separated string of tabs to hide, more info below                        |
+| show_tabs             | string        |         | An array or comma separated string of tabs to show, more info below                        |
 | hidden_tab_redirect   | Boolean       | true    | Automatically redirects off hidden tabs to either the default tab or the first visible tab |
 | tab_icons             | string        |         | Set the icon of each tab, useful for templates, more info below                            |
 
