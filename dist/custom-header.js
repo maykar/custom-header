@@ -362,7 +362,7 @@ fecha.parse = function (dateStr, format, i18nSettings) {
   return date;
 };
 
-var a=function(){try{(new Date).toLocaleDateString("i");}catch(e){return "RangeError"===e.name}return !1}()?function(e,t){return e.toLocaleDateString(t,{year:"numeric",month:"long",day:"numeric"})}:function(t){return fecha.format(t,"mediumDate")},n=function(){try{(new Date).toLocaleString("i");}catch(e){return "RangeError"===e.name}return !1}()?function(e,t){return e.toLocaleString(t,{year:"numeric",month:"long",day:"numeric",hour:"numeric",minute:"2-digit"})}:function(t){return fecha.format(t,"haDateTime")},r=function(){try{(new Date).toLocaleTimeString("i");}catch(e){return "RangeError"===e.name}return !1}()?function(e,t){return e.toLocaleTimeString(t,{hour:"numeric",minute:"2-digit"})}:function(t){return fecha.format(t,"shortTime")};var A=function(e,t,a,n){n=n||{},a=null==a?{}:a;var r=new Event(t,{bubbles:void 0===n.bubbles||n.bubbles,cancelable:Boolean(n.cancelable),composed:void 0===n.composed||n.composed});return r.detail=a,e.dispatchEvent(r),r};var F=function(){var e=document.querySelector("home-assistant");if(e=(e=(e=(e=(e=(e=(e=(e=e&&e.shadowRoot)&&e.querySelector("home-assistant-main"))&&e.shadowRoot)&&e.querySelector("app-drawer-layout partial-panel-resolver"))&&e.shadowRoot||e)&&e.querySelector("ha-panel-lovelace"))&&e.shadowRoot)&&e.querySelector("hui-root")){var t=e.lovelace;return t.current_view=e.___curView,t}return null},B=function(){var e=document.querySelector("home-assistant");if(e=(e=(e=(e=(e=(e=(e=(e=e&&e.shadowRoot)&&e.querySelector("home-assistant-main"))&&e.shadowRoot)&&e.querySelector("app-drawer-layout partial-panel-resolver"))&&e.shadowRoot||e)&&e.querySelector("ha-panel-lovelace"))&&e.shadowRoot)&&e.querySelector("hui-root"))return e.shadowRoot};//# sourceMappingURL=index.m.js.map
+var a=function(){try{(new Date).toLocaleDateString("i");}catch(e){return "RangeError"===e.name}return !1}()?function(e,t){return e.toLocaleDateString(t,{year:"numeric",month:"long",day:"numeric"})}:function(t){return fecha.format(t,"mediumDate")},n=function(){try{(new Date).toLocaleString("i");}catch(e){return "RangeError"===e.name}return !1}()?function(e,t){return e.toLocaleString(t,{year:"numeric",month:"long",day:"numeric",hour:"numeric",minute:"2-digit"})}:function(t){return fecha.format(t,"haDateTime")},r=function(){try{(new Date).toLocaleTimeString("i");}catch(e){return "RangeError"===e.name}return !1}()?function(e,t){return e.toLocaleTimeString(t,{hour:"numeric",minute:"2-digit"})}:function(t){return fecha.format(t,"shortTime")};var A=function(e,t,a,n){n=n||{},a=null==a?{}:a;var r=new Event(t,{bubbles:void 0===n.bubbles||n.bubbles,cancelable:Boolean(n.cancelable),composed:void 0===n.composed||n.composed});return r.detail=a,e.dispatchEvent(r),r};var F=function(){var e=document.querySelector("home-assistant");if(e=(e=(e=(e=(e=(e=(e=(e=e&&e.shadowRoot)&&e.querySelector("home-assistant-main"))&&e.shadowRoot)&&e.querySelector("app-drawer-layout partial-panel-resolver"))&&e.shadowRoot||e)&&e.querySelector("ha-panel-lovelace"))&&e.shadowRoot)&&e.querySelector("hui-root")){var t=e.lovelace;return t.current_view=e.___curView,t}return null},B=function(){var e=document.querySelector("home-assistant");if(e=(e=(e=(e=(e=(e=(e=(e=e&&e.shadowRoot)&&e.querySelector("home-assistant-main"))&&e.shadowRoot)&&e.querySelector("app-drawer-layout partial-panel-resolver"))&&e.shadowRoot||e)&&e.querySelector("ha-panel-lovelace"))&&e.shadowRoot)&&e.querySelector("hui-root"))return e.shadowRoot};
 
 const homeAssistant = document.querySelector('home-assistant');
 const hass = homeAssistant.hass;
@@ -628,7 +628,6 @@ const directives = new WeakMap();
 const isDirective = (o) => {
     return typeof o === 'function' && directives.has(o);
 };
-//# sourceMappingURL=directive.js.map
 
 /**
  * @license
@@ -660,7 +659,6 @@ const removeNodes = (container, start, end = null) => {
         start = n;
     }
 };
-//# sourceMappingURL=dom.js.map
 
 /**
  * @license
@@ -684,7 +682,6 @@ const noChange = {};
  * A sentinel value that signals a NodePart to fully clear its content.
  */
 const nothing = {};
-//# sourceMappingURL=part.js.map
 
 /**
  * @license
@@ -898,7 +895,6 @@ const createMarker = () => document.createComment('');
  *    * (') then any non-(')
  */
 const lastAttributeNameRegex = /([ \x09\x0a\x0c\x0d])([^\0-\x1F\x7F-\x9F "'>=/]+)([ \x09\x0a\x0c\x0d]*=[ \x09\x0a\x0c\x0d]*(?:[^ \x09\x0a\x0c\x0d"'`<>=]*|"[^"]*|'[^']*))$/;
-//# sourceMappingURL=template.js.map
 
 /**
  * @license
@@ -1031,7 +1027,6 @@ class TemplateInstance {
         return fragment;
     }
 }
-//# sourceMappingURL=template-instance.js.map
 
 /**
  * @license
@@ -1120,7 +1115,6 @@ class TemplateResult {
         return template;
     }
 }
-//# sourceMappingURL=template-result.js.map
 
 /**
  * @license
@@ -1560,7 +1554,6 @@ const getOptions = (o) => o &&
     (eventOptionsSupported ?
         { capture: o.capture, passive: o.passive, once: o.once } :
         o.capture);
-//# sourceMappingURL=parts.js.map
 
 /**
  * @license
@@ -1612,7 +1605,6 @@ class DefaultTemplateProcessor {
     }
 }
 const defaultTemplateProcessor = new DefaultTemplateProcessor();
-//# sourceMappingURL=default-template-processor.js.map
 
 /**
  * @license
@@ -1660,7 +1652,6 @@ function templateFactory(result) {
     return template;
 }
 const templateCaches = new Map();
-//# sourceMappingURL=template-factory.js.map
 
 /**
  * @license
@@ -1701,7 +1692,6 @@ const render = (result, container, options) => {
     part.setValue(result);
     part.commit();
 };
-//# sourceMappingURL=render.js.map
 
 /**
  * @license
@@ -1725,7 +1715,6 @@ const render = (result, container, options) => {
  * render to and update a container.
  */
 const html = (strings, ...values) => new TemplateResult(strings, values, 'html', defaultTemplateProcessor);
-//# sourceMappingURL=lit-html.js.map
 
 /**
  * @license
@@ -1850,7 +1839,6 @@ function insertNodeIntoTemplate(template, node, refNode = null) {
         }
     }
 }
-//# sourceMappingURL=modify-template.js.map
 
 /**
  * @license
@@ -2120,7 +2108,6 @@ const render$1 = (result, container, options) => {
         window.ShadyCSS.styleElement(container.host);
     }
 };
-//# sourceMappingURL=shady-render.js.map
 
 /**
  * @license
@@ -2746,7 +2733,6 @@ _a = finalized;
  * Marks class as having finished creating properties.
  */
 UpdatingElement[_a] = true;
-//# sourceMappingURL=updating-element.js.map
 
 /**
 @license
@@ -2760,7 +2746,6 @@ found at http://polymer.github.io/PATENTS.txt
 */
 const supportsAdoptingStyleSheets = ('adoptedStyleSheets' in Document.prototype) &&
     ('replace' in CSSStyleSheet.prototype);
-//# sourceMappingURL=css-tag.js.map
 
 /**
  * @license
@@ -2958,7 +2943,6 @@ LitElement['finalized'] = true;
  * @nocollapse
  */
 LitElement.render = render$1;
-//# sourceMappingURL=lit-element.js.map
 
 const getThemeVar = themeVar => {
   return getComputedStyle(document.body).getPropertyValue(themeVar);
