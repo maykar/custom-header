@@ -5,6 +5,22 @@ index: 3
 
 ## Change Log
 
+### Dec. 17th 2019 - v1.0.6
+
+Fixes for:
+- View sizing
+- 12 hour template
+- Default tab
+- Current tab indicator
+
+### Dec. 17th 2019 - v1.0.6
+
+- Fix "custom header" menu item
+
+### Dec. 17th 2019 - v1.0.5
+
+- Addresses "Tried to serve up '/config/www/community/custom-header/lit-element.js.map' but it does not exist"
+
 ### Dec. 17th 2019 - v1.0.4
 
 - View style fixes
