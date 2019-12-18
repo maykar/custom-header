@@ -23,6 +23,7 @@ const plugins = [
   json(),
   babel({
     exclude: 'node_modules/**',
+    sourceMaps: false,
   }),
   dev && serve(serveopts),
   !dev && terser({ keep_fnames: true }),

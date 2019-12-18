@@ -4,6 +4,7 @@ import { buildConfig } from './config.js';
 import { haElem, root } from './ha-elements';
 
 export const selectTab = () => {
+  if (!haElem.tabContainer || !header.tabContainer) return;
   const haActiveTabIndex = haElem.tabContainer.indexOf(root.querySelector('paper-tab.iron-selected'));
   const chActiveTabIndex = header.tabContainer.querySelector('paper-tab.iron-selected');
   if (chActiveTabIndex !== haActiveTabIndex) {
