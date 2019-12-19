@@ -143,11 +143,11 @@ export const insertStyleTags = config => {
           min-height: calc(100vh - 112px);
           margin-top: -96px;
           ${config.footer_mode ? `padding-bottom: ${headerHeight}px;` : ''}
-          ${config.footer_mode ? `margin-bottom: -${headerHeight}px;` : ''}
+          ${config.footer_mode ? `margin-bottom: -${headerHeight + 4}px;` : ''}
         }
         hui-panel-view {
-          margin-top: 0;
-          ${config.hide_header || config.kiosk_mode ? 'padding-top: 96px; min-height: 100vh !important;' : ''}
+          padding-top: 96px;
+          min-height: 100vh !important;
           ${config.panel_view_css ? config.panel_view_css : ''}
         }
         hui-view {

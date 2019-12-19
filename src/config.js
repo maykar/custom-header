@@ -23,6 +23,19 @@ export const buildConfig = config => {
     if (config.show_tabs && config.show_tabs.length) config.hide_tabs = invertNumArray(config.show_tabs);
     if (config.disable_sidebar || config.menu_dropdown) config.menu_hide = true;
     if (config.voice_dropdown) config.voice_hide = true;
+    if (config.test_template != undefined) {
+      if (
+        typeof config.test_template != 'string' &&
+        (config.test_template.toLowerCase().includes('true') || config.test_template.toLowerCase().includes('false'))
+      ) {
+        console.log(`Custom Header test returned: "${config.test_template}"`);
+        console.log(`Warning: Boolean is returned as string instead of Boolean.`);
+      } else if (typeof config.test_template == 'string') {
+        console.log(`Custom Header test returned: "${config.test_template}"`);
+      } else {
+        console.log(`Custom Header test returned: ${config.test_template}`);
+      }
+    }
     styleHeader(config);
   };
 
@@ -30,6 +43,7 @@ export const buildConfig = config => {
   const hasTemplates = !!variables || configString.includes('{{') || configString.includes('{%');
 
   let unsubRenderTemplate;
+  let templateFailed = false;
   if (hasTemplates) {
     unsubRenderTemplate = subscribeRenderTemplate(
       result => {
@@ -58,7 +72,6 @@ export const buildConfig = config => {
   }
 
   // Catch less helpful template errors.
-  let templateFailed = false;
   (async () => {
     try {
       const test = await unsubRenderTemplate;
