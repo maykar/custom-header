@@ -26,7 +26,7 @@
     "@polymer/iron-icon": "^3.0.1",
     "@polymer/iron-icons": "^3.0.1",
     "@polymer/paper-card": "^3.0.1",
-    "@polymer/paper-dropdown-menu": "^3.0.1",
+    "@polymer/paper-dropdown-menu": "3.0.1",
     "@polymer/paper-item": "^3.0.1",
     "@polymer/paper-listbox": "^3.0.1",
     "@polymer/paper-menu-button": "^3.0.1",
