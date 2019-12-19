@@ -70,6 +70,7 @@ export class Main extends LitElement {
 
   changeCategory(e: any) {
     if (e.composedPath()[0].localName !== 'paper-item') {
+      console.log(e)
       this.category = e.composedPath()[3].innerText.toLowerCase();
       this.page = this.docs[this.category!].sort((a, b) => (a.index > b.index ? 1 : -1))[0].id;
       window.history.pushState(null, '', `./#${this.category}`);
