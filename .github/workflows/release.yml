@@ -1,0 +1,30 @@
+name: Release
+on:
+  release:
+    types: [published]
+jobs:
+  release:
+    name: Publish card to release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Set version number
+        run: |
+          sed -i 's|master|${{ github.ref }}|g' ./src/custom-header.ts
+          sed -i 's|refs/tags/||' ./src/custom-header.ts
+
+      - name: Build the card
+        run: |
+          cd /home/runner/work/custom-header/custom-header
+          npm install
+          npm run build
+
+      - name: Upload card to release
+        uses: svenstaro/upload-release-action@v1-release
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: /home/runner/work/custom-header/custom-header/dist/custom-header.js
+          asset_name: custom-header.js
+          tag: ${{ github.ref }}
+          overwrite: true
