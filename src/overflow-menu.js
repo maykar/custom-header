@@ -52,10 +52,10 @@ export const buttonToOverflow = (item, mdiIcon, header, config) => {
   paperItem.innerText = item;
   paperItem.appendChild(icon);
   paperItem.addEventListener('click', () => {
-    header[item.toLowerCase()].click();
+    header[item.toLowerCase()].dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: true }));
   });
   icon.addEventListener('click', () => {
-    header[item.toLowerCase()].click();
+    header[item.toLowerCase()].dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: true }));
   });
   header.options.querySelector('paper-listbox').appendChild(paperItem);
 };

@@ -6,10 +6,10 @@ import { haElem, root } from './ha-elements';
 export const selectTab = () => {
   if (!haElem.tabContainer || !header.tabContainer) return;
   const haActiveTabIndex = haElem.tabContainer.indexOf(root.querySelector('paper-tab.iron-selected'));
-  const chActiveTabIndex = header.tabContainer.querySelector('paper-tab.iron-selected');
-  if (chActiveTabIndex !== haActiveTabIndex) {
-    header.tabContainer.setAttribute('selected', haActiveTabIndex);
-  }
+  header.tabContainer.setAttribute('selected', haActiveTabIndex);
+  const tab = header.tabs[haActiveTabIndex].getBoundingClientRect();
+  if (haActiveTabIndex === 0) header.tabContainer._scrollToSelectedIfNeeded(tab.width / 2, tab.right);
+  else header.tabContainer._scrollToSelectedIfNeeded(tab.width / 2, tab.left);
 };
 
 export const observers = () => {
