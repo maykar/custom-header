@@ -18,12 +18,12 @@ export const redirects = (config, header) => {
   // Redirect off hidden tab to first not hidden tab or default tab.
   const defaultTab = config.default_tab != undefined ? tabIndexByName(config.default_tab) : null;
 
-  if (config.hidden_tab_redirect && header.tabs.length) {
-    const activeTab = header.tabContainer.indexOf(header.tabContainer.querySelector('paper-tab.iron-selected'));
-    if (config.hide_tabs.includes(activeTab) && config.hide_tabs.length != header.tabs.length) {
+  if (config.hidden_tab_redirect && haElem.tabs.length) {
+    const activeTab = haElem.tabContainer.indexOf(haElem.tabContainer.querySelector('paper-tab.iron-selected'));
+    if (config.hide_tabs.includes(activeTab) && config.hide_tabs.length != haElem.tabs.length) {
       if (defaultTab && !config.hide_tabs.includes(tabIndexByName(defaultTab))) {
         if (getComputedStyle(header.tabs[defaultTab]).display != 'none') {
-          header.tabs[defaultTab].click();
+          haElem.tabs[defaultTab].click();
           overview.setAttribute('href', `/lovelace/${defaultTab}`);
         }
       } else {
