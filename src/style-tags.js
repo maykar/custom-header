@@ -32,7 +32,9 @@ export const insertStyleTags = config => {
         margin-top: 4px;
         margin-bottom: 0px;
         margin-top: ${config.footer_mode ? '4px;' : '0px'};
-        ${config.footer_mode ? 'position: sticky; bottom: 0px;' : 'position: sticky; top: 0px;'}
+        position: sticky;
+        position: -webkit-sticky;
+        ${config.footer_mode ? 'bottom: 0px;' : 'top: 0px;'}
         ${config.header_css ? config.header_css : ''}
       }
       ch-stack {
