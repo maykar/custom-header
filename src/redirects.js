@@ -38,8 +38,13 @@ export const redirects = (config, header) => {
     }
   }
 
+  let reloaded;
+  if (window.performance) reloaded = performance.navigation.type == 0;
+  else reloaded = performance.getEntriesByType('navigation')[0].type == 'reload';
+
   // Click default tab on first open.
   if (
+    !reloaded &&
     defaultTab != null &&
     !window.customHeaderDefaultClicked &&
     header.tabs[defaultTab] &&
