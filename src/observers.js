@@ -6,11 +6,14 @@ import { haElem, root } from './ha-elements';
 export const selectTab = () => {
   if (!haElem.tabContainer || !header.tabContainer) return;
   const haActiveTabIndex = haElem.tabContainer.indexOf(root.querySelector('paper-tab.iron-selected'));
-  header.tabContainer.setAttribute('selected', String(haActiveTabIndex));
+  header.tabContainer.setAttribute('selected', haActiveTabIndex);
   if (!header.tabs[haActiveTabIndex]) return;
   const tab = header.tabs[haActiveTabIndex].getBoundingClientRect();
-  if (haActiveTabIndex === 0) header.tabContainer._scrollToSelectedIfNeeded(tab.width, tab.right);
-  else header.tabContainer._scrollToSelectedIfNeeded(tab.width, tab.left);
+  const container = header.tabContainer.getBoundingClientRect();
+  if (container.right < tab.right || container.left > tab.left) {
+    if (haActiveTabIndex === 0) header.tabContainer._scrollToSelectedIfNeeded(tab.width, tab.right);
+    else header.tabContainer._scrollToSelectedIfNeeded(tab.width, tab.left);
+  }
 };
 
 export const observers = () => {
@@ -19,7 +22,7 @@ export const observers = () => {
     mutations.forEach(({ addedNodes, target }) => {
       if (target.id == 'view' && addedNodes.length && header.tabs.length) {
         // Navigating to new tab/view.
-        setTimeout(() => selectTab(), 500);
+        setTimeout(() => selectTab(), 200);
       } else if (addedNodes.length && target.nodeName == 'PARTIAL-PANEL-RESOLVER') {
         // When returning to lovelace/overview from elsewhere in HA.
         if (haElem.main.shadowRoot.querySelector(' ha-panel-lovelace')) {
