@@ -208,5 +208,4 @@ export const styleHeader = config => {
 
   fireEvent(header.container, 'iron-resize');
   setTimeout(() => selectTab(config), 200);
-  // fireEvent(header.tabContainer, 'iron-resize');
 };

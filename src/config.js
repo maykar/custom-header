@@ -41,10 +41,11 @@ export const buildConfig = config => {
 
   const configString = JSON.stringify(config);
   const hasTemplates = !!variables || configString.includes('{{') || configString.includes('{%');
+  const disabled = config.disabled_mode || window.location.href.includes('disable_ch');
 
   let unsubRenderTemplate;
   let templateFailed = false;
-  if (hasTemplates) {
+  if (hasTemplates && !disabled) {
     unsubRenderTemplate = subscribeRenderTemplate(
       result => {
         if (window.customHeaderLastTemplateResult == result) return;
@@ -67,23 +68,19 @@ export const buildConfig = config => {
       { template: JSON.stringify(variables).replace(/\\/g, '') + JSON.stringify(config).replace(/\\/g, '') },
       config.locale,
     );
-  } else {
-    processAndContinue();
-  }
 
-  // Catch less helpful template errors.
-  (async () => {
-    try {
-      const test = await unsubRenderTemplate;
-    } catch (e) {
-      templateFailed = true;
-      console.log('[CUSTOM-HEADER] There was an error with one or more of your templates:');
-      console.log(`${e.message.substring(0, e.message.indexOf(')'))})`);
-    }
-  })();
+    // Catch less helpful template errors.
+    (async () => {
+      try {
+        const test = await unsubRenderTemplate;
+      } catch (e) {
+        templateFailed = true;
+        console.log('[CUSTOM-HEADER] There was an error with one or more of your templates:');
+        console.log(`${e.message.substring(0, e.message.indexOf(')'))})`);
+      }
+    })();
 
-  // Render templates every minute.
-  if (hasTemplates) {
+    // Render templates every minute.
     window.setTimeout(() => {
       // Unsubscribe from template.
       if (templateFailed || root.querySelector('custom-header-editor')) return;
@@ -94,5 +91,7 @@ export const buildConfig = config => {
       })();
       buildConfig();
     }, (60 - new Date().getSeconds()) * 1000);
+  } else {
+    processAndContinue();
   }
 };
