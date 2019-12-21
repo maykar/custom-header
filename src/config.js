@@ -41,7 +41,9 @@ export const buildConfig = config => {
 
   const configString = JSON.stringify(config);
   const hasTemplates = !!variables || configString.includes('{{') || configString.includes('{%');
-  const disabled = config.disabled_mode || window.location.href.includes('disable_ch');
+  const disabled =
+    (config.disabled_mode && !config.disabled_mode.includes('{{') && !config.disabled_mode.includes('{%')) ||
+    window.location.href.includes('disable_ch');
 
   let unsubRenderTemplate;
   let templateFailed = false;
