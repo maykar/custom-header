@@ -18,7 +18,7 @@ export const buildHeader = () => {
       haIcon.setAttribute('icon', lovelace.config.views[index].icon);
     }
     tabClone.addEventListener('click', () => {
-      haElem.tabs[index].dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: true }));
+      haElem.tabs[index].dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
     });
     header.tabContainer.appendChild(tabClone);
   });
@@ -35,7 +35,7 @@ export const buildHeader = () => {
         item.addEventListener('click', () => {
           haElem[button]
             .querySelectorAll('paper-item')
-            [index].dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: true }));
+            [index].dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
         });
       });
     } else {
@@ -43,7 +43,7 @@ export const buildHeader = () => {
       header[button] = document.createElement('paper-icon-button');
       header[button].addEventListener('click', () => {
         (haElem[button].shadowRoot.querySelector('paper-icon-button') || haElem[button]).dispatchEvent(
-          new MouseEvent('click', { bubbles: false, cancelable: true }),
+          new MouseEvent('click', { bubbles: false, cancelable: false }),
         );
       });
     }

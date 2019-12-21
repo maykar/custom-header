@@ -14,7 +14,7 @@ export const selectTab = () => {
   if (container.right < tab.right || container.left > tab.left) {
     header.tabContainer._scrollToLeft();
     header.tabContainer._scrollToRight();
-    header.tabs[haActiveTabIndex].dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: true }));
+    header.tabs[haActiveTabIndex].dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
     if (lastTab.right > container.right) header.tabContainer._scrollToRight();
   }
 };
