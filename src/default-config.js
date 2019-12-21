@@ -10,6 +10,8 @@ export const defaultConfig = {
   kiosk_mode: false,
   compact_mode: false,
   footer_mode: false,
+  split_mode: false,
+  split_mode_reverse: false,
   disable_sidebar: false,
   hide_header: false,
   chevrons: true,
