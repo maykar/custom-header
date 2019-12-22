@@ -3,6 +3,7 @@ import { haElem, root, lovelace } from './ha-elements';
 export const buildHeader = () => {
   if (root.querySelector('ch-header')) return;
   const header = {};
+  header.bottom = document.createElement('ch-header-bottom');
 
   header.tabContainer = document.createElement('paper-tabs');
   header.tabContainer.setAttribute('scrollable', '');
@@ -71,6 +72,7 @@ export const buildHeader = () => {
   if (header.voice && header.voice.style.visibility != 'hidden') header.container.appendChild(header.voice);
   if (header.options) header.container.appendChild(header.options);
   haElem.appLayout.appendChild(header.container);
+  haElem.appLayout.appendChild(header.bottom);
 
   return header;
 };

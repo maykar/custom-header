@@ -19,6 +19,9 @@ export const kioskMode = (sidebarOnly, headerOnly) => {
         ch-header {
           display: none;
         }
+        ch-header-bottom {
+          display: none;
+        }
         app-header {
           display: none;
         }

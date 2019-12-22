@@ -22,6 +22,7 @@ export const styleHeader = config => {
     if (root.querySelector('#ch_view_style')) root.querySelector('#ch_view_style').remove();
     if (header.tabContainer.shadowRoot.querySelector('#ch_chevron')) {
       header.tabContainer.shadowRoot.querySelector('#ch_chevron').remove();
+      header.bottom.tabContainer.shadowRoot.querySelector('#ch_chevron').remove();
     }
     header.menu.style.display = 'none';
     root.querySelector('ha-menu-button').style.display = '';
@@ -37,6 +38,29 @@ export const styleHeader = config => {
     if (header.container) header.container.style.visibility = 'visible';
     insertSettings();
   }
+
+  if (!root.querySelector('ch-header-bottom').querySelector('paper-tabs')) {
+    header.bottom.appendChild(header.tabContainer.cloneNode(true));
+    header.bottom.tabContainer = root.querySelector('ch-header-bottom').querySelector('paper-tabs');
+    header.bottom.tabs = header.bottom.tabContainer.querySelectorAll('paper-tab');
+  }
+  haElem.tabs.forEach(tab => {
+    const index = haElem.tabs.indexOf(tab);
+    header.bottom.tabs[index].addEventListener('click', () => {
+      haElem.tabs[index].dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
+    });
+  });
+
+  if (config.split_mode) {
+    header.tabContainer.style.display = 'none';
+    config.compact_mode = false;
+    if (config.footer_mode) header.bottom.setAttribute('slot', 'header');
+    else header.bottom.setAttribute('slot', '');
+  } else {
+    header.bottom.style.display = 'none';
+  }
+
+  const headerType = config.split_mode ? header.bottom : header;
 
   if (!header.tabs.length) config.compact_mode = false;
 
@@ -82,10 +106,14 @@ export const styleHeader = config => {
       haElem.sidebar.main.shadowRoot.querySelector('.menu').style = 'height:49px;';
       haElem.sidebar.main.shadowRoot.querySelector('paper-listbox').style = 'height:calc(100% - 175px);';
       haElem.sidebar.main.shadowRoot.querySelector('div.divider').style = '';
-    } else if (config.footer_mode) {
+    } else if (config.footer_mode && !config.split_mode) {
       haElem.sidebar.main.shadowRoot.querySelector('.menu').style = '';
       haElem.sidebar.main.shadowRoot.querySelector('paper-listbox').style = 'height: calc(100% - 170px);';
       haElem.sidebar.main.shadowRoot.querySelector('div.divider').style = 'margin-bottom: -10px;';
+    } else if (config.split_mode) {
+      haElem.sidebar.main.shadowRoot.querySelector('.menu').style = 'height:49px;';
+      haElem.sidebar.main.shadowRoot.querySelector('paper-listbox').style = 'height: calc(100% - 170px);';
+      haElem.sidebar.main.shadowRoot.querySelector('div.divider').style = 'margin-bottom: -3px;';
     } else {
       haElem.sidebar.main.shadowRoot.querySelector('.menu').style = '';
       haElem.sidebar.main.shadowRoot.querySelector('paper-listbox').style = '';
@@ -95,12 +123,12 @@ export const styleHeader = config => {
   }
 
   // Remove chevrons.
-  if (!config.chevrons) header.tabContainer.hideScrollButtons = true;
-  else header.tabContainer.hideScrollButtons = false;
+  if (!config.chevrons) headerType.tabContainer.hideScrollButtons = true;
+  else headerType.tabContainer.hideScrollButtons = false;
 
   // Current tab indicator on top.
-  if (config.indicator_top) header.tabContainer.alignBottom = true;
-  else header.tabContainer.alignBottom = false;
+  if (config.indicator_top) headerType.tabContainer.alignBottom = true;
+  else headerType.tabContainer.alignBottom = false;
 
   // Set/remove attributes for footer mode.
   if (config.footer_mode) header.options.setAttribute('vertical-align', 'bottom');
@@ -109,14 +137,14 @@ export const styleHeader = config => {
   else header.container.removeAttribute('slot');
 
   // Tabs direction left to right or right to left.
-  header.tabContainer.dir = config.reverse_tab_direction ? 'rtl' : 'ltr';
+  headerType.tabContainer.dir = config.reverse_tab_direction ? 'rtl' : 'ltr';
   header.container.dir = config.reverse_button_direction ? 'rtl' : 'ltr';
 
   // Tab icon customization.
-  if (config.tab_icons && header.tabs.length) {
+  if (config.tab_icons && headerType.tabs.length) {
     for (const tab in config.tab_icons) {
       const index = tabIndexByName(tab);
-      const haIcon = header.tabs[index].querySelector('ha-icon');
+      const haIcon = headerType.tabs[index].querySelector('ha-icon');
       if (!config.tab_icons[tab]) haIcon.icon = lovelace.config.views[index].icon;
       else haIcon.icon = config.tab_icons[tab];
     }
@@ -173,11 +201,12 @@ export const styleHeader = config => {
 
   redirects(config, header);
 
-  if (!header.tabs.length) header.tabContainer.style.display = 'none';
+  if (!headerType.tabs.length) headerType.tabContainer.style.display = 'none';
 
   menuButtonObservers(config, header, root);
 
-  if (!window.customHeaderShrink) {
+  if (!window.customHeaderShrink && !config.split_mode) {
+    window.customHeaderShrink = true;
     window.addEventListener('scroll', function(e) {
       const compact_mode =
         window.getComputedStyle(header.container.querySelector('#contentContainer')).getPropertyValue('display') ===

@@ -1,29 +1,30 @@
 import { header } from './build-header';
 import { hideMenuItems } from './overflow-menu';
-import { buildConfig } from './config.js';
 import { haElem, root } from './ha-elements';
 
-export const selectTab = () => {
-  if (!haElem.tabContainer || !header.tabContainer) return;
+export const selectTab = config => {
+  const headerType = config.split_mode ? header.bottom : header;
+  if (!haElem.tabContainer || !headerType.tabContainer) return;
   const haActiveTabIndex = haElem.tabContainer.indexOf(root.querySelector('paper-tab.iron-selected'));
-  header.tabContainer.setAttribute('selected', haActiveTabIndex);
-  if (!header.tabs[haActiveTabIndex]) return;
-  const tab = header.tabs[haActiveTabIndex].getBoundingClientRect();
-  const lastTab = header.tabs[header.tabs.length - 1].getBoundingClientRect();
-  const container = header.tabContainer.shadowRoot.querySelector('#tabsContainer').getBoundingClientRect();
+  headerType.tabContainer.setAttribute('selected', haActiveTabIndex);
+  if (!headerType.tabs[haActiveTabIndex]) return;
+  const tab = headerType.tabs[haActiveTabIndex].getBoundingClientRect();
+  const lastTab = headerType.tabs[headerType.tabs.length - 1].getBoundingClientRect();
+  const container = headerType.tabContainer.shadowRoot.querySelector('#tabsContainer').getBoundingClientRect();
   if (container.right < tab.right || container.left > tab.left) {
-    header.tabContainer._scrollToLeft();
-    header.tabContainer._scrollToRight();
-    header.tabs[haActiveTabIndex].dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
-    if (lastTab.right > container.right) header.tabContainer._scrollToRight();
+    headerType.tabContainer._scrollToLeft();
+    headerType.tabContainer._scrollToRight();
+    headerType.tabs[haActiveTabIndex].dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
+    if (lastTab.right > container.right) headerType.tabContainer._scrollToRight();
   }
 };
 
 export const observers = () => {
   const callback = mutations => {
     const config = window.customHeaderConfig;
+    const headerType = config.split_mode ? header.bottom : header;
     mutations.forEach(({ addedNodes, target }) => {
-      if (target.id == 'view' && addedNodes.length && header.tabs.length) {
+      if (target.id == 'view' && addedNodes.length && headerType.tabs.length) {
         // Navigating to new tab/view.
         setTimeout(() => selectTab(config), 200);
       } else if (addedNodes.length && target.nodeName == 'PARTIAL-PANEL-RESOLVER') {
@@ -33,10 +34,14 @@ export const observers = () => {
             haElem.sidebar.main.shadowRoot.querySelector('.menu').style = 'height:49px;';
             haElem.sidebar.main.shadowRoot.querySelector('paper-listbox').style = 'height:calc(100% - 175px);';
             haElem.sidebar.main.shadowRoot.querySelector('div.divider').style = '';
-          } else if (config.footer_mode) {
+          } else if (config.footer_mode && !config.split_mode) {
             haElem.sidebar.main.shadowRoot.querySelector('.menu').style = '';
             haElem.sidebar.main.shadowRoot.querySelector('paper-listbox').style = 'height: calc(100% - 170px);';
             haElem.sidebar.main.shadowRoot.querySelector('div.divider').style = 'margin-bottom: -10px;';
+          } else if (config.split_mode) {
+            haElem.sidebar.main.shadowRoot.querySelector('.menu').style = 'height:49px;';
+            haElem.sidebar.main.shadowRoot.querySelector('paper-listbox').style = 'height: calc(100% - 170px);';
+            haElem.sidebar.main.shadowRoot.querySelector('div.divider').style = 'margin-bottom: -3px;';
           }
         } else {
           haElem.sidebar.main.shadowRoot.querySelector('.menu').style = '';
@@ -44,7 +49,6 @@ export const observers = () => {
           haElem.sidebar.main.shadowRoot.querySelector('div.divider').style = '';
         }
         if (root.querySelector('editor')) root.querySelector('editor').remove();
-        buildConfig();
       } else if (target.className === 'edit-mode' && addedNodes.length) {
         // Entered edit mode.
         if (root.querySelector('editor')) root.querySelector('editor').remove();
@@ -59,7 +63,6 @@ export const observers = () => {
         haElem.appHeader.style.display = 'none';
         header.menu.style.display = '';
         root.querySelector('ch-header').style.display = '';
-        buildConfig();
       }
     });
   };

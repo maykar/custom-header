@@ -4,6 +4,7 @@ import { tabIndexByName } from './helpers';
 
 export const insertStyleTags = config => {
   let headerHeight = 48;
+  const headerType = config.split_mode ? header.bottom : header;
   if (!config.compact_mode) {
     if (config.reverse_button_direction) {
       header.container.querySelector('#contentContainer').dir = 'ltr';
@@ -13,7 +14,7 @@ export const insertStyleTags = config => {
       header.container.querySelector('#contentContainer').dir = '';
     }
     header.container.querySelector('#contentContainer').innerHTML = config.header_text;
-    headerHeight = header.tabs.length ? 96 : 48;
+    headerHeight = headerType.tabs.length ? 96 : 48;
   }
 
   // Build header's main style.
@@ -29,7 +30,6 @@ export const insertStyleTags = config => {
         font: 400 20px Roboto, sans-serif;
         background: ${config.background || 'var(--primary-color)'};
         color: ${config.elements_color || 'var(--text-primary-color)'};
-        margin-top: 4px;
         margin-bottom: 0px;
         margin-top: ${config.footer_mode ? '4px;' : '0px'};
         position: sticky;
@@ -37,7 +37,30 @@ export const insertStyleTags = config => {
         ${config.footer_mode ? 'bottom: 0px;' : 'top: 0px;'}
         ${config.header_css ? config.header_css : ''}
       }
+      ch-header-bottom {
+        padding-left: 10px;
+        padding-right: 10px;
+        box-sizing: border-box;
+        display:flex;
+        justify-content: center;
+        font: 400 20px Roboto, sans-serif;
+        background: ${config.background || 'var(--primary-color)'};
+        color: ${config.elements_color || 'var(--text-primary-color)'};
+        margin-bottom: 0px;
+        margin-top: 0px;
+        position: sticky;
+        position: -webkit-sticky;
+        ${config.footer_mode ? 'top: 0px;' : 'bottom: 0px;'}
+        ${config.header_css ? config.header_css : ''}
+      }
       ch-stack {
+        flex-direction: column;
+        width: 100%;
+        margin-left: 9px;
+        margin-right: 9px;
+        ${config.stack_css ? config.stack_css : ''}
+      }
+      ch-stack-bottom {
         flex-direction: column;
         width: 100%;
         margin-left: 9px;
@@ -180,8 +203,12 @@ export const insertStyleTags = config => {
       }
     `;
   // Add updated style element and remove old one after.
-  currentStyle = header.tabContainer.shadowRoot.querySelector('#ch_chevron');
-  header.tabContainer.shadowRoot.appendChild(style);
+  currentStyle = headerType.tabContainer.shadowRoot.querySelector('#ch_chevron');
+  headerType.tabContainer.shadowRoot.appendChild(style);
+  if (currentStyle) currentStyle.remove();
+
+  currentStyle = header.bottom.querySelector('paper-tabs').shadowRoot.querySelector('#ch_chevron');
+  header.bottom.querySelector('paper-tabs').shadowRoot.appendChild(style.cloneNode(true));
   if (currentStyle) currentStyle.remove();
 
   style = document.createElement('style');
