@@ -167,8 +167,10 @@ export const insertStyleTags = config => {
         hui-view, hui-panel-view {
           min-height: calc(100vh - 112px);
           margin-top: -96px;
-          ${config.footer_mode ? `padding-bottom: ${headerHeight}px;` : ''}
-          ${config.footer_mode ? `margin-bottom: -${headerHeight + 4}px;` : ''}
+          ${config.footer_mode && !config.split_mode ? `padding-bottom: ${headerHeight}px;` : ''}
+          ${config.footer_mode && !config.split_mode ? `margin-bottom: -${headerHeight + 4}px;` : ''}
+          ${config.split_mode ? `padding-bottom: 48px;` : ''}
+          ${config.split_mode && config.footer_mode ? `margin-bottom: -4px;` : ''}
         }
         hui-panel-view {
           padding-top: 96px;
@@ -181,8 +183,14 @@ export const insertStyleTags = config => {
         }
         #view {
           min-height: calc(100vh - 96px) !important;
-          ${config.footer_mode ? `min-height: calc(100vh - ${headerHeight}px) !important;` : ''}
+          ${config.footer_mode && !config.split_mode ? `min-height: calc(100vh - ${headerHeight}px) !important;` : ''}
           ${config.compact_mode && !config.footer_mode ? `min-height: calc(100vh - ${headerHeight}px) !important;` : ''}
+          ${config.split_mode ? `min-height: calc(100vh - 48px) !important; margin-bottom: -48px;` : ''}
+          ${
+            config.split_mode && config.footer_mode
+              ? 'min-height: calc(100vh - 52px) !important; margin-bottom: -48px;'
+              : ''
+          }
         }
       `;
 
