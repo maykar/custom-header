@@ -4,6 +4,18 @@ index: 3
 ---
 
 ## Change Log
+Major fixes, added features, or breaking changes.
+<hr>
+
+### Dec. 20th 2019 - v1.1.1
+
+- iOS styling fixes
+- Don't redirect to default tab on refresh
+
+### Dec. 19th 2019 - v1.1.0
+
+- Panel view display fixes
+- Adds `test_template:`
 
 ### Dec. 18th 2019 - v1.0.7
 
