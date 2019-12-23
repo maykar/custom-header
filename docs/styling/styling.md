@@ -9,7 +9,7 @@ All color items accept [valid CSS colors](https://developer.mozilla.org/en-US/do
 
 | NAME                   | TYPE   | DESCRIPTION                                                                                                           |
 | :--------------------- | :----- | :-------------------------------------------------------------------------------------------------------------------- |
-| background             | string | Background of the header (accepts [background shorthand](https://developer.mozilla.org/en-US/docs/Web/CSS/background)) |
+| background             | string | Background of the header (accepts [background shorthand](https://developer.mozilla.org/en-US/docs/Web/CSS/background)): `background: repeat url('/local/img/header.png')` |
 | elements_color         | string | Color of all elements in header                                                                                       |
 | menu_color             | string | Color of menu button                                                                                                  |
 | voice_color            | string | Color of voice button                                                                                                 |
