@@ -7,7 +7,7 @@ title: Issues
 #### Before posting an issue:
 
 - Be sure to read the [important notes section](#intro/notes) of the Docs.
-- Disable Custom Header by temporarily removing it from your resouces to see if the issue persists. If it does, Custom Header is not the culprit.
+- Disable Custom Header by temporarily removing it from your resouces to see if the issue persists. If it does, it's likely Custom Header is not the culprit.
 - Issues should be posted on [GitHub](https://github.com/maykar/custom-header/issues/new/choose) and preferably not on the forums. This makes tracking the issues easier and they will be resolved quicker.
 - Search [GitHub issues](https://github.com/maykar/custom-header/issues?q=is%3Aissue) (open and closed) as well as the forums to see if your issue has already been posted.
 
