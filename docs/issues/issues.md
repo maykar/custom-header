@@ -4,6 +4,8 @@ title: Issues
 
 ## Issues
 
+Be sure to read the [important notes section](#intro/notes) of the Docs.
+
 Issues should be posted on [GitHub](https://github.com/maykar/custom-header/issues/new/choose) and preferably not on the forums. This makes tracking the issues easier and they will be resolved quicker.
 
 You should always search [GitHub issues](https://github.com/maykar/custom-header/issues?q=is%3Aissue) (open and closed) as well as the forums to see if your issue has already been posted.
