@@ -24,7 +24,6 @@ export const observers = () => {
   const callback = mutations => {
     const config = window.customHeaderConfig;
     const headerType = config.split_mode ? header.bottom : header;
-    console.log(mutations);
     mutations.forEach(({ addedNodes, target }) => {
       if (mutations.length && mutations[0].target.nodeName == 'HTML') {
         buildConfig();
