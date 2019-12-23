@@ -235,6 +235,18 @@ export const styleHeader = config => {
     });
   }
 
+  if (!window.customHeaderShadow && !config.footer_mode && !config.split_mode && config.shadow) {
+    window.customHeaderShadow = true;
+    window.addEventListener('scroll', function(e) {
+      if (window.scrollY > 15) {
+        header.container.style.boxShadow = '0px 0px 5px 5px rgba(0,0,0,0.2)';
+      } else {
+        console.log('off');
+        header.container.style.boxShadow = '0px 0px 5px 5px rgba(0,0,0,0)';
+      }
+    });
+  }
+
   fireEvent(header.container, 'iron-resize');
   setTimeout(() => selectTab(config), 200);
 };

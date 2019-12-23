@@ -36,6 +36,12 @@ export const insertStyleTags = config => {
         position: -webkit-sticky;
         ${config.footer_mode ? 'bottom: 0px;' : 'top: 0px;'}
         ${config.header_css ? config.header_css : ''}
+        transition: box-shadow 0.3s ease-in-out;
+        ${
+          config.shadow && (config.footer_mode || config.split_mode)
+            ? 'box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.2)'
+            : ''
+        }
       }
       ch-header-bottom {
         padding-left: 10px;
@@ -52,6 +58,7 @@ export const insertStyleTags = config => {
         position: -webkit-sticky;
         ${config.footer_mode ? 'top: 0px;' : 'bottom: 0px;'}
         ${config.header_css ? config.header_css : ''}
+        ${config.shadow ? 'box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.2)' : ''}
       }
       ch-stack {
         flex-direction: column;

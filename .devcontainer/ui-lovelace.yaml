@@ -2,7 +2,8 @@ resources:
   - url: http://127.0.0.1:5000/custom-header.js
     type: module
 custom_header:
-  split_mode: true
+  test_template: '{{ clock }}'
+  # split_mode: true
   template_variables: '{% set clock = (now().strftime("%I")|int)~now().strftime(":%M") %}'
   background: '{{ states.input_text.background.state }}'
   menu_color: '{{ states.input_text.menu_color.state }}'
@@ -10,6 +11,7 @@ custom_header:
   options_color: '{{ states.input_text.options_color.state }}'
   all_tabs_color: '{{ states.input_text.all_tabs_color.state }}'
   indicator_top: '{{ states.input_boolean.indicator_top.state == "on" }}'
+  background: repeat url('/local/img/header.png')
   footer_mode: '{{ states.input_boolean.footer_mode.state == "on" }}'
   chevrons: '{{ states.input_boolean.chevrons.state == "on" }}'
   hide_tabs: '{{ states.input_text.hide_tabs.state }}'

@@ -17,6 +17,13 @@ export const buildConfig = config => {
     return `${left ? left[0] : ''}${right ? right[0] : ''}`.replace('":"', ': "');
   };
 
+  const disabled =
+    (typeof config.disabled_mode == 'boolean' && config.disabled_mode) ||
+    (typeof config.disabled_mode == 'string' &&
+      !config.disabled_mode.includes('{{') &&
+      !config.disabled_mode.includes('{%')) ||
+    window.location.href.includes('disable_ch');
+
   const processAndContinue = () => {
     if (config.hide_tabs) config.hide_tabs = processTabArray(config.hide_tabs);
     if (config.show_tabs) config.show_tabs = processTabArray(config.show_tabs);
@@ -24,7 +31,9 @@ export const buildConfig = config => {
     if (config.disable_sidebar || config.menu_dropdown) config.menu_hide = true;
     if (config.voice_dropdown) config.voice_hide = true;
     if (config.test_template != undefined) {
-      if (
+      if (disabled) {
+        console.log(`Custom Header cannot render templates while disabled.`);
+      } else if (
         typeof config.test_template != 'string' &&
         (config.test_template.toLowerCase().includes('true') || config.test_template.toLowerCase().includes('false'))
       ) {
@@ -41,9 +50,6 @@ export const buildConfig = config => {
 
   const configString = JSON.stringify(config);
   const hasTemplates = !!variables || configString.includes('{{') || configString.includes('{%');
-  const disabled =
-    (config.disabled_mode && !config.disabled_mode.includes('{{') && !config.disabled_mode.includes('{%')) ||
-    window.location.href.includes('disable_ch');
 
   let unsubRenderTemplate;
   let templateFailed = false;

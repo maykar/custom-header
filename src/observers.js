@@ -1,6 +1,7 @@
 import { header } from './build-header';
 import { hideMenuItems } from './overflow-menu';
 import { haElem, root } from './ha-elements';
+import { buildConfig } from './config';
 
 export const selectTab = config => {
   const headerType = config.split_mode ? header.bottom : header;
@@ -23,7 +24,12 @@ export const observers = () => {
   const callback = mutations => {
     const config = window.customHeaderConfig;
     const headerType = config.split_mode ? header.bottom : header;
+    console.log(mutations);
     mutations.forEach(({ addedNodes, target }) => {
+      if (mutations.length && mutations[0].target.nodeName == 'HTML') {
+        buildConfig();
+        mutations = [];
+      }
       if (target.id == 'view' && addedNodes.length && headerType.tabs.length) {
         // Navigating to new tab/view.
         setTimeout(() => selectTab(config), 200);
@@ -70,4 +76,5 @@ export const observers = () => {
   observer.observe(haElem.partialPanelResolver, { childList: true });
   observer.observe(haElem.appHeader, { childList: true });
   observer.observe(root.querySelector('#view'), { childList: true });
+  observer.observe(document.querySelector('html'), { attributes: true });
 };

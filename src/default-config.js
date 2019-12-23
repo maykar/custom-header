@@ -16,6 +16,7 @@ export const defaultConfig = {
   chevrons: true,
   indicator_top: false,
   hidden_tab_redirect: true,
+  shadow: true,
 
   // Colors
   background: getThemeVar('--ch-background') || 'var(--primary-color)',
