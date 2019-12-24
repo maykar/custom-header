@@ -9,7 +9,7 @@ Options with a :warning: remove the ability to edit from the UI. See [important 
 
 | NAME            | TYPE    | DEFAULT          | DESCRIPTION                                                                |
 | :-------------- | :------ | :--------------- | :------------------------------------------------------------------------- |
-| header_text     | string  | 'Home Assistant' | Replace the main header text, more info below                              |
+| header_text     | string  | default HA title | Replace the main header text, more info below                              |
 | disabled_mode   | Boolean | false            | Disables Custom Header and returns the default HA header                   |
 | kiosk_mode      | Boolean | false            | Hides the header and sidebar completely :warning:                          |
 | compact_mode    | Boolean | false            | Compacts the header to about half the size while keeping all functionality |
