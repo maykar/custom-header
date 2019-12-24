@@ -17,7 +17,14 @@ const serveopts = {
   },
 };
 
-const plugins = [nodeResolve({}), commonjs(), typescript(), !dev && terser(), dev && serve(serveopts), json()];
+const plugins = [
+  nodeResolve({}),
+  commonjs(),
+  typescript(),
+  !dev && terser({ safari10: true }),
+  dev && serve(serveopts),
+  json(),
+];
 
 export default [
   {
