@@ -369,6 +369,13 @@ class ChConfigEditor extends LitElement {
           localize('editor.compact_mode_tip'),
         )}
         ${this.haSwitch(
+          'split_mode',
+          true,
+          false,
+          localize('editor.split_mode_title'),
+          localize('editor.split_mode_tip'),
+        )}
+        ${this.haSwitch(
           'kiosk_mode',
           true,
           true,
@@ -397,6 +404,7 @@ class ChConfigEditor extends LitElement {
           localize('editor.hidden_tab_redirect_title'),
           localize('editor.hidden_tab_redirect_tip'),
         )}
+        ${this.haSwitch('shadow', true, false, localize('editor.shadow_title'), localize('editor.shadow_tip'))}
         ${!this.exception && !this.getConfig('editor_warnings')
           ? this.haSwitch(
               'editor_warnings',
