@@ -1,3 +1,5 @@
+import { lovelace } from './ha-elements';
+
 const getThemeVar = themeVar => {
   return getComputedStyle(document.body).getPropertyValue(themeVar);
 };
@@ -5,7 +7,7 @@ const getThemeVar = themeVar => {
 export const defaultConfig = {
   // Main config
   locale: [],
-  header_text: 'Home Assistant',
+  header_text: lovelace.config.title || 'Home Assistant',
   disabled_mode: false,
   kiosk_mode: false,
   compact_mode: false,
