@@ -13,7 +13,8 @@ Options with a :warning: remove the ability to edit from the UI. See [important 
 | disabled_mode   | Boolean | false            | Disables Custom Header and returns the default HA header                   |
 | kiosk_mode      | Boolean | false            | Hides the header and sidebar completely :warning:                          |
 | compact_mode    | Boolean | false            | Compacts the header to about half the size while keeping all functionality |
-| footer_mode     | Boolean | false            | Places the header at the bottom of the page                                |
+| footer_mode     | Boolean | false            | Places the header at the bottom of the page or flips order of split_mode.  |
+| split_mode      | Boolean | false            | Splits header into a header and footer, `footer_mode: true` to flip order. |
 | disable_sidebar | Boolean | false            | Disables and hides the sidebar and menu button                             |
 | hide_header     | Boolean | false            | Hides the header, but still allows sidebar to be swiped on from left.      |
 | hide_help       | Boolean | false            | Hides the "Help" option in the options menu                                |
