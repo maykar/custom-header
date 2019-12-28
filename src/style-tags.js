@@ -172,8 +172,8 @@ export const insertStyleTags = config => {
   style.setAttribute('id', 'ch_view_style');
   style.innerHTML = `
         hui-view, hui-panel-view {
-          min-height: calc(100vh - 112px);
           margin-top: -96px;
+          ${config.compact_mode ? 'min-height: calc(100vh - 96px);' : 'min-height: calc(100vh - 112px);'}
           ${config.footer_mode && !config.split_mode ? `padding-bottom: ${headerHeight}px;` : ''}
           ${config.footer_mode && !config.split_mode ? `margin-bottom: -${headerHeight + 4}px;` : ''}
           ${config.split_mode ? `padding-bottom: 48px;` : ''}
