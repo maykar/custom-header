@@ -61,6 +61,7 @@ export const styleHeader = config => {
   }
 
   const headerType = config.split_mode ? header.bottom : header;
+  if (!config.split_mode) header.bottom.style.display = 'none';
 
   if (!header.tabs.length) config.compact_mode = false;
 

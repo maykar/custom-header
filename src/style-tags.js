@@ -181,7 +181,6 @@ export const insertStyleTags = config => {
         }
         hui-panel-view {
           padding-top: 96px;
-          min-height: 100vh !important;
           ${config.panel_view_css ? config.panel_view_css : ''}
         }
         hui-view {
