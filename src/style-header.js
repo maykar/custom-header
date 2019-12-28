@@ -236,15 +236,19 @@ export const styleHeader = config => {
     });
   }
 
+  const shadowScroll = () => {
+    if (window.scrollY > 15) {
+      header.container.style.boxShadow = '0px 0px 5px 5px rgba(0,0,0,0.2)';
+    } else {
+      header.container.style.boxShadow = '0px 0px 5px 5px rgba(0,0,0,0)';
+    }
+  };
+
   if (!window.customHeaderShadow && !config.footer_mode && !config.split_mode && config.shadow) {
     window.customHeaderShadow = true;
-    window.addEventListener('scroll', function(e) {
-      if (window.scrollY > 15) {
-        header.container.style.boxShadow = '0px 0px 5px 5px rgba(0,0,0,0.2)';
-      } else {
-        header.container.style.boxShadow = '0px 0px 5px 5px rgba(0,0,0,0)';
-      }
-    });
+    window.addEventListener('scroll', shadowScroll);
+  } else {
+    window.removeEventListener('scroll', shadowScroll);
   }
 
   fireEvent(header.container, 'iron-resize');
