@@ -31,6 +31,11 @@ export const buildConfig = config => {
     if (config.disable_sidebar || config.menu_dropdown) config.menu_hide = true;
     if (config.voice_dropdown) config.voice_hide = true;
     if (config.header_text === '' || config.header_text === ' ') config.header_text = '&nbsp;';
+    if (config.hide_header && config.disable_sidebar) {
+      config.kiosk_mode = true;
+      config.hide_header = false;
+      config.disable_sidebar = false;
+    }
     if (config.test_template != undefined) {
       if (disabled) {
         console.log(`Custom Header cannot render templates while disabled.`);

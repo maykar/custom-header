@@ -24,13 +24,13 @@ export const redirects = (config, header) => {
     if (config.hide_tabs.includes(activeTab) && config.hide_tabs.length != haElem.tabs.length) {
       if (defaultTab && !config.hide_tabs.includes(tabIndexByName(defaultTab))) {
         if (getComputedStyle(headerType.tabs[defaultTab]).display != 'none') {
-          haElem.tabs[defaultTab].click();
+          haElem.tabs[defaultTab].dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
           overview.setAttribute('href', `/lovelace/${defaultTab}`);
         }
       } else {
         for (const tab of headerType.tabs) {
           if (getComputedStyle(tab).display != 'none') {
-            tab.click();
+            tab.dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
             overview.setAttribute('href', `/lovelace/${headerType.tabContainer.indexOf(tab)}`);
             break;
           }
@@ -40,9 +40,9 @@ export const redirects = (config, header) => {
   }
 
   let reloaded;
-  if (config.default_tab_on_refresh && window.performance) {
+  if (!config.default_tab_on_refresh && window.performance) {
     reloaded = performance.navigation.type == 0;
-  } else if (config.default_tab_on_refresh && performance.getEntriesByType('navigation')) {
+  } else if (!config.default_tab_on_refresh && performance.getEntriesByType('navigation')) {
     reloaded = performance.getEntriesByType('navigation')[0].type == 'reload';
   } else {
     reloaded = false;
@@ -53,10 +53,10 @@ export const redirects = (config, header) => {
     !reloaded &&
     defaultTab != null &&
     !window.customHeaderDefaultClicked &&
-    headerType.tabs[defaultTab] &&
+    haElem.tabs[defaultTab] &&
     getComputedStyle(headerType.tabs[defaultTab]).display != 'none'
   ) {
-    headerType.tabs[defaultTab].click();
+    haElem.tabs[defaultTab].dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
   }
   window.customHeaderDefaultClicked = true;
 };

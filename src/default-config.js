@@ -19,7 +19,7 @@ export const defaultConfig = {
   indicator_top: false,
   hidden_tab_redirect: true,
   shadow: true,
-  default_tab_on_refresh: false,
+  default_tab_on_refresh: true,
 
   // Colors
   background: getThemeVar('--ch-background') || 'var(--primary-color)',
