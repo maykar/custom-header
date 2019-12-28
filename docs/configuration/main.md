@@ -22,7 +22,7 @@ Options with a :warning: remove the ability to edit from the UI. See [important 
 | hide_refresh          | Boolean | false            | Hides the "Refresh" option in the options menu                             |
 | hide_config           | Boolean | false            | Hides the "Configure UI" option in the options menu :warning:              |
 | hide_raw              | Boolean | false            | Hides the "Raw Config Editor" option in the options menu :warning:         |
-| default_tab_on_refresh| Boolean | false            | Disables/enables going to default tab on refresh. May cause default tab issues in some browsers when enabled.    |
+| default_tab_on_refresh| Boolean | true             | Disables/enables going to default tab on refresh. May cause default tab issues in some browsers when disabled.    |
 
 ### Example
 
