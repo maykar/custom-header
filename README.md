@@ -16,18 +16,13 @@ Custom Header adds enhancements and customization options to Home Assistant's Lo
 - And much more
 
 ### Supporting Development
-* :coffee:&nbsp;&nbsp;[Buy me a coffee](https://www.buymeacoffee.com/FgwNR2l)
-* :busts_in_silhouette:&nbsp;&nbsp;[Support and check out these guys](https://maykar.github.io/custom-header/#support)
 
-* :keyboard:&nbsp;&nbsp;[Help with development or documentation](https://maykar.github.io/custom-header/#development)
-
-* :heart:&nbsp;&nbsp;[Sponsor me on GitHub](https://github.com/sponsors/maykar)
-<br>
+- :coffee:&nbsp;&nbsp;[Buy me a coffee](https://www.buymeacoffee.com/FgwNR2l)
+- :busts_in_silhouette:&nbsp;&nbsp;[Support and check out these guys](https://maykar.github.io/custom-header/#support)
+- :keyboard:&nbsp;&nbsp;[Help with development or documentation](https://maykar.github.io/custom-header/#development)
+- :heart:&nbsp;&nbsp;[Sponsor me on GitHub](https://github.com/sponsors/maykar)
+  <br>
 
 <img style="border: 5px solid #767676;border-radius: 10px;max-width: 350px;width: 100%;box-sizing: border-box;" src="https://github.com/maykar/custom-header/blob/master/demo.gif?raw=true" alt="Demo">
 
-```yaml
-resources:
-  - url: /community_plugin/custom-header/custom-header.js
-    type: module
-```
+<!-- type: module -->
