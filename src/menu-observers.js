@@ -9,7 +9,7 @@ export const menuButtonObservers = (config, header) => {
     dot.style.cssText = `
         pointer-events: none;
         position: relative;
-        background-color: var(--accent-color, ${config.notification_dot_color});
+        background-color: ${config.notification_dot_color || 'var(--accent-color)'};
         width: 12px;
         height: 12px;
         top: -28px;
