@@ -28,7 +28,7 @@ export const defaultConfig = {
   voice_color: getThemeVar('--ch-voice-color') || '',
   options_color: getThemeVar('--ch-options-color') || '',
   all_tabs_color: getThemeVar('--ch-all-tabs-color') || '',
-  notification_dot_color: getThemeVar('--ch-notification-dot-color') || '#ff9800',
+  notification_dot_color: getThemeVar('--ch-notification-dot-color') || getThemeVar('var(--accent-color)') || '#ff9800',
   tab_indicator_color: getThemeVar('--ch-tab-indicator-color') || '',
   active_tab_color: getThemeVar('--ch-active-tab-color') || '',
   tabs_color: [],

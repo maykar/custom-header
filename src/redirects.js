@@ -51,6 +51,6 @@ export const redirects = (config, header) => {
   // Click default tab on first open.
   if (!reloaded && defaultTab != null && !window.customHeaderDefaultClicked && haElem.tabs[defaultTab]) {
     haElem.tabs[defaultTab].dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
+    window.customHeaderDefaultClicked = true;
   }
-  window.customHeaderDefaultClicked = true;
 };

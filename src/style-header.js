@@ -10,7 +10,6 @@ import { redirects } from './redirects';
 import { fireEvent } from 'custom-card-helpers';
 
 export const styleHeader = config => {
-  window.customHeaderConfig = config;
   insertSettings();
 
   if (window.location.href.includes('disable_ch')) config.disabled_mode = true;
@@ -200,8 +199,6 @@ export const styleHeader = config => {
     }
   }
 
-  redirects(config, header);
-
   if (!headerType.tabs.length) headerType.tabContainer.style.display = 'none';
 
   menuButtonObservers(config, header, root);
@@ -237,11 +234,8 @@ export const styleHeader = config => {
   }
 
   const shadowScroll = () => {
-    if (window.scrollY > 15) {
-      header.container.style.boxShadow = '0px 0px 5px 5px rgba(0,0,0,0.2)';
-    } else {
-      header.container.style.boxShadow = '0px 0px 5px 5px rgba(0,0,0,0)';
-    }
+    if (window.scrollY > 15) header.container.style.boxShadow = '0px 0px 5px 5px rgba(0,0,0,0.2)';
+    else header.container.style.boxShadow = '0px 0px 5px 5px rgba(0,0,0,0)';
   };
 
   if (!window.customHeaderShadow && !config.footer_mode && !config.split_mode && config.shadow) {
@@ -253,4 +247,5 @@ export const styleHeader = config => {
 
   fireEvent(header.container, 'iron-resize');
   setTimeout(() => selectTab(config), 200);
+  redirects(config, header);
 };

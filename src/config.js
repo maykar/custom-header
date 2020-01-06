@@ -51,6 +51,7 @@ export const buildConfig = config => {
         console.log(`Custom Header test returned: ${config.test_template}`);
       }
     }
+    window.customHeaderConfig = config;
     styleHeader(config);
   };
 
