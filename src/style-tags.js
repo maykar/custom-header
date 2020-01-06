@@ -34,7 +34,7 @@ export const insertStyleTags = config => {
         margin-top: ${config.footer_mode ? '4px;' : '0px'};
         position: sticky;
         position: -webkit-sticky;
-        ${config.footer_mode ? 'bottom: 0px;' : 'top: 0px;'}
+        ${config.footer_mode ? 'z-index: 99; bottom: 0px;' : 'top: 0px;'}
         ${config.header_css ? config.header_css : ''}
         transition: box-shadow 0.3s ease-in-out;
         ${
@@ -44,6 +44,7 @@ export const insertStyleTags = config => {
         }
       }
       ch-header-bottom {
+        z-index: 99;
         padding-left: 10px;
         padding-right: 10px;
         box-sizing: border-box;
