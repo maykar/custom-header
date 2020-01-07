@@ -41,7 +41,7 @@ export const buildConfig = config => {
       if (disabled) {
         console.log(`Custom Header cannot render templates while disabled.`);
       } else if (
-        typeof config.test_template != 'string' &&
+        typeof config.test_template == 'string' &&
         (config.test_template.toLowerCase().includes('true') || config.test_template.toLowerCase().includes('false'))
       ) {
         console.log(`Custom Header test returned: "${config.test_template}"`);
