@@ -23,7 +23,7 @@ export const selectTab = config => {
 export const observers = () => {
   const callback = mutations => {
     const config = window.customHeaderConfig;
-    const headerType = config && config.split_mode ? header.bottom : header;
+    const headerType = config.split_mode ? header.bottom : header;
     mutations.forEach(({ addedNodes, target }) => {
       if (mutations.length && mutations[0].target.nodeName == 'HTML') {
         buildConfig();
