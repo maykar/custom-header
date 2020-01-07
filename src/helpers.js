@@ -1,6 +1,14 @@
 import { defaultVariables } from './template-variables';
 import { haElem, lovelace, hass } from './ha-elements';
 
+Object.defineProperty(Array.prototype, 'flat', {
+  value: function(depth = 1) {
+    return this.reduce(function(flat, toFlatten) {
+      return flat.concat(Array.isArray(toFlatten) && depth - 1 ? toFlatten.flat(depth - 1) : toFlatten);
+    }, []);
+  },
+});
+
 // Get tab index number from view's title or path
 export const tabIndexByName = tab => {
   let index;
