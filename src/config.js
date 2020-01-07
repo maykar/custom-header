@@ -3,6 +3,7 @@ import { lovelace, root } from './ha-elements';
 import { conditionalConfig } from './conditional-config';
 import { styleHeader } from './style-header';
 import { defaultConfig } from './default-config';
+import { observers } from './observers';
 
 export const buildConfig = config => {
   if (!config) config = { ...defaultConfig, ...lovelace.config.custom_header };
@@ -53,6 +54,10 @@ export const buildConfig = config => {
     }
     window.customHeaderConfig = config;
     styleHeader(config);
+    if (!window.customHeaderObservers) {
+      observers();
+      window.customHeaderObservers = true;
+    }
   };
 
   const configString = JSON.stringify(config);

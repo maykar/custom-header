@@ -1,6 +1,4 @@
 import { buildConfig } from './config.js';
-import { observers } from './observers';
-
 import { localize } from './localize/localize';
 
 console.info(
@@ -10,4 +8,3 @@ console.info(
 );
 
 buildConfig();
-observers();
