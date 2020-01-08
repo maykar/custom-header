@@ -7,7 +7,7 @@
       "@babel/preset-env",
       {
         "targets": {
-          "browsers": ["> 0.25%, not dead"]
+          "browsers": [ ">2%", "Edge > 14", "Firefox > 63", "Chrome > 67"]
         }
       }
     ]
