@@ -22,8 +22,8 @@ const plugins = [
   nodeResolve({}),
   typescript(),
   json(),
-  // babel(),
-  // commonjs(),
+  babel(),
+  commonjs(),
   dev && serve(serveopts),
   !dev && terser({ keep_fnames: true }),
 ];
