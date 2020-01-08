@@ -11,7 +11,6 @@ custom_header:
   options_color: '{{ states.input_text.options_color.state }}'
   all_tabs_color: '{{ states.input_text.all_tabs_color.state }}'
   indicator_top: '{{ states.input_boolean.indicator_top.state == "on" }}'
-  background: repeat url('/local/img/header.png')
   footer_mode: '{{ states.input_boolean.footer_mode.state == "on" }}'
   chevrons: '{{ states.input_boolean.chevrons.state == "on" }}'
   hide_tabs: '{{ states.input_text.hide_tabs.state }}'

@@ -1,0 +1,15 @@
+{
+  "exclude": "node_modules/**",
+  "sourceMaps": false,
+  // "plugins": [["@babel/plugin-transform-regenerator", {}]],
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "browsers": ["> 0.25%, not dead"]
+        }
+      }
+    ]
+  ]
+}
