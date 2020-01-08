@@ -71,14 +71,11 @@ export const processTabArray = array => {
   const sortNumber = (a, b) => a - b;
   array = typeof array === 'string' ? array.replace(/\s+/g, '').split(',') : array;
   for (const i in array) {
-    let range = false;
     if (typeof array[i] == 'string' && array[i].includes('to')) {
       const rangeTest = array[i].replace(/ /g, '').split('to');
-      if (!(rangeTest[0].match(/[a-z]/g) || rangeTest[1].match(/[a-z]/g))) range = true;
-    }
-    if (range) {
-      console.log(array[i]);
-      ranges.push(buildRange(array[i]));
+      if (!(rangeTest[0].match(/[a-z]/g) || rangeTest[1].match(/[a-z]/g))) {
+        ranges.push(buildRange(array[i]));
+      }
     } else {
       ranges.push(array[i]);
     }
