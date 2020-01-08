@@ -72,12 +72,9 @@ export const processTabArray = array => {
   array = typeof array === 'string' ? array.replace(/\s+/g, '').split(',') : array;
   for (const i in array) {
     if (typeof array[i] == 'string' && array[i].includes('to')) {
-      const rangeTest = [...array[i]].replace(/ /g, '').split('to');
-      if (!(rangeTest[0].match(/[a-z]/g) || rangeTest[1].match(/[a-z]/g))) {
-        ranges.push(buildRange(array[i]));
-      } else {
-        ranges.push(array[i]);
-      }
+      const rangeTest = array[i].replace(/ /g, '').split('to');
+      if (!(rangeTest[0].match(/[a-z]/g) || rangeTest[1].match(/[a-z]/g))) ranges.push(buildRange(array[i]));
+      else ranges.push(array[i]);
     }
   }
   ranges = ranges.flat();
