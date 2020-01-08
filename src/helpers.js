@@ -54,7 +54,6 @@ export const subscribeRenderTemplate = (onChange, params, locale) => {
 
 // Builds range from single range string "5 to 9" and returns array [5,6,7,8,9].
 export const buildRange = string => {
-  console.log(string);
   const ranges = [];
   const range = (start, end) => new Array(end - start + 1).fill(undefined).map((_, i) => i + start);
   if (string.includes('to')) {
@@ -77,8 +76,12 @@ export const processTabArray = array => {
       const rangeTest = array[i].replace(/ /g, '').split('to');
       if (!(rangeTest[0].match(/[a-z]/g) || rangeTest[1].match(/[a-z]/g))) range = true;
     }
-    if (range) ranges.push(buildRange(array[i]));
-    else ranges.push(array[i]);
+    if (range) {
+      console.log(array[i]);
+      ranges.push(buildRange(array[i]));
+    } else {
+      ranges.push(array[i]);
+    }
   }
   ranges = ranges.flat();
   for (const i in ranges) {
