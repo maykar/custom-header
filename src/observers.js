@@ -2,6 +2,7 @@ import { header } from './build-header';
 import { hideMenuItems } from './overflow-menu';
 import { haElem, root } from './ha-elements';
 import { buildConfig } from './config';
+import { insertStyleTags } from './style-tags';
 
 export const selectTab = config => {
   const headerType = config.split_mode ? header.bottom : header;
@@ -62,8 +63,11 @@ export const observers = () => {
         root.querySelector('ch-header').style.display = 'none';
         haElem.appHeader.style.display = 'block';
         if (root.querySelector('#ch_view_style')) root.querySelector('#ch_view_style').remove();
+        if (root.querySelector('#ch_header_style')) root.querySelector('#ch_header_style').remove();
+        if (root.querySelector('#ch_animated')) root.querySelector('#ch_animated').remove();
       } else if (target.nodeName === 'APP-HEADER' && addedNodes.length) {
         // Exited edit mode.
+        insertStyleTags(config);
         haElem.menu = haElem.appHeader.querySelector('ha-menu-button');
         haElem.appHeader.style.display = 'none';
         header.menu.style.display = '';
