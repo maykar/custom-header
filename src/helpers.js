@@ -75,6 +75,8 @@ export const processTabArray = array => {
       const rangeTest = array[i].replace(/ /g, '').split('to');
       if (!(rangeTest[0].match(/[a-z]/g) || rangeTest[1].match(/[a-z]/g))) ranges.push(buildRange(array[i]));
       else ranges.push(array[i]);
+    } else {
+      ranges.push(array[i]);
     }
   }
   ranges = ranges.flat();
