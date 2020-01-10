@@ -6,7 +6,7 @@ Custom Header adds enhancements and customization options to Home Assistant's Lo
 
 ## [Visit docs for installation, config, and issues.](https://maykar.github.io/custom-header)
 
-### Features
+## Features
 
 - Per user/device configs
 - Every config item can be templated with Jinja
@@ -17,7 +17,7 @@ Custom Header adds enhancements and customization options to Home Assistant's Lo
 - Default/starting view
 - And much more
 
-### Supporting Development
+## Supporting Development
 
 - :coffee:&nbsp;&nbsp;[Buy me a coffee](https://www.buymeacoffee.com/FgwNR2l)
 - :busts_in_silhouette:&nbsp;&nbsp;[Support and check out these guys](https://maykar.github.io/custom-header/#support)
