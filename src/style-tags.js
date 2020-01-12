@@ -183,6 +183,7 @@ export const insertStyleTags = config => {
         hui-panel-view {
           padding-top: 96px;
           ${config.panel_view_css ? config.panel_view_css : ''}
+          ${config.kiosk_mode || config.hide_header ? `min-height: 100vh;` : ''}
         }
         hui-view {
           padding-top: 100px;
@@ -198,6 +199,7 @@ export const insertStyleTags = config => {
               ? 'min-height: calc(100vh - 52px) !important; margin-bottom: -48px;'
               : ''
           }
+          ${config.kiosk_mode || config.hide_header ? `min-height: 100vh !important;` : ''}
         }
       `;
 

@@ -185,10 +185,15 @@ export const styleHeader = config => {
         } else {
           buttonElem.shadowRoot.querySelector('.buttonText').innerHTML = config.button_text[button];
         }
+        buttonElem.shadowRoot.querySelector('.buttonText').dir = 'ltr';
         if (button == 'menu') {
-          buttonElem.shadowRoot.querySelector('.buttonText').dir = config.reverse_button_direction ? 'rtl' : 'ltr';
+          buttonElem.shadowRoot.querySelector('.buttonText').style.textAlign = config.reverse_button_direction
+            ? 'right'
+            : 'left';
         } else {
-          buttonElem.shadowRoot.querySelector('.buttonText').dir = config.reverse_button_direction ? 'ltr' : 'rtl';
+          buttonElem.shadowRoot.querySelector('.buttonText').style.textAlign = config.reverse_button_direction
+            ? 'left'
+            : 'right';
         }
         buttonElem.shadowRoot.querySelector('iron-icon').style.display = 'none';
         buttonElem.style.width = 'auto';
