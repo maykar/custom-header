@@ -1,6 +1,9 @@
+import { deviceID } from 'card-tools/src/deviceId';
+
 export const defaultVariables = locale => {
   const d = new Date();
   return {
+    deviceID: deviceID,
     time: d.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' }),
     date: d.toLocaleDateString(locale, {}),
     monthNum: d.getMonth() + 1,

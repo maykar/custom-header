@@ -1,10 +1,12 @@
 import { hass } from './ha-elements';
+import { deviceID } from 'card-tools/src/deviceId';
 
 export const conditionalConfig = config => {
   const countMatches = conditions => {
     const userVars = {
       user: hass.user.name,
       user_agent: navigator.userAgent,
+      device_id: deviceID,
     };
     let count = 0;
     for (const cond in conditions) {
