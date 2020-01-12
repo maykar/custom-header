@@ -22,6 +22,7 @@ const Main = css`
 
   .view {
     display: flex;
+    display: --webkit-flex;
     margin-left: 55px;
     padding-top: 24px;
     background: var(--content-container-background);

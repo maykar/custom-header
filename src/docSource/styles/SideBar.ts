@@ -29,6 +29,7 @@ export const SideBar = css`
   .menu {
     height: 48px;
     display: flex;
+    display: --webkit-flex;
     white-space: nowrap;
     font-weight: 400;
     color: var(--text-color);
