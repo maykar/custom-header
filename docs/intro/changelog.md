@@ -7,6 +7,20 @@ index: 3
 Major fixes, added features, or breaking changes.
 <hr>
 
+
+### Dec. 28th 2019 - v1.1.6
+
+- Adds default_tab_on_refresh option
+- Adjusts panel view styling
+- Fixes animated shadow
+
+### Dec. 24th 2019 - v1.1.4
+
+- Uses default HA header text as default for header_text
+- Adds shadow to header can be toggled with `shadow: true` or `shadow: false` 
+- Adds split mode to split header into a header and footer, flip order with footer_mode.
+- Listens for theme changes and updates accordingly
+
 ### Dec. 20th 2019 - v1.1.1
 
 - iOS styling fixes
