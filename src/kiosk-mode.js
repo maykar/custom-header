@@ -1,7 +1,8 @@
 import { haElem, root } from './ha-elements';
+import { tabIndexByName } from './helpers';
 
 // Kiosk mode is used to hide sidebar only as well.
-export const kioskMode = (sidebarOnly, headerOnly) => {
+export const kioskMode = (sidebarOnly, headerOnly, config) => {
   if (window.location.href.includes('disable_ch')) return;
 
   // Kiosk mode styling.
@@ -41,6 +42,17 @@ export const kioskMode = (sidebarOnly, headerOnly) => {
   if (!oldStyle || oldStyle.innerText != style.innerHTML) {
     root.appendChild(style);
     if (oldStyle) oldStyle.remove();
+  }
+
+  // Add per tab hiding.
+  if (config.hide_tabs) {
+    config.hide_tabs.forEach(tab => {
+      style.innerHTML += `
+        paper-tab:nth-child(${tabIndexByName(tab) + 1}) {
+          display: none;
+        }
+      `;
+    });
   }
 
   if (!headerOnly) {

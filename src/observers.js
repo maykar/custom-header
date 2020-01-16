@@ -3,6 +3,7 @@ import { hideMenuItems } from './overflow-menu';
 import { haElem, root } from './ha-elements';
 import { buildConfig } from './config';
 import { insertStyleTags } from './style-tags';
+import { redirects } from './redirects';
 
 export const selectTab = config => {
   const headerType = config.split_mode ? header.bottom : header;
@@ -32,6 +33,7 @@ export const observers = () => {
       }
       if (target.id == 'view' && addedNodes.length && headerType.tabs.length) {
         // Navigating to new tab/view.
+        redirects(config, header);
         setTimeout(() => selectTab(config), 200);
       } else if (addedNodes.length && target.nodeName == 'PARTIAL-PANEL-RESOLVER') {
         // When returning to lovelace/overview from elsewhere in HA.

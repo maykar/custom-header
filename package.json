@@ -17,6 +17,7 @@
   "author": "Ryan Meek <contact@ryanmeek.com>",
   "license": "MIT",
   "dependencies": {
+    "@babel/plugin-proposal-object-rest-spread": "^7.8.3",
     "@babel/plugin-transform-regenerator": "^7.7.5",
     "@babel/polyfill": "^7.7.0",
     "@babel/preset-env": "^7.7.7",

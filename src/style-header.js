@@ -93,13 +93,13 @@ export const styleHeader = config => {
   // Disable sidebar or style it to fit header's new sizing/placement.
   if (config.kiosk_mode && !config.disabled_mode) {
     insertStyleTags(config);
-    kioskMode(false, false);
+    kioskMode(false, false, config);
   } else if (config.disable_sidebar) {
-    kioskMode(true, false);
+    kioskMode(true, false, config);
     insertStyleTags(config);
   } else if (config.hide_header) {
     insertStyleTags(config);
-    kioskMode(false, true);
+    kioskMode(false, true, config);
   } else if (!config.disable_sidebar && !config.kiosk_mode && !config.hide_header) {
     removeKioskMode();
     if (config.compact_mode && !config.footer_mode) {
