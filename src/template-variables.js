@@ -1,9 +1,13 @@
 import { deviceID } from 'card-tools/src/deviceId';
+import { hass } from './ha-elements';
 
 export const defaultVariables = locale => {
   const d = new Date();
   return {
     deviceID: deviceID,
+    isAdmin: hass.user.is_admin,
+    user: hass.user.name,
+    userAgent: navigator.userAgent,
     time: d.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' }),
     date: d.toLocaleDateString(locale, {}),
     monthNum: d.getMonth() + 1,
