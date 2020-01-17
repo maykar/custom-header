@@ -22,8 +22,9 @@ export const defaultConfig = {
   default_tab_on_refresh: true,
 
   // Colors
-  background: getThemeVar('--ch-background') || 'var(--primary-color)',
-  elements_color: getThemeVar('--ch-elements-color') || 'var(--text-primary-color)',
+  background: getThemeVar('--ch-background') || getThemeVar('--app-header-background-color') || 'var(--primary-color)',
+  elements_color:
+    getThemeVar('--ch-elements-color') || getThemeVar('--app-header-text-color') || 'var(--text-primary-color)',
   menu_color: getThemeVar('--ch-menu-color') || '',
   voice_color: getThemeVar('--ch-voice-color') || '',
   options_color: getThemeVar('--ch-options-color') || '',
