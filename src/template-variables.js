@@ -1,13 +1,18 @@
 import { deviceID } from 'card-tools/src/deviceId';
 import { hass } from './ha-elements';
+import { lovelace } from 'card-tools/src/hass.js';
 
 export const defaultVariables = locale => {
   const d = new Date();
   return {
     deviceID: deviceID,
     isAdmin: hass.user.is_admin,
+    isOwner: hass.user.is_owner,
     user: hass.user.name,
     userAgent: navigator.userAgent,
+    viewTitle: lovelace().config.views[lovelace().current_view].title,
+    viewPath: lovelace().config.views[lovelace().current_view].path,
+    viewIndex: lovelace().current_view,
     time: d.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' }),
     date: d.toLocaleDateString(locale, {}),
     monthNum: d.getMonth() + 1,

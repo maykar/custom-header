@@ -1,5 +1,8 @@
 import { hass } from './ha-elements';
+import { tabIndexByName } from './helpers';
 import { deviceID } from 'card-tools/src/deviceId';
+import { lovelace } from 'card-tools/src/hass.js';
+import { subscribeRenderTemplate } from './helpers';
 
 export const conditionalConfig = config => {
   const countMatches = conditions => {
@@ -20,8 +23,9 @@ export const conditionalConfig = config => {
           (cond == 'query_string' && window.location.search.includes(conditions[cond])) ||
           (cond == 'user_agent' && userVars[cond].includes(conditions[cond])) ||
           (cond == 'media_query' && window.matchMedia(conditions[cond]).matches) ||
-          (cond == 'is_admin' && userVars[cond] == hass.user.is_admin) ||
-          (cond == 'template' && userVars[cond])
+          (cond == 'is_admin' && conditions[cond] == hass.user.is_admin) ||
+          (cond == 'is_owner' && conditions[cond] == hass.user.is_owner) ||
+          (cond == 'view' && tabIndexByName(conditions[cond]) == (lovelace().current_view || -1))
         ) {
           count++;
         } else {
