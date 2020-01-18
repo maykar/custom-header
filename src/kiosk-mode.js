@@ -32,7 +32,6 @@ export const kioskMode = (sidebarOnly, headerOnly, config) => {
         hui-view, hui-panel-view {
           min-height: calc(100vh + 96px);
           margin-top: -96px;
-          margin-bottom: -16px;
         }
       `;
   }
