@@ -16,23 +16,21 @@ export const conditionalConfig = config => {
         conditions[cond].split(/,+/).forEach(user => {
           if (userVars[cond] == user.trim() || user == hass.user.id) count++;
         });
+      } else if (
+        userVars[cond] == conditions[cond] ||
+        (cond == 'query_string' && window.location.search.includes(conditions[cond])) ||
+        (cond == 'user_agent' && userVars[cond].includes(conditions[cond])) ||
+        (cond == 'media_query' && window.matchMedia(conditions[cond]).matches) ||
+        (cond == 'user' && conditions[cond] == hass.user.id) ||
+        (cond == 'is_admin' && conditions[cond] == hass.user.is_admin) ||
+        (cond == 'is_owner' && conditions[cond] == hass.user.is_owner) ||
+        (cond == 'template' && conditions[cond]) ||
+        (cond == 'view' && tabIndexByName(conditions[cond]) == lovelace().current_view)
+      ) {
+        if (cond == 'view') window.customHeaderViewCond = true;
+        count++;
       } else {
-        if (
-          userVars[cond] == conditions[cond] ||
-          (cond == 'query_string' && window.location.search.includes(conditions[cond])) ||
-          (cond == 'user_agent' && userVars[cond].includes(conditions[cond])) ||
-          (cond == 'media_query' && window.matchMedia(conditions[cond]).matches) ||
-          (cond == 'user' && conditions[cond] == hass.user.id) ||
-          (cond == 'is_admin' && conditions[cond] == hass.user.is_admin) ||
-          (cond == 'is_owner' && conditions[cond] == hass.user.is_owner) ||
-          (cond == 'template' && conditions[cond]) ||
-          (cond == 'view' && tabIndexByName(conditions[cond]) == (lovelace().current_view || -1))
-        ) {
-          if (cond == 'view') window.customHeaderViewCond = true;
-          count++;
-        } else {
-          return 0;
-        }
+        return 0;
       }
     }
     return count;
