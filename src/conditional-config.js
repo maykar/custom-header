@@ -2,7 +2,6 @@ import { hass } from './ha-elements';
 import { tabIndexByName } from './helpers';
 import { deviceID } from 'card-tools/src/deviceId';
 import { lovelace } from 'card-tools/src/hass.js';
-import { subscribeRenderTemplate } from './helpers';
 
 export const conditionalConfig = config => {
   const countMatches = conditions => {
@@ -25,8 +24,10 @@ export const conditionalConfig = config => {
           (cond == 'media_query' && window.matchMedia(conditions[cond]).matches) ||
           (cond == 'is_admin' && conditions[cond] == hass.user.is_admin) ||
           (cond == 'is_owner' && conditions[cond] == hass.user.is_owner) ||
+          (cond == 'template' && conditions[cond]) ||
           (cond == 'view' && tabIndexByName(conditions[cond]) == (lovelace().current_view || -1))
         ) {
+          if (cond == 'view') window.customHeaderViewCond = true;
           count++;
         } else {
           return 0;
