@@ -56,6 +56,12 @@ export class Main extends LitElement {
       const space = bottomItems ? window.getComputedStyle(bottomItems).getPropertyValue('height') : '0px';
       topItems.style.cssText = `height: calc((100% - 82px) - ${space});`;
     }
+    if (main!.querySelector('app-header-layout')) {
+      const contentContainer = main!
+        .querySelector('app-header-layout')!
+        .shadowRoot!.querySelector('#contentContainer') as HTMLElement;
+      if (!contentContainer!.style.overflowY) contentContainer!.style.cssText = 'overflow-y: initial;';
+    }
     if (tabs.length < 2) return;
     for (const tab of tabs) if (tab.classList.contains('iron-selected')) return;
     tabs[1].click();
@@ -71,6 +77,7 @@ export class Main extends LitElement {
   changeCategory(e: any) {
     if (e.composedPath()[0].localName !== 'paper-item') {
       this.category = e.composedPath()[3].innerText.toLowerCase();
+      this.category = this.category!.trim();
       this.page = this.docs[this.category!].sort((a, b) => (a.index > b.index ? 1 : -1))[0].id;
       window.history.pushState(null, '', `./#${this.category}`);
       this.tabCountAndResize();
