@@ -13,6 +13,7 @@ export const defaultVariables = locale => {
     viewTitle: lovelace().config.views[lovelace().current_view].title,
     viewPath: lovelace().config.views[lovelace().current_view].path,
     viewIndex: lovelace().current_view,
+    url: window.location.href,
     time: d.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' }),
     date: d.toLocaleDateString(locale, {}),
     monthNum: d.getMonth() + 1,
