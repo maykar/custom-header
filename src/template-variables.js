@@ -9,6 +9,7 @@ export const defaultVariables = locale => {
     isAdmin: hass.user.is_admin,
     isOwner: hass.user.is_owner,
     user: hass.user.name,
+    userID: hass.user.id,
     userAgent: navigator.userAgent,
     viewTitle: lovelace().config.views[lovelace().current_view].title,
     viewPath: lovelace().config.views[lovelace().current_view].path,

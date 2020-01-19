@@ -14,7 +14,7 @@ export const conditionalConfig = config => {
     for (const cond in conditions) {
       if (cond == 'user' && conditions[cond].includes(',')) {
         conditions[cond].split(/,+/).forEach(user => {
-          if (userVars[cond] == user.trim()) count++;
+          if (userVars[cond] == user.trim() || user == hass.user.id) count++;
         });
       } else {
         if (
@@ -22,6 +22,7 @@ export const conditionalConfig = config => {
           (cond == 'query_string' && window.location.search.includes(conditions[cond])) ||
           (cond == 'user_agent' && userVars[cond].includes(conditions[cond])) ||
           (cond == 'media_query' && window.matchMedia(conditions[cond]).matches) ||
+          (cond == 'user' && conditions[cond] == hass.user.id) ||
           (cond == 'is_admin' && conditions[cond] == hass.user.is_admin) ||
           (cond == 'is_owner' && conditions[cond] == hass.user.is_owner) ||
           (cond == 'template' && conditions[cond]) ||
