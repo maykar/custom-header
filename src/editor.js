@@ -317,7 +317,7 @@ class ChConfigEditor extends LitElement {
                     <br />
                     <p style="padding: 5px; margin: 0;">
                       <ha-icon style="padding-right: 3px;" icon="mdi:alpha-t-box-outline"></ha-icon>
-                      ${localize('editor.warning_allready_a_template')}
+                      ${localize('editor.warning_already_a_template')}
                       <br /><ha-icon style="padding-right: 3px;" icon="mdi:alert-box-outline"></ha-icon> ${localize(
                         'editor.warning_edit_ui',
                       )}<br />
@@ -796,6 +796,12 @@ class ChConditionsEditor extends LitElement {
   get _query_string() {
     return this.conditions.query_string || '';
   }
+  get _template() {
+    return this.conditions.template || '';
+  }
+  get _tab() {
+    return this.conditions.tab || '';
+  }
 
   render() {
     if (!this.conditions) return html``;
@@ -825,6 +831,20 @@ class ChConditionsEditor extends LitElement {
         label="${localize('editor.query_string')}"
         .value="${this._query_string}"
         .configValue="${'query_string'}"
+        @value-changed="${this._valueChanged}"
+      >
+      </paper-input>
+      <paper-input
+        label="${localize('editor.template')}"
+        .value="${this._template}"
+        .configValue="${'template'}"
+        @value-changed="${this._valueChanged}"
+      >
+      </paper-input>
+      <paper-input
+        label="${localize('editor.tabs')}"
+        .value="${this._tab}"
+        .configValue="${'tab'}"
         @value-changed="${this._valueChanged}"
       >
       </paper-input>

@@ -78,7 +78,7 @@ const showEditor = () => {
       box-sizing: border-box;
       position: absolute;
       background: var(--background-color, grey);
-      z-index: 2;
+      z-index: 100;
       padding: 5px;
     `;
     root.querySelector('ha-app-layout').insertBefore(container, root.querySelector('#view'));
