@@ -35,7 +35,7 @@ export const observers = () => {
         // Navigating to new tab/view.
         redirects(config, header);
         setTimeout(() => selectTab(config), 200);
-        if (window.customHeaderViewCond) buildConfig();
+        buildConfig();
       } else if (addedNodes.length && target.nodeName == 'PARTIAL-PANEL-RESOLVER') {
         // When returning to lovelace/overview from elsewhere in HA.
         if (haElem.main.shadowRoot.querySelector(' ha-panel-lovelace')) {

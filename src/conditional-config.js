@@ -2,6 +2,7 @@ import { hass } from './ha-elements';
 import { tabIndexByName } from './helpers';
 import { deviceID } from 'card-tools/src/deviceId';
 import { lovelace } from 'card-tools/src/hass.js';
+import { processTabArray } from './helpers';
 
 export const conditionalConfig = config => {
   const countMatches = conditions => {
@@ -16,6 +17,12 @@ export const conditionalConfig = config => {
         conditions[cond].split(/,+/).forEach(user => {
           if (userVars[cond] == user.trim() || user == hass.user.id) count++;
         });
+      } else if (cond == 'tab' && (conditions[cond].includes(',') || conditions[cond].includes('to'))) {
+        const tabs = processTabArray(conditions[cond]);
+        if (tabs.includes(lovelace().current_view)) {
+          count++;
+          continue;
+        }
       } else if (
         userVars[cond] == conditions[cond] ||
         (cond == 'query_string' && window.location.search.includes(conditions[cond])) ||
@@ -25,9 +32,8 @@ export const conditionalConfig = config => {
         (cond == 'is_admin' && conditions[cond] == hass.user.is_admin) ||
         (cond == 'is_owner' && conditions[cond] == hass.user.is_owner) ||
         (cond == 'template' && conditions[cond]) ||
-        (cond == 'view' && tabIndexByName(conditions[cond]) == lovelace().current_view)
+        (cond == 'tab' && tabIndexByName(conditions[cond]) == lovelace().current_view)
       ) {
-        if (cond == 'view') window.customHeaderViewCond = true;
         count++;
       } else {
         return 0;
@@ -61,5 +67,6 @@ export const conditionalConfig = config => {
   ) {
     delete config.hide_tabs;
   }
+  window.customHeaderExceptionConfig = JSON.stringify(exceptionConfig);
   return { ...config, ...exceptionConfig };
 };

@@ -3,6 +3,7 @@ import { hass } from './ha-elements';
 import { lovelace } from 'card-tools/src/hass.js';
 
 export const defaultVariables = locale => {
+  if (!lovelace()) return;
   const d = new Date();
   return {
     deviceID: deviceID,

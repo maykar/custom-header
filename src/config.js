@@ -5,8 +5,10 @@ import { styleHeader } from './style-header';
 import { defaultConfig } from './default-config';
 import { observers } from './observers';
 
+window.customHeaderExceptionConfig = 'init';
 export const buildConfig = config => {
   if (!config) config = { ...defaultConfig, ...lovelace.config.custom_header };
+  conditionalConfig(config);
   const variables = config.template_variables;
   delete config.template_variables;
 
@@ -68,7 +70,13 @@ export const buildConfig = config => {
   if (hasTemplates && !disabled) {
     unsubRenderTemplate = subscribeRenderTemplate(
       result => {
-        if (window.customHeaderLastTemplateResult == result) return;
+        if (
+          window.customHeaderLastTemplateResult == result &&
+          window.customHeaderLastExceptionConfig == window.customHeaderExceptionConfig
+        ) {
+          return;
+        }
+        window.customHeaderLastExceptionConfig = window.customHeaderExceptionConfig;
         window.customHeaderLastTemplateResult = result;
         try {
           config = JSON.parse(
@@ -103,7 +111,12 @@ export const buildConfig = config => {
     // Render templates every minute.
     window.setTimeout(() => {
       // Unsubscribe from template.
-      if (templateFailed || root.querySelector('custom-header-editor')) return;
+      const editor = document
+        .querySelector('home-assistant')
+        .shadowRoot.querySelector('home-assistant-main')
+        .shadowRoot.querySelector('ha-panel-lovelace')
+        .shadowRoot.querySelector('hui-editor');
+      if (editor || templateFailed || root.querySelector('custom-header-editor')) return;
       (async () => {
         const unsub = await unsubRenderTemplate;
         unsubRenderTemplate = undefined;
