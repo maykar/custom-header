@@ -110,13 +110,13 @@ export const buildConfig = config => {
 
     // Render templates every minute.
     window.setTimeout(() => {
-      // Unsubscribe from template.
-      const editor = document
+      const panelLovelace = document
         .querySelector('home-assistant')
         .shadowRoot.querySelector('home-assistant-main')
-        .shadowRoot.querySelector('ha-panel-lovelace')
-        .shadowRoot.querySelector('hui-editor');
+        .shadowRoot.querySelector('ha-panel-lovelace');
+      const editor = panelLovelace ? panelLovelace.shadowRoot.querySelector('hui-editor') : null;
       if (editor || templateFailed || root.querySelector('custom-header-editor')) return;
+      // Unsubscribe from template.
       (async () => {
         const unsub = await unsubRenderTemplate;
         unsubRenderTemplate = undefined;

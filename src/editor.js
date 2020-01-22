@@ -3,6 +3,7 @@ import { defaultConfig } from './default-config';
 import { getLovelace, fireEvent } from 'custom-card-helpers';
 import { hass } from './ha-elements';
 import { localize } from './localize/localize';
+import { deviceID } from 'card-tools/src/deviceId';
 
 export class CustomHeaderEditor extends LitElement {
   static get properties() {
@@ -47,7 +48,13 @@ export class CustomHeaderEditor extends LitElement {
       <br />
       <mwc-button @click="${this._addException}">${localize('editor.add_exception')}</mwc-button>
       <h4 class="underline">${localize('editor.current_user')}</h4>
-      <p style="font-size:16pt">${hass.user.name}</p>
+      <br />
+      <b>Name:</b> ${hass.user.name}<br />
+      <b>ID:</b> ${hass.user.id}
+      <h4 class="underline">Device ID</h4>
+      <br />
+      ${deviceID}
+      <br />
       <h4 class="underline">${localize('editor.current_user_agent')}</h4>
       <br />
       ${navigator.userAgent}
@@ -802,6 +809,9 @@ class ChConditionsEditor extends LitElement {
   get _tab() {
     return this.conditions.tab || '';
   }
+  get _device_id() {
+    return this.conditions.device_id || '';
+  }
 
   render() {
     if (!this.conditions) return html``;
@@ -845,6 +855,13 @@ class ChConditionsEditor extends LitElement {
         label="${localize('editor.tabs')}"
         .value="${this._tab}"
         .configValue="${'tab'}"
+        @value-changed="${this._valueChanged}"
+      >
+      </paper-input>
+      <paper-input
+        label="Device ID"
+        .value="${this._device_id}"
+        .configValue="${'device_id'}"
         @value-changed="${this._valueChanged}"
       >
       </paper-input>
