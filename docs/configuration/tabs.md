@@ -39,7 +39,7 @@ custom_header:
 
 ### Tab Icons
 
-The tab_icons option accepts a tab/views index number, title, or path. This option is mostly useful when used with [templates](#templates).
+The tab_icons option accepts a tab/views index number, title, or path. This option is mostly useful when used with [templates](#templates). The tab/view must already have an icon in your lovelace config to use this option.
 
 ```yaml
 custom_header:

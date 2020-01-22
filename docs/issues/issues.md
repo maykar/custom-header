@@ -4,6 +4,8 @@ title: Issues
 
 ## Issues
 
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/maykar/custom-header?label=%20&style=flat-square) Is the current version of Custom Header. You can check the version you're running by looking at your browser's dev tools console (F12). If this doesn't display the current version either clear your cache or reinstall.
+
 #### Before posting an issue:
 
 - Be sure to read the [important notes section](#intro/notes) of the Docs.

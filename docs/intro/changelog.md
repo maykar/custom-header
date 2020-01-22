@@ -4,9 +4,32 @@ index: 3
 ---
 
 ## Change Log
+
 Major fixes, added features, or breaking changes.
+
 <hr>
 
+### Jan. 21st 2020 - v1.2.2
+
+Added Features:
+
+- New template variables: deviceID, isAdmin, isOwner, userID, userAgent, viewTitle, viewPath, viewIndex, url
+- New exception conditions: is_admin, is_owner, tab, template
+- Can use a user's ID instead of name in user condition
+
+Fixes:
+
+- Tabs not hiding while in kiosk mode.
+- Respects new theme variables for header text and background.
+- Bottom margin in kiosk mode.
+
+### Jan. 8th 2020 - v1.1.8
+
+- Fix button text justification
+- Fix for view names containing the letters "to" being detected as a range
+- Fix for boolean reporting in test_template:
+- Fix for notification dot color
+- Fix for cards overlapping in split mode and footer mode
 
 ### Dec. 28th 2019 - v1.1.6
 
@@ -17,7 +40,7 @@ Major fixes, added features, or breaking changes.
 ### Dec. 24th 2019 - v1.1.4
 
 - Uses default HA header text as default for header_text
-- Adds shadow to header can be toggled with `shadow: true` or `shadow: false` 
+- Adds shadow to header can be toggled with `shadow: true` or `shadow: false`
 - Adds split mode to split header into a header and footer, flip order with footer_mode.
 - Listens for theme changes and updates accordingly
 
@@ -34,6 +57,7 @@ Major fixes, added features, or breaking changes.
 ### Dec. 18th 2019 - v1.0.7
 
 Fixes for:
+
 - View sizing
 - 12 hour template
 - Default tab

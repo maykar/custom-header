@@ -1,5 +1,6 @@
 {
   "exclude": "node_modules/**",
+  "ignore": ["src/docSource/mdi.js"],
   "sourceMaps": false,
   "presets": [
     [
