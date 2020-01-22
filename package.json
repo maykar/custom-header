@@ -22,7 +22,7 @@
     "@babel/polyfill": "^7.7.0",
     "@babel/preset-env": "^7.7.7",
     "@rollup/plugin-commonjs": "^11.0.1",
-    "card-tools": "git@github.com:thomasloven/lovelace-card-tools.git#2.3",
+    "card-tools": "github:thomasloven/lovelace-card-tools#2.3",
     "custom-card-helpers": "^1.4.0",
     "home-assistant-js-websocket": "^4.4.0",
     "lit-element": "^2.2.1"
