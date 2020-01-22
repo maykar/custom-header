@@ -18,7 +18,6 @@ jobs:
         run: |
           cd /home/runner/work/custom-header/custom-header
           npm install
-          npm install thomasloven/lovelace-card-tools
           npm run build
 
       - name: Upload card to release
