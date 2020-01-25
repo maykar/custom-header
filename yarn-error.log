@@ -1,20 +1,30 @@
 Arguments: 
-  /usr/bin/node /usr/share/node_modules/yarn/bin/yarn.js add thomasloven/lovelace-card-tools#2.3
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js install
 
 PATH: 
-  /root/.vscode-server/bin/26076a4de974ead31f97692a0d32f90d735645c0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+  C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\theme\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files\Docker\Docker\Resources\bin;C:\Program Files (x86)\Razer Chroma SDK\bin;C:\Program Files\Razer Chroma SDK\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\PuTTY;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\nodejs;C:\Users\theme\AppData\Local\Programs\Python\Python37-32\Scripts;C:\Users\theme\AppData\Local\Programs\Python\Python37-32;C:\Users\theme\AppData\Local\Microsoft\WindowsApps;C:\Users\theme\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\theme\AppData\Roaming\npm;C:\Users\theme\AppData\Local\atom\bin;C:\Users\theme\AppData\Local\learn_ide_3\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Git\cmd;C:\Program Files (x86)\Yarn\bin;C:\Ruby26-x64\bin;C:\Users\theme\AppData\Local\Programs\Python\Python37-32\Scripts;C:\Users\theme\AppData\Local\Programs\Python\Python37-32;C:\Users\theme\AppData\Local\Microsoft\WindowsApps;C:\Users\theme\AppData\Roaming\npm;C:\Users\theme\AppData\Local\atom\bin;C:\Users\theme\AppData\Local\learn_ide_3\bin;C:\Users\theme\AppData\Local\Microsoft\WindowsApps;C:\Users\theme\AppData\Local\Yarn\bin;C:\Users\theme\AppData\Local\Programs\Microsoft VS Code\bin
 
 Yarn version: 
   1.16.0
 
 Node version: 
-  10.16.3
+  10.15.1
 
 Platform: 
-  linux x64
+  win32 x64
 
 Trace: 
-  Error: Unknown system error -116: Unknown system error -116, copyfile '/usr/local/share/.cache/yarn/v4/npm-lodash-4.17.15-b447f6670a0455bbfeedd11392eff330ea097548/node_modules/lodash/propertyOf.js' -> '/workspaces/custom-header/node_modules/lodash/propertyOf.js'
+  Error: https://registry.yarnpkg.com/card-tools: Not found
+      at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:65200:18)
+      at Request.self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:129590:22)
+      at Request.emit (events.js:189:13)
+      at Request.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:130562:10)
+      at Request.emit (events.js:189:13)
+      at IncomingMessage.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:130484:12)
+      at Object.onceWrapper (events.js:277:13)
+      at IncomingMessage.emit (events.js:194:15)
+      at endReadableNT (_stream_readable.js:1103:12)
+      at process._tickCallback (internal/process/next_tick.js:63:19)
 
 npm manifest: 
   {
@@ -41,7 +51,7 @@ npm manifest:
       "@babel/polyfill": "^7.7.0",
       "@babel/preset-env": "^7.7.7",
       "@rollup/plugin-commonjs": "^11.0.1",
-      "card-tools": "github:thomasloven/lovelace-card-tools#2.3",
+      "card-tools": "thomasloven/lovelace-card-tools@2.0.0",
       "custom-card-helpers": "^1.4.0",
       "home-assistant-js-websocket": "^4.4.0",
       "lit-element": "^2.2.1"
@@ -1020,7 +1030,7 @@ Lockfile:
   
   card-tools@thomasloven/lovelace-card-tools:
     version "2.0.0"
-    resolved "https://codeload.github.com/thomasloven/lovelace-card-tools/tar.gz/9c775ce6cb27b9c463ce0daddcac2989972db2ac"
+    resolved "https://codeload.github.com/thomasloven/lovelace-card-tools/tar.gz/fa1edfd127bb86bf1f224dc7982cb7ad53269d35"
   
   chalk@^2.0.0, chalk@^2.1.0, chalk@^2.4.2:
     version "2.4.2"

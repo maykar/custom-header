@@ -1,6 +1,6 @@
 import { buildConfig } from './config.js';
 import { localize } from './localize/localize';
-import { deviceID } from 'card-tools/src/deviceId';
+import { deviceID } from './template-variables';
 import '@babel/polyfill';
 
 console.info(
@@ -12,5 +12,7 @@ console.info(
 buildConfig();
 
 window.setTimeout(() => {
-  if (!customElements.get('card-tools')) console.log('Device ID: ', deviceID);
+  if (!customElements.get('card-tools')) {
+    console.log('Device ID: ', deviceID);
+  }
 }, 2000);

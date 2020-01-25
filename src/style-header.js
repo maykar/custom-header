@@ -255,6 +255,6 @@ export const styleHeader = config => {
   }
 
   fireEvent(header.container, 'iron-resize');
-  setTimeout(() => selectTab(config), 200);
+  selectTab(config);
   redirects(config, header);
 };

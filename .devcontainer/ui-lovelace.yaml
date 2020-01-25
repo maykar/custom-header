@@ -2,7 +2,7 @@ resources:
   - url: http://127.0.0.1:5000/custom-header.js
     type: module
 custom_header:
-  test_template: '{{ clock }}'
+  test_template: '{{ viewIndex }}'
   # split_mode: true
   template_variables: '{% set clock = (now().strftime("%I")|int)~now().strftime(":%M") %}'
   background: '{{ states.input_text.background.state }}'

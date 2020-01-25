@@ -11,15 +11,9 @@ export const selectTab = config => {
   const haActiveTabIndex = haElem.tabContainer.indexOf(root.querySelector('paper-tab.iron-selected'));
   headerType.tabContainer.setAttribute('selected', haActiveTabIndex);
   if (!headerType.tabs[haActiveTabIndex]) return;
-  const tab = headerType.tabs[haActiveTabIndex].getBoundingClientRect();
-  const lastTab = headerType.tabs[headerType.tabs.length - 1].getBoundingClientRect();
-  const container = headerType.tabContainer.shadowRoot.querySelector('#tabsContainer').getBoundingClientRect();
-  if (container.right < tab.right || container.left > tab.left) {
-    headerType.tabContainer._scrollToLeft();
-    headerType.tabContainer._scrollToRight();
-    headerType.tabs[haActiveTabIndex].dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
-    if (lastTab.right > container.right) headerType.tabContainer._scrollToRight();
-  }
+  const tab = headerType.tabs[haActiveTabIndex];
+  tab.dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
+  tab.dispatchEvent(new MouseEvent('tap', { bubbles: false, cancelable: false }));
 };
 
 export const observers = () => {
@@ -28,13 +22,14 @@ export const observers = () => {
     const headerType = config.split_mode ? header.bottom : header;
     mutations.forEach(({ addedNodes, target }) => {
       if (mutations.length && mutations[0].target.nodeName == 'HTML') {
+        window.customHeaderExceptionConfig = 'init';
         buildConfig();
         mutations = [];
       }
       if (target.id == 'view' && addedNodes.length && headerType.tabs.length) {
         // Navigating to new tab/view.
         redirects(config, header);
-        setTimeout(() => selectTab(config), 200);
+        selectTab(config);
         buildConfig();
       } else if (addedNodes.length && target.nodeName == 'PARTIAL-PANEL-RESOLVER') {
         // When returning to lovelace/overview from elsewhere in HA.

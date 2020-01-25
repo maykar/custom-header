@@ -1,10 +1,27 @@
-import { deviceID } from 'card-tools/src/deviceId';
 import { hass } from './ha-elements';
-import { lovelace } from 'card-tools/src/hass.js';
+import { getLovelace } from 'custom-card-helpers';
+
+// deviceID taken directly from https://github.com/thomasloven/lovelace-card-tools
+const _deviceID = () => {
+  const ID_STORAGE_KEY = 'lovelace-player-device-id';
+  if (window['fully'] && typeof fully.getDeviceId === 'function') return fully.getDeviceId();
+  if (!localStorage[ID_STORAGE_KEY]) {
+    const s4 = () => {
+      return Math.floor((1 + Math.random()) * 100000)
+        .toString(16)
+        .substring(1);
+    };
+    localStorage[ID_STORAGE_KEY] = `${s4()}${s4()}-${s4()}${s4()}`;
+  }
+  return localStorage[ID_STORAGE_KEY];
+};
+
+export let deviceID = _deviceID();
 
 export const defaultVariables = locale => {
-  if (!lovelace()) return;
+  const lovelace = getLovelace();
   const d = new Date();
+  if (lovelace.config.views[lovelace.current_view] == undefined) return;
   return {
     deviceID: deviceID,
     isAdmin: hass.user.is_admin,
@@ -12,9 +29,9 @@ export const defaultVariables = locale => {
     user: hass.user.name,
     userID: hass.user.id,
     userAgent: navigator.userAgent,
-    viewTitle: lovelace().config.views[lovelace().current_view].title,
-    viewPath: lovelace().config.views[lovelace().current_view].path,
-    viewIndex: lovelace().current_view,
+    viewTitle: lovelace.config.views[lovelace.current_view].title,
+    viewPath: lovelace.config.views[lovelace.current_view].path,
+    viewIndex: lovelace.current_view,
     url: window.location.href,
     time: d.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' }),
     date: d.toLocaleDateString(locale, {}),

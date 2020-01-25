@@ -1,4 +1,5 @@
 import { haElem, root, lovelace } from './ha-elements';
+import { tapOrClick } from './helpers';
 
 export const buildHeader = () => {
   if (root.querySelector('ch-header')) return;
@@ -15,12 +16,8 @@ export const buildHeader = () => {
     const index = haElem.tabs.indexOf(tab);
     const tabClone = tab.cloneNode(true);
     const haIcon = tabClone.querySelector('ha-icon');
-    if (haIcon) {
-      haIcon.setAttribute('icon', lovelace.config.views[index].icon);
-    }
-    tabClone.addEventListener('click', () => {
-      haElem.tabs[index].dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
-    });
+    if (haIcon) haIcon.setAttribute('icon', lovelace.config.views[index].icon);
+    tapOrClick(tabClone, haElem.tabs[index]);
     header.tabContainer.appendChild(tabClone);
   });
   header.tabs = header.tabContainer.querySelectorAll('paper-tab');
@@ -33,20 +30,12 @@ export const buildHeader = () => {
       const items = Array.from(header[button].querySelectorAll('paper-item'));
       items.forEach(item => {
         const index = items.indexOf(item);
-        item.addEventListener('click', () => {
-          haElem[button]
-            .querySelectorAll('paper-item')
-            [index].dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
-        });
+        tapOrClick(item, haElem[button].querySelectorAll('paper-item')[index]);
       });
     } else {
       if (!haElem[button]) return;
       header[button] = document.createElement('paper-icon-button');
-      header[button].addEventListener('click', () => {
-        (haElem[button].shadowRoot.querySelector('paper-icon-button') || haElem[button]).dispatchEvent(
-          new MouseEvent('click', { bubbles: false, cancelable: false }),
-        );
-      });
+      tapOrClick(header[button], haElem[button].shadowRoot.querySelector('paper-icon-button') || haElem[button]);
     }
 
     header[button].setAttribute('icon', icon);

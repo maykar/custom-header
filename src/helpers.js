@@ -9,6 +9,15 @@ Object.defineProperty(Array.prototype, 'flat', {
   },
 });
 
+export const tapOrClick = (listenElement, clickElement) => {
+  listenElement.addEventListener('click', () => {
+    clickElement.dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
+  });
+  listenElement.addEventListener('tap', () => {
+    clickElement.dispatchEvent(new MouseEvent('tap', { bubbles: false, cancelable: false }));
+  });
+};
+
 // Get tab index number from view's title or path
 export const tabIndexByName = tab => {
   let index;

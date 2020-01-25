@@ -3,7 +3,7 @@ import { defaultConfig } from './default-config';
 import { getLovelace, fireEvent } from 'custom-card-helpers';
 import { hass } from './ha-elements';
 import { localize } from './localize/localize';
-import { deviceID } from 'card-tools/src/deviceId';
+import { deviceID } from './template-variables';
 
 export class CustomHeaderEditor extends LitElement {
   static get properties() {
