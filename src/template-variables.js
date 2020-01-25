@@ -21,7 +21,7 @@ export let deviceID = _deviceID();
 export const defaultVariables = locale => {
   const lovelace = getLovelace();
   const d = new Date();
-  if (lovelace.config.views[lovelace.current_view] == undefined) return;
+  if (!lovelace || lovelace.config.views[lovelace.current_view] == undefined) return;
   return {
     deviceID: deviceID,
     isAdmin: hass.user.is_admin,

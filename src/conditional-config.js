@@ -21,7 +21,7 @@ export const conditionalConfig = config => {
         });
       } else if (cond == 'tab' && (conditions[cond].includes(',') || conditions[cond].includes('to'))) {
         const tabs = processTabArray(conditions[cond]);
-        if (tabs.includes(lovelace.current_view)) {
+        if (lovelace && tabs.includes(lovelace.current_view)) {
           count++;
           continue;
         }
@@ -34,7 +34,7 @@ export const conditionalConfig = config => {
         (cond == 'is_admin' && conditions[cond] == hass.user.is_admin) ||
         (cond == 'is_owner' && conditions[cond] == hass.user.is_owner) ||
         (cond == 'template' && conditions[cond]) ||
-        (cond == 'tab' && tabIndexByName(conditions[cond]) == lovelace.current_view)
+        (lovelace && cond == 'tab' && tabIndexByName(conditions[cond]) == lovelace.current_view)
       ) {
         count++;
       } else {

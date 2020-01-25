@@ -7,7 +7,8 @@ import { observers } from './observers';
 
 window.customHeaderExceptionConfig = 'init';
 export const buildConfig = config => {
-  if (!config) config = { ...defaultConfig, ...lovelace.config.custom_header };
+  const defaultConf = defaultConfig();
+  if (!config) config = { ...defaultConf, ...lovelace.config.custom_header };
   conditionalConfig(config);
   const variables = config.template_variables;
   delete config.template_variables;
