@@ -14,6 +14,7 @@ export const conditionalConfig = config => {
     };
     let count = 0;
     for (const cond in conditions) {
+      window.customHeaderTabCond = Object.keys(conditions).includes('tab') ? true : false;
       if (cond == 'user' && conditions[cond].includes(',')) {
         conditions[cond].split(/,+/).forEach(user => {
           if (userVars[cond] == user.trim() || user == hass.user.id) count++;
