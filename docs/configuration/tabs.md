@@ -18,9 +18,9 @@ index: 4
 
 ### Hide/Show Tabs
 
-hide_tabs and show_tabs accept a tab/views index number, title, or path. They can also accept ranges like so: `5 to 9`
-
-hide_tabs and show_tabs accept a comma separated list of tabs:
+* hide_tabs and show_tabs shouln't be used together, show_tabs will always override hide_tabs
+* hide_tabs and show_tabs accept a tab/views index number, title, or path. They can also accept ranges like so: `5 to 9`
+* hide_tabs and show_tabs accept a comma separated list of tabs:
 
 ```yaml
 custom_header:
