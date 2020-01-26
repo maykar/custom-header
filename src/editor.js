@@ -11,6 +11,7 @@ export class CustomHeaderEditor extends LitElement {
   }
 
   firstUpdated() {
+    this.defaultConfig = defaultConfig();
     this._lovelace = getLovelace();
     this.deepcopy = this.deepcopy.bind(this);
     this._config = this._lovelace.config.custom_header ? this.deepcopy(this._lovelace.config.custom_header) : {};
@@ -24,7 +25,7 @@ export class CustomHeaderEditor extends LitElement {
       </div>
       ${this.renderStyle()}
       <ch-config-editor
-        .defaultConfig="${defaultConfig}"
+        .defaultConfig="${this.defaultConfig}"
         .config="${this._config}"
         @ch-config-changed="${this._configChanged}"
       >
@@ -85,7 +86,7 @@ export class CustomHeaderEditor extends LitElement {
 
   _save() {
     for (const key in this._config) {
-      if (this._config[key] == defaultConfig[key]) delete this._config[key];
+      if (this._config[key] == this.defaultConfig[key]) delete this._config[key];
     }
     const newConfig = { ...this._lovelace.config, ...{ custom_header: this._config } };
     try {
@@ -137,7 +138,7 @@ export class CustomHeaderEditor extends LitElement {
     for (const exceptions of newExceptions) {
       for (const key in exceptions.config) {
         if (this._config[key] == exceptions.config[key]) delete exceptions.config[key];
-        else if (!this._config[key] && defaultConfig[key] == exceptions.config[key]) delete exceptions.config[key];
+        else if (!this._config[key] && this.defaultConfig[key] == exceptions.config[key]) delete exceptions.config[key];
       }
     }
     this._config = { ...this._config, exceptions: newExceptions };
@@ -239,7 +240,7 @@ class ChConfigEditor extends LitElement {
   }
 
   getConfig(item) {
-    return this.config[item] !== undefined ? this.config[item] : defaultConfig[item];
+    return this.config[item] !== undefined ? this.config[item] : this.defaultConfig[item];
   }
 
   templateExists(item) {
@@ -722,7 +723,7 @@ class ChExceptionEditor extends LitElement {
           <h4 class="underline">${localize('editor.config')}</h4>
           <ch-config-editor
             exception
-            .defaultConfig="${{ ...defaultConfig, ...this.config }}"
+            .defaultConfig="${{ ...this.defaultConfig, ...this.config }}"
             .config="${this.exception.config}"
             @ch-config-changed="${this._configChanged}"
           >

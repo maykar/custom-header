@@ -112,6 +112,7 @@ export const buildConfig = config => {
 
     // Render templates every minute.
     window.setTimeout(() => {
+      // Unsubscribe from template.
       (async () => {
         const unsub = await unsubRenderTemplate;
         unsubRenderTemplate = undefined;
@@ -123,7 +124,6 @@ export const buildConfig = config => {
         .shadowRoot.querySelector('ha-panel-lovelace');
       const editor = panelLovelace ? panelLovelace.shadowRoot.querySelector('hui-editor') : null;
       if (editor || templateFailed || root.querySelector('custom-header-editor')) return;
-      // Unsubscribe from template.
       buildConfig();
     }, (60 - new Date().getSeconds()) * 1000);
   } else {
