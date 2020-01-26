@@ -1,5 +1,5 @@
 import { invertNumArray, subscribeRenderTemplate, processTabArray } from './helpers';
-import { lovelace } from './ha-elements';
+import { lovelace, root } from './ha-elements';
 import { conditionalConfig } from './conditional-config';
 import { styleHeader } from './style-header';
 import { defaultConfig } from './default-config';
@@ -70,6 +70,10 @@ export const buildConfig = config => {
   let templateFailed = false;
   let unsubRenderTemplate;
   if (hasTemplates && !disabled) {
+    if (typeof window.unsub === 'function') {
+      window.unsub();
+      window.unsub = null;
+    }
     unsubRenderTemplate = subscribeRenderTemplate(
       result => {
         if (
@@ -102,7 +106,7 @@ export const buildConfig = config => {
     // Catch less helpful template errors.
     (async () => {
       try {
-        const test = await unsubRenderTemplate;
+        window.unsub = await unsubRenderTemplate;
       } catch (e) {
         templateFailed = true;
         console.log('[CUSTOM-HEADER] There was an error with one or more of your templates:');
@@ -113,12 +117,12 @@ export const buildConfig = config => {
     clearTimeout(window.customHeaderTempTimeout);
     // Render templates every minute.
     window.customHeaderTempTimeout = window.setTimeout(() => {
-      // Unsubscribe from template.
-      (async () => {
-        const unsub = await unsubRenderTemplate;
-        unsubRenderTemplate = undefined;
-        await unsub();
-      })();
+      const panelLovelace = document
+        .querySelector('home-assistant')
+        .shadowRoot.querySelector('home-assistant-main')
+        .shadowRoot.querySelector('ha-panel-lovelace');
+      const editor = panelLovelace ? panelLovelace.shadowRoot.querySelector('hui-editor') : null;
+      if (editor || templateFailed || root.querySelector('custom-header-editor')) return;
       buildConfig();
     }, (60 - new Date().getSeconds()) * 1000);
     window.customHeaderTempTimeout;
