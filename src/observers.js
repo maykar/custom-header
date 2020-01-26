@@ -4,16 +4,17 @@ import { haElem, root } from './ha-elements';
 import { buildConfig } from './config';
 import { insertStyleTags } from './style-tags';
 import { redirects } from './redirects';
+import { getLovelace } from 'custom-card-helpers';
+import { fireEvent } from 'custom-card-helpers';
 
 export const selectTab = config => {
   const headerType = config.split_mode ? header.bottom : header;
-  if (!haElem.tabContainer || !headerType.tabContainer) return;
-  const haActiveTabIndex = haElem.tabContainer.indexOf(root.querySelector('paper-tab.iron-selected'));
-  headerType.tabContainer.setAttribute('selected', haActiveTabIndex);
-  if (!headerType.tabs[haActiveTabIndex]) return;
-  const tab = headerType.tabs[haActiveTabIndex];
-  tab.dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
-  tab.dispatchEvent(new MouseEvent('tap', { bubbles: false, cancelable: false }));
+  if (haElem.tabContainer || headerType.tabContainer) {
+    headerType.tabs[getLovelace().current_view].dispatchEvent(
+      new MouseEvent('click', { bubbles: false, cancelable: false }),
+    );
+    fireEvent(header.container, 'iron-resize');
+  }
 };
 
 export const observers = () => {
