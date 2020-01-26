@@ -34,8 +34,8 @@ export const buildConfig = config => {
     if (config.show_tabs && config.show_tabs.length) config.hide_tabs = invertNumArray(config.show_tabs);
     if (config.disable_sidebar || config.menu_dropdown) config.menu_hide = true;
     if (config.voice_dropdown) config.voice_hide = true;
-    if (config.header_text && config.header_text === '') config.header_text = defaultConfig.header_text;
-    if (config.header_text && config.header_text === ' ') config.header_text = '&nbsp;';
+    if (config.header_text != undefined && config.header_text == '') config.header_text = defaultConf.header_text;
+    if (config.header_text && config.header_text == ' ') config.header_text = '&nbsp;';
     if (config.hide_header && config.disable_sidebar) {
       config.kiosk_mode = true;
       config.hide_header = false;
