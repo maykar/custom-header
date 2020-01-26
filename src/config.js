@@ -113,7 +113,6 @@ export const buildConfig = config => {
     clearTimeout(window.customHeaderTempTimeout);
     // Render templates every minute.
     window.customHeaderTempTimeout = window.setTimeout(() => {
-      console.log('timeout');
       // Unsubscribe from template.
       (async () => {
         const unsub = await unsubRenderTemplate;
