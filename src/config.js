@@ -111,6 +111,11 @@ export const buildConfig = config => {
 
     // Render templates every minute.
     window.setTimeout(() => {
+      (async () => {
+        const unsub = await unsubRenderTemplate;
+        unsubRenderTemplate = undefined;
+        await unsub();
+      })();
       const panelLovelace = document
         .querySelector('home-assistant')
         .shadowRoot.querySelector('home-assistant-main')
@@ -118,11 +123,6 @@ export const buildConfig = config => {
       const editor = panelLovelace ? panelLovelace.shadowRoot.querySelector('hui-editor') : null;
       if (editor || templateFailed || root.querySelector('custom-header-editor')) return;
       // Unsubscribe from template.
-      (async () => {
-        const unsub = await unsubRenderTemplate;
-        unsubRenderTemplate = undefined;
-        await unsub();
-      })();
       buildConfig();
     }, (60 - new Date().getSeconds()) * 1000);
   } else {
