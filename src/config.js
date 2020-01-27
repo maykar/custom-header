@@ -9,7 +9,7 @@ window.customHeaderExceptionConfig = 'init';
 export const buildConfig = config => {
   const defaultConf = defaultConfig();
   if (!config) config = { ...defaultConf, ...lovelace.config.custom_header };
-  conditionalConfig(config);
+  const testConfig = { ...config, ...conditionalConfig(config) };
   const variables = config.template_variables;
   delete config.template_variables;
 
@@ -21,10 +21,10 @@ export const buildConfig = config => {
   };
 
   const disabled =
-    (typeof config.disabled_mode == 'boolean' && config.disabled_mode) ||
-    (typeof config.disabled_mode == 'string' &&
-      !config.disabled_mode.includes('{{') &&
-      !config.disabled_mode.includes('{%')) ||
+    (typeof testConfig.disabled_mode == 'boolean' && testConfig.disabled_mode) ||
+    (typeof testConfig.disabled_mode == 'string' &&
+      !testConfig.disabled_mode.includes('{{') &&
+      !testConfig.disabled_mode.includes('{%')) ||
     window.location.href.includes('disable_ch');
 
   const processAndContinue = () => {
