@@ -9,8 +9,9 @@ import { fireEvent } from 'custom-card-helpers';
 
 export const selectTab = config => {
   const headerType = config.split_mode ? header.bottom : header;
+  if (getLovelace() == null) return;
   const lovelace = getLovelace();
-  if (!lovelace) return;
+  if (!lovelace.current_view) return;
   if (haElem.tabContainer || headerType.tabContainer) {
     headerType.tabs[lovelace.current_view].dispatchEvent(
       new MouseEvent('click', { bubbles: false, cancelable: false }),
