@@ -70,9 +70,9 @@ export const buildConfig = config => {
   let templateFailed = false;
   let unsubRenderTemplate;
   if (hasTemplates && !disabled) {
-    if (typeof window.unsub === 'function') {
-      window.unsub();
-      window.unsub = null;
+    if (typeof window.customHeaderUnsub === 'function') {
+      window.customHeaderUnsub();
+      window.customHeaderUnsub = undefined;
     }
     unsubRenderTemplate = subscribeRenderTemplate(
       result => {
@@ -106,7 +106,7 @@ export const buildConfig = config => {
     // Catch less helpful template errors.
     (async () => {
       try {
-        window.unsub = await unsubRenderTemplate;
+        window.customHeaderUnsub = await unsubRenderTemplate;
       } catch (e) {
         templateFailed = true;
         console.log('[CUSTOM-HEADER] There was an error with one or more of your templates:');

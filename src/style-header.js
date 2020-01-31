@@ -7,6 +7,7 @@ import { insertStyleTags } from './style-tags';
 import { haElem, root, lovelace } from './ha-elements';
 import { redirects } from './redirects';
 import { fireEvent } from 'custom-card-helpers';
+import { selectTab } from './observers';
 
 export const styleHeader = config => {
   insertSettings();
@@ -255,4 +256,5 @@ export const styleHeader = config => {
 
   fireEvent(header.container, 'iron-resize');
   redirects(config, header);
+  selectTab(config);
 };
