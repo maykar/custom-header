@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - if: github.event.label.name != "Feature Request"
+    - if: github.event.label.name != 'Feature Request'
       uses: derekprior/add-autoresponse@master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
