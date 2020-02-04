@@ -17,4 +17,4 @@ jobs:
         respondableId: ${{ github.event.issue.node_id }}
         response: "Please, be sure to read the [issues section](https://maykar.github.io/custom-header/#issues) of the docs and provide the required information. Issues that don't provide the necessary information may not get a reply and may be closed."
         author: ${{ github.event.issue.user.login }}
-        exemptedAuthors: 'maykar'
+        
