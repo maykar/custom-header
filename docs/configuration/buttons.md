@@ -17,6 +17,7 @@ Options with a :warning: remove the ability to edit from the UI. See [important 
 | reverse_button_direction | Boolean | false   | Places buttons at opposite side of the window |
 | button_icons             |         |         | Set the icon of each button, more info below  |
 | button_text              |         |         | Set text instead of an icon, more info below  |
+| button_scroll            | Boolean | false   | Leaves space on sides of tabs so when the header collapses the buttons collapse with it  |
 
 ### Button Icons
 
