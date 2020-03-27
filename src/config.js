@@ -154,7 +154,7 @@ export class CustomHeaderConfig {
       haElem = ha_elements();
       if (!haElem) return;
       const editor = haElem.panel ? haElem.panel.shadowRoot.querySelector('hui-editor') : null;
-      const edit_mode = haElem.root.querySelector('app-toolbar').className != 'edit-mode';
+      const edit_mode = haElem.root.querySelector('app-toolbar').className == 'edit-mode';
       if (!haElem.panel || editor || this.template_failed || edit_mode) return;
       if (haElem.root && haElem.root.querySelector('custom-header-editor')) return;
       this.buildConfig(ch);
