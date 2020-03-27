@@ -19,7 +19,8 @@ Options with a :warning: remove the ability to edit from the UI. See [important 
 | hide_header           | Boolean | false            | Hides the header, but still allows sidebar to be swiped on from left.      |
 | hide_help             | Boolean | false            | Hides the "Help" option in the options menu                                |
 | hide_unused           | Boolean | false            | Hides the "Unused Entities" option in the options menu                     |
-| hide_refresh          | Boolean | false            | Hides the "Refresh" option in the options menu                             |
+| hide_refresh          | Boolean | false            | Hides the "Refresh" option in the options menu (yaml mode only)            |
+| hide_reload_resources | Boolean | false            | Hides the "Reload Resources" option in the options menu (yaml mode only)   |
 | hide_config           | Boolean | false            | Hides the "Configure UI" option in the options menu :warning:              |
 | hide_raw              | Boolean | false            | Hides the "Raw Config Editor" option in the options menu :warning:         |
 | default_tab_on_refresh| Boolean | true             | Disables/enables going to default tab on refresh. May cause default tab issues in some browsers when disabled.    |
