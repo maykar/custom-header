@@ -37,6 +37,13 @@ if (ha_elements()) {
                     if (!window.location.href.includes('disable_ch')) hideHeader();
                     CustomHeaderConfig.buildConfig(new CustomHeader(ha_elements()));
                   }).observe(ha_elements().menu.shadowRoot, { childList: true });
+                } else if (node.nodeName == 'HUI-ROOT') {
+                  new MutationObserver(function() {
+                    new MutationObserver(function() {
+                      if (!window.location.href.includes('disable_ch')) hideHeader();
+                      CustomHeaderConfig.buildConfig(new CustomHeader(ha_elements()));
+                    }).observe(ha_elements().menu.shadowRoot, { childList: true });
+                  }).observe(node!.parentNode!.querySelector('hui-root')!.shadowRoot!, { childList: true });
                 }
               }
             }
