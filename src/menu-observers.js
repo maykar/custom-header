@@ -1,6 +1,4 @@
-import { haElem } from './ha-elements';
-
-export const menuButtonObservers = (config, header) => {
+export const menuButtonObservers = (config, ch, haElem) => {
   if (config.menu_hide) return;
   // Create Notification Dot
   const buildDot = () => {
@@ -20,9 +18,14 @@ export const menuButtonObservers = (config, header) => {
   };
 
   const menuButtonVisibility = () => {
-    if (config.disable_sidebar || window.customHeaderDisabled) return;
-    if (haElem.menu.style.visibility === 'hidden') header.menu.style.display = 'none';
-    else header.menu.style.display = 'initial';
+    if (config.disable_sidebar || window.customHeaderDisabled || config.menu_dropdown || config.menu_hide) return;
+    if (haElem.menu.style.visibility === 'hidden') {
+      ch.header.menu.style.display = 'none';
+      ch.footer.tabContainer.style.margin = '0 10px';
+    } else {
+      ch.header.menu.style.display = 'initial';
+      ch.footer.tabContainer.style.margin = '0';
+    }
   };
 
   const notificationDot = mutations => {
@@ -46,7 +49,7 @@ export const menuButtonObservers = (config, header) => {
                 .querySelector('[buttonElem="menu"]')
                 .shadowRoot.querySelector(
                   '.buttonText',
-                ).style.borderBottom = `3px solid ${window.customHeaderConfig.notification_dot_color}`;
+                ).style.borderBottom = `3px solid ${config.notification_dot_color}`;
             }
           }
         }
@@ -72,29 +75,33 @@ export const menuButtonObservers = (config, header) => {
     });
   };
 
-  if (!window.customHeaderMenuObserver) {
-    window.customHeaderMenuObserver = true;
-    const notificationObserver = new MutationObserver(notificationDot);
-    notificationObserver.observe(haElem.menu.shadowRoot, { childList: true });
-
-    const menuButtonObserver = new MutationObserver(menuButtonVisibility);
-    menuButtonObserver.observe(haElem.menu, { attributes: true, attributeFilter: ['style'] });
+  if (window.customHeaderMenuObservers) {
+    for (const observer of window.customHeaderMenuObservers) {
+      observer.disconnect();
+    }
+    window.customHeaderMenuObservers = [];
   }
+  const notificationObserver = new MutationObserver(notificationDot);
+  notificationObserver.observe(haElem.menu.shadowRoot, { childList: true });
+
+  const menuButtonObserver = new MutationObserver(menuButtonVisibility);
+  menuButtonObserver.observe(haElem.menu, { attributes: true, attributeFilter: ['style'] });
+
+  window.customHeaderMenuObservers = [notificationObserver, menuButtonObserver];
 
   menuButtonVisibility();
-
-  const prevDot = header.menu.shadowRoot.querySelector('.dot');
+  const prevDot = ch.header.menu.shadowRoot.querySelector('.dot');
   if (prevDot && prevDot.style.cssText != buildDot().style.cssText) {
     prevDot.remove();
     if (config.button_text.menu) {
       header.menu.shadowRoot.querySelector('.buttonText').style.textDecoration = '';
     }
   }
-  if (!header.menu.shadowRoot.querySelector('.dot') && haElem.menu.shadowRoot.querySelector('.dot')) {
-    header.menu.shadowRoot.appendChild(buildDot());
+  if (!ch.header.menu.shadowRoot.querySelector('.dot') && haElem.menu.shadowRoot.querySelector('.dot')) {
+    ch.header.menu.shadowRoot.appendChild(buildDot());
     if (config.button_text.menu) {
-      header.menu.shadowRoot.querySelector('.dot').style.display = 'none';
-      header.menu.shadowRoot.querySelector(
+      ch.header.menu.shadowRoot.querySelector('.dot').style.display = 'none';
+      ch.header.menu.shadowRoot.querySelector(
         '.buttonText',
       ).style.borderBottom = `3px solid ${config.notification_dot_color}`;
     }

@@ -1,44 +1,33 @@
-import { getLovelace, getRoot } from 'custom-card-helpers';
+import { getLovelace } from 'custom-card-helpers';
 
-export const homeAssistant = document.querySelector('home-assistant');
-export const hass = homeAssistant.hass;
-export const lovelace = getLovelace();
-export const root = getRoot();
-export const haElem = {};
+export const ha_elements = () => {
+  const haElem = {};
+  haElem.lovelace = getLovelace();
+  haElem.homeAssistant = document.querySelector('home-assistant');
+  haElem.main = haElem.homeAssistant.shadowRoot.querySelector('home-assistant-main').shadowRoot;
+  haElem.hass = haElem.homeAssistant.hass;
+  haElem.partialPanel = haElem.main.querySelector('partial-panel-resolver');
+  haElem.panel = haElem.main.querySelector('ha-panel-lovelace');
+  if (!haElem.panel) return;
+  haElem.root = haElem.panel.shadowRoot.querySelector('hui-root');
+  if (!haElem.root) return;
+  haElem.root = haElem.root.shadowRoot;
 
-haElem.main = homeAssistant.shadowRoot.querySelector('home-assistant-main');
-haElem.tabs = Array.from((root.querySelector('paper-tabs') || root).querySelectorAll('paper-tab'));
-haElem.tabContainer = root.querySelector('paper-tabs');
-haElem.menu = root.querySelector('ha-menu-button');
-haElem.options = root.querySelector('paper-menu-button');
-haElem.voice =
-  root.querySelector('ha-start-voice-button') || root.querySelector('paper-icon-button[icon="hass:microphone"]');
-haElem.drawer = haElem.main.shadowRoot.querySelector('#drawer');
-haElem.sidebar = {};
-haElem.sidebar.main = haElem.main.shadowRoot.querySelector('ha-sidebar');
-haElem.sidebar.menu = haElem.sidebar.main.shadowRoot.querySelector('.menu');
-haElem.sidebar.listbox = haElem.sidebar.main.shadowRoot.querySelector('paper-listbox');
-haElem.sidebar.divider = haElem.sidebar.main.shadowRoot.querySelector('div.divider');
-haElem.appHeader = root.querySelector('app-header');
-haElem.appLayout = root.querySelector('ha-app-layout');
-haElem.partialPanelResolver = haElem.main.shadowRoot.querySelector('partial-panel-resolver');
-
-const missing = [];
-for (const item in haElem) {
-  if (item == 'voice') {
-    continue;
-  } else if (!haElem[item]) {
-    missing.push(item);
-  } else if (typeof haElem[item] === 'object' && !haElem[item].nodeName) {
-    for (const nested in haElem[item]) {
-      if (!haElem[item][nested]) missing.push(`${item}[${nested}]`);
-    }
-  }
-}
-if (missing.length) {
-  console.log(
-    `[CUSTOM HEADER] The following HA element${missing.length > 1 ? 's' : ''} could not be found: ${missing.join(
-      ', ',
-    )}`,
-  );
-}
+  haElem.tabs = Array.from((haElem.root.querySelector('paper-tabs') || haElem.root).querySelectorAll('paper-tab'));
+  haElem.tabContainer = haElem.root.querySelector('paper-tabs');
+  haElem.menu = haElem.root.querySelector('ha-menu-button');
+  haElem.options = haElem.root.querySelector('paper-menu-button');
+  haElem.voice =
+    haElem.root.querySelector('ha-start-voice-button') ||
+    haElem.root.querySelector('paper-icon-button[icon="hass:microphone"]');
+  haElem.drawer = haElem.main.querySelector('#drawer');
+  haElem.sidebar = {};
+  haElem.sidebar.main = haElem.main.querySelector('ha-sidebar').shadowRoot;
+  haElem.sidebar.menu = haElem.sidebar.main.querySelector('.menu');
+  haElem.sidebar.listbox = haElem.sidebar.main.querySelector('paper-listbox');
+  haElem.sidebar.divider = haElem.sidebar.main.querySelector('div.divider');
+  haElem.appHeader = haElem.root.querySelector('app-header');
+  haElem.appLayout = haElem.root.querySelector('ha-app-layout');
+  haElem.partialPanelResolver = haElem.main.querySelector('partial-panel-resolver');
+  return haElem;
+};

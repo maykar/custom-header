@@ -1,19 +1,17 @@
-import { root } from './ha-elements';
-import { header } from './build-header';
 import { tabIndexByName } from './helpers';
 
-export const insertStyleTags = config => {
+export const insertStyleTags = (config, ch, haElem) => {
   let headerHeight = 48;
-  const headerType = config.split_mode ? header.bottom : header;
+  const headerType = config.split_mode ? ch.footer : ch.header;
   if (!config.compact_mode) {
     if (config.reverse_button_direction) {
-      header.container.querySelector('#contentContainer').dir = 'ltr';
-      header.container.querySelector('#contentContainer').style.textAlign = 'right';
+      ch.header.container.querySelector('#ch-content-container').dir = 'ltr';
+      ch.header.container.querySelector('#ch-content-container').style.textAlign = 'right';
     } else {
-      header.container.querySelector('#contentContainer').style.textAlign = '';
-      header.container.querySelector('#contentContainer').dir = '';
+      ch.header.container.querySelector('#ch-content-container').style.textAlign = '';
+      ch.header.container.querySelector('#ch-content-container').dir = '';
     }
-    header.container.querySelector('#contentContainer').innerHTML = config.header_text;
+    ch.header.container.querySelector('#ch-content-container').innerHTML = config.header_text;
     headerHeight = headerType.tabs.length ? 96 : 48;
   }
 
@@ -22,6 +20,7 @@ export const insertStyleTags = config => {
   style.setAttribute('id', 'ch_header_style');
   style.innerHTML = `
       ch-header {
+        z-index: 100;
         padding-left: 10px;
         padding-right: 10px;
         box-sizing: border-box;
@@ -31,22 +30,18 @@ export const insertStyleTags = config => {
         background: ${config.background || 'var(--primary-color)'};
         color: ${config.elements_color || 'var(--text-primary-color)'};
         margin-bottom: 0px;
-        margin-top: ${config.footer_mode ? '4px;' : '0px'};
         position: sticky;
         position: -webkit-sticky;
-        ${config.footer_mode ? 'z-index: 99; bottom: 0px;' : 'top: 0px;'}
+        ${config.footer_mode ? 'bottom: 0px;' : 'top: 0px;'}
         ${config.header_css ? config.header_css : ''}
         transition: box-shadow 0.3s ease-in-out;
-        ${
-          config.shadow && (config.footer_mode || config.split_mode)
-            ? 'box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.2)'
-            : ''
-        }
+        ${config.shadow && config.split_mode ? 'box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.2)' : ''}
+        ${config.footer_mode ? 'margin-top:48px;margin-bottom:-48px;padding-bottom:4px;' : ''}
       }
-      ch-header-bottom {
+      ch-footer {
         z-index: 99;
-        padding-left: 10px;
-        padding-right: 10px;
+        padding-left: 3px;
+        padding-right: 3px;
         box-sizing: border-box;
         display:flex;
         justify-content: center;
@@ -57,9 +52,16 @@ export const insertStyleTags = config => {
         margin-top: 0px;
         position: sticky;
         position: -webkit-sticky;
-        ${config.footer_mode ? 'top: 0px;' : 'bottom: 0px;'}
+        ${config.footer_mode && config.split_mode ? 'top: 0px;' : 'bottom: 0px;'}
+        ${config.footer_mode ? 'bottom: 48px;' : ''}
         ${config.header_css ? config.header_css : ''}
-        ${config.shadow ? 'box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.2)' : ''}
+        ${config.shadow && config.split_mode ? 'box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.2)' : ''}
+        transition: box-shadow 0.3s ease-in-out;
+        ${
+          config.shadow && (config.footer_mode || config.split_mode)
+            ? 'box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.2)'
+            : ''
+        }
       }
       ch-stack {
         flex-direction: column;
@@ -68,15 +70,8 @@ export const insertStyleTags = config => {
         margin-right: 9px;
         ${config.stack_css ? config.stack_css : ''}
       }
-      ch-stack-bottom {
-        flex-direction: column;
-        width: 100%;
-        margin-left: 9px;
-        margin-right: 9px;
-        ${config.stack_css ? config.stack_css : ''}
-      }
-      #contentContainer {
-        padding: 12px 6px 12px 6px;
+
+      #ch-content-container {
         ${config.compact_mode ? 'display: none;' : ''}
         ${
           config.header_text.includes('<br>')
@@ -88,7 +83,11 @@ export const insertStyleTags = config => {
             : ''
         }
         ${config.header_text_css ? config.header_text_css : ''}
-
+        ${
+          config.menu_dropdown || config.disable_sidebar || config.hide_menu
+            ? 'padding: 12px 0px;'
+            : 'padding: 12px 6px;'
+        }
       }
       app-header {
         display: none;
@@ -120,6 +119,7 @@ export const insertStyleTags = config => {
         ${config.all_tabs_css ? config.all_tabs_css : ''}
       }
       paper-tabs {
+        padding: 0 4px;
         ${
           config.tab_indicator_color
             ? `--paper-tabs-selection-bar-color: ${config.tab_indicator_color} !important;`
@@ -164,9 +164,11 @@ export const insertStyleTags = config => {
 
   // Add updated style element and remove old one after.
   // This prevents elements "flashing" when styles change.
-  let currentStyle = root.querySelector('#ch_header_style');
-  root.appendChild(style);
-  if (currentStyle) currentStyle.remove();
+  let currentStyle = haElem.root.querySelector('#ch_header_style');
+  if (!currentStyle || style.innerHTML != currentStyle.innerHTML) {
+    haElem.root.appendChild(style);
+    if (currentStyle) currentStyle.remove();
+  }
 
   // Style views elements.
   style = document.createElement('style');
@@ -200,14 +202,16 @@ export const insertStyleTags = config => {
               : ''
           }
           ${config.kiosk_mode || config.hide_header ? `min-height: 100vh !important;` : ''}
+          ${config.footer_mode ? `min-height: calc(100vh - 100px) !important;` : ''}
+
         }
       `;
 
   // Add updated view style if changed.
   // Prevents background images flashing on every change.
-  currentStyle = root.querySelector('#ch_view_style');
+  currentStyle = haElem.root.querySelector('#ch_view_style');
   if (!currentStyle || style.innerHTML != currentStyle.innerHTML) {
-    root.appendChild(style);
+    haElem.root.appendChild(style);
     if (currentStyle) currentStyle.remove();
   }
 
@@ -224,19 +228,7 @@ export const insertStyleTags = config => {
   headerType.tabContainer.shadowRoot.appendChild(style);
   if (currentStyle) currentStyle.remove();
 
-  currentStyle = header.bottom.querySelector('paper-tabs').shadowRoot.querySelector('#ch_chevron');
-  header.bottom.querySelector('paper-tabs').shadowRoot.appendChild(style.cloneNode(true));
+  currentStyle = ch.footer.tabContainer.shadowRoot.querySelector('#ch_chevron');
+  ch.footer.tabContainer.shadowRoot.appendChild(style.cloneNode(true));
   if (currentStyle) currentStyle.remove();
-
-  style = document.createElement('style');
-  style.setAttribute('id', 'ch_animated');
-  style.innerHTML = `
-    ch-header, [buttonElem="menu"], [buttonElem="options"], [buttonElem="voice"] {
-      transition: margin-top 0.4s ease-in-out;
-      transition: top 0.4s ease-in-out;
-    }
-  `;
-  setTimeout(() => {
-    if (!root.querySelector('#ch_animated')) root.appendChild(style);
-  }, 1000);
 };

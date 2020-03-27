@@ -1,25 +1,15 @@
 import './editor';
-import { header } from './build-header';
-import { root, lovelace, haElem } from './ha-elements';
 
-export const hideMenuItems = (config, header, editMode) => {
+export const hideMenuItems = (config, header, edit_mode, haElem) => {
   const localized = (item, string) => {
     let localString;
     const hass = document.querySelector('home-assistant').hass;
     if (string === 'raw_editor') localString = hass.localize('ui.panel.lovelace.editor.menu.raw_editor');
     else if (string == 'unused_entities') localString = hass.localize('ui.panel.lovelace.unused_entities.title');
-    else localString = hass.localize(`ui.panel.lovelace.menu.${string}`);
+    else localString = hass.localize(`ui.panel.lovelace.menu.${string}`) || string;
     return item.innerHTML.includes(localString) || item.getAttribute('aria-label') == localString;
   };
-  (!editMode
-    ? header.options
-    : document
-        .querySelector('home-assistant')
-        .shadowRoot.querySelector('home-assistant-main')
-        .shadowRoot.querySelector('ha-panel-lovelace')
-        .shadowRoot.querySelector('hui-root')
-        .shadowRoot.querySelector('app-toolbar > paper-menu-button')
-  )
+  (edit_mode ? haElem.options : header.options)
     .querySelector('paper-listbox')
     .querySelectorAll('paper-item')
     .forEach(item => {
@@ -28,7 +18,8 @@ export const hideMenuItems = (config, header, editMode) => {
         (config.hide_unused && localized(item, 'unused_entities')) ||
         (config.hide_refresh && localized(item, 'refresh')) ||
         (config.hide_config && localized(item, 'configure_ui')) ||
-        (config.hide_raw && localized(item, 'raw_editor'))
+        (config.hide_raw && localized(item, 'raw_editor')) ||
+        (config.hide_reload_resources && localized(item, 'Reload resources'))
       ) {
         item.style.display = 'none';
       } else {
@@ -60,9 +51,9 @@ export const buttonToOverflow = (item, mdiIcon, header, config) => {
   header.options.querySelector('paper-listbox').appendChild(paperItem);
 };
 
-const showEditor = () => {
+const showEditor = haElem => {
   window.scrollTo(0, 0);
-  if (!root.querySelector('ha-app-layout editor')) {
+  if (!haElem.root.querySelector('ha-app-layout editor')) {
     const container = document.createElement('editor');
     const nest = document.createElement('div');
     nest.style.cssText = `
@@ -78,23 +69,29 @@ const showEditor = () => {
       box-sizing: border-box;
       position: absolute;
       background: var(--background-color, grey);
-      z-index: 100;
+      z-index: 101;
       padding: 5px;
     `;
-    root.querySelector('ha-app-layout').insertBefore(container, root.querySelector('#view'));
+    haElem.root.querySelector('ha-app-layout').insertBefore(container, haElem.root.querySelector('#view'));
     container.appendChild(nest);
     nest.appendChild(document.createElement('custom-header-editor'));
   }
 };
 
-export const insertSettings = () => {
+export const insertSettings = (header, config, haElem) => {
   function insertAfter(el, referenceNode) {
     referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
   }
-  if (lovelace.mode === 'storage') {
+  if (haElem.lovelace.mode === 'storage' && !config.hide_ch_settings) {
+    if (header.options.querySelector('paper-listbox').querySelector('#ch_settings')) {
+      header.options
+        .querySelector('paper-listbox')
+        .querySelector('#ch_settings')
+        .remove();
+    }
     const chSettings = document.createElement('paper-item');
     chSettings.setAttribute('id', 'ch_settings');
-    chSettings.addEventListener('click', () => showEditor());
+    chSettings.addEventListener('click', () => showEditor(haElem));
     chSettings.innerHTML = 'Custom Header';
     const paperItems = header.options.querySelector('paper-listbox').querySelectorAll('paper-item');
     const paperItemsHA = haElem.options.querySelector('paper-listbox').querySelectorAll('paper-item');

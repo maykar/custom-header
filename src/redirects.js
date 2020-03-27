@@ -1,9 +1,12 @@
 import { tabIndexByName } from './helpers';
-import { haElem } from './ha-elements';
+import { ha_elements } from './ha-elements';
 
-export const redirects = (config, header) => {
+export const redirects = (config, ch) => {
   // Change link of "overview" item in sidebar to a visible tab or default tab.
-  const headerType = config.split_mode ? header.bottom : header;
+  if (window.customHeaderDisabled) return;
+  const haElem = ha_elements();
+  if (!haElem) return;
+  const headerType = !config.compact_mode ? ch.footer : ch.header;
   const overview = haElem.sidebar.listbox.querySelector('[data-panel="lovelace"]');
   if (config.hide_tabs.includes(0) && !config.default_tab) {
     for (const tab of headerType.tabs) {
