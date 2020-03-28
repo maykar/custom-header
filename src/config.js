@@ -68,6 +68,7 @@ export class CustomHeaderConfig {
         this.config.locale,
       );
     } else {
+      this.config = conditionalConfig(this.config, haElem);
       this.processAndContinue(ch, haElem);
     }
   }
