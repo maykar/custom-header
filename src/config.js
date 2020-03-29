@@ -115,7 +115,7 @@ export class CustomHeaderConfig {
         config.header_text = this.default_config.header_text;
       }
       if (config.header_text && config.header_text == ' ') config.header_text = '&nbsp;';
-
+      if (config.split_mode) config.compact_mode = false;
       if (config.hide_header && config.disable_sidebar) {
         config.kiosk_mode = true;
         config.hide_header = false;
