@@ -123,11 +123,9 @@ export class CustomHeader {
   }
 
   tapOrClick(listenElement, clickElement) {
+    listenElement.setAttribute('onClick', ' ');
     listenElement.addEventListener('click', () => {
       clickElement.dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
     });
-    // listenElement.addEventListener('tap', () => {
-    //   clickElement.dispatchEvent(new MouseEvent('tap', { bubbles: false, cancelable: false }));
-    // });
   }
 }

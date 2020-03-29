@@ -83,17 +83,18 @@ export const observers = (config, ch, haElem) => {
         if (haElem.root.querySelector('#ch_animated')) haElem.root.querySelector('#ch_animated').remove();
       } else if (target.nodeName === 'APP-HEADER' && addedNodes.length) {
         // Exited edit mode.
-        insertStyleTags(config, ch, haElem);
         haElem.menu = haElem.appHeader.querySelector('ha-menu-button');
         ch.header.menu.addEventListener('click', () => {
           haElem.menu.shadowRoot
             .querySelector('paper-icon-button')
             .dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
         });
+        ch.header.menu.setAttribute('onClick', ' ');
         haElem.appHeader.style.display = 'none';
         ch.header.menu.style.display = '';
         haElem.root.querySelector('ch-header').style.display = '';
         haElem.root.querySelector('ch-footer').style.display = '';
+        insertStyleTags(config, ch, haElem);
       }
     });
   };

@@ -48,6 +48,8 @@ export const buttonToOverflow = (item, mdiIcon, header, config) => {
   icon.addEventListener('click', () => {
     header[item.toLowerCase()].dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
   });
+  paperItem.setAttribute('onClick', ' ');
+  icon.setAttribute('onClick', ' ');
   header.options.querySelector('paper-listbox').appendChild(paperItem);
 };
 
@@ -92,6 +94,7 @@ export const insertSettings = (header, config, haElem) => {
     const chSettings = document.createElement('paper-item');
     chSettings.setAttribute('id', 'ch_settings');
     chSettings.addEventListener('click', () => showEditor(haElem));
+    chSettings.setAttribute('onClick', ' ');
     chSettings.innerHTML = 'Custom Header';
     const paperItems = header.options.querySelector('paper-listbox').querySelectorAll('paper-item');
     const paperItemsHA = haElem.options.querySelector('paper-listbox').querySelectorAll('paper-item');

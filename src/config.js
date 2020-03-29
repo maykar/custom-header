@@ -6,8 +6,6 @@ import { observers } from './observers';
 import { ha_elements } from './ha-elements';
 import { getLovelace } from 'custom-card-helpers';
 
-window.customHeaderUnsub = [];
-
 export class CustomHeaderConfig {
   static buildConfig(ch, lovelace = getLovelace()) {
     if (!lovelace) return;
@@ -31,11 +29,6 @@ export class CustomHeaderConfig {
         !this.test_config.disabled_mode.includes('{{') &&
         !this.test_config.disabled_mode.includes('{%')) ||
       window.location.href.includes('disable_ch');
-
-    if (typeof window.customHeaderUnsub === 'function') {
-      window.customHeaderUnsub();
-      window.customHeaderUnsub = null;
-    }
 
     this.renderTemplate(ch, haElem);
     this.catchTemplate();
@@ -95,10 +88,9 @@ export class CustomHeaderConfig {
       for (const unsub of window.customHeaderUnsub) {
         if (typeof unsub === 'function') unsub();
       }
-      window.customHeaderUnsub = [];
-    } else {
-      window.customHeaderUnsub = [];
     }
+    window.customHeaderUnsub = [];
+
     try {
       const unsub = await this.unsub;
       window.customHeaderUnsub.push(unsub);
@@ -110,47 +102,48 @@ export class CustomHeaderConfig {
   }
 
   static processAndContinue(ch, haElem) {
-    const config = this.config;
-    if (config.hide_tabs) config.hide_tabs = processTabArray(config.hide_tabs);
-    if (config.show_tabs) config.show_tabs = processTabArray(config.show_tabs);
-    if (config.show_tabs && config.show_tabs.length) config.hide_tabs = invertNumArray(config.show_tabs);
-    if (config.disable_sidebar || config.menu_dropdown) config.menu_hide = true;
-    if (config.voice_dropdown) config.voice_hide = true;
-    if (config.header_text != undefined && config.header_text == '') {
-      config.header_text = this.default_config.header_text;
-    }
-    if (config.header_text && config.header_text == ' ') config.header_text = '&nbsp;';
+    let config = this.config;
+    if (config.disabled_mode) {
+      config = { disabled_mode: true };
+    } else {
+      if (config.hide_tabs) config.hide_tabs = processTabArray(config.hide_tabs);
+      if (config.show_tabs) config.show_tabs = processTabArray(config.show_tabs);
+      if (config.show_tabs && config.show_tabs.length) config.hide_tabs = invertNumArray(config.show_tabs);
+      if (config.disable_sidebar || config.menu_dropdown) config.menu_hide = true;
+      if (config.voice_dropdown) config.voice_hide = true;
+      if (config.header_text != undefined && config.header_text == '') {
+        config.header_text = this.default_config.header_text;
+      }
+      if (config.header_text && config.header_text == ' ') config.header_text = '&nbsp;';
 
-    if (config.hide_header && config.disable_sidebar) {
-      config.kiosk_mode = true;
-      config.hide_header = false;
-      config.disable_sidebar = false;
-    }
-    if (config.test_template != undefined) {
-      if (this.disabled) {
-        console.log(`Custom Header cannot render templates while disabled.`);
-      } else if (
-        typeof config.test_template == 'string' &&
-        (config.test_template.toLowerCase().includes('true') || config.test_template.toLowerCase().includes('false'))
-      ) {
-        console.log(`Custom Header test returned: "${config.test_template}"`);
-        console.log(`Warning: Boolean is returned as string instead of Boolean.`);
-      } else if (typeof config.test_template == 'string') {
-        console.log(`Custom Header test returned: "${config.test_template}"`);
-      } else {
-        console.log(`Custom Header test returned: ${config.test_template}`);
+      if (config.hide_header && config.disable_sidebar) {
+        config.kiosk_mode = true;
+        config.hide_header = false;
+        config.disable_sidebar = false;
+      }
+      if (config.test_template != undefined) {
+        if (this.disabled) {
+          console.log(`Custom Header cannot render templates while disabled.`);
+        } else if (
+          typeof config.test_template == 'string' &&
+          (config.test_template.toLowerCase().includes('true') || config.test_template.toLowerCase().includes('false'))
+        ) {
+          console.log(`Custom Header test returned: "${config.test_template}"`);
+          console.log(`Warning: Boolean is returned as string instead of Boolean.`);
+        } else if (typeof config.test_template == 'string') {
+          console.log(`Custom Header test returned: "${config.test_template}"`);
+        } else {
+          console.log(`Custom Header test returned: ${config.test_template}`);
+        }
       }
     }
 
     if (window.customHeaderTempTimeout) {
-      for (const timeout of window.customHeaderTempTimeout) {
-        clearTimeout(timeout);
-      }
-      window.customHeaderTempTimeout = [];
-    } else {
-      window.customHeaderTempTimeout = [];
+      for (const timeout of window.customHeaderTempTimeout) clearTimeout(timeout);
     }
-    // Render templates every minute.
+    window.customHeaderTempTimeout = [];
+
+    // Render config every minute.
     const template_timeout = window.setTimeout(() => {
       haElem = ha_elements();
       if (!haElem) return;
@@ -160,8 +153,9 @@ export class CustomHeaderConfig {
       if (haElem.root && haElem.root.querySelector('custom-header-editor')) return;
       this.buildConfig(ch);
     }, (60 - new Date().getSeconds()) * 1000);
+
+    template_timeout;
     window.customHeaderTempTimeout.push(template_timeout);
-    window.customHeaderTempTimeout[window.customHeaderTempTimeout.length - 1];
 
     styleHeader(config, ch, haElem);
     observers(config, ch, haElem);
