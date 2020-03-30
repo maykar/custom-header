@@ -2,7 +2,9 @@ import { hideMenuItems } from './overflow-menu';
 import { redirects } from './redirects';
 import { getLovelace } from 'custom-card-helpers';
 import { CustomHeaderConfig } from './config';
+import { ha_elements } from './ha-elements';
 import { CustomHeader } from './build-header';
+import { styleHeader } from './style-header';
 
 export const selectTab = (config, ch) => {
   const headerType = config.compact_mode || config.button_scroll ? ch.header : ch.footer;
@@ -18,6 +20,15 @@ export const selectTab = (config, ch) => {
     headerType.tabContainer._scrollToRight();
     headerType.tabs[haActiveTabIndex].dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
   }
+};
+
+const rebuild = config => {
+  const haElem = ha_elements();
+  window.last_template_result = {};
+  const ch = new CustomHeader(haElem);
+  CustomHeaderConfig.buildConfig(ch);
+  if (!window.location.href.includes('disable_ch') && haElem) haElem.appHeader.style.display = 'none';
+  styleHeader(config, ch, haElem);
 };
 
 export const observers = (config, ch, haElem) => {
@@ -38,15 +49,7 @@ export const observers = (config, ch, haElem) => {
         }
       } else if (addedNodes.length && target.nodeName == 'PARTIAL-PANEL-RESOLVER') {
         // When returning to lovelace/overview from elsewhere in HA.
-        if (addedNodes[0].nodeName == 'HA-PANEL-LOVELACE') {
-          if (window.customHeaderObservers) {
-            for (const observer of window.customHeaderObservers) {
-              observer.disconnect();
-            }
-            window.customHeaderObservers = [];
-          }
-          CustomHeaderConfig.buildConfig(ch, addedNodes[0].lovelace);
-        }
+        if (addedNodes[0].nodeName == 'HA-PANEL-LOVELACE') rebuild(config);
         if (haElem.main.querySelector('ha-panel-lovelace')) {
           if (config.compact_mode && !config.footer_mode) {
             haElem.sidebar.main.querySelector('.menu').style = 'height:49px;';
@@ -83,9 +86,7 @@ export const observers = (config, ch, haElem) => {
         if (haElem.root.querySelector('#ch_animated')) haElem.root.querySelector('#ch_animated').remove();
       } else if (target.nodeName === 'APP-HEADER' && addedNodes.length) {
         // Exited edit mode.
-        if (!window.customHeaderDisabled) haElem.appHeader.style.display = 'none';
-        window.last_template_result = {};
-        CustomHeaderConfig.buildConfig(new CustomHeader(haElem));
+        rebuild(config);
       }
     });
   };

@@ -148,14 +148,22 @@ export class CustomHeaderConfig {
       haElem = ha_elements();
       if (!haElem) return;
       const editor = haElem.panel ? haElem.panel.shadowRoot.querySelector('hui-editor') : null;
-      const edit_mode = haElem.root.querySelector('app-toolbar').className == 'edit-mode';
-      if (!haElem.panel || editor || this.template_failed || edit_mode) return;
+      if (!haElem.panel || editor || this.template_failed) return;
       if (haElem.root && haElem.root.querySelector('custom-header-editor')) return;
       this.buildConfig(ch);
     }, (60 - new Date().getSeconds()) * 1000);
 
     template_timeout;
     window.customHeaderTempTimeout.push(template_timeout);
+
+    if (haElem.root.querySelector('app-toolbar').className == 'edit-mode') return;
+
+    if (window.customHeaderObservers) {
+      for (const observer of window.customHeaderObservers) {
+        observer.disconnect();
+      }
+      window.customHeaderObservers = [];
+    }
 
     styleHeader(config, ch, haElem);
     observers(config, ch, haElem);

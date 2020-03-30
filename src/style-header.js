@@ -6,8 +6,10 @@ import { insertStyleTags } from './style-tags';
 import { redirects } from './redirects';
 import { fireEvent } from 'custom-card-helpers';
 import { selectTab } from './observers';
+import { ha_elements } from './ha-elements';
 
-export const styleHeader = (config, ch, haElem) => {
+export const styleHeader = (config, ch, haElem = ha_elements()) => {
+  if (!haElem) return;
   insertSettings(ch.header, config, haElem);
   insertSettings(ch.header, config, haElem);
 
@@ -37,7 +39,6 @@ export const styleHeader = (config, ch, haElem) => {
     ch.header.menu.style.display = '';
     if (ch.header.container) ch.header.container.style.visibility = 'visible';
     if (ch.footer.container) ch.footer.container.style.visibility = 'visible';
-    // insertSettings(ch.header, config);
   }
 
   if (!config.compact_mode && !config.button_scroll) {
@@ -50,7 +51,6 @@ export const styleHeader = (config, ch, haElem) => {
 
   if (config.split_mode) {
     ch.header.tabContainer.style.display = 'none';
-    config.compact_mode = false;
     if (config.footer_mode) ch.footer.container.setAttribute('slot', 'header');
     else ch.footer.container.setAttribute('slot', '');
   } else if (!config.footer_mode) {
@@ -60,7 +60,6 @@ export const styleHeader = (config, ch, haElem) => {
   }
 
   const headerType = config.compact_mode || config.button_scroll ? ch.header : ch.footer;
-  // if (!config.split_mode) ch.footer.container.style.display = 'none';
 
   if (!ch.header.tabs.length) config.compact_mode = false;
 
