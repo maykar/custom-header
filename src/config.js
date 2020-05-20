@@ -12,8 +12,9 @@ export class CustomHeaderConfig {
     lovelace = document
       .querySelector('body > home-assistant')
       .shadowRoot.querySelector('home-assistant-main')
-      .shadowRoot.querySelector('app-drawer-layout > partial-panel-resolver > ha-panel-lovelace').lovelace;
+      .shadowRoot.querySelector('app-drawer-layout > partial-panel-resolver > ha-panel-lovelace');
     if (!lovelace) return;
+    lovelace = lovelace.lovelace;
     const haElem = ha_elements();
     if (!haElem) return;
     clearTimeout(window.customHeaderTempTimeout);
