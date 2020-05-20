@@ -49,7 +49,6 @@ export const observers = (config, ch, haElem) => {
         }
       } else if (addedNodes.length && target.nodeName == 'PARTIAL-PANEL-RESOLVER') {
         // When returning to lovelace/overview from elsewhere in HA.
-        if (addedNodes[0].nodeName == 'HA-PANEL-LOVELACE') rebuild(config);
         if (haElem.main.querySelector('ha-panel-lovelace')) {
           if (config.compact_mode && !config.footer_mode) {
             haElem.sidebar.main.querySelector('.menu').style = 'height:49px;';
