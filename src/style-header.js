@@ -159,11 +159,11 @@ export const styleHeader = (config, ch, haElem = ha_elements()) => {
         if (button === 'menu') ch.header.menu.icon = 'mdi:menu';
         else if (button === 'voice' && ch.header.voice) ch.header.voice.icon = 'mdi:microphone';
         else if (button === 'options') {
-          ch.header[button].querySelector('paper-icon-button').icon = 'mdi:dots-vertical';
+          ch.header[button].querySelector('ha-icon-button, paper-icon-button').icon = 'mdi:dots-vertical';
         }
       } else {
         if (button === 'options')
-          ch.header[button].querySelector('paper-icon-button').icon = config.button_icons[button];
+          ch.header[button].querySelector('ha-icon-button, paper-icon-button').icon = config.button_icons[button];
         else ch.header[button].icon = config.button_icons[button];
       }
     }
@@ -175,7 +175,7 @@ export const styleHeader = (config, ch, haElem = ha_elements()) => {
       const text = document.createElement('p');
       text.className = 'buttonText';
       const buttonElem =
-        button === 'options' ? ch.header[button].querySelector('paper-icon-button') : ch.header[button];
+        button === 'options' ? ch.header[button].querySelector('ha-icon-button, paper-icon-button') : ch.header[button];
       if (!config.button_text[button] && buttonElem.shadowRoot.querySelector('.buttonText')) {
         buttonElem.shadowRoot.querySelector('.buttonText').remove();
         buttonElem.shadowRoot.querySelector('iron-icon').style.display = '';

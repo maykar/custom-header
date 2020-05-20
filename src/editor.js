@@ -251,14 +251,10 @@ class ChConfigEditor extends LitElement {
 
   haSwitch(option, templateWarn, editorWarn, text, title, checked) {
     const templateIcon = html`
-      <iron-icon
-        icon="mdi:alpha-t-box-outline"
-        class="alert"
-        title="${localize('editor.disabled_template')}"
-      ></iron-icon>
+      <ha-icon icon="mdi:alpha-t-box-outline" class="alert" title="${localize('editor.disabled_template')}"></ha-icon>
     `;
     const editorWarning = html`
-      <iron-icon icon="mdi:alert-box-outline" class="alert" title="${localize('editor.removes_edit_ui')}"></iron-icon>
+      <ha-icon icon="mdi:alert-box-outline" class="alert" title="${localize('editor.removes_edit_ui')}"></ha-icon>
     `;
     return html`
       <ha-switch
@@ -288,7 +284,7 @@ class ChConfigEditor extends LitElement {
             margin-top: -5px;
             @apply --paper-font-headline;
           }
-          .card-header paper-icon-button {
+          .card-header ha-icon-button {
             margin-top: -5px;
             float: right;
           }
@@ -601,7 +597,7 @@ class ChConfigEditor extends LitElement {
         ha-switch {
           padding-top: 16px;
         }
-        iron-icon {
+        ha-icon {
           padding-right: 5px;
         }
         iron-input {
@@ -629,12 +625,12 @@ class ChConfigEditor extends LitElement {
         .buttons > div paper-dropdown-menu {
           flex-grow: 1;
         }
-        .buttons > div iron-icon {
+        .buttons > div ha-icon {
           padding-right: 15px;
           padding-top: 20px;
           margin-left: -3px;
         }
-        .buttons > div:nth-of-type(2n) iron-icon {
+        .buttons > div:nth-of-type(2n) ha-icon {
           padding-left: 20px;
         }
         .warning {
@@ -695,7 +691,7 @@ class ChExceptionEditor extends LitElement {
             margin-top: -5px;
             @apply --paper-font-headline;
           }
-          .card-header paper-icon-button {
+          .card-header ha-icon-button {
             margin-top: -5px;
             float: right;
           }
@@ -707,13 +703,10 @@ class ChExceptionEditor extends LitElement {
             ${Object.values(this.exception.conditions)
               .join(', ')
               .substring(0, 40) || 'New Exception'}
-            <paper-icon-button
-              icon="${this._closed ? 'mdi:chevron-down' : 'mdi:chevron-up'}"
-              @click="${this._toggleCard}"
-            >
-            </paper-icon-button>
-            <paper-icon-button ?hidden=${this._closed} icon="mdi:delete" @click="${this._deleteException}">
-            </paper-icon-button>
+            <ha-icon-button icon="${this._closed ? 'mdi:chevron-down' : 'mdi:chevron-up'}" @click="${this._toggleCard}">
+            </ha-icon-button>
+            <ha-icon-button ?hidden=${this._closed} icon="mdi:delete" @click="${this._deleteException}">
+            </ha-icon-button>
           </div>
           <h4 class="underline">${localize('editor.conditions')}</h4>
           <ch-conditions-editor
