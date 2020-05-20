@@ -18,6 +18,10 @@ const hideHeader = () => {
   const haElem = ha_elements();
   if (!haElem) return;
   haElem.appHeader.style.display = 'none';
+  if (haElem.root.querySelector('ch-header')) {
+    haElem.root.querySelector('ch-header').style.display = 'none';
+    haElem.root.querySelector('ch-footer').style.display = 'none';
+  }
 };
 
 if (!window.location.href.includes('disable_ch')) hideHeader();
@@ -39,10 +43,12 @@ if (ha_elements()) {
                   }).observe(ha_elements().menu.shadowRoot, { childList: true });
                 } else if (node.nodeName == 'HUI-ROOT') {
                   new MutationObserver(function() {
-                    new MutationObserver(function() {
-                      if (!window.location.href.includes('disable_ch')) hideHeader();
-                      CustomHeaderConfig.buildConfig(new CustomHeader(ha_elements()));
-                    }).observe(ha_elements().menu.shadowRoot, { childList: true });
+                    if (ha_elements().menu.shadowRoot) {
+                      new MutationObserver(function() {
+                        if (!window.location.href.includes('disable_ch')) hideHeader();
+                        CustomHeaderConfig.buildConfig(new CustomHeader(ha_elements()));
+                      }).observe(ha_elements().menu.shadowRoot, { childList: true });
+                    }
                   }).observe(node!.parentNode!.querySelector('hui-root')!.shadowRoot!, { childList: true });
                 }
               }
@@ -54,4 +60,18 @@ if (ha_elements()) {
   };
   const observer = new MutationObserver(callback);
   observer.observe(ha_elements().partialPanel, { childList: true });
+
+  const rebuildcall = () => {
+    if (!window.location.href.includes('disable_ch')) hideHeader();
+    CustomHeaderConfig.buildConfig(new CustomHeader(ha_elements()));
+  };
+  const rebuild = new MutationObserver(rebuildcall);
+  rebuild.observe(
+    document!
+      .querySelector('body > home-assistant')!
+      .shadowRoot!.querySelector('home-assistant-main')!
+      .shadowRoot!.querySelector('app-drawer-layout')!
+      .querySelector('partial-panel-resolver')!,
+    { childList: true },
+  );
 }
