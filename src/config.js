@@ -16,10 +16,6 @@ export class CustomHeaderConfig {
     if (!lovelace) return;
     const haElem = ha_elements();
     if (!haElem) return;
-    if (haElem.root.querySelector('ch-header')) {
-      haElem.root.querySelector('ch-header').style.visibility = 'hidden';
-      haElem.root.querySelector('ch-footer').style.visibility = 'hidden';
-    }
     clearTimeout(window.customHeaderTempTimeout);
     this.default_config = defaultConfig();
     this.config = {
