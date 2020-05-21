@@ -2,9 +2,7 @@ import { hideMenuItems } from './overflow-menu';
 import { redirects } from './redirects';
 import { getLovelace } from 'custom-card-helpers';
 import { CustomHeaderConfig } from './config';
-import { ha_elements } from './ha-elements';
-import { CustomHeader } from './build-header';
-import { styleHeader } from './style-header';
+import { rebuild } from './custom-header.ts';
 
 export const selectTab = (config, ch) => {
   const headerType = config.compact_mode || config.button_scroll ? ch.header : ch.footer;
@@ -20,15 +18,6 @@ export const selectTab = (config, ch) => {
     headerType.tabContainer._scrollToRight();
     headerType.tabs[haActiveTabIndex].dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
   }
-};
-
-const rebuild = config => {
-  const haElem = ha_elements();
-  window.last_template_result = {};
-  const ch = new CustomHeader(haElem);
-  CustomHeaderConfig.buildConfig(ch);
-  if (!window.location.href.includes('disable_ch') && haElem) haElem.appHeader.style.display = 'none';
-  styleHeader(config, ch, haElem);
 };
 
 export const observers = (config, ch, haElem) => {
@@ -49,7 +38,6 @@ export const observers = (config, ch, haElem) => {
         }
       } else if (addedNodes.length && target.nodeName == 'PARTIAL-PANEL-RESOLVER') {
         // When returning to lovelace/overview from elsewhere in HA.
-        if (addedNodes[0].nodeName == 'HA-PANEL-LOVELACE') rebuild(config);
         if (haElem.main.querySelector('ha-panel-lovelace')) {
           if (config.compact_mode && !config.footer_mode) {
             haElem.sidebar.main.querySelector('.menu').style = 'height:49px;';
@@ -72,21 +60,18 @@ export const observers = (config, ch, haElem) => {
         if (haElem.root.querySelector('editor')) haElem.root.querySelector('editor').remove();
       } else if (target.className === 'edit-mode' && addedNodes.length) {
         // Entered edit mode.
-        const menu_clone = ch.header.menu.cloneNode(true);
-        ch.header.menu.parentNode.replaceChild(menu_clone, ch.header.menu);
-        ch.header.menu = ch.header.container.querySelector("[buttonelem='menu']");
         if (haElem.root.querySelector('editor')) haElem.root.querySelector('editor').remove();
         if (!window.customHeaderDisabled) hideMenuItems(config, ch.header, true, haElem);
-        ch.header.menu.style.display = 'none';
-        haElem.root.querySelector('ch-header').style.display = 'none';
-        haElem.root.querySelector('ch-footer').style.display = 'none';
-        haElem.appHeader.style.display = 'block';
+        haElem.appHeader.style.display = '';
+        if (haElem.root.querySelector('ch-header')) haElem.root.querySelector('ch-header').remove();
+        if (haElem.root.querySelector('ch-footer')) haElem.root.querySelector('ch-footer').remove();
         if (haElem.root.querySelector('#ch_view_style')) haElem.root.querySelector('#ch_view_style').remove();
         if (haElem.root.querySelector('#ch_header_style')) haElem.root.querySelector('#ch_header_style').remove();
         if (haElem.root.querySelector('#ch_animated')) haElem.root.querySelector('#ch_animated').remove();
+        window.dispatchEvent(new Event('resize'));
       } else if (target.nodeName === 'APP-HEADER' && addedNodes.length) {
         // Exited edit mode.
-        rebuild(config);
+        rebuild();
       }
     });
   };

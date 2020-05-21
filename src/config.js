@@ -8,9 +8,9 @@ import { getLovelace } from 'custom-card-helpers';
 
 export class CustomHeaderConfig {
   static buildConfig(ch, lovelace = getLovelace()) {
-    if (!lovelace) return;
+    window.customHeaderUnsub = [];
     const haElem = ha_elements();
-    if (!haElem) return;
+    if (!lovelace || !haElem) return;
     clearTimeout(window.customHeaderTempTimeout);
     this.default_config = defaultConfig();
     this.config = {
@@ -19,7 +19,7 @@ export class CustomHeaderConfig {
     };
     this.template_vars = this.config.template_variables;
     this.last_template_result = null;
-    this.test_config = { ...this.config, ...conditionalConfig(this.config, haElem) };
+    this.test_config = { ...this.config, ...conditionalConfig(this.config, ha_elements()) };
     const config_string = JSON.stringify(this.config);
     this.has_templates = !!this.template_vars || config_string.includes('{{') || config_string.includes('{%');
     this.template_failed = false;
@@ -30,7 +30,7 @@ export class CustomHeaderConfig {
         !this.test_config.disabled_mode.includes('{%')) ||
       window.location.href.includes('disable_ch');
 
-    this.renderTemplate(ch, haElem);
+    this.renderTemplate(ch, ha_elements());
     this.catchTemplate();
   }
 
@@ -61,14 +61,14 @@ export class CustomHeaderConfig {
         this.config.locale,
       );
     } else {
-      this.config = conditionalConfig(this.config, haElem);
-      this.processAndContinue(ch, haElem);
+      this.config = conditionalConfig(this.config, ha_elements());
+      this.processAndContinue(ch, ha_elements());
     }
   }
 
   static helpfulTempError(result, error) {
     let err;
-    const position = error.toString().match(/\d+/g);
+    let position = error.toString().match(/\d+/g);
     if (position) {
       position = error.toString().match(/\d+/g)[0];
       const left = result.substr(0, position).match(/[^,]*$/);

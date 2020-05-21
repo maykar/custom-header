@@ -1,3 +1,5 @@
+import { fireEvent } from 'custom-card-helpers';
+
 export class CustomHeader {
   constructor(ha_elements) {
     if (!ha_elements) return;
@@ -101,7 +103,7 @@ export class CustomHeader {
     if (button === 'options') {
       header[button] = this.ha_elem[button].cloneNode(true);
       header[button].removeAttribute('horizontal-offset');
-      header[button].querySelector('paper-icon-button').style.height = '48px';
+      header[button].querySelector('ha-icon-button, paper-icon-button').style.height = '48px';
       const items = Array.from(header[button].querySelectorAll('paper-item'));
       items.forEach(item => {
         const index = items.indexOf(item);
@@ -109,10 +111,14 @@ export class CustomHeader {
       });
     } else {
       if (!this.ha_elem[button]) return;
-      header[button] = document.createElement('paper-icon-button');
+      if (this.ha_elem['menu'].shadowRoot.querySelector('paper-icon-button')) {
+        header[button] = document.createElement('paper-icon-button');
+      } else {
+        header[button] = document.createElement('ha-icon-button');
+      }
       this.tapOrClick(
         header[button],
-        this.ha_elem[button].shadowRoot.querySelector('paper-icon-button') || this.ha_elem[button],
+        this.ha_elem[button].shadowRoot.querySelector('mwc-icon-button, paper-icon-button') || this.ha_elem[button],
       );
     }
 
@@ -123,9 +129,16 @@ export class CustomHeader {
   }
 
   tapOrClick(listenElement, clickElement) {
-    listenElement.setAttribute('onClick', ' ');
-    listenElement.addEventListener('click', () => {
-      clickElement.dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
-    });
+    if (clickElement.nodeName == 'HA-MENU-BUTTON') {
+      listenElement.setAttribute(
+        'onClick',
+        'document.querySelector("home-assistant").shadowRoot.querySelector("home-assistant-main").shadowRoot.querySelector("ha-panel-lovelace").shadowRoot.querySelector("hui-root").shadowRoot.querySelector("ha-menu-button").shadowRoot.querySelector("mwc-icon-button, paper-icon-button").click()',
+      );
+    } else {
+      listenElement.setAttribute('onClick', ' ');
+      listenElement.addEventListener('click', () => {
+        clickElement.dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
+      });
+    }
   }
 }

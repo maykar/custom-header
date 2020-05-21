@@ -1,12 +1,14 @@
 import { ha_elements } from './ha-elements';
 import { tabIndexByName } from './helpers';
 import { deviceID } from './template-variables';
-import { getLovelace } from 'custom-card-helpers';
 import { processTabArray } from './helpers';
 
 export const conditionalConfig = config => {
   const hass = ha_elements().hass;
-  const lovelace = getLovelace();
+  let lovelace = document
+    .querySelector('body > home-assistant')
+    .shadowRoot.querySelector('home-assistant-main')
+    .shadowRoot.querySelector('app-drawer-layout > partial-panel-resolver > ha-panel-lovelace').lovelace;
   const countMatches = conditions => {
     const userVars = {
       user: hass.user.name,
