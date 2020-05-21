@@ -45,8 +45,8 @@ export const rebuild = () => {
     timeout;
   } else if (haElem && haElem.lovelace && haElem.menu) {
     clearTimeout(timeout);
+    CustomHeaderConfig.buildConfig(new CustomHeader(haElem));
     if (!haElem.root.querySelector('ch-header')) {
-      CustomHeaderConfig.buildConfig(new CustomHeader(haElem));
       haElem.root.querySelector('ch-header').style.visibility = 'hidden';
       haElem.root.querySelector('ch-footer').style.visibility = 'hidden';
     }
