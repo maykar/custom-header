@@ -61,11 +61,13 @@ export class CustomHeader {
     const rootString =
       'document.querySelector("home-assistant").shadowRoot.querySelector("home-assistant-main").shadowRoot.querySelector("ha-panel-lovelace").shadowRoot.querySelector("hui-root").shadowRoot';
 
-    header.voice.setAttribute(
-      'onClick',
-      rootString +
-        '.querySelector("ha-icon-button").shadowRoot.querySelector("mwc-icon-button, paper-icon-button").click()',
-    );
+    if (header.voice) {
+      header.voice.setAttribute(
+        'onClick',
+        rootString +
+          '.querySelector("ha-icon-button").shadowRoot.querySelector("mwc-icon-button, paper-icon-button").click()',
+      );
+    }
     header.menu.setAttribute(
       'onClick',
       rootString +
