@@ -58,6 +58,21 @@ export class CustomHeader {
     this.cloneButton('voice', 'mdi:microphone', header);
     this.cloneButton('options', 'mdi:dots-vertical', header);
 
+    const rootString =
+      'document.querySelector("home-assistant").shadowRoot.querySelector("home-assistant-main").shadowRoot.querySelector("ha-panel-lovelace").shadowRoot.querySelector("hui-root").shadowRoot';
+
+    header.voice.setAttribute(
+      'onClick',
+      rootString +
+        '.querySelector("ha-icon-button").shadowRoot.querySelector("mwc-icon-button, paper-icon-button").click()',
+    );
+    header.menu.setAttribute(
+      'onClick',
+      rootString +
+        '.querySelector("ha-menu-button").shadowRoot.querySelector("mwc-icon-button, paper-icon-button").click()',
+    );
+    header.options.setAttribute('onClick', rootString + '.querySelector("paper-menu-button").click()');
+
     header.container.appendChild(header.menu);
     header.container.appendChild(stack);
     header.stack = header.container.querySelector('ch-stack');
@@ -116,10 +131,6 @@ export class CustomHeader {
       } else {
         header[button] = document.createElement('ha-icon-button');
       }
-      this.tapOrClick(
-        header[button],
-        this.ha_elem[button].shadowRoot.querySelector('mwc-icon-button, paper-icon-button') || this.ha_elem[button],
-      );
     }
 
     header[button].setAttribute('icon', icon);
@@ -129,16 +140,9 @@ export class CustomHeader {
   }
 
   tapOrClick(listenElement, clickElement) {
-    if (clickElement.nodeName == 'HA-MENU-BUTTON') {
-      listenElement.setAttribute(
-        'onClick',
-        'document.querySelector("home-assistant").shadowRoot.querySelector("home-assistant-main").shadowRoot.querySelector("ha-panel-lovelace").shadowRoot.querySelector("hui-root").shadowRoot.querySelector("ha-menu-button").shadowRoot.querySelector("mwc-icon-button, paper-icon-button").click()',
-      );
-    } else {
-      listenElement.setAttribute('onClick', ' ');
-      listenElement.addEventListener('click', () => {
-        clickElement.dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
-      });
-    }
+    listenElement.setAttribute('onClick', ' ');
+    listenElement.addEventListener('click', () => {
+      clickElement.dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
+    });
   }
 }
