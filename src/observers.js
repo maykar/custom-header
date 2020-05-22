@@ -71,7 +71,27 @@ export const observers = (config, ch, haElem) => {
         window.dispatchEvent(new Event('resize'));
       } else if (target.nodeName === 'APP-HEADER' && addedNodes.length) {
         // Exited edit mode.
-        rebuild();
+        let timeout;
+        const wait = () => {
+          if (
+            !document
+              .querySelector('home-assistant')
+              .shadowRoot.querySelector('home-assistant-main')
+              .shadowRoot.querySelector('ha-panel-lovelace')
+              .shadowRoot.querySelector('hui-root')
+              .shadowRoot.querySelector('ha-menu-button, paper-menu-button')
+              .shadowRoot.querySelector('mwc-icon-button, paper-icon-button')
+          ) {
+            timeout = window.setTimeout(() => {
+              wait();
+            }, 200);
+            timeout;
+          } else {
+            clearTimeout(timeout);
+            rebuild();
+          }
+        };
+        wait();
       }
     });
   };

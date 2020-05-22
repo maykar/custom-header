@@ -1,5 +1,3 @@
-import { fireEvent } from 'custom-card-helpers';
-
 export class CustomHeader {
   constructor(ha_elements) {
     if (!ha_elements) return;
@@ -57,23 +55,6 @@ export class CustomHeader {
     this.cloneButton('menu', 'mdi:menu', header);
     this.cloneButton('voice', 'mdi:microphone', header);
     this.cloneButton('options', 'mdi:dots-vertical', header);
-
-    const rootString =
-      'document.querySelector("home-assistant").shadowRoot.querySelector("home-assistant-main").shadowRoot.querySelector("ha-panel-lovelace").shadowRoot.querySelector("hui-root").shadowRoot';
-
-    if (header.voice) {
-      header.voice.setAttribute(
-        'onClick',
-        rootString +
-          '.querySelector("ha-icon-button").shadowRoot.querySelector("mwc-icon-button, paper-icon-button").click()',
-      );
-    }
-    header.menu.setAttribute(
-      'onClick',
-      rootString +
-        '.querySelector("ha-menu-button").shadowRoot.querySelector("mwc-icon-button, paper-icon-button").click()',
-    );
-    header.options.setAttribute('onClick', rootString + '.querySelector("paper-menu-button").click()');
 
     header.container.appendChild(header.menu);
     header.container.appendChild(stack);
@@ -133,6 +114,12 @@ export class CustomHeader {
       } else {
         header[button] = document.createElement('ha-icon-button');
       }
+      this.tapOrClick(
+        header[button],
+        button == 'voice'
+          ? this.ha_elem[button]
+          : this.ha_elem[button].shadowRoot.querySelector('mwc-icon-button, paper-icon-button') || this.ha_elem[button],
+      );
     }
 
     header[button].setAttribute('icon', icon);
