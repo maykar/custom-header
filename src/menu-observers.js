@@ -1,6 +1,7 @@
 export const menuButtonObservers = (config, ch, haElem) => {
   if (config.menu_hide) return;
   // Create Notification Dot
+  const mwc = haElem.menu.shadowRoot.querySelector('mwc-icon-button');
   const buildDot = () => {
     const dot = document.createElement('div');
     dot.className = 'dot';
@@ -10,8 +11,8 @@ export const menuButtonObservers = (config, ch, haElem) => {
         background-color: ${config.notification_dot_color};
         width: 12px;
         height: 12px;
-        top: -28px;
-        right: ${config.reverse_button_direction ? '' : '-'}16px;
+        top: ${mwc ? '-35px;' : '-28px;'}
+        right: ${config.reverse_button_direction ? '' : '-'}${mwc ? '27px;' : '16px;'}
         border-radius: 50%;
     `;
     return dot;
