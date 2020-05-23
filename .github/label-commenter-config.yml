@@ -14,6 +14,7 @@ labels:
           * Any errors relevant to Custom Header found in the HA logs
           * Any relevant errors found in your browsers dev console (F12)
           * The version of Home Assistant and Custom Header you are using
+          * Installation method (HACS or manual)
           * The browsers or apps that are affected (i.e. Firefox, Chrome, Chrome Mobile, iOS HA Companion app, etc.)
           <br>
 
