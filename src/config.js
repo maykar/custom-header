@@ -8,7 +8,6 @@ import { getLovelace } from 'custom-card-helpers';
 
 export class CustomHeaderConfig {
   static buildConfig(ch, lovelace = getLovelace()) {
-    window.customHeaderUnsub = [];
     const haElem = ha_elements();
     if (!lovelace || !haElem) return;
     clearTimeout(window.customHeaderTempTimeout);

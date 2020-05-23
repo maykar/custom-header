@@ -60,17 +60,32 @@ export const conditionalConfig = config => {
     });
   }
 
+  if (
+    exceptionConfig &&
+    exceptionConfig.default_tab &&
+    (exceptionConfig.default_tab == null || exceptionConfig.default_tab == 'null')
+  ) {
+    config.default_tab = [];
+  }
+
   // If exception config uses hide_tabs and main config uses show_tabs,
   // delete show_tabs and vice versa.
-  if (exceptionConfig.hide_tabs && config.show_tabs && exceptionConfig.hide_tabs.length && config.show_tabs.length) {
-    delete config.show_tabs;
-  } else if (
-    exceptionConfig.show_tabs &&
-    config.hide_tabs &&
-    exceptionConfig.show_tabs.length &&
-    config.hide_tabs.length
-  ) {
-    delete config.hide_tabs;
+  if (exceptionConfig) {
+    if (
+      typeof exceptionConfig.hide_tabs != 'undefined' &&
+      config.show_tabs &&
+      exceptionConfig.hide_tabs.length &&
+      config.show_tabs.length
+    ) {
+      delete config.show_tabs;
+    } else if (
+      exceptionConfig.show_tabs &&
+      config.hide_tabs &&
+      exceptionConfig.show_tabs.length &&
+      config.hide_tabs.length
+    ) {
+      delete config.hide_tabs;
+    }
   }
   window.customHeaderExceptionConfig = JSON.stringify(exceptionConfig);
   return { ...config, ...exceptionConfig };

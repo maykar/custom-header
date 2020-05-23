@@ -536,7 +536,7 @@ class ChConfigEditor extends LitElement {
         </div>
         <paper-input
           class="${this.exception && this.config.default_tab === undefined ? 'inherited slotted' : 'slotted'}"
-          label="${localize('editor.default_tab')}:"
+          label="${localize('editor.default_tab')}${this.exception ? ' (use "null" to override default)' : ''}:"
           .value="${this.getConfig('default_tab')}"
           .configValue="${'default_tab'}"
           @value-changed="${this._valueChanged}"

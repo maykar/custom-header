@@ -24,6 +24,7 @@ export const defaultVariables = locale => {
   const d = new Date();
   if (!lovelace || lovelace.config.views[lovelace.current_view] == undefined) return;
   return {
+    hassVersion: hass.config.version,
     deviceID: deviceID,
     isAdmin: hass.user.is_admin,
     isOwner: hass.user.is_owner,
