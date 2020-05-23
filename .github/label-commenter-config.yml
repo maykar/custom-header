@@ -23,3 +23,8 @@ labels:
       issue:
         body: In order for me to replicate and troubleshoot the issue, please provide as much of the info requested in the reply above. This issue will remain closed until more information is provided.
         action: close
+  - name: Stale
+    labeled:
+      issue:
+        body: After a request for more info or clarification there has been no activity for 7 or more days. Closing issue as stale.
+        action: close
