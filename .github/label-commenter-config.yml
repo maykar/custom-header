@@ -8,24 +8,24 @@ labels:
           If you haven't yet done so, please read the ["Before Posting an Issue"](https://maykar.github.io/custom-header/#issues) section of the docs site.<br>
           ![Release](https://img.shields.io/github/v/release/maykar/custom-header?label=%20&amp;style=flat-square) is the current version of Custom Header. Be sure that you are using the latest version by checking your browser's dev tools console (usually found by pressing F12). If this doesn't display the current version either clear your cache or reinstall.
 
-          **Include as much of the following info as you can:**
+          **Include as much of the following info as you can, so I am able to replicate and investigate your issue:**
 
-          * A copy/paste of your Custom Header config (found in "Raw Config Editor" or ui-lovelace.yaml)
+          * A copy/paste of your Custom Header config (found in "Raw Config Editor" or ui-lovelace.yaml). Use the tip at the end of this post to format it correctly.
           * Any errors relevant to Custom Header found in the HA logs
           * Any relevant errors found in your browsers dev console (F12)
           * The version of Home Assistant and Custom Header you are using
-          * Installation method (HACS or manual)
           * The browsers or apps that are affected (i.e. Firefox, Chrome, Chrome Mobile, iOS HA Companion app, etc.)
+          * Installation method (HACS or manual)
           <br>
 
           **When pasting in your config always place 3 backticks <code>```</code> above the first line of your config and after the last line. Doing this will format it correctly so that I may find any formatting errors in your config.**
   - name: Missing Info
     labeled:
       issue:
-        body: In order for me to replicate and troubleshoot the issue, please provide as much of the info requested in the reply above. This issue will remain closed until more information is provided.
+        body: In order for me to recreate and troubleshoot your issue, please provide as much of the info requested in the bot's previous reply. This issue will remain closed until more information is provided.
         action: close
   - name: Stale
     labeled:
       issue:
-        body: After a request for more info or clarification there has been no activity for 7 or more days. Closing issue as stale.
+        body: This issue has become inactive and is being closed as stale.
         action: close
