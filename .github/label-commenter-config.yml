@@ -5,12 +5,14 @@ labels:
         body: |
           ## Important:
           **Issues that don't provide the necessary information listed below may not get a reply and will be closed until the info is provided.**<br>
-          If you haven't yet done so, please read the ["Before Posting an Issue"](https://maykar.github.io/custom-header/#issues) section of the docs site.<br>
+
           ![Release](https://img.shields.io/github/v/release/maykar/custom-header?label=%20&amp;style=flat-square) is the current version of Custom Header. Be sure that you are using the latest version by checking your browser's dev tools console (usually found by pressing F12). If this doesn't display the current version either clear your cache or reinstall.
 
-          **Include as much of the following info as you can, so I am able to replicate and investigate your issue:**
+          If you haven't yet done so, please read the ["Before Posting an Issue"](https://maykar.github.io/custom-header/#issues) section of the docs site.<br>
 
-          * A copy/paste of your Custom Header config (found in "Raw Config Editor" or ui-lovelace.yaml). Use the tip at the end of this post to format it correctly.
+          **Include as much of the following info as you can to help me replicate and investigate your issue:**
+
+          * A copy/paste of your Custom Header config (found in "Raw Config Editor" or ui-lovelace.yaml).<br>**Use the tip at the end of this post to format it correctly.**
           * Any errors relevant to Custom Header found in the HA logs
           * Any relevant errors found in your browsers dev console (F12)
           * The version of Home Assistant and Custom Header you are using
@@ -18,7 +20,7 @@ labels:
           * Installation method (HACS or manual)
           <br>
 
-          **When pasting in your config always place 3 backticks <code>```</code> above the first line of your config and after the last line. Doing this will format it correctly so that I may find any formatting errors in your config.**
+          **When pasting in your config always place 3 backticks <code>```</code> above the first line of your config and after the last line. Doing this will format it correctly so that I may find any formatting errors in your config.**<br>
   - name: Missing Info
     labeled:
       issue:
