@@ -29,6 +29,7 @@ if (!window.location.href.includes('disable_ch')) hideHeader();
 export const rebuild = () => {
   if (ha_elements() && ha_elements().root.querySelector('app-toolbar').className == 'edit-mode') return;
   (window as any).last_template_result = [];
+  clearTimeout((window as any).customHeaderTempTimeout);
   if (!window.location.href.includes('disable_ch')) hideHeader();
   let timeout;
   const haElem = ha_elements();

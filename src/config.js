@@ -8,9 +8,9 @@ import { getLovelace } from 'custom-card-helpers';
 
 export class CustomHeaderConfig {
   static buildConfig(ch, lovelace = getLovelace()) {
+    if (!window.customHeaderUnsub) window.customHeaderUnsub = [];
     const haElem = ha_elements();
     if (!lovelace || !haElem) return;
-    clearTimeout(window.customHeaderTempTimeout);
     this.default_config = defaultConfig();
     this.config = {
       ...this.default_config,
@@ -52,6 +52,13 @@ export class CustomHeaderConfig {
           if (JSON.stringify(window.last_template_result) == JSON.stringify(this.config)) {
             return;
           } else {
+            clearTimeout(window.customHeaderTempTimeout);
+            if (window.customHeaderUnsub) {
+              for (const unsub of window.customHeaderUnsub) {
+                if (typeof unsub === 'function') unsub();
+              }
+            }
+            window.customHeaderUnsub = [];
             window.last_template_result = this.config;
           }
           this.processAndContinue(ch, haElem);
@@ -83,13 +90,6 @@ export class CustomHeaderConfig {
   }
 
   static async catchTemplate() {
-    if (window.customHeaderUnsub) {
-      for (const unsub of window.customHeaderUnsub) {
-        if (typeof unsub === 'function') unsub();
-      }
-    }
-    window.customHeaderUnsub = [];
-
     try {
       const unsub = await this.unsub;
       window.customHeaderUnsub.push(unsub);
