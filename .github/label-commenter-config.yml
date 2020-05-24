@@ -29,5 +29,5 @@ labels:
   - name: Stale
     labeled:
       issue:
-        body: This issue has become inactive and is being closed as stale.
+        body: This issue has become inactive and is being closed as stale. Please, provide more info if it has been requested or ask for the issue to be reopened if it hasn't been resolved. 
         action: close
