@@ -205,6 +205,9 @@ export const insertStyleTags = (config, ch, haElem) => {
           ${config.footer_mode ? `min-height: calc(100vh - 100px) !important;` : ''}
 
         }
+        #view.tabs-hidden {
+          min-height: calc(100vh - 48px) !important;
+        }
       `;
 
   // Add updated view style if changed.

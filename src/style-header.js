@@ -103,7 +103,7 @@ export const styleHeader = (config, ch, haElem = ha_elements()) => {
     kioskMode(haElem, false, true, config);
   } else if (!config.disable_sidebar && !config.kiosk_mode && !config.hide_header) {
     removeKioskMode(haElem);
-    if (config.compact_mode && !config.footer_mode) {
+    if ((config.compact_mode && !config.footer_mode) || !ch.header.tabs.length) {
       haElem.sidebar.main.querySelector('.menu').style = 'height:49px;';
       haElem.sidebar.main.querySelector('paper-listbox').style = 'height:calc(100% - 175px);';
       haElem.sidebar.main.querySelector('div.divider').style = '';
