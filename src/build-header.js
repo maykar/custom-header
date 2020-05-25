@@ -66,6 +66,7 @@ export class CustomHeader {
       header.container.appendChild(header.voice);
     }
 
+    header.container.style.visibility = 'hidden';
     this.ha_elem.appLayout.appendChild(header.container);
     return header;
   }
@@ -92,6 +93,7 @@ export class CustomHeader {
 
     footer.container = document.createElement('ch-footer');
     footer.container.appendChild(footer.tabContainer);
+    footer.container.style.visibility = 'hidden';
 
     this.ha_elem.appLayout.appendChild(footer.container);
     return footer;

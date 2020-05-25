@@ -47,10 +47,6 @@ export const rebuild = () => {
   } else if (haElem && haElem.lovelace && haElem.menu) {
     clearTimeout(timeout);
     CustomHeaderConfig.buildConfig(new CustomHeader(haElem));
-    if (!haElem.root.querySelector('ch-header')) {
-      haElem.root.querySelector('ch-header').style.visibility = 'hidden';
-      haElem.root.querySelector('ch-footer').style.visibility = 'hidden';
-    }
   }
 };
 const rebuildMO = new MutationObserver(rebuild);

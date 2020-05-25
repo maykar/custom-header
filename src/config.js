@@ -19,8 +19,6 @@ export class CustomHeaderConfig {
     this.template_vars = this.config.template_variables;
     this.last_template_result = null;
     this.test_config = { ...this.config, ...conditionalConfig(this.config, ha_elements()) };
-    const config_string = JSON.stringify(this.config);
-    this.has_templates = !!this.template_vars || config_string.includes('{{') || config_string.includes('{%');
     this.template_failed = false;
     this.disabled =
       (typeof this.test_config.disabled_mode == 'boolean' && this.test_config.disabled_mode) ||
@@ -34,7 +32,7 @@ export class CustomHeaderConfig {
   }
 
   static renderTemplate(ch, haElem) {
-    if (this.has_templates && !this.disabled) {
+    if (!this.disabled) {
       const template_vars = JSON.stringify(this.template_vars).replace(/\\/g, '');
       const config = JSON.stringify(this.config).replace(/\\/g, '');
       this.unsub = subscribeRenderTemplate(
