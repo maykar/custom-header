@@ -18,6 +18,9 @@ export const selectTab = (config, ch) => {
     headerType.tabContainer._scrollToRight();
     headerType.tabs[haActiveTabIndex].dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
   }
+  for (const tab of headerType.tabs) {
+    if (tab != headerType.tabs[haActiveTabIndex]) tab.classList.remove('iron-selected');
+  }
 };
 
 export const observers = (config, ch, haElem) => {
