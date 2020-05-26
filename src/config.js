@@ -48,15 +48,11 @@ export class CustomHeaderConfig {
             this.helpfulTempError(result, e);
           }
           if (JSON.stringify(window.last_template_result) == JSON.stringify(this.config)) {
+            this.changed = false;
             return;
           } else {
             clearTimeout(window.customHeaderTempTimeout);
-            if (window.customHeaderUnsub) {
-              for (const unsub of window.customHeaderUnsub) {
-                if (typeof unsub === 'function') unsub();
-              }
-            }
-            window.customHeaderUnsub = [];
+            this.changed = true;
             window.last_template_result = this.config;
           }
           this.processAndContinue(ch, haElem);
@@ -90,7 +86,13 @@ export class CustomHeaderConfig {
   static async catchTemplate() {
     try {
       const unsub = await this.unsub;
-      window.customHeaderUnsub.push(unsub);
+      if (this.changed) {
+        for (const prev of window.customHeaderUnsub) prev();
+        window.customHeaderUnsub = [];
+        window.customHeaderUnsub.push(unsub);
+      } else {
+        unsub();
+      }
     } catch (e) {
       this.template_failed = true;
       console.log('[CUSTOM-HEADER] There was an error with one or more of your templates:');

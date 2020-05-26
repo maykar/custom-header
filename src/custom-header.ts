@@ -4,10 +4,6 @@ import { ha_elements } from './ha-elements';
 import { CustomHeader } from './build-header';
 import { CustomHeaderConfig } from './config';
 
-interface Window {
-  last_template_result: any;
-}
-
 console.info(
   `%c  CUSTOM-HEADER  \n%c  ${localize('common.version')} master  `,
   'color: orange; font-weight: bold; background: black',
@@ -46,7 +42,13 @@ export const rebuild = () => {
     timeout;
   } else if (haElem && haElem.lovelace && haElem.menu) {
     clearTimeout(timeout);
-    CustomHeaderConfig.buildConfig(new CustomHeader(haElem));
+    if ((window as any).customHeaderUnsub && (window as any).customHeaderUnsub.length) {
+      for (const prev of (window as any).customHeaderUnsub) prev();
+      (window as any).customHeaderUnsub = [];
+    }
+    const ch = new CustomHeader(haElem);
+    CustomHeaderConfig.buildConfig(ch);
+    CustomHeaderConfig.buildConfig(ch);
   }
 };
 const rebuildMO = new MutationObserver(rebuild);
