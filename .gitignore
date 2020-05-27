@@ -3,3 +3,4 @@
 package-lock.json
 dist
 yarn.lock
+yarn-error.log

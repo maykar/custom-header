@@ -30,7 +30,9 @@ export const tabIndexByName = tab => {
 export const invertNumArray = show_tabs => {
   if (show_tabs && show_tabs.length) {
     const total_tabs = [];
-    for (let i = 0; i < ha_elements().tabs.length; i += 1) total_tabs.push(i);
+    const haElem = ha_elements();
+    if (!haElem || !haElem.tabs) return [];
+    for (let i = 0; i < haElem.tabs.length; i += 1) total_tabs.push(i);
     return total_tabs.filter(el => !show_tabs.includes(el));
   }
 };

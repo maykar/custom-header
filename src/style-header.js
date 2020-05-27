@@ -145,6 +145,7 @@ export const styleHeader = (config, ch, haElem = ha_elements()) => {
   if (config.tab_icons && headerType.tabs.length) {
     for (const tab in config.tab_icons) {
       const index = tabIndexByName(tab);
+      if (!headerType.tabs[index]) continue;
       const haIcon = headerType.tabs[index].querySelector('ha-icon');
       if (!config.tab_icons[tab]) haIcon.icon = haElem.lovelace.config.views[index].icon;
       else haIcon.icon = config.tab_icons[tab];
