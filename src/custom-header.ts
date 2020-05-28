@@ -14,51 +14,150 @@ window.setTimeout(() => {
   if (!customElements.get('card-tools')) console.log('Device ID: ', deviceID);
 }, 2000);
 
-const hideHeader = () => {
-  const haElem = ha_elements();
-  if (!haElem) return;
+const hideHeader = haElem => {
+  if (!haElem || !haElem.appHeader) return;
   haElem.appHeader.style.display = 'none';
 };
 
-if (!window.location.href.includes('disable_ch')) hideHeader();
+if (!window.location.href.includes('disable_ch')) hideHeader(ha_elements());
 
 export const rebuild = () => {
-  if (ha_elements() && ha_elements().root.querySelector('app-toolbar').className == 'edit-mode') return;
+  const haElem = ha_elements();
+
+  // If returning to a dashboard with raw config editor active - wait to rebuild.
+  if (
+    document
+      .querySelector('home-assistant')!
+      .shadowRoot!.querySelector('home-assistant-main')!
+      .shadowRoot!.querySelector('ha-panel-lovelace')!
+      .shadowRoot!.querySelector('hui-editor')!
+  ) {
+    let rawModeMO;
+    const editModeCallback = mutations => {
+      for (const mutation of mutations) {
+        for (const removed of mutation.removedNodes) {
+          if (removed.nodeName == 'HUI-EDITOR') {
+            // Wait for app-toolbar to exist.
+            const raw_timeout = () => {
+              const ch_raw_timeout = window.setTimeout(() => {
+                if (ha_elements().root.querySelector('app-toolbar')) {
+                  clearTimeout(ch_raw_timeout);
+                } else {
+                  ch_raw_timeout;
+                }
+              }, 100);
+            };
+            raw_timeout();
+            rebuild();
+            rawModeMO.disconnect();
+            return;
+          }
+        }
+      }
+    };
+    rawModeMO = new MutationObserver(editModeCallback);
+    rawModeMO.observe(
+      document
+        .querySelector('home-assistant')!
+        .shadowRoot!.querySelector('home-assistant-main')!
+        .shadowRoot!.querySelector('ha-panel-lovelace')!.shadowRoot!,
+      {
+        childList: true,
+        subtree: true,
+      },
+    );
+    return;
+  }
+
+  // If returning to a dashboard with edit-mode active or just exited raw config - wait to rebuild.
+  if (
+    haElem &&
+    haElem.root.querySelector('app-toolbar') &&
+    haElem.root.querySelector('app-toolbar').className == 'edit-mode'
+  ) {
+    let editModeMO;
+    const editModeCallback = mutations => {
+      for (const mutation of mutations) {
+        for (const removed of mutation.removedNodes) {
+          if (removed.classList && removed.classList.contains('edit-mode')) {
+            rebuild();
+            editModeMO.disconnect();
+            return;
+          }
+        }
+      }
+    };
+    editModeMO = new MutationObserver(editModeCallback);
+    editModeMO.observe(haElem.appLayout, {
+      childList: true,
+      subtree: true,
+    });
+    return;
+  }
+
   (window as any).last_template_result = [];
   clearTimeout((window as any).customHeaderTempTimeout);
-  if (!window.location.href.includes('disable_ch')) hideHeader();
+  if (!window.location.href.includes('disable_ch')) hideHeader(haElem);
+
+  // If on a Lovelace dashboard wait for elements.
   let timeout;
-  const haElem = ha_elements();
-  const panelLove = document!
-    .querySelector('body > home-assistant')!
-    .shadowRoot!.querySelector('home-assistant-main')!
-    .shadowRoot!.querySelector('app-drawer-layout')!
-    .querySelector('partial-panel-resolver')!
-    .querySelector('ha-panel-lovelace')!;
-  if (!haElem && panelLove) {
+  if (
+    !haElem &&
+    document
+      .querySelector('home-assistant')!
+      .shadowRoot!.querySelector('home-assistant-main')!
+      .shadowRoot!.querySelector('ha-panel-lovelace')!
+  ) {
     timeout = window.setTimeout(() => {
       rebuild();
-    }, 200);
+      return;
+    }, 100);
     timeout;
   } else if (haElem && haElem.lovelace && haElem.menu) {
+    // Clear old timeout and subscriptions.
     clearTimeout(timeout);
     if ((window as any).customHeaderUnsub && (window as any).customHeaderUnsub.length) {
       for (const prev of (window as any).customHeaderUnsub) prev();
       (window as any).customHeaderUnsub = [];
     }
+
+    // Build header and config.
     const ch = new CustomHeader(haElem);
     CustomHeaderConfig.buildConfig(ch);
+    // Once more for good luck.
     CustomHeaderConfig.buildConfig(ch);
+    // Templates not rendering if config isn't built twice. Looking into it...
   }
 };
-const rebuildMO = new MutationObserver(rebuild);
-rebuildMO.observe(
-  document!
-    .querySelector('body > home-assistant')!
-    .shadowRoot!.querySelector('home-assistant-main')!
-    .shadowRoot!.querySelector('app-drawer-layout')!
-    .querySelector('partial-panel-resolver')!,
-  { childList: true },
-);
 
+const haElem = ha_elements();
+const rebuildMO = new MutationObserver(rebuild);
+rebuildMO.observe(haElem.partialPanelResolver, { childList: true });
+
+// Watch for raw config editor and trigger "rebuild" on exit.
+const rawExit = mutations => {
+  for (const mutation of mutations) {
+    for (const node of mutation.removedNodes) {
+      if (node.nodeName == 'HUI-EDITOR') {
+        // Wait for app-toolbar to exist.
+        const raw_timeout = () => {
+          const ch_raw_timeout = window.setTimeout(() => {
+            if (haElem.root.querySelector('app-toolbar')) {
+              rebuild();
+              clearTimeout(ch_raw_timeout);
+              return;
+            } else {
+              ch_raw_timeout;
+            }
+          }, 100);
+        };
+        raw_timeout();
+      }
+    }
+  }
+};
+const rawConfigExit = new MutationObserver(rawExit);
+rawConfigExit.observe(haElem.panel.shadowRoot, { childList: true });
+
+// First build, probably should have just called it build, huh?
 rebuild();
