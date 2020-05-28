@@ -24,74 +24,83 @@ if (!window.location.href.includes('disable_ch')) hideHeader(ha_elements());
 export const rebuild = () => {
   const haElem = ha_elements();
 
-  // If returning to a dashboard with raw config editor active - wait to rebuild.
   if (
     document
       .querySelector('home-assistant')!
       .shadowRoot!.querySelector('home-assistant-main')!
       .shadowRoot!.querySelector('ha-panel-lovelace')!
-      .shadowRoot!.querySelector('hui-editor')!
   ) {
-    let rawModeMO;
-    const editModeCallback = mutations => {
-      for (const mutation of mutations) {
-        for (const removed of mutation.removedNodes) {
-          if (removed.nodeName == 'HUI-EDITOR') {
-            // Wait for app-toolbar to exist.
-            const raw_timeout = () => {
-              const ch_raw_timeout = window.setTimeout(() => {
-                if (ha_elements().root.querySelector('app-toolbar')) {
-                  clearTimeout(ch_raw_timeout);
-                } else {
-                  ch_raw_timeout;
-                }
-              }, 100);
-            };
-            raw_timeout();
-            rebuild();
-            rawModeMO.disconnect();
-            return;
-          }
-        }
-      }
-    };
-    rawModeMO = new MutationObserver(editModeCallback);
-    rawModeMO.observe(
+    if (
       document
         .querySelector('home-assistant')!
         .shadowRoot!.querySelector('home-assistant-main')!
-        .shadowRoot!.querySelector('ha-panel-lovelace')!.shadowRoot!,
-      {
-        childList: true,
-        subtree: true,
-      },
-    );
-    return;
-  }
-
-  // If returning to a dashboard with edit-mode active or just exited raw config - wait to rebuild.
-  if (
-    haElem &&
-    haElem.root.querySelector('app-toolbar') &&
-    haElem.root.querySelector('app-toolbar').className == 'edit-mode'
-  ) {
-    let editModeMO;
-    const editModeCallback = mutations => {
-      for (const mutation of mutations) {
-        for (const removed of mutation.removedNodes) {
-          if (removed.classList && removed.classList.contains('edit-mode')) {
-            rebuild();
-            editModeMO.disconnect();
-            return;
+        .shadowRoot!.querySelector('ha-panel-lovelace')!
+        .shadowRoot!.querySelector('hui-editor')!
+    ) {
+      // If returning to a dashboard with raw config editor active - wait to rebuild.
+      let rawModeMO;
+      const editModeCallback = mutations => {
+        for (const mutation of mutations) {
+          for (const removed of mutation.removedNodes) {
+            if (removed.nodeName == 'HUI-EDITOR') {
+              // Wait for app-toolbar to exist.
+              const raw_timeout = () => {
+                const ch_raw_timeout = window.setTimeout(() => {
+                  if (ha_elements().root.querySelector('app-toolbar')) {
+                    clearTimeout(ch_raw_timeout);
+                  } else {
+                    ch_raw_timeout;
+                  }
+                }, 100);
+              };
+              raw_timeout();
+              rebuild();
+              rawModeMO.disconnect();
+              return;
+            }
           }
         }
-      }
-    };
-    editModeMO = new MutationObserver(editModeCallback);
-    editModeMO.observe(haElem.appLayout, {
-      childList: true,
-      subtree: true,
-    });
+      };
+      rawModeMO = new MutationObserver(editModeCallback);
+      rawModeMO.observe(
+        document
+          .querySelector('home-assistant')!
+          .shadowRoot!.querySelector('home-assistant-main')!
+          .shadowRoot!.querySelector('ha-panel-lovelace')!.shadowRoot!,
+        {
+          childList: true,
+          subtree: true,
+        },
+      );
+      return;
+    }
+
+    // If returning to a dashboard with edit-mode active or just exited raw config - wait to rebuild.
+    if (
+      haElem &&
+      haElem.root.querySelector('app-toolbar') &&
+      haElem.root.querySelector('app-toolbar').className == 'edit-mode'
+    ) {
+      let editModeMO;
+      const editModeCallback = mutations => {
+        for (const mutation of mutations) {
+          for (const removed of mutation.removedNodes) {
+            if (removed.classList && removed.classList.contains('edit-mode')) {
+              rebuild();
+              editModeMO.disconnect();
+              return;
+            }
+          }
+        }
+      };
+      editModeMO = new MutationObserver(editModeCallback);
+      editModeMO.observe(haElem.appLayout, {
+        childList: true,
+        subtree: true,
+      });
+      return;
+    }
+  } else {
     return;
   }
 
@@ -101,13 +110,7 @@ export const rebuild = () => {
 
   // If on a Lovelace dashboard wait for elements.
   let timeout;
-  if (
-    !haElem &&
-    document
-      .querySelector('home-assistant')!
-      .shadowRoot!.querySelector('home-assistant-main')!
-      .shadowRoot!.querySelector('ha-panel-lovelace')!
-  ) {
+  if (!haElem) {
     timeout = window.setTimeout(() => {
       rebuild();
       return;
