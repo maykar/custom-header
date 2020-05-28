@@ -38,6 +38,7 @@ export const rebuild = () => {
         .shadowRoot!.querySelector('hui-editor')!
     ) {
       // If returning to a dashboard with raw config editor active - wait to rebuild.
+      // eslint-disable-next-line prefer-const
       let rawModeMO;
       const editModeCallback = mutations => {
         for (const mutation of mutations) {
@@ -81,6 +82,7 @@ export const rebuild = () => {
       haElem.root.querySelector('app-toolbar') &&
       haElem.root.querySelector('app-toolbar').className == 'edit-mode'
     ) {
+      // eslint-disable-next-line prefer-const
       let editModeMO;
       const editModeCallback = mutations => {
         for (const mutation of mutations) {
