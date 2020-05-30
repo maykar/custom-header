@@ -110,7 +110,7 @@ export const rebuild = () => {
   clearTimeout((window as any).customHeaderTempTimeout);
   if (!window.location.href.includes('disable_ch')) hideHeader(haElem);
 
-  // If on a Lovelace dashboard wait for elements.
+  // Wait for elements before building.
   let timeout;
   if (!haElem) {
     timeout = window.setTimeout(() => {
@@ -119,7 +119,7 @@ export const rebuild = () => {
     }, 100);
     timeout;
   } else if (haElem && haElem.lovelace && haElem.menu) {
-    // Clear old timeout and subscriptions.
+    // Clear timeout and old subscriptions.
     clearTimeout(timeout);
     if ((window as any).customHeaderUnsub && (window as any).customHeaderUnsub.length) {
       for (const prev of (window as any).customHeaderUnsub) prev();
@@ -135,34 +135,44 @@ export const rebuild = () => {
   }
 };
 
-const haElem = ha_elements();
-const rebuildMO = new MutationObserver(rebuild);
-rebuildMO.observe(haElem.partialPanelResolver, { childList: true });
+const rawConfigObserver = () => {
+  const haElem = ha_elements();
+  if (!haElem || !haElem.partialPanel) {
+    window.setTimeout(() => {
+      rawConfigObserver();
+      return;
+    }, 100);
+  }
+  const rebuildMO = new MutationObserver(rebuild);
+  rebuildMO.observe(haElem.partialPanel, { childList: true });
 
-// Watch for raw config editor and trigger "rebuild" on exit.
-const rawExit = mutations => {
-  for (const mutation of mutations) {
-    for (const node of mutation.removedNodes) {
-      if (node.nodeName == 'HUI-EDITOR') {
-        // Wait for app-toolbar to exist.
-        const raw_timeout = () => {
-          const ch_raw_timeout = window.setTimeout(() => {
-            if (haElem.root.querySelector('app-toolbar')) {
-              rebuild();
-              clearTimeout(ch_raw_timeout);
-              return;
-            } else {
-              ch_raw_timeout;
-            }
-          }, 100);
-        };
-        raw_timeout();
+  // Watch for raw config editor and trigger "rebuild" on exit.
+  const rawExit = mutations => {
+    for (const mutation of mutations) {
+      for (const node of mutation.removedNodes) {
+        if (node.nodeName == 'HUI-EDITOR') {
+          // Wait for app-toolbar to exist.
+          const raw_timeout = () => {
+            const ch_raw_timeout = window.setTimeout(() => {
+              if (haElem.root.querySelector('app-toolbar')) {
+                rebuild();
+                clearTimeout(ch_raw_timeout);
+                return;
+              } else {
+                ch_raw_timeout;
+              }
+            }, 100);
+          };
+          raw_timeout();
+        }
       }
     }
-  }
+  };
+  const rawConfigExit = new MutationObserver(rawExit);
+  rawConfigExit.observe(haElem.panel.shadowRoot, { childList: true });
 };
-const rawConfigExit = new MutationObserver(rawExit);
-rawConfigExit.observe(haElem.panel.shadowRoot, { childList: true });
+
+rawConfigObserver();
 
 // First build, probably should have just called it build, huh?
 rebuild();

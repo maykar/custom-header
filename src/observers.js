@@ -105,7 +105,7 @@ export const observers = (config, ch, haElem) => {
   const html_observer = new MutationObserver(callback);
 
   if (!window.customHeaderObservers || !window.customHeaderObservers.length) {
-    panel_observer.observe(haElem.partialPanelResolver, { childList: true });
+    panel_observer.observe(haElem.partialPanel, { childList: true });
     header_observer.observe(haElem.appHeader, { childList: true });
     root_observer.observe(haElem.root.querySelector('#view'), { childList: true });
     html_observer.observe(document.querySelector('html'), { attributes: true });
