@@ -9,7 +9,7 @@ Major fixes, added features, or breaking changes.
 
 <br>
 
-## June 2nd 2020
+## June 2nd 2020 - v1.5.0
 
 Fixes:
 
