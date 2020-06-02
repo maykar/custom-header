@@ -12,6 +12,6 @@ index: 1
 
 ## Manual Installation
 
-1. Download `custom-header.js` from the bottom of the [latest release page](https://github.com/maykar/custom-header/releases/latest) and place it in `www/custom-lovelace/compact-custom-header/` or another folder of your choosing (change url below to match).
+1. Download `custom-header.js` from the bottom of the [latest release page](https://github.com/maykar/custom-header/releases/latest) and place it in the `www` of your HA instance. You may place it in another folder of your choosing as long as it's inside the `www` folder, but be sure to update the url below to match the change.
 
-2. Go to your Lovelace dashboard resources found under "Configuration" in your sidebar: `Configuration > Lovelace Dashboards > Resources`. Click the plus icon on the bottom right and add `/local/custom-lovelace/custom-header/custom-header.js?v=0.0.1` as your URL and select "Javascript Module" as the resource type. Any time you update you need to change version number at the end of the URL `?v=0.0.1`.
+2. Go to your Lovelace dashboard resources found under "Configuration" in your sidebar: `Configuration > Lovelace Dashboards > Resources`. Click the plus icon on the bottom right and add `/local/custom-header.js?v=0.0.1` as your URL and select "Javascript Module" as the resource type. Any time you update you need to change version number at the end of the URL to prevent caching issues.
