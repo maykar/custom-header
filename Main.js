@@ -5451,8 +5451,11 @@ Ui({_template:dV`
               `)}
           </div>
           <div class="footer">
-            <a href="" title="To be released soon!" style=${this.expanded?"":"opacity: 0;"}
-              >Docs site by @ludeeus & @maykar</a
+            <a
+              href="https://github.com/maykar/polymer-docs-template"
+              target="_blank"
+              style=${this.expanded?"":"opacity: 0;"}
+              >Made with polymer-docs-template.</a
             >
           </div>
         </div>
