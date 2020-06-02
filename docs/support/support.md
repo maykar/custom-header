@@ -4,9 +4,10 @@ title: Supporting Dev
 
 ## Supporting Development
 
-If you'd like to offer support you can do so by providing friendly chat on Discord or the forums, buying me a coffee, or sponsoring me on GitHub.
+If you'd like to offer support you can do so by providing friendly chat on Discord or the forums, buying me a coffee, tipping me some crypto, or sponsoring me on GitHub.
 
 - [Buy me a coffee](https://www.buymeacoffee.com/FgwNR2l)
+- [Tip with Crypto](https://github.com/sponsors/maykar)
 - [Sponsor me on GitHub](https://github.com/sponsors/maykar)
 
 Also consider supporting these fine individuals who have graciously helped me and this project. Go and check out their amazing work as well.
