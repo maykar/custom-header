@@ -9,7 +9,7 @@ index: 4
 | :-------------------- | :------------ | :------ | :----------------------------------------------------------------------------------------- |
 | chevrons              | Boolean       | true    | Enables/disables the scroll arrows for the tabs                                            |
 | indicator_top         | Boolean       | false   | Places the current tab indicator on top of the tab                                         |
-| default_tab           | number/string |         | The default starting tab when entering Lovelace                                            |
+| default_tab           | number/string |         | The default tab when entering Lovelace. Use "null" to override default for exceptions.     |
 | reverse_tab_direction | Boolean       | false   | Places tabs at opposite side of the window in reverse order                                |
 | hide_tabs             | string        |         | An array or comma separated string of tabs to hide, more info below                        |
 | show_tabs             | string        |         | An array or comma separated string of tabs to show, more info below                        |
@@ -18,9 +18,9 @@ index: 4
 
 ### Hide/Show Tabs
 
-* hide_tabs and show_tabs shouln't be used together, show_tabs will always override hide_tabs
-* hide_tabs and show_tabs accept a tab/views index number, title, or path. They can also accept ranges like so: `5 to 9`
-* hide_tabs and show_tabs accept a comma separated list of tabs:
+- hide_tabs and show_tabs shouln't be used together, show_tabs will always override hide_tabs
+- hide_tabs and show_tabs accept a tab/views index number, title, or path. They can also accept ranges like so: `5 to 9`
+- hide_tabs and show_tabs accept a comma separated list of tabs:
 
 ```yaml
 custom_header:
