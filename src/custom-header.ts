@@ -23,7 +23,6 @@ if (!window.location.href.includes('disable_ch')) hideHeader(ha_elements());
 
 export const rebuild = () => {
   const haElem = ha_elements();
-
   if (
     document
       .querySelector('home-assistant')!
@@ -132,19 +131,29 @@ export const rebuild = () => {
     // Once more for good luck.
     CustomHeaderConfig.buildConfig(ch);
     // Templates not rendering if config isn't built twice. Looking into it...
+
+    rawConfigObserver();
   }
 };
 
 const rawConfigObserver = () => {
   const haElem = ha_elements();
+  if ((window as any).chRebuildMO) (window as any).chRebuildMO.disconnect();
+  if ((window as any).chRawConfigExit) (window as any).chRawConfigExit.disconnect();
   if (!haElem || !haElem.partialPanel) {
     window.setTimeout(() => {
       rawConfigObserver();
       return;
     }, 100);
   }
-  const rebuildMO = new MutationObserver(rebuild);
-  rebuildMO.observe(haElem.partialPanel, { childList: true });
+  (window as any).chRebuildMO = new MutationObserver(rebuild);
+  (window as any).chRebuildMO.observe(
+    document
+      .querySelector('home-assistant')!
+      .shadowRoot!.querySelector('home-assistant-main')!
+      .shadowRoot!.querySelector('partial-panel-resolver')!,
+    { childList: true },
+  );
 
   // Watch for raw config editor and trigger "rebuild" on exit.
   const rawExit = mutations => {
@@ -154,7 +163,14 @@ const rawConfigObserver = () => {
           // Wait for app-toolbar to exist.
           const raw_timeout = () => {
             const ch_raw_timeout = window.setTimeout(() => {
-              if (haElem.root.querySelector('app-toolbar')) {
+              if (
+                document
+                  .querySelector('home-assistant')!
+                  .shadowRoot!.querySelector('home-assistant-main')!
+                  .shadowRoot!.querySelector('ha-panel-lovelace')!
+                  .shadowRoot!.querySelector('hui-root')!
+                  .shadowRoot!.querySelector('app-toolbar')!
+              ) {
                 rebuild();
                 clearTimeout(ch_raw_timeout);
                 return;
@@ -168,11 +184,15 @@ const rawConfigObserver = () => {
       }
     }
   };
-  const rawConfigExit = new MutationObserver(rawExit);
-  rawConfigExit.observe(haElem.panel.shadowRoot, { childList: true });
+  (window as any).chRawConfigExit = new MutationObserver(rawExit);
+  (window as any).chRawConfigExit.observe(
+    document
+      .querySelector('home-assistant')!
+      .shadowRoot!.querySelector('home-assistant-main')!
+      .shadowRoot!.querySelector('ha-panel-lovelace')!.shadowRoot!,
+    { childList: true },
+  );
 };
-
-rawConfigObserver();
 
 // First build, probably should have just called it build, huh?
 rebuild();

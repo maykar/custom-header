@@ -8,15 +8,17 @@ export const redirects = (config, ch) => {
   if (!haElem) return;
   const headerType = !config.compact_mode ? ch.footer : ch.header;
   const overview = haElem.sidebar.listbox.querySelector('[data-panel="lovelace"]');
-  if (config.hide_tabs.includes(0) && !config.default_tab) {
-    for (const tab of headerType.tabs) {
-      if (getComputedStyle(tab).display != 'none') {
-        overview.setAttribute('href', `/lovelace/${headerType.tabContainer.indexOf(tab)}`);
-        break;
+  if (overview) {
+    if (config.hide_tabs.includes(0) && !config.default_tab) {
+      for (const tab of headerType.tabs) {
+        if (getComputedStyle(tab).display != 'none') {
+          overview.setAttribute('href', `/lovelace/${headerType.tabContainer.indexOf(tab)}`);
+          break;
+        }
       }
+    } else if (config.default_tab) {
+      overview.setAttribute('href', `/lovelace/${tabIndexByName(config.default_tab)}`);
     }
-  } else if (config.default_tab) {
-    overview.setAttribute('href', `/lovelace/${tabIndexByName(config.default_tab)}`);
   }
 
   // Redirect off hidden tab to first not hidden tab or default tab.
@@ -28,13 +30,13 @@ export const redirects = (config, ch) => {
       if (defaultTab && !config.hide_tabs.includes(tabIndexByName(defaultTab))) {
         if (getComputedStyle(headerType.tabs[defaultTab]).display != 'none') {
           haElem.tabs[defaultTab].dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
-          overview.setAttribute('href', `/lovelace/${defaultTab}`);
+          if (overview) overview.setAttribute('href', `/lovelace/${defaultTab}`);
         }
       } else {
         for (const tab of headerType.tabs) {
           if (getComputedStyle(tab).display != 'none') {
             tab.dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
-            overview.setAttribute('href', `/lovelace/${headerType.tabContainer.indexOf(tab)}`);
+            if (overview) overview.setAttribute('href', `/lovelace/${headerType.tabContainer.indexOf(tab)}`);
             break;
           }
         }

@@ -95,6 +95,7 @@ export class CustomHeaderConfig {
       }
     } catch (e) {
       this.template_failed = true;
+      if (this.disabled) return;
       console.log('[CUSTOM-HEADER] There was an error with one or more of your templates:');
       console.log(`${e.message.substring(0, e.message.indexOf(')'))})`);
     }
