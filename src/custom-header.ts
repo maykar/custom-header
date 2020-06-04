@@ -105,8 +105,8 @@ export const rebuild = () => {
     return;
   }
 
-  (window as any).last_template_result = [];
-  clearTimeout((window as any).customHeaderTempTimeout);
+  window['last_template_result'] = [];
+  clearTimeout(window['customHeaderTempTimeout']);
   if (!window.location.href.includes('disable_ch')) hideHeader(haElem);
 
   // Wait for elements before building.
@@ -120,9 +120,9 @@ export const rebuild = () => {
   } else if (haElem && haElem.lovelace && haElem.menu) {
     // Clear timeout and old subscriptions.
     clearTimeout(timeout);
-    if ((window as any).customHeaderUnsub && (window as any).customHeaderUnsub.length) {
-      for (const prev of (window as any).customHeaderUnsub) prev();
-      (window as any).customHeaderUnsub = [];
+    if (window['customHeaderUnsub'] && window['customHeaderUnsub'].length) {
+      for (const prev of window['customHeaderUnsub']) prev();
+      window['customHeaderUnsub'] = [];
     }
 
     // Build header and config.
@@ -138,16 +138,16 @@ export const rebuild = () => {
 
 const rawConfigObserver = () => {
   const haElem = ha_elements();
-  if ((window as any).chRebuildMO) (window as any).chRebuildMO.disconnect();
-  if ((window as any).chRawConfigExit) (window as any).chRawConfigExit.disconnect();
+  if (window['customHeaderRebuildMO']) window['customHeaderRebuildMO'].disconnect();
+  if (window['customHeaderRawConfigExit']) window['customHeaderRawConfigExit'].disconnect();
   if (!haElem || !haElem.partialPanel) {
     window.setTimeout(() => {
       rawConfigObserver();
       return;
     }, 100);
   }
-  (window as any).chRebuildMO = new MutationObserver(rebuild);
-  (window as any).chRebuildMO.observe(
+  window['customHeaderRebuildMO'] = new MutationObserver(rebuild);
+  window['customHeaderRebuildMO'].observe(
     document
       .querySelector('home-assistant')!
       .shadowRoot!.querySelector('home-assistant-main')!
@@ -184,8 +184,8 @@ const rawConfigObserver = () => {
       }
     }
   };
-  (window as any).chRawConfigExit = new MutationObserver(rawExit);
-  (window as any).chRawConfigExit.observe(
+  window['customHeaderRawConfigExit'] = new MutationObserver(rawExit);
+  window['customHeaderRawConfigExit'].observe(
     document
       .querySelector('home-assistant')!
       .shadowRoot!.querySelector('home-assistant-main')!
