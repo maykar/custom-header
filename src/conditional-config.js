@@ -87,6 +87,5 @@ export const conditionalConfig = config => {
       delete config.hide_tabs;
     }
   }
-  window.customHeaderExceptionConfig = JSON.stringify(exceptionConfig);
   return { ...config, ...exceptionConfig };
 };

@@ -15,25 +15,13 @@ const _deviceID = () => {
   }
   return localStorage[ID_STORAGE_KEY];
 };
-
 export let deviceID = _deviceID();
 
 export const defaultVariables = locale => {
-  const hass = ha_elements().hass;
-  const lovelace = getLovelace();
   const d = new Date();
-  if (!lovelace || lovelace.config.views[lovelace.current_view] == undefined) return;
-  return {
-    hassVersion: hass.config.version,
+  let vars = {
     deviceID: deviceID,
-    isAdmin: hass.user.is_admin,
-    isOwner: hass.user.is_owner,
-    user: hass.user.name,
-    userID: hass.user.id,
     userAgent: navigator.userAgent,
-    viewTitle: lovelace.config.views[lovelace.current_view].title,
-    viewPath: lovelace.config.views[lovelace.current_view].path,
-    viewIndex: lovelace.current_view,
     url: window.location.href,
     time: d.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' }),
     date: d.toLocaleDateString(locale, {}),
@@ -56,4 +44,19 @@ export const defaultVariables = locale => {
     AMPM: d.getHours() >= 12 ? 'PM' : 'AM',
     ampm: d.getHours() >= 12 ? 'pm' : 'am',
   };
+
+  const hass = ha_elements().hass;
+  vars.hassVersion = hass ? hass.config.version : '';
+  vars.isAdmin = hass ? hass.user.is_admin : '';
+  vars.isOwner = hass ? hass.user.is_owner : '';
+  vars.user = hass ? hass.user.name : '';
+  vars.userID = hass ? hass.user.id : '';
+
+  const lovelace = getLovelace();
+  const current_view = lovelace && lovelace.config.views[lovelace.current_view] != undefined;
+  vars.viewIndex = lovelace ? lovelace.current_view : '';
+  vars.viewTitle = current_view ? lovelace.config.views[lovelace.current_view].title || '' : '';
+  vars.viewPath = current_view ? lovelace.config.views[lovelace.current_view].path || '' : '';
+
+  return vars;
 };

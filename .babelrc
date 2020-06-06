@@ -1,13 +1,20 @@
 {
   "exclude": "node_modules/**",
   "sourceMaps": false,
-  "plugins": ["@babel/plugin-proposal-object-rest-spread"],
+  "plugins": [
+    ["@babel/plugin-proposal-object-rest-spread"],
+    ["@babel/plugin-transform-runtime",
+      {
+        "regenerator": true
+      }
+    ]
+  ],
   "presets": [
     [
       "@babel/preset-env",
       {
         "targets": {
-          "browsers": [">2%", "Edge > 14", "Firefox > 63", "Chrome > 50"]
+          "browsers": [">2%", "edge > 14", "firefox > 63", "chrome > 50", "ios > 9"]
         }
       }
     ]

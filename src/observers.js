@@ -28,7 +28,6 @@ export const observers = (config, ch, haElem) => {
     const headerType = config.split_mode ? ch.footer : ch.header;
     mutations.forEach(({ addedNodes, target }) => {
       if (mutations.length && mutations[0].target.nodeName == 'HTML') {
-        window.customHeaderExceptionConfig = 'init';
         CustomHeaderConfig.buildConfig(ch);
         mutations = [];
       }
