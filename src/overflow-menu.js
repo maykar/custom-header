@@ -84,7 +84,7 @@ export const insertSettings = (header, config, haElem) => {
   function insertAfter(el, referenceNode) {
     referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
   }
-  if (haElem.lovelace.mode === 'storage' && !config.hide_ch_settings) {
+  if (haElem.lovelace.mode === 'storage') {
     if (header.options.querySelector('paper-listbox').querySelector('#ch_settings')) {
       header.options
         .querySelector('paper-listbox')

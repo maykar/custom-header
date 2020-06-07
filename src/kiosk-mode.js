@@ -2,7 +2,11 @@ import { tabIndexByName } from './helpers';
 
 // Kiosk mode is used to hide sidebar only as well.
 export const kioskMode = (haElem, sidebarOnly, headerOnly, config) => {
-  if (window.location.href.includes('disable_ch') || window.customHeaderDisabled) return;
+  if (
+    (window.location.href.includes('disable_ch') || window.customHeaderDisabled) &&
+    (haElem.hass.user.is_admin || haElem.hass.user.is_owner || !config.restrict_users)
+  )
+    return;
 
   // Kiosk mode styling.
   let style = document.createElement('style');

@@ -27,6 +27,11 @@ export class CustomHeaderConfig {
         !this.test_config.disabled_mode.includes('{%')) ||
       window.location.href.includes('disable_ch');
 
+    const user = haElem.hass.user;
+    if (!user.is_admin && !user.is_owner && this.test_config.restrict_users) {
+      this.disabled = false;
+    }
+
     this.renderTemplate(ch, ha_elements());
     this.catchTemplate();
   }

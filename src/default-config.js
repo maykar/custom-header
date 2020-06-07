@@ -84,5 +84,6 @@ export const defaultConfig = () => {
     template_variables: '',
     exceptions: [],
     editor_warnings: true,
+    restrict_users: false,
   };
 };

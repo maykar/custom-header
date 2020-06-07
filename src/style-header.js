@@ -10,10 +10,16 @@ import { ha_elements } from './ha-elements';
 
 export const styleHeader = (config, ch, haElem = ha_elements()) => {
   if (!haElem) return;
-  insertSettings(ch.header, config, haElem);
-  insertSettings(ch.header, config, haElem);
-
   if (window.location.href.includes('disable_ch')) config.disabled_mode = true;
+
+  const user = haElem.hass.user;
+  if (!user.is_admin && !user.is_owner && config.restrict_users) {
+    config.disabled_mode = false;
+  } else if (!config.hide_ch_settings) {
+    insertSettings(ch.header, config, haElem);
+    insertSettings(ch.header, config, haElem);
+  }
+
   if (config.disabled_mode) {
     window.customHeaderDisabled = true;
     removeKioskMode(haElem);

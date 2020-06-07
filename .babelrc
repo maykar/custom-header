@@ -14,7 +14,7 @@
       "@babel/preset-env",
       {
         "targets": {
-          "browsers": [">2%", "edge > 14", "firefox > 63", "chrome > 50", "ios > 9"]
+          "browsers": [">2%", "edge > 14", "firefox > 63", "chrome > 50"]
         }
       }
     ]
