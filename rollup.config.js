@@ -22,7 +22,7 @@ const plugins = [
   nodeResolve({}),
   typescript(),
   json(),
-  babel({ runtimeHelpers: true }),
+  babel(),
   commonjs(),
   dev && serve(serveopts),
   !dev && terser({ keep_fnames: true }),
