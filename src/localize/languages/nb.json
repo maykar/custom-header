@@ -24,6 +24,8 @@
     "disable_sidebar_title": "Deaktiver side panelet",
     "disabled_mode_tip": "Deaktiver Custom-Header.",
     "disabled_mode_title": "Deaktivert modus",
+    "restrict_users_title" : "Begrens til brukere",
+    "restrict_users_tip": "Tar vekk muligheten for brukere som ikke er administratorer til å deaktivere CH.",
     "disabled_template": "Deaktivert: Nåværende verdi er en mal.",
     "editor_warnings_second_title": "Vis editor advarser of informasjon",
     "editor_warnings_tip": "Veksle editor advarsler.",
@@ -36,6 +38,7 @@
     "hidden_tab_redirect_title": "Gjemt tab omadresser",
     "hide_configure_ui_tip": "Gjem 'Konfigurer brukergrensesnitt' in nedtrekksmenyen.",
     "hide_configure_ui_title": "Gjem 'Konfigurer brukergrensesnitt'",
+    "hide_ch_settings": "Skjul 'CH instillinger'",
     "hide_header_tip": "Gjem headderen, men tillat å dra inn fra siden for å åpne side panelet",
     "hide_help_tip": "Deaktiver header",
     "hide_help_title": "Gjem 'Hjelp'",
@@ -69,6 +72,8 @@
     "tabs_hide": "Gjem Tabber",
     "tabs_show": "Vis Tabber",
     "tabs": "Tabber",
+    "tab_icons_and_text_title": "Vis ikoner med text.",
+    "tab_icons_and_text_tip": "Vis både ikon og text på faner.",
     "template": "mal",
     "user_list": "Bruker (Skill flere brukere med komma.)",
     "voice_dropdown_tip": "Plasser stemme i nedtrekksmenyen.",
@@ -78,7 +83,6 @@
     "warning_already_a_template": "Etter å ha brukt 'Tekstbasert konfigurasjonsredigering', må du laste inn siden på nytt for å gjenopprette Custom Header.",
     "warning_disable_ch": "Du kan deaktivere Custom-Header midlertidig ved å legge til '?disable_ch' på slutten av nettadressen.",
     "warning_edit_ui": "Markerer elementer som fjerner muligheten til å redigere brukergrensesnittet.",
-    "warning_jinja_info": "Alle tekstalternativer godtar Jinja. Hold musepekeren over et hvilket som helst element for mer informasjon.",
-    "warning_raw_editor_reload": "After using the 'Tekstbasert konfigurasjonsredigering' you need to reload the page to restore Custom Header."
+    "warning_jinja_info": "Alle tekstalternativer godtar Jinja. Hold musepekeren over et hvilket som helst element for mer informasjon."
   }
 }

@@ -1,6 +1,6 @@
 import { localize } from './localize/localize';
 import { deviceID } from './template-variables';
-import { ha_elements } from './ha-elements';
+import { ha_elements, hass } from './ha-elements';
 import { CustomHeader } from './build-header';
 import { CustomHeaderConfig } from './config';
 
@@ -11,6 +11,8 @@ console.info(
 );
 
 window.setTimeout(() => {
+  console.log("Current User's Name: ", hass.user.name);
+  console.log("Current User's ID: ", hass.user.id);
   if (!customElements.get('card-tools')) console.log('Device ID: ', deviceID);
 }, 2000);
 

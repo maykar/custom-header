@@ -43,6 +43,8 @@ export const defaultConfig = () => {
     show_tabs: [],
     default_tab: '',
     tab_icons: [],
+    tab_text: [],
+    tab_icons_and_text: false,
     reverse_tab_direction: false,
 
     // Buttons

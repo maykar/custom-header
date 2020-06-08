@@ -47,6 +47,15 @@ export class CustomHeader {
 
     header.tabs = header.tabContainer.querySelectorAll('paper-tab');
 
+    header.tabs.forEach(tab => {
+      const tab_index = Array.from(header.tabs).indexOf(tab);
+      const text = document.createElement('p');
+      const existingText = tab.innerText.replace(/\s/g, '');
+      if (existingText) tab.innerText = '';
+      text.innerHTML = existingText ? this.ha_elem.lovelace.config.views[tab_index].title : '';
+      tab.appendChild(text);
+    });
+
     const stack = document.createElement('ch-stack');
     const contentContainer = document.createElement('div');
     contentContainer.setAttribute('id', 'ch-content-container');

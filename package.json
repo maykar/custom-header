@@ -14,7 +14,7 @@
   ],
   "module": "custom-header.js",
   "repository": "git@github.com:maykar/custom-header.git",
-  "author": "Ryan Meek <contact@ryanmeek.com>",
+  "author": "Ryan Meek",
   "license": "MIT",
   "dependencies": {
     "@babel/plugin-proposal-object-rest-spread": "^7.8.3",

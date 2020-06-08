@@ -1,5 +1,7 @@
 import { getLovelace } from 'custom-card-helpers';
 
+export const hass = document.querySelector('home-assistant').shadowRoot.querySelector('home-assistant-main').hass;
+
 export const ha_elements = () => {
   const haElem = {};
   haElem.lovelace = getLovelace();

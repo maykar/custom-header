@@ -317,19 +317,14 @@ class ChConfigEditor extends LitElement {
                       ${localize('editor.warning_disable_ch')}
                     </p>
                     <p style="padding: 5px; margin: 0;">
-                      ${localize('editor.warning_raw_editor_reload')}
+                      ${localize('editor.warning_jinja_info')}
                     </p>
-                    <br />
                     <p style="padding: 5px; margin: 0;">
                       <ha-icon style="padding-right: 3px;" icon="mdi:alpha-t-box-outline"></ha-icon>
                       ${localize('editor.warning_already_a_template')}
                       <br /><ha-icon style="padding-right: 3px;" icon="mdi:alert-box-outline"></ha-icon> ${localize(
                         'editor.warning_edit_ui',
-                      )}<br />
-                    </p>
-                    <br />
-                    <p style="padding: 5px; margin: 0;">
-                      ${localize('editor.warning_jinja_info')}
+                      )}
                     </p>
                   </div>
                 `
@@ -359,6 +354,15 @@ class ChConfigEditor extends LitElement {
           localize('editor.disabled_mode_title'),
           localize('editor.disabled_mode_tip'),
         )}
+        ${!this.exception
+          ? this.haSwitch(
+              'restrict_users',
+              true,
+              false,
+              localize('editor.restrict_users_title'),
+              localize('editor.restrict_users_tip'),
+            )
+          : ''}
         ${this.haSwitch(
           'footer_mode',
           true,
@@ -466,6 +470,13 @@ class ChConfigEditor extends LitElement {
           localize('editor.hide_unused_title'),
           localize('editor.hide_unused_tip'),
         )}
+        ${this.haSwitch(
+          'hide_ch_settings',
+          true,
+          true,
+          localize('editor.hide_ch_settings'),
+          localize('editor.hide_ch_settings'),
+        )}
       </div>
       <h4 class="underline">${localize('editor.buttons')}</h4>
       <div style="padding-bottom:20px;" class="side-by-side">
@@ -548,6 +559,13 @@ class ChConfigEditor extends LitElement {
           false,
           localize('editor.reverse_tab_title'),
           localize('editor.reverse_tab_tip'),
+        )}
+        ${this.haSwitch(
+          'tab_icons_and_text',
+          true,
+          false,
+          localize('editor.tab_icons_and_text_title'),
+          localize('editor.tab_icons_and_text_tip'),
         )}
       </div>
     `;

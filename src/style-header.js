@@ -155,6 +155,53 @@ export const styleHeader = (config, ch, haElem = ha_elements()) => {
       const haIcon = headerType.tabs[index].querySelector('ha-icon');
       if (!config.tab_icons[tab]) haIcon.icon = haElem.lovelace.config.views[index].icon;
       else haIcon.icon = config.tab_icons[tab];
+      const iconStyle = headerType.tabs[index].querySelector('#ch_icon_style');
+      if (!iconStyle && config.tab_icons[tab] == 'none') {
+        const hideIcon = document.createElement('style');
+        hideIcon.setAttribute('id', 'ch_icon_style');
+        hideIcon.innerHTML = `paper-tab:nth-child(${index + 1}) ha-icon{display:none;}`;
+        headerType.tabs[index].appendChild(hideIcon);
+      }
+    }
+  }
+
+  // Display icons and text on tabs.
+  if (config.tab_icons_and_text && headerType.tabs.length) {
+    let text = '';
+    for (const tab of headerType.tabs) {
+      const index = Array.from(headerType.tabs).indexOf(tab);
+      if (!headerType.tabs[index]) continue;
+      if (config.tab_icons_and_text || !tab.querySelector('ha-icon')) {
+        text = haElem.lovelace.config.views[index].title || '';
+      }
+      tab.querySelector('p').innerHTML = text;
+    }
+  }
+
+  // Tab text customization.
+  if (config.tab_text && headerType.tabs.length) {
+    for (const tab in config.tab_text) {
+      const index = tabIndexByName(tab);
+      if (!headerType.tabs[index]) continue;
+      if (config.tab_text[tab]) {
+        if (headerType.tabContainer.dir == 'ltr' && headerType.tabs[index].querySelector('ha-icon')) {
+          headerType.tabs[index].querySelector('ha-icon').style.marginRight = '5px';
+        } else if (tab.querySelector('ha-icon')) {
+          headerType.tabs[index].querySelector('ha-icon').style.marginLeft = '5px';
+        }
+        headerType.tabs[index].querySelector('p').innerHTML = config.tab_text[tab];
+      }
+    }
+  }
+
+  // If text and icons displayed and exist, add margin between.
+  if ((config.tab_text || config.tab_icons_and_text) && headerType.tabs.length) {
+    for (const tab of headerType.tabs) {
+      const icon = tab.querySelector('ha-icon');
+      if (icon && tab.querySelector('p').innerHTML) {
+        if (headerType.tabContainer.dir == 'ltr' && icon) icon.style.marginRight = '5px';
+        else if (icon) icon.style.marginLeft = '5px';
+      }
     }
   }
 
