@@ -9,6 +9,14 @@ Major fixes, added features, or breaking changes.
 
 <br>
 
+## June 8th 2020 - v1.5.3
+
+Added Features:
+
+- restrict_users: This will prevent non-admin users from disabling CH and accessing CH settings.
+- tab_icons_and_text: Will display both icons and text on tabs.
+- tab_text: Change a tab's text, works just like button_text and accepts templates.
+
 ## June 2nd 2020 - v1.5.0
 
 Fixes:
