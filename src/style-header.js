@@ -174,12 +174,12 @@ export const styleHeader = (config, ch, haElem = ha_elements()) => {
       if (config.tab_icons_and_text || !tab.querySelector('ha-icon')) {
         text = haElem.lovelace.config.views[index].title || '';
       }
-      tab.querySelector('p').innerHTML = text;
+      if (tab.querySelector('p')) tab.querySelector('p').innerHTML = text;
     }
   }
 
   // Tab text customization.
-  if (config.tab_text && headerType.tabs.length) {
+  if (Object.keys(config.tab_text).length && headerType.tabs.length) {
     for (const tab in config.tab_text) {
       const index = tabIndexByName(tab);
       if (!headerType.tabs[index]) continue;
@@ -189,16 +189,18 @@ export const styleHeader = (config, ch, haElem = ha_elements()) => {
         } else if (tab.querySelector('ha-icon')) {
           headerType.tabs[index].querySelector('ha-icon').style.marginLeft = '5px';
         }
-        headerType.tabs[index].querySelector('p').innerHTML = config.tab_text[tab];
+        if (headerType.tabs[index].querySelector('p')) {
+          headerType.tabs[index].querySelector('p').innerHTML = config.tab_text[tab];
+        }
       }
     }
   }
 
   // If text and icons displayed and exist, add margin between.
-  if ((config.tab_text || config.tab_icons_and_text) && headerType.tabs.length) {
+  if ((Object.keys(config.tab_text).length || config.tab_icons_and_text) && headerType.tabs.length) {
     for (const tab of headerType.tabs) {
       const icon = tab.querySelector('ha-icon');
-      if (icon && tab.querySelector('p').innerHTML) {
+      if (icon && tab.querySelector('p') && tab.querySelector('p').innerHTML) {
         if (headerType.tabContainer.dir == 'ltr' && icon) icon.style.marginRight = '5px';
         else if (icon) icon.style.marginLeft = '5px';
       }
