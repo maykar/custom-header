@@ -31,4 +31,4 @@ Custom Header adds enhancements and customization options to Home Assistant's Lo
 
 <img style="border: 5px solid #767676;border-radius: 10px;max-width: 350px;width: 100%;box-sizing: border-box;" src="https://github.com/maykar/custom-header/blob/master/demo.gif?raw=true" alt="Demo">
 
-<!-- type: module -->
+[This project is translated with Lokalise](https://lokalise.com/)
