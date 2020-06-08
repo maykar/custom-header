@@ -14,13 +14,14 @@ index: 4
 | hide_tabs             | string        |         | An array or comma separated string of tabs to hide, more info below                        |
 | show_tabs             | string        |         | An array or comma separated string of tabs to show, more info below                        |
 | hidden_tab_redirect   | Boolean       | true    | Automatically redirects off hidden tabs to either the default tab or the first visible tab |
+| tab_icons_and_text    | Boolean       | false   | Display both the icon and text on tabs                                                     |
 | tab_icons             | string        |         | Set the icon of each tab, useful for templates, more info below                            |
+| tab_text              | string        |         | Set the text of each tab, useful for templates, more info below                            |
 
 ### Hide/Show Tabs
 
 - hide_tabs and show_tabs shouln't be used together, show_tabs will always override hide_tabs
-- hide_tabs and show_tabs accept a tab/views index number, title, or path. They can also accept ranges like so: `5 to 9`
-- hide_tabs and show_tabs accept a comma separated list of tabs:
+- hide_tabs, show_tabs, tab_icons, and tab_text accept a tab/views index number, title, path, or a comma separated list of tabs. They can also accept ranges like so: `5 to 9`
 
 ```yaml
 custom_header:
@@ -37,14 +38,18 @@ custom_header:
     - home
 ```
 
-### Tab Icons
+### Tab Icons and Text
 
-The tab_icons option accepts a tab/views index number, title, or path. This option is mostly useful when used with [templates](#templates). The tab/view must already have an icon in your lovelace config to use this option.
+These options are mostly useful when used with [templates](#templates). The tab/view must already have an icon in your lovelace config to use this option. 'none' is a valid option for icons, but if not used with and icon and `tab_icons_and_text: true` then it will display as blank and not be selectable.
 
 ```yaml
 custom_header:
+  tab_icons_and_text: true
   tab_icons:
     0: mdi:skull
-    home: mdi:home
+    home: none
     7: mdi:death-star-variant
+  tab_text:
+    0: Skull
+    home: '{{ time }}
 ```
