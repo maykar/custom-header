@@ -183,8 +183,8 @@ export const styleHeader = (config, ch, haElem = ha_elements()) => {
     for (const tab in config.tab_text) {
       const index = tabIndexByName(tab);
       if (!headerType.tabs[index]) continue;
+      const icon = headerType.tabs[index].querySelector('ha-icon');
       if (config.tab_text[tab] && config.tab_icons_and_text) {
-        const icon = headerType.tabs[index].querySelector('ha-icon');
         if (headerType.tabContainer.dir == 'ltr' && icon) {
           icon.style.marginRight = '5px';
         } else if (icon) {
