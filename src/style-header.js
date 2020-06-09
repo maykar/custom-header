@@ -193,10 +193,10 @@ export const styleHeader = (config, ch, haElem = ha_elements()) => {
         if (headerType.tabs[index].querySelector('p')) {
           headerType.tabs[index].querySelector('p').innerHTML = config.tab_text[tab];
         }
-      } else if (config.tab_text[tab] && icon) {
+      } else if (config.tab_text[tab]) {
         if (headerType.tabs[index].querySelector('p')) {
           headerType.tabs[index].querySelector('p').innerHTML = config.tab_text[tab];
-          headerType.tabs[index].querySelector('p').style.display = 'none';
+          if (icon) headerType.tabs[index].querySelector('p').style.display = 'none';
         }
       }
     }
