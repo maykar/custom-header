@@ -6,24 +6,34 @@ const languages = {
   nb: nb,
 };
 
-export function localize(string, search = '', replace = '') {
-  const section = string.split('.')[0];
-  const key = string.split('.')[1];
-
-  const lang = (localStorage.getItem('selectedLanguage') || 'en').replace(/['"]+/g, '').replace('-', '_');
-
-  let tranlated;
+export function localize(string, search = undefined, replace = undefined) {
+  let translated;
+  const split = string.split(".");
+  const lang = (localStorage.getItem("selectedLanguage") || "en")
+    .replace(/['"]+/g, "")
+    .replace("-", "_");
 
   try {
-    tranlated = languages[lang][section][key];
+    translated = languages[lang];
+    split.forEach((section) => {
+      translated = translated[section];
+    });
   } catch (e) {
-    tranlated = languages['en'][section][key];
+    translated = languages["en"];
+    split.forEach((section) => {
+      translated = translated[section];
+    });
   }
 
-  if (tranlated === undefined) tranlated = languages['en'][section][key];
-
-  if (search !== '' && replace !== '') {
-    tranlated = tranlated.replace(search, replace);
+  if (translated === undefined) {
+    translated = languages["en"];
+    split.forEach((section) => {
+      translated = translated[section];
+    });
   }
-  return tranlated;
+
+  if (search !== undefined && replace !== undefined) {
+    translated = translated.replace(search, replace);
+  }
+  return translated;
 }
