@@ -100,6 +100,15 @@ export class CustomHeader {
 
     footer.tabs = footer.tabContainer.querySelectorAll('paper-tab');
 
+    footer.tabs.forEach(tab => {
+      const tab_index = Array.from(footer.tabs).indexOf(tab);
+      const text = document.createElement('p');
+      const existingText = tab.innerText.replace(/\s/g, '');
+      if (existingText) tab.innerText = '';
+      text.innerHTML = existingText ? this.ha_elem.lovelace.config.views[tab_index].title : '';
+      tab.appendChild(text);
+    });
+
     footer.container = document.createElement('ch-footer');
     footer.container.appendChild(footer.tabContainer);
     footer.container.style.visibility = 'hidden';

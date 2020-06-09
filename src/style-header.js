@@ -183,14 +183,20 @@ export const styleHeader = (config, ch, haElem = ha_elements()) => {
     for (const tab in config.tab_text) {
       const index = tabIndexByName(tab);
       if (!headerType.tabs[index]) continue;
-      if (config.tab_text[tab]) {
-        if (headerType.tabContainer.dir == 'ltr' && headerType.tabs[index].querySelector('ha-icon')) {
-          headerType.tabs[index].querySelector('ha-icon').style.marginRight = '5px';
-        } else if (tab.querySelector('ha-icon')) {
-          headerType.tabs[index].querySelector('ha-icon').style.marginLeft = '5px';
+      if (config.tab_text[tab] && config.tab_icons_and_text) {
+        const icon = headerType.tabs[index].querySelector('ha-icon');
+        if (headerType.tabContainer.dir == 'ltr' && icon) {
+          icon.style.marginRight = '5px';
+        } else if (icon) {
+          icon.style.marginLeft = '5px';
         }
         if (headerType.tabs[index].querySelector('p')) {
           headerType.tabs[index].querySelector('p').innerHTML = config.tab_text[tab];
+        }
+      } else if (config.tab_text[tab] && icon) {
+        if (headerType.tabs[index].querySelector('p')) {
+          headerType.tabs[index].querySelector('p').innerHTML = config.tab_text[tab];
+          headerType.tabs[index].querySelector('p').style.display = 'none';
         }
       }
     }
