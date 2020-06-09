@@ -34,17 +34,19 @@ export class CustomHeaderEditor extends LitElement {
       <h4 class="underline">${localize('editor.exceptions')}</h4>
       <br />
       ${this._config.exceptions
-        ? this._config.exceptions.map(
-            (exception, index) => html`
-              <ch-exception-editor
-                .config="${this._config}"
-                .exception="${exception}"
-                .index="${index}"
-                @ch-exception-changed="${this._exceptionChanged}"
-                @ch-exception-delete="${this._exceptionDelete}"
-              >
-              </ch-exception-editor>
-            `,
+        ? this._config.exceptions.map((exception, index) =>
+            'or_conditions' in exception.conditions
+              ? html``
+              : html`
+                  <ch-exception-editor
+                    .config="${this._config}"
+                    .exception="${exception}"
+                    .index="${index}"
+                    @ch-exception-changed="${this._exceptionChanged}"
+                    @ch-exception-delete="${this._exceptionDelete}"
+                  >
+                  </ch-exception-editor>
+                `,
           )
         : ''}
       <br />
