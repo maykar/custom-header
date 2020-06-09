@@ -8,6 +8,7 @@ import { getLovelace } from 'custom-card-helpers';
 
 export class CustomHeaderConfig {
   static buildConfig(ch, lovelace = getLovelace()) {
+    window.chHeader = ch;
     if (!window.customHeaderUnsub) window.customHeaderUnsub = [];
     const haElem = ha_elements();
     if (!lovelace || !haElem) return;
@@ -160,6 +161,20 @@ export class CustomHeaderConfig {
 
     template_timeout;
     window.customHeaderTempTimeout.push(template_timeout);
+
+    if (!window.chOrientation) {
+      window.addEventListener('orientationchange', function() {
+        window.setTimeout(() => {
+          haElem = ha_elements();
+          if (!haElem) return;
+          const editor = haElem.panel ? haElem.panel.shadowRoot.querySelector('hui-editor') : null;
+          if (!haElem.panel || editor || this.template_failed) return;
+          if (haElem.root && haElem.root.querySelector('custom-header-editor')) return;
+          CustomHeaderConfig.buildConfig(window.chHeader);
+          window.chOrientation = true;
+        }, 500);
+      });
+    }
 
     if (haElem.root.querySelector('app-toolbar').className == 'edit-mode') return;
 
