@@ -7,7 +7,14 @@ index: 3
 
 Major fixes, added features, or breaking changes.
 
-<br>
+</br>
+
+## June 10th 2020 - v1.5.8
+
+Added Features:
+
+- tab_text_only: Display only text on tabs, no icons
+- header updates on device orientation change
 
 ## June 8th 2020 - v1.5.3
 
