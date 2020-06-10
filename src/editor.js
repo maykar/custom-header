@@ -34,19 +34,17 @@ export class CustomHeaderEditor extends LitElement {
       <h4 class="underline">${localize('editor.exceptions')}</h4>
       <br />
       ${this._config.exceptions
-        ? this._config.exceptions.map((exception, index) =>
-            'or_conditions' in exception.conditions
-              ? html``
-              : html`
-                  <ch-exception-editor
-                    .config="${this._config}"
-                    .exception="${exception}"
-                    .index="${index}"
-                    @ch-exception-changed="${this._exceptionChanged}"
-                    @ch-exception-delete="${this._exceptionDelete}"
-                  >
-                  </ch-exception-editor>
-                `,
+        ? this._config.exceptions.map(
+            (exception, index) => html`
+              <ch-exception-editor
+                .config="${this._config}"
+                .exception="${exception}"
+                .index="${index}"
+                @ch-exception-changed="${this._exceptionChanged}"
+                @ch-exception-delete="${this._exceptionDelete}"
+              >
+              </ch-exception-editor>
+            `,
           )
         : ''}
       <br />
@@ -556,6 +554,13 @@ class ChConfigEditor extends LitElement {
         >
         </paper-input>
         ${this.haSwitch(
+          'tab_icons_and_text',
+          true,
+          false,
+          localize('editor.tab_icons_and_text_title'),
+          localize('editor.tab_icons_and_text_tip'),
+        )}
+        ${this.haSwitch(
           'reverse_tab_direction',
           true,
           false,
@@ -563,11 +568,11 @@ class ChConfigEditor extends LitElement {
           localize('editor.reverse_tab_tip'),
         )}
         ${this.haSwitch(
-          'tab_icons_and_text',
+          'tab_text_only',
           true,
           false,
-          localize('editor.tab_icons_and_text_title'),
-          localize('editor.tab_icons_and_text_tip'),
+          localize('editor.tab_text_only_title'),
+          localize('editor.tab_text_only_tip'),
         )}
       </div>
     `;

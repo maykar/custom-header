@@ -74,6 +74,8 @@
     "tabs": "Tabber",
     "tab_icons_and_text_title": "Vis ikoner med text.",
     "tab_icons_and_text_tip": "Vis både ikon og text på faner.",
+    "tab_text_only_title": "Vis kun tekst.",
+    "tab_text_only_tip": "Vis kun tekst på faner.",
     "template": "mal",
     "user_list": "Bruker (Skill flere brukere med komma.)",
     "voice_dropdown_tip": "Plasser stemme i nedtrekksmenyen.",

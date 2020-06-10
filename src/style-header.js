@@ -147,6 +147,13 @@ export const styleHeader = (config, ch, haElem = ha_elements()) => {
   headerType.tabContainer.dir = config.reverse_tab_direction ? 'rtl' : 'ltr';
   ch.header.container.dir = config.reverse_button_direction ? 'rtl' : 'ltr';
 
+  const hideIcons = index => {
+    const hideIcon = document.createElement('style');
+    hideIcon.setAttribute('id', 'ch_icon_style');
+    hideIcon.innerHTML = `paper-tab:nth-child(${index + 1}) ha-icon{display:none;}`;
+    headerType.tabs[index].appendChild(hideIcon);
+  };
+
   // Tab icon customization.
   if (config.tab_icons && headerType.tabs.length) {
     for (const tab in config.tab_icons) {
@@ -156,12 +163,16 @@ export const styleHeader = (config, ch, haElem = ha_elements()) => {
       if (!config.tab_icons[tab]) haIcon.icon = haElem.lovelace.config.views[index].icon;
       else haIcon.icon = config.tab_icons[tab];
       const iconStyle = headerType.tabs[index].querySelector('#ch_icon_style');
-      if (!iconStyle && config.tab_icons[tab] == 'none') {
-        const hideIcon = document.createElement('style');
-        hideIcon.setAttribute('id', 'ch_icon_style');
-        hideIcon.innerHTML = `paper-tab:nth-child(${index + 1}) ha-icon{display:none;}`;
-        headerType.tabs[index].appendChild(hideIcon);
-      }
+      if (!iconStyle && config.tab_icons[tab] == 'none') hideIcons(index);
+    }
+  }
+
+  // Hide tab icons.
+  if (config.tab_text_only && headerType.tabs.length) {
+    for (const tab of Array.from(headerType.tabs)) {
+      const index = Array.from(headerType.tabs).indexOf(tab);
+      const iconStyle = headerType.tabs[index].querySelector('#ch_icon_style');
+      if (!iconStyle) hideIcons(index);
     }
   }
 

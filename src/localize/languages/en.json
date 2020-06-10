@@ -77,6 +77,8 @@
     "tabs": "Tabs",
     "tab_icons_and_text_title": "Show Icons with Text",
     "tab_icons_and_text_tip": "Display both icons and text on tabs.",
+    "tab_text_only_title": "Show Text Only.",
+    "tab_text_only_tip": "Display only text on tabs.",
     "template": "Template",
     "user_agent": "User Agent",
     "user_list": "User (Seperate multiple users with a comma.)",
