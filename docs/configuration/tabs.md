@@ -15,6 +15,7 @@ index: 4
 | show_tabs             | string        |         | An array or comma separated string of tabs to show, more info below                        |
 | hidden_tab_redirect   | Boolean       | true    | Automatically redirects off hidden tabs to either the default tab or the first visible tab |
 | tab_icons_and_text    | Boolean       | false   | Display both the icon and text on tabs                                                     |
+| tab_text_only         | Boolean       | false   | Display only text on tabs                                                                  |
 | tab_icons             | string        |         | Set the icon of each tab, useful for templates, more info below                            |
 | tab_text              | string        |         | Set the text of each tab, useful for templates, more info below                            |
 
