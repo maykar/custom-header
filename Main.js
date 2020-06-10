@@ -4446,7 +4446,7 @@ const wL=Ui({_template:dV`
       }
     </style>
     <div aria-live$="[[mode]]">[[_text]]</div>
-`,is:"iron-a11y-announcer",properties:{mode:{type:String,value:"polite"},_text:{type:String,value:""}},created:function(){wL.instance||(wL.instance=this),document.body.addEventListener("iron-announce",this._onIronAnnounce.bind(this))},announce:function(t){this._text="",this.async((function(){this._text=t}),100)},_onIronAnnounce:function(t){t.detail&&t.detail.text&&this.announce(t.detail.text)}});wL.instance=null,wL.requestAvailability=function(){wL.instance||(wL.instance=document.createElement("iron-a11y-announcer")),document.body.appendChild(wL.instance)};
+`,is:"iron-a11y-announcer",properties:{mode:{type:String,value:"polite"},timeout:{type:Number,value:150},_text:{type:String,value:""}},created:function(){wL.instance||(wL.instance=this),document.addEventListener("iron-announce",this._onIronAnnounce.bind(this))},announce:function(t){this._text="",this.async((function(){this._text=t}),this.timeout)},_onIronAnnounce:function(t){t.detail&&t.detail.text&&this.announce(t.detail.text)}});wL.instance=null,wL.requestAvailability=function(){wL.instance||(wL.instance=document.createElement("iron-a11y-announcer")),document.body?document.body.appendChild(wL.instance):document.addEventListener("load",(function(){document.body.appendChild(wL.instance)}))};
 /**
 @license
 Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
