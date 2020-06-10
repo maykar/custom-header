@@ -6,7 +6,10 @@ Custom Header adds enhancements and customization options to Home Assistant's Lo
 
 ## [Visit docs for installation, config, and issues.](https://maykar.github.io/custom-header)
 
-:warning: Custom Header version 1.5.0 and above is designed for Home Assistant version 0.110 and above. If you are on lower versions of Home Assistant you need to use earlier versions of CH.
+### :warning: Important
+
+* Some config options can remove your ability to access UI elements. Each of these options is marked with a warning in the docs and in the UI editor. Be sure to read the [important notes](https://maykar.github.io/custom-header/#intro/notes) section of the docs or the warning at the top of the UI editor for instructions on how to restore the default header if needed.
+* Custom Header version 1.5.0 and above is designed for Home Assistant version 0.110 and above. If you are on lower versions of Home Assistant you need to use earlier versions of CH.
 
 ## Features
 
