@@ -6,7 +6,7 @@ Custom Header adds enhancements and customization options to Home Assistant's Lo
 
 ## [Visit docs for installation, config, and issues.](https://maykar.github.io/custom-header)
 
-### :warning: Important
+### :warning:&nbsp;&nbsp;&nbsp;&nbsp;Important
 
 * Some config options can remove your ability to access UI elements. Each of these options is marked with a warning in the docs and in the UI editor. Be sure to read the [important notes](https://maykar.github.io/custom-header/#intro/notes) section of the docs or the warning at the top of the UI editor for instructions on how to restore the default header if needed.
 * Custom Header version 1.5.0 and above is designed for Home Assistant version 0.110 and above. If you are on lower versions of Home Assistant you need to use earlier versions of CH.
@@ -25,11 +25,11 @@ Custom Header adds enhancements and customization options to Home Assistant's Lo
 
 ## Supporting Development
 
-- :coffee:&nbsp;&nbsp;[Buy me a coffee](https://www.buymeacoffee.com/FgwNR2l)
-- :red_circle:&nbsp;&nbsp;[Tip with Crypto](https://github.com/sponsors/maykar)
-- :heart:&nbsp;&nbsp;[Sponsor me on GitHub](https://github.com/sponsors/maykar)
-- :busts_in_silhouette:&nbsp;&nbsp;[Support and check out these guys](https://maykar.github.io/custom-header/#support)
-- :keyboard:&nbsp;&nbsp;[Help with development or documentation](https://maykar.github.io/custom-header/#development)
+- :coffee:&nbsp;&nbsp;&nbsp;&nbsp;[Buy me a coffee](https://www.buymeacoffee.com/FgwNR2l)
+- :red_circle:&nbsp;&nbsp;&nbsp;&nbsp;[Tip with Crypto](https://github.com/sponsors/maykar)
+- :heart:&nbsp;&nbsp;&nbsp;&nbsp;[Sponsor me on GitHub](https://github.com/sponsors/maykar)
+- :busts_in_silhouette:&nbsp;&nbsp;&nbsp;&nbsp;[Support and check out these guys](https://maykar.github.io/custom-header/#support)
+- :keyboard:&nbsp;&nbsp;&nbsp;&nbsp;[Help with development or documentation](https://maykar.github.io/custom-header/#development)
   <br><br>
 
 <img style="border: 5px solid #767676;border-radius: 10px;max-width: 350px;width: 100%;box-sizing: border-box;" src="https://github.com/maykar/custom-header/blob/master/demo.gif?raw=true" alt="Demo">
