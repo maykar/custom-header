@@ -162,17 +162,24 @@ export class CustomHeaderConfig {
     template_timeout;
     window.customHeaderTempTimeout.push(template_timeout);
 
-    if (!window.chOrientation) {
+    const simple_update = () => {
+      window.setTimeout(() => {
+        haElem = ha_elements();
+        if (!haElem) return;
+        const editor = haElem.panel ? haElem.panel.shadowRoot.querySelector('hui-editor') : null;
+        if (!haElem.panel || editor || this.template_failed) return;
+        if (haElem.root && haElem.root.querySelector('custom-header-editor')) return;
+        CustomHeaderConfig.buildConfig(window.chHeader);
+        window.chVisibilityOrientation = true;
+      }, 500);
+    };
+
+    if (!window.chVisibilityOrientation) {
       window.addEventListener('orientationchange', function() {
-        window.setTimeout(() => {
-          haElem = ha_elements();
-          if (!haElem) return;
-          const editor = haElem.panel ? haElem.panel.shadowRoot.querySelector('hui-editor') : null;
-          if (!haElem.panel || editor || this.template_failed) return;
-          if (haElem.root && haElem.root.querySelector('custom-header-editor')) return;
-          CustomHeaderConfig.buildConfig(window.chHeader);
-          window.chOrientation = true;
-        }, 500);
+        simple_update();
+      });
+      window.addEventListener('visibilitychange', function() {
+        if (document.visibilityState === 'visible') simple_update();
       });
     }
 
