@@ -32,7 +32,10 @@ export const buttonToOverflow = (item, mdiIcon, header, config) => {
   if (header.options.querySelector(`#${item.toLowerCase()}_dropdown`)) {
     header.options.querySelector(`#${item.toLowerCase()}_dropdown`).remove();
   }
-  const paperItem = document.createElement('paper-item');
+  let paperItem = document.createElement('paper-item');
+  if (header.options.querySelector('mwc-list-item')) {
+    paperItem = document.createElement('mwc-list-item');
+  }
   const icon = document.createElement('ha-icon');
   paperItem.setAttribute('id', `${item.toLowerCase()}_dropdown`);
   icon.setAttribute('icon', config.button_icons[item.toLowerCase()] || mdiIcon);
@@ -49,7 +52,11 @@ export const buttonToOverflow = (item, mdiIcon, header, config) => {
   });
   paperItem.setAttribute('onClick', ' ');
   icon.setAttribute('onClick', ' ');
-  header.options.querySelector('paper-listbox').appendChild(paperItem);
+  if (!header.options.querySelector('mwc-list-item')) {
+    header.options.querySelector('paper-listbox').appendChild(paperItem);
+  } else {
+    header.options.appendChild(paperItem);
+  }
 };
 
 const showEditor = haElem => {
