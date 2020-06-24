@@ -256,19 +256,41 @@ class ChConfigEditor extends LitElement {
     const editorWarning = html`
       <ha-icon icon="mdi:alert-box-outline" class="alert" title="${localize('editor.removes_edit_ui')}"></ha-icon>
     `;
-    return html`
-      <ha-switch
-        class="${this.exception && this.config[option] === undefined ? 'inherited slotted' : 'slotted'}"
-        ?checked="${this.getConfig(option) !== false && !this.templateExists(this.getConfig(option))}"
-        .configValue="${option}"
-        @change="${this._valueChanged}"
-        title=${title}
-        ?disabled=${this.templateExists(this.getConfig(option))}
-      >
-        ${text} ${this.templateExists(this.getConfig(option)) && templateWarn ? templateIcon : ''}
-        ${editorWarn ? editorWarning : ''}
-      </ha-switch>
-    `;
+    if (ha_elements().hass.config.version > '0.112.0') {
+      return html`
+        <div>
+          <ha-switch
+            class="${this.exception && this.config[option] === undefined ? 'inherited slotted' : 'slotted'}"
+            ?checked="${this.getConfig(option) !== false && !this.templateExists(this.getConfig(option))}"
+            .configValue="${option}"
+            @change="${this._valueChanged}"
+            title=${title}
+            ?disabled=${this.templateExists(this.getConfig(option))}
+          >
+          </ha-switch>
+          <switch-text>
+            <sw-text title=${title}
+              >${text} ${this.templateExists(this.getConfig(option)) && templateWarn ? templateIcon : ''}</sw-text
+            >
+            ${editorWarn ? editorWarning : ''}
+          </switch-text>
+        </div>
+      `;
+    } else {
+      return html`
+        <ha-switch
+          class="${this.exception && this.config[option] === undefined ? 'inherited slotted' : 'slotted'}"
+          ?checked="${this.getConfig(option) !== false && !this.templateExists(this.getConfig(option))}"
+          .configValue="${option}"
+          @change="${this._valueChanged}"
+          title=${title}
+          ?disabled=${this.templateExists(this.getConfig(option))}
+        >
+          ${text} ${this.templateExists(this.getConfig(option)) && templateWarn ? templateIcon : ''}
+          ${editorWarn ? editorWarning : ''}
+        </ha-switch>
+      `;
+    }
   }
 
   render() {
@@ -618,6 +640,10 @@ class ChConfigEditor extends LitElement {
           font-size: 16pt;
           margin-bottom: 5px;
           width: 100%;
+        }
+        switch-text {
+          padding-left: 10px;
+          vertical-align: bottom;
         }
         ha-switch {
           padding-top: 16px;
