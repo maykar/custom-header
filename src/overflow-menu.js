@@ -9,23 +9,22 @@ export const hideMenuItems = (config, header, edit_mode, haElem) => {
     else localString = hass.localize(`ui.panel.lovelace.menu.${string}`) || string;
     return item.innerHTML.includes(localString) || item.getAttribute('aria-label') == localString;
   };
-  (edit_mode ? haElem.options : header.options)
-    .querySelector('paper-listbox')
-    .querySelectorAll('paper-item')
-    .forEach(item => {
-      if (
-        (config.hide_help && localized(item, 'help')) ||
-        (config.hide_unused && localized(item, 'unused_entities')) ||
-        (config.hide_refresh && localized(item, 'refresh')) ||
-        (config.hide_config && localized(item, 'configure_ui')) ||
-        (config.hide_raw && localized(item, 'raw_editor')) ||
-        (config.hide_reload_resources && localized(item, 'Reload resources'))
-      ) {
-        item.style.display = 'none';
-      } else {
-        item.style.display = '';
-      }
-    });
+  let options = edit_mode ? haElem.options : header.options;
+  options = options.querySelector('paper-listbox') ? options.querySelector('paper-listbox') : options;
+  options.querySelectorAll('mwc-list-item, paper-item').forEach(item => {
+    if (
+      (config.hide_help && localized(item, 'help')) ||
+      (config.hide_unused && localized(item, 'unused_entities')) ||
+      (config.hide_refresh && localized(item, 'refresh')) ||
+      (config.hide_config && localized(item, 'configure_ui')) ||
+      (config.hide_raw && localized(item, 'raw_editor')) ||
+      (config.hide_reload_resources && localized(item, 'Reload resources'))
+    ) {
+      item.style.display = 'none';
+    } else {
+      item.style.display = '';
+    }
+  });
 };
 
 // Add button to overflow menu.
@@ -85,24 +84,35 @@ export const insertSettings = (header, config, haElem) => {
     referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
   }
   if (haElem.lovelace.mode === 'storage') {
-    if (header.options.querySelector('paper-listbox').querySelector('#ch_settings')) {
-      header.options
-        .querySelector('paper-listbox')
-        .querySelector('#ch_settings')
-        .remove();
+    let chSettings = document.createElement('paper-item');
+    if (header.options.querySelector('mwc-list-item')) {
+      chSettings = document.createElement('mwc-list-item');
     }
-    const chSettings = document.createElement('paper-item');
     chSettings.setAttribute('id', 'ch_settings');
     chSettings.addEventListener('click', () => showEditor(haElem));
     chSettings.setAttribute('onClick', ' ');
     chSettings.innerHTML = 'Custom Header';
-    const paperItems = header.options.querySelector('paper-listbox').querySelectorAll('paper-item');
-    const paperItemsHA = haElem.options.querySelector('paper-listbox').querySelectorAll('paper-item');
-    if (!header.options.querySelector('paper-listbox').querySelector('#ch_settings')) {
-      insertAfter(chSettings, paperItems[paperItems.length - 1]);
-    }
-    if (!haElem.options.querySelector('paper-listbox').querySelector('#ch_settings')) {
-      insertAfter(chSettings, paperItemsHA[paperItemsHA.length - 1]);
+    if (header.options.querySelector('mwc-list-item') && !header.options.querySelector('#ch_settings')) {
+      const mwcItems = header.options.querySelectorAll('mwc-list-item');
+      const mwcItemsHA = header.options.querySelectorAll('mwc-list-item');
+      if (!header.options.querySelector('#ch_settings')) {
+        insertAfter(chSettings, mwcItems[mwcItems.length - 1]);
+      }
+      if (!haElem.options.querySelector('#ch_settings')) {
+        insertAfter(chSettings, mwcItemsHA[mwcItemsHA.length - 1]);
+      }
+    } else if (
+      header.options.querySelector('paper-listbox') &&
+      !header.options.querySelector('paper-listbox').querySelector('#ch_settings')
+    ) {
+      const paperItems = header.options.querySelector('paper-listbox').querySelectorAll('paper-item');
+      const paperItemsHA = haElem.options.querySelector('paper-listbox').querySelectorAll('paper-item');
+      if (!header.options.querySelector('paper-listbox').querySelector('#ch_settings')) {
+        insertAfter(chSettings, paperItems[paperItems.length - 1]);
+      }
+      if (!haElem.options.querySelector('paper-listbox').querySelector('#ch_settings')) {
+        insertAfter(chSettings, paperItemsHA[paperItemsHA.length - 1]);
+      }
     }
   }
 };

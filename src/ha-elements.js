@@ -18,8 +18,9 @@ export const ha_elements = () => {
   haElem.tabs = Array.from((haElem.root.querySelector('paper-tabs') || haElem.root).querySelectorAll('paper-tab'));
   haElem.tabContainer = haElem.root.querySelector('paper-tabs');
   haElem.menu = haElem.root.querySelector('ha-menu-button');
-  haElem.options = haElem.root.querySelector('paper-menu-button');
+  haElem.options = haElem.root.querySelector('ha-button-menu, paper-menu-button');
   haElem.voice =
+    haElem.root.querySelector('app-toolbar').querySelector('mwc-icon-button') ||
     haElem.root.querySelector('ha-start-voice-button') ||
     haElem.root.querySelector('paper-icon-button[icon="hass:microphone"]') ||
     haElem.root.querySelector('ha-icon-button[icon="hass:microphone"]');

@@ -121,7 +121,15 @@ export class CustomHeader {
     if (button === 'options') {
       header[button] = this.ha_elem[button].cloneNode(true);
       header[button].removeAttribute('horizontal-offset');
-      header[button].querySelector('ha-icon-button, paper-icon-button').style.height = '48px';
+      if (header[button].querySelector('mwc-icon-button')) {
+        const icon = document.createElement('ha-icon-button');
+        icon.setAttribute('icon', 'hass:dots-vertical');
+        icon.setAttribute('slot', 'trigger');
+        icon.setAttribute('title', header[button].querySelector('mwc-icon-button').getAttribute('title'));
+        header[button].appendChild(icon);
+        header[button].querySelector('mwc-icon-button').style.display = 'none';
+      }
+      header[button].querySelector('ha-icon, ha-icon-button, paper-icon-button').style.height = '48px';
       const items = Array.from(header[button].querySelectorAll('paper-item'));
       items.forEach(item => {
         const index = items.indexOf(item);
@@ -142,10 +150,19 @@ export class CustomHeader {
       );
     }
 
-    header[button].setAttribute('icon', icon);
-    header[button].setAttribute('buttonElem', button);
+    if (button == 'options' && header[button].querySelector('mwc-icon-button')) {
+      header[button].querySelector('ha-icon-button').setAttribute('buttonElem', button);
+    } else {
+      header[button].setAttribute('buttonElem', button);
+    }
     header[button].style.flexShrink = '0';
     header[button].style.height = '48px';
+    if (button == 'options' && header[button].querySelector('mwc-icon-button')) {
+      header[button].icon = header[button].querySelector('ha-icon-button');
+    } else {
+      header[button].icon = header[button];
+      header[button].setAttribute('icon', icon);
+    }
   }
 
   tapOrClick(listenElement, clickElement) {

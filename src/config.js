@@ -170,7 +170,6 @@ export class CustomHeaderConfig {
         if (!haElem.panel || editor || this.template_failed) return;
         if (haElem.root && haElem.root.querySelector('custom-header-editor')) return;
         CustomHeaderConfig.buildConfig(window.chHeader);
-        window.chVisibilityOrientation = true;
       }, 500);
     };
 
@@ -178,9 +177,10 @@ export class CustomHeaderConfig {
       window.addEventListener('orientationchange', function() {
         simple_update();
       });
-      window.addEventListener('visibilitychange', function() {
-        if (document.visibilityState === 'visible') simple_update();
-      });
+      // window.addEventListener('visibilitychange', function() {
+      //   if (document.visibilityState === 'visible') simple_update();
+      // });
+      window.chVisibilityOrientation = true;
     }
 
     if (haElem.root.querySelector('app-toolbar').className == 'edit-mode') return;

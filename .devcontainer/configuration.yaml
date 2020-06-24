@@ -1,7 +1,10 @@
 default_config:
 lovelace:
   mode: yaml
-# conversation:
+  resources:
+    - url: http://127.0.0.1:5000/custom-header.js
+      type: module
+conversation:
 input_boolean:
   kiosk_mode:
     name: 'kiosk_mode:'

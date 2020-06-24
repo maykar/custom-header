@@ -79,10 +79,18 @@ export const styleHeader = (config, ch, haElem = ha_elements()) => {
   // Style overflow menu depending on position.
   if (config.reverse_button_direction) {
     ch.header.options.setAttribute('horizontal-align', 'left');
-    ch.header.options.querySelector('paper-listbox').setAttribute('dir', 'ltr');
+    if (ch.header.options.querySelector('paper-listbox')) {
+      ch.header.options.querySelector('paper-listbox').setAttribute('dir', 'ltr');
+    } else {
+      ch.header.options.setAttribute('dir', 'ltr');
+    }
   } else {
     ch.header.options.setAttribute('horizontal-align', 'right');
-    ch.header.options.querySelector('paper-listbox').setAttribute('dir', 'rtl');
+    if (ch.header.options.querySelector('paper-listbox')) {
+      ch.header.options.querySelector('paper-listbox').setAttribute('dir', 'rtl');
+    } else {
+      ch.header.options.setAttribute('dir', 'rtl');
+    }
   }
 
   const style = document.createElement('style');
@@ -251,7 +259,7 @@ export const styleHeader = (config, ch, haElem = ha_elements()) => {
         button === 'options' ? ch.header[button].querySelector('ha-icon-button, paper-icon-button') : ch.header[button];
       if (!config.button_text[button] && buttonElem.shadowRoot.querySelector('.buttonText')) {
         buttonElem.shadowRoot.querySelector('.buttonText').remove();
-        buttonElem.shadowRoot.querySelector('ha-icon, iron-icon').style.display = '';
+        buttonElem.shadowRoot.querySelector('mwc-icon-button, ha-icon, iron-icon').style.display = '';
         buttonElem.style.width = '';
         continue;
       } else if (config.button_text[button]) {
