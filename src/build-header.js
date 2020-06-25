@@ -130,10 +130,10 @@ export class CustomHeader {
         header[button].querySelector('mwc-icon-button').style.display = 'none';
       }
       header[button].querySelector('ha-icon, ha-icon-button, paper-icon-button').style.height = '48px';
-      const items = Array.from(header[button].querySelectorAll('paper-item'));
+      const items = Array.from(header[button].querySelectorAll('mwc-list-item, paper-item'));
       items.forEach(item => {
         const index = items.indexOf(item);
-        this.tapOrClick(item, this.ha_elem[button].querySelectorAll('paper-item')[index]);
+        this.tapOrClick(item, this.ha_elem[button].querySelectorAll('mwc-list-item, paper-item')[index]);
       });
     } else {
       if (!this.ha_elem[button]) return;
@@ -168,7 +168,11 @@ export class CustomHeader {
   tapOrClick(listenElement, clickElement) {
     listenElement.setAttribute('onClick', ' ');
     listenElement.addEventListener('click', () => {
-      clickElement.dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
+      if (clickElement.nodeName === 'MWC-LIST-ITEM') {
+        clickElement.click();
+      } else {
+        clickElement.dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
+      }
     });
   }
 }
