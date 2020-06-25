@@ -162,7 +162,14 @@ export class CustomHeaderConfig {
     template_timeout;
     window.customHeaderTempTimeout.push(template_timeout);
 
-    const simple_update = () => {
+    let visibilityChange = 'visibilitychange';
+    if (typeof document.msHidden !== 'undefined') {
+      visibilityChange = 'msvisibilitychange';
+    } else if (typeof document.webkitHidden !== 'undefined') {
+      visibilityChange = 'webkitvisibilitychange';
+    }
+
+    const simple_update = timeout => {
       window.setTimeout(() => {
         haElem = ha_elements();
         if (!haElem) return;
@@ -170,17 +177,25 @@ export class CustomHeaderConfig {
         if (!haElem.panel || editor || this.template_failed) return;
         if (haElem.root && haElem.root.querySelector('custom-header-editor')) return;
         CustomHeaderConfig.buildConfig(window.chHeader);
-      }, 500);
+      }, timeout);
     };
 
-    if (!window.chVisibilityOrientation) {
-      window.addEventListener('orientationchange', function() {
-        simple_update();
-      });
-      // window.addEventListener('visibilitychange', function() {
-      //   if (document.visibilityState === 'visible') simple_update();
-      // });
-      window.chVisibilityOrientation = true;
+    if (!window.chVisibilityAndOrientation) {
+      window.addEventListener(
+        'orientationchange',
+        function() {
+          simple_update(500);
+        },
+        false,
+      );
+      document.addEventListener(
+        visibilityChange,
+        function() {
+          simple_update(0);
+        },
+        false,
+      );
+      window.chVisibilityAndOrientation = true;
     }
 
     if (haElem.root.querySelector('app-toolbar').className == 'edit-mode') return;
