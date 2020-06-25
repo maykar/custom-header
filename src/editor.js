@@ -256,7 +256,9 @@ class ChConfigEditor extends LitElement {
     const editorWarning = html`
       <ha-icon icon="mdi:alert-box-outline" class="alert" title="${localize('editor.removes_edit_ui')}"></ha-icon>
     `;
-    if (ha_elements().hass.config.version > '0.112.0') {
+    let version = ha_elements().hass.config.version.split('.');
+    version = parseInt(version[0] + version[1]);
+    if (version > 111) {
       return html`
         <div>
           <ha-switch
