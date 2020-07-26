@@ -1,4 +1,4 @@
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/maykar/custom-header?style=for-the-badge) ![GitHub Release Date](https://img.shields.io/github/release-date/maykar/custom-header?style=for-the-badge) ![GitHub Releases](https://img.shields.io/github/downloads/maykar/custom-header/latest/total?color=purple&label=%20release%20Downloads&style=for-the-badge) ![GitHub All Releases](https://img.shields.io/github/downloads/maykar/custom-header/total?color=orange&label=Total%20downloads&style=for-the-badge)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/maykar/custom-header?style=for-the-badge) ![GitHub Release Date](https://img.shields.io/github/release-date/maykar/custom-header?style=for-the-badge) ![GitHub Releases](https://img.shields.io/github/downloads/maykar/custom-header/latest/total?color=purple&label=%20release%20Downloads&style=for-the-badge)
 
 # CUSTOM HEADER
 
@@ -6,7 +6,7 @@ Custom Header adds enhancements and customization options to Home Assistant's Lo
 
 ## [Visit docs for installation, config, and issues.](https://maykar.github.io/custom-header)
 
-### :warning:&nbsp;&nbsp;&nbsp;&nbsp;Important
+### :warning: Important
 
 * Some config options can remove your ability to access UI elements. Each of these options is marked with a warning in the docs and in the UI editor. Be sure to read the [important notes](https://maykar.github.io/custom-header/#intro/notes) section of the docs or the warning at the top of the UI editor for instructions on how to restore the default header if needed.
 * Custom Header version 1.5.0 and above is designed for Home Assistant version 0.110 and above. If you are on lower versions of Home Assistant you need to use earlier versions of CH.
@@ -25,11 +25,11 @@ Custom Header adds enhancements and customization options to Home Assistant's Lo
 
 ## Supporting Development
 
-- :coffee:&nbsp;&nbsp;&nbsp;&nbsp;[Buy me a coffee](https://www.buymeacoffee.com/FgwNR2l)
-- :red_circle:&nbsp;&nbsp;&nbsp;&nbsp;[Tip with Crypto](https://github.com/sponsors/maykar)
-- :heart:&nbsp;&nbsp;&nbsp;&nbsp;[Sponsor me on GitHub](https://github.com/sponsors/maykar)
-- :busts_in_silhouette:&nbsp;&nbsp;&nbsp;&nbsp;[Support and check out these guys](https://maykar.github.io/custom-header/#support)
-- :keyboard:&nbsp;&nbsp;&nbsp;&nbsp;[Help with development or documentation](https://maykar.github.io/custom-header/#development)
+- :coffee: [Buy me a coffee](https://www.buymeacoffee.com/FgwNR2l)
+- :red_circle: [Tip with Crypto](https://github.com/sponsors/maykar)
+- :heart: [Sponsor me on GitHub](https://github.com/sponsors/maykar)
+- :busts_in_silhouette: [Support and check out these guys](https://maykar.github.io/custom-header/#support)
+- :keyboard: [Help with development or documentation](https://maykar.github.io/custom-header/#development)
   <br><br>
 
 <img style="border: 5px solid #767676;border-radius: 10px;max-width: 350px;width: 100%;box-sizing: border-box;" src="https://github.com/maykar/custom-header/blob/master/demo.gif?raw=true" alt="Demo">
