@@ -18,7 +18,6 @@ export class CustomHeaderConfig {
       ...lovelace.config.custom_header,
     };
     this.template_vars = this.config.template_variables;
-    this.last_template_result = null;
     this.test_config = { ...this.config, ...conditionalConfig(this.config, ha_elements()) };
     this.template_failed = false;
     this.disabled =

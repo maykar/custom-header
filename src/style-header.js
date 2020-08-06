@@ -17,7 +17,6 @@ export const styleHeader = (config, ch, haElem = ha_elements()) => {
     config.disabled_mode = false;
   } else if (!config.hide_ch_settings) {
     insertSettings(ch.header, config, haElem);
-    insertSettings(ch.header, config, haElem);
   }
 
   if (config.disabled_mode) {

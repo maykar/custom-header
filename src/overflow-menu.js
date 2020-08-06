@@ -100,13 +100,11 @@ export const insertSettings = (header, config, haElem) => {
     chSettings.setAttribute('onClick', ' ');
     chSettings.innerHTML = 'Custom Header';
     if (header.options.querySelector('mwc-list-item') && !header.options.querySelector('#ch_settings')) {
-      const mwcItems = header.options.querySelectorAll('mwc-list-item');
-      const mwcItemsHA = header.options.querySelectorAll('mwc-list-item');
       if (!header.options.querySelector('#ch_settings')) {
-        insertAfter(chSettings, mwcItems[mwcItems.length - 1]);
+        header.options.appendChild(chSettings);
       }
       if (!haElem.options.querySelector('#ch_settings')) {
-        insertAfter(chSettings, mwcItemsHA[mwcItemsHA.length - 1]);
+        haElem.options.appendChild(chSettings);
       }
     } else if (
       header.options.querySelector('paper-listbox') &&

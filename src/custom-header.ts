@@ -107,7 +107,7 @@ export const rebuild = () => {
     return;
   }
 
-  window['last_template_result'] = [];
+  window['last_template_result'] = {};
   clearTimeout(window['customHeaderTempTimeout']);
   if (!window.location.href.includes('disable_ch')) hideHeader(haElem);
 

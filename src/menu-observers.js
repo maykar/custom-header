@@ -95,7 +95,7 @@ export const menuButtonObservers = (config, ch, haElem) => {
   if (prevDot && prevDot.style.cssText != buildDot().style.cssText) {
     prevDot.remove();
     if (config.button_text.menu) {
-      header.menu.shadowRoot.querySelector('.buttonText').style.textDecoration = '';
+      ch.header.menu.shadowRoot.querySelector('.buttonText').style.textDecoration = '';
     }
   }
   if (!ch.header.menu.shadowRoot.querySelector('.dot') && haElem.menu.shadowRoot.querySelector('.dot')) {
