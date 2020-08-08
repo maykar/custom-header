@@ -169,7 +169,7 @@ export class CustomHeader {
     listenElement.setAttribute('onClick', ' ');
     if (clickElement.nodeName === 'MWC-LIST-ITEM') {
       listenElement.addEventListener('tap', () => {
-        clickElement.dispatchEvent(new MouseEvent('tap'));
+        clickElement.dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
       });
     }
     listenElement.addEventListener('click', () => {
