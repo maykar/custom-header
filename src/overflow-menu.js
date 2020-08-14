@@ -87,9 +87,6 @@ const showEditor = haElem => {
 };
 
 export const insertSettings = (header, config, haElem) => {
-  function insertAfter(el, referenceNode) {
-    referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
-  }
   if (haElem.lovelace.mode === 'storage') {
     let chSettings = document.createElement('paper-item');
     if (header.options.querySelector('mwc-list-item')) {
@@ -99,24 +96,19 @@ export const insertSettings = (header, config, haElem) => {
     chSettings.addEventListener('click', () => showEditor(haElem));
     chSettings.setAttribute('onClick', ' ');
     chSettings.innerHTML = 'Custom Header';
-    if (header.options.querySelector('mwc-list-item') && !header.options.querySelector('#ch_settings')) {
+    if (header.options.querySelector('mwc-list-item')) {
       if (!header.options.querySelector('#ch_settings')) {
         header.options.appendChild(chSettings);
       }
       if (!haElem.options.querySelector('#ch_settings')) {
         haElem.options.appendChild(chSettings);
       }
-    } else if (
-      header.options.querySelector('paper-listbox') &&
-      !header.options.querySelector('paper-listbox').querySelector('#ch_settings')
-    ) {
-      const paperItems = header.options.querySelector('paper-listbox').querySelectorAll('paper-item');
-      const paperItemsHA = haElem.options.querySelector('paper-listbox').querySelectorAll('paper-item');
+    } else if (header.options.querySelector('paper-listbox')) {
       if (!header.options.querySelector('paper-listbox').querySelector('#ch_settings')) {
-        insertAfter(chSettings, paperItems[paperItems.length - 1]);
+        header.options.querySelector('paper-listbox').appendChild(chSettings);
       }
       if (!haElem.options.querySelector('paper-listbox').querySelector('#ch_settings')) {
-        insertAfter(chSettings, paperItemsHA[paperItemsHA.length - 1]);
+        haElem.options.querySelector('paper-listbox').appendChild(chSettings);
       }
     }
   }
