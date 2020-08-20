@@ -18,7 +18,7 @@ export const hideMenuItems = (config, header, edit_mode, haElem) => {
       (config.hide_refresh && localized(item, 'refresh')) ||
       (config.hide_config && localized(item, 'configure_ui')) ||
       (config.hide_raw && localized(item, 'raw_editor')) ||
-      (config.hide_reload_resources && localized(item, 'Reload resources'))
+      (config.hide_reload_resources && localized(item, 'reload_resources'))
     ) {
       item.style.display = 'none';
     } else {
