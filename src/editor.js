@@ -378,15 +378,6 @@ class ChConfigEditor extends LitElement {
           localize('editor.disabled_mode_title'),
           localize('editor.disabled_mode_tip'),
         )}
-        ${!this.exception
-          ? this.haSwitch(
-              'restrict_users',
-              true,
-              false,
-              localize('editor.restrict_users_title'),
-              localize('editor.restrict_users_tip'),
-            )
-          : ''}
         ${this.haSwitch(
           'footer_mode',
           true,
@@ -438,6 +429,15 @@ class ChConfigEditor extends LitElement {
           localize('editor.hidden_tab_redirect_tip'),
         )}
         ${this.haSwitch('shadow', true, false, localize('editor.shadow_title'), localize('editor.shadow_tip'))}
+        ${!this.exception
+          ? this.haSwitch(
+              'restrict_users',
+              true,
+              false,
+              localize('editor.restrict_users_title'),
+              localize('editor.restrict_users_tip'),
+            )
+          : ''}
         ${!this.exception && !this.getConfig('editor_warnings')
           ? this.haSwitch(
               'editor_warnings',
