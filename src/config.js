@@ -1,4 +1,5 @@
 import { invertNumArray, subscribeRenderTemplate, processTabArray } from './helpers';
+import { insertSettings } from './overflow-menu';
 import { conditionalConfig } from './conditional-config';
 import { styleHeader } from './style-header';
 import { defaultConfig } from './default-config';
@@ -54,6 +55,7 @@ export class CustomHeaderConfig {
           }
           if (JSON.stringify(window.last_template_result) == JSON.stringify(this.config)) {
             this.changed = false;
+            insertSettings(ch.header, this.config, haElem);
             return;
           } else {
             clearTimeout(window.customHeaderTempTimeout);

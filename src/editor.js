@@ -62,7 +62,7 @@ export class CustomHeaderEditor extends LitElement {
       ${navigator.userAgent}
       <br />
       <h4
-        style="background:var(--paper-card-background-color);
+        style="background:var(--ha-card-background-color);
           margin-bottom:-20px;"
         class="underline"
       >
@@ -325,7 +325,7 @@ class ChConfigEditor extends LitElement {
                 ${localize('links.docs')}&nbsp;&nbsp;&nbsp;</a
               >
               <a href="https://github.com/maykar/custom-header" target="_blank">
-                <ha-icon icon="mdi:github-circle" style="margin-top:-5px;"> </ha-icon>
+                <ha-icon icon="mdi:github" style="margin-top:-5px;"> </ha-icon>
                 GitHub&nbsp;&nbsp;&nbsp;</a
               >
               <a href="https://community.home-assistant.io/t/custom-header/" target="_blank">
@@ -702,7 +702,7 @@ class ChConfigEditor extends LitElement {
           overflow: hidden;
           height: 52px;
         }
-        paper-card {
+        ha-card {
           margin-top: 10px;
           width: 100%;
           transition: all 0.5s ease;
@@ -750,7 +750,7 @@ class ChExceptionEditor extends LitElement {
           }
         </style>
       </custom-style>
-      <paper-card ?closed=${this._closed}>
+      <ha-card ?closed=${this._closed}>
         <div class="card-content">
           <div class="card-header">
             ${Object.values(this.exception.conditions)
@@ -776,7 +776,7 @@ class ChExceptionEditor extends LitElement {
           >
           </ch-config-editor>
         </div>
-      </paper-card>
+      </ha-card>
     `;
   }
 
@@ -793,7 +793,7 @@ class ChExceptionEditor extends LitElement {
           overflow: hidden;
           height: 52px;
         }
-        paper-card {
+        ha-card {
           margin-top: 10px;
           width: 100%;
           transition: all 0.5s ease;
