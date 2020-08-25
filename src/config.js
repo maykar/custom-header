@@ -6,6 +6,7 @@ import { defaultConfig } from './default-config';
 import { observers } from './observers';
 import { ha_elements } from './ha-elements';
 import { getLovelace } from 'custom-card-helpers';
+import { redirects } from './redirects';
 
 export class CustomHeaderConfig {
   static buildConfig(ch, lovelace = getLovelace()) {
@@ -56,6 +57,7 @@ export class CustomHeaderConfig {
           if (JSON.stringify(window.last_template_result) == JSON.stringify(this.config)) {
             this.changed = false;
             insertSettings(ch.header, this.config, haElem);
+            redirects(this.config, ch);
             return;
           } else {
             clearTimeout(window.customHeaderTempTimeout);
