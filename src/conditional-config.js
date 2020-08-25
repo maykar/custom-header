@@ -33,8 +33,10 @@ export const conditionalConfig = config => {
           continue;
         }
       } else if (
-        (typeof conditions[cond] == 'string' && userVars[cond].toUpperCase() == conditions[cond].toUpperCase()) ||
         userVars[cond] == conditions[cond] ||
+        (typeof conditions[cond] == 'string' &&
+          userVars[cond] &&
+          userVars[cond].toUpperCase() == conditions[cond].toUpperCase()) ||
         (cond == 'query_string' && window.location.search.includes(conditions[cond])) ||
         (cond == 'user_agent' && userVars[cond].toUpperCase().includes(conditions[cond].toUpperCase())) ||
         (cond == 'media_query' && window.matchMedia(conditions[cond]).matches) ||
