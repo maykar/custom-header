@@ -33,6 +33,7 @@ export const conditionalConfig = config => {
           continue;
         }
       } else if (
+        (typeof conditions[cond] == 'string' && userVars[cond].toUpperCase() == conditions[cond].toUpperCase()) ||
         userVars[cond] == conditions[cond] ||
         (cond == 'query_string' && window.location.search.includes(conditions[cond])) ||
         (cond == 'user_agent' && userVars[cond].toUpperCase().includes(conditions[cond].toUpperCase())) ||
