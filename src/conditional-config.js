@@ -20,7 +20,11 @@ export const conditionalConfig = config => {
       window.customHeaderTabCond = Object.keys(conditions).includes('tab') ? true : false;
       if (cond == 'user' && conditions[cond].includes(',')) {
         conditions[cond].split(/,+/).forEach(user => {
-          if (userVars[cond] == user.trim() || user == hass.user.id) count++;
+          if (
+            userVars[cond].toUpperCase() == user.toUpperCase().trim() ||
+            user.toUpperCase() == hass.user.id.toUpperCase()
+          )
+            count++;
         });
       } else if (cond == 'tab' && (conditions[cond].includes(',') || conditions[cond].includes('to'))) {
         const tabs = processTabArray(conditions[cond]);
@@ -31,9 +35,9 @@ export const conditionalConfig = config => {
       } else if (
         userVars[cond] == conditions[cond] ||
         (cond == 'query_string' && window.location.search.includes(conditions[cond])) ||
-        (cond == 'user_agent' && userVars[cond].includes(conditions[cond])) ||
+        (cond == 'user_agent' && userVars[cond].toUpperCase().includes(conditions[cond].toUpperCase())) ||
         (cond == 'media_query' && window.matchMedia(conditions[cond]).matches) ||
-        (cond == 'user' && conditions[cond] == hass.user.id) ||
+        (cond == 'user' && conditions[cond].toUpperCase() == hass.user.id.toUpperCase()) ||
         (cond == 'is_admin' && conditions[cond] == hass.user.is_admin) ||
         (cond == 'is_owner' && conditions[cond] == hass.user.is_owner) ||
         (cond == 'template' && conditions[cond]) ||
