@@ -15,3 +15,4 @@ Also consider supporting these fine individuals who have graciously helped me an
 - [@ludeeus](https://github.com/ludeeus) - Joakim Sørensen
 - [@bramkragten](https://github.com/bramkragten) - Bram Kragten
 - [@iantrich](https://github.com/iantrich) - Ian Richardson
+- [@thomasloven](https://github.com/thomasloven) - Thomas Lovén

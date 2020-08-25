@@ -22,6 +22,7 @@ title: Issues
 - The version of Home Assistant and Custom Header you are using
 - The browsers or apps that are affected (i.e. Firefox, Chrome, Chrome Mobile, iOS HA Companion app, etc.)
 - Installation method (HACS or manual)
+- HA config method (YAML or Storage). If you don't know what this means, you're using Storage mode
   <br>
 
 **When pasting in your config always place 3 backticks <code>```</code> above the first line of your config and after the last line. Doing this will format it correctly so that I may find any formatting errors in your config.**<br>

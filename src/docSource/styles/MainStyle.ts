@@ -26,7 +26,7 @@ const Main = css`
     margin-left: 55px;
     padding-top: 24px;
     background: var(--content-container-background);
-    height: calc(100vh - 96px);
+    height: auto;
     min-height: fit-content;
     transition: margin-left 0.4s ease-in-out;
   }

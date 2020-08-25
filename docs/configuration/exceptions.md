@@ -9,8 +9,8 @@ index: 5
 
 You can have different settings depending on the conditions listed below. When using multiple conditions each one needs to match to use the exception's config. For more complicated conditions including "not" and "or" conditions use the template condition.
 
-- <item>user:</item> A user or a comma separated list of multiple users. This is the Home Assistant user's name, **not username** (if they're different) or an user's ID. You can look to the bottom of the Custom Header editor or in the HA user list to see which to use. This option is case sensitive.
-- <item>user_agent:</item> A matching word or phrase from the devices user agent. You can find this at the bottom of the Custom Header settings or by [googling "what's my user agent"](http://www.google.com/search?q=whats+my+user+agent) on the device in question. This option is case sensitive, enclose in quotes if including special characters and not using editor.
+- <item>user:</item> A user or a comma separated list of multiple users. This is the Home Assistant user's name, **not username** (if they're different) or an user's ID. You can look to the bottom of the Custom Header editor or in the HA user list to see which to use.
+- <item>user_agent:</item> A matching word or phrase from the devices user agent. You can find this at the bottom of the Custom Header settings or by [googling "what's my user agent"](http://www.google.com/search?q=whats+my+user+agent) on the device in question. Enclose in quotes if including special characters and not using editor.
 - <item>media_query:</item> A valid [CSS media query](https://www.w3schools.com/css/css_rwd_mediaqueries.asp). Enclose in quotes if not using editor.
 - <item>query_string:</item> A matching string following a question mark appended to the end of the URL (e.g. `http://192.168.1.42:8123/lovelace/0?kiosk`).
 - <item>tab:</item> View/tab. Accepts ranges, paths, index, and titles. Can use a comma seperated list of tabs as well.
