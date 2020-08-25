@@ -53,15 +53,9 @@ export const redirects = (config, ch) => {
     reloaded = false;
   }
 
-  // Click default tab or url on first open.
-  if (!reloaded && !window.customHeaderDefaultClicked) {
-    if (defaultTab != null && haElem.tabs[defaultTab]) {
-      haElem.tabs[defaultTab].dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
-      window.customHeaderDefaultClicked = true;
-    }
-    if (config.default_url != null) {
-      window.location.href = window.location.host + config.default_url;
-      window.customHeaderDefaultClicked = true;
-    }
+  // Click default tab on first open.
+  if (!reloaded && defaultTab != null && !window.customHeaderDefaultClicked && haElem.tabs[defaultTab]) {
+    haElem.tabs[defaultTab].dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
+    window.customHeaderDefaultClicked = true;
   }
 };
