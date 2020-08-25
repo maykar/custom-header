@@ -75,6 +75,7 @@ gulp.task('generate', done => {
   `;
   const CSS = `
   docs-main {
+    background: var(--secondary-background);
     position: absolute;
     height: 100%;
     width: 100%;
