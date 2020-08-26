@@ -18,6 +18,7 @@ labels:
           * The version of Home Assistant and Custom Header you are using
           * The browsers or apps that are affected (i.e. Firefox, Chrome, Chrome Mobile, iOS HA Companion app, etc.)
           * Installation method (HACS or manual)
+          * Lovelace Mode (YAML or Storage). If you are unsure, you are most likely using Storage.
           <br>
 
           **When pasting in your config always place 3 backticks <code>```</code> above the first line of your config and after the last line. Doing this will format it correctly so that I may find any formatting errors in your config.**<br>
@@ -31,3 +32,28 @@ labels:
       issue:
         body: This issue has become inactive and is being closed as stale. Please, provide more info if it has been requested or ask for the issue to be reopened if it hasn't been resolved. 
         action: close
+  - name: unlabeled
+    unlabeled:
+        issue:
+          body: |
+            ** Your issue was submitted without a label. If this is a feature request please ignore the following message, otherwise follow the steps below.
+            
+            ## Important:
+            **Issues that don't provide the necessary information listed below may not get a reply and will be closed until the info is provided.**<br>
+
+            ![Release](https://img.shields.io/github/v/release/maykar/custom-header?label=%20&amp;style=flat-square) is the current version of Custom Header. Be sure that you are using the latest version by checking your browser's dev tools console (usually found by pressing F12). If this doesn't display the current version either clear your cache or reinstall.
+
+            If you haven't yet done so, please read the ["Before Posting an Issue"](https://maykar.github.io/custom-header/#issues) section of the docs site.<br>
+
+            **Include as much of the following info as you can to help me replicate and investigate your issue:**
+
+            * A copy/paste of your Custom Header config (found in "Raw Config Editor" or ui-lovelace.yaml).<br>**Use the tip at the end of this post to format it correctly.**
+            * Any errors relevant to Custom Header found in the HA logs
+            * Any relevant errors found in your browsers dev console (F12)
+            * The version of Home Assistant and Custom Header you are using
+            * The browsers or apps that are affected (i.e. Firefox, Chrome, Chrome Mobile, iOS HA Companion app, etc.)
+            * Installation method (HACS or manual)
+            * Lovelace Mode (YAML or Storage). If you are unsure, you are most likely using Storage.
+            <br>
+
+            **When pasting in your config always place 3 backticks <code>```</code> above the first line of your config and after the last line. Doing this will format it correctly so that I may find any formatting errors in your config.**<br>
