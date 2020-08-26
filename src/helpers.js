@@ -10,6 +10,17 @@ Object.defineProperty(Array.prototype, 'flat', {
   },
 });
 
+// Make tab active in tab container if it isn't already.
+export const selectTab = (config, ch) => {
+  const headerType = config.compact_mode || config.button_scroll ? ch.header : ch.footer;
+  const lovelace = getLovelace();
+  if (!lovelace || !headerType.tabs[lovelace.current_view]) {
+    return;
+  } else if (headerType.tabContainer.selected != lovelace.current_view) {
+    headerType.tabContainer.selectIndex(lovelace.current_view);
+  }
+};
+
 // Get tab index number from view's title or path
 export const tabIndexByName = tab => {
   const lovelace = getLovelace();

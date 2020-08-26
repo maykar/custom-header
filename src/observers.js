@@ -1,27 +1,8 @@
 import { hideMenuItems } from './overflow-menu';
 import { redirects } from './redirects';
-import { getLovelace } from 'custom-card-helpers';
+import { selectTab } from './helpers';
 import { CustomHeaderConfig } from './config';
 import { rebuild } from './custom-header.ts';
-
-export const selectTab = (config, ch) => {
-  const headerType = config.compact_mode || config.button_scroll ? ch.header : ch.footer;
-  const lovelace = getLovelace();
-  if (!lovelace) return;
-  const haActiveTabIndex = lovelace.current_view;
-  headerType.tabContainer.setAttribute('selected', haActiveTabIndex);
-  if (!headerType.tabs[haActiveTabIndex]) return;
-  const tab = headerType.tabs[haActiveTabIndex].getBoundingClientRect();
-  const container = headerType.tabContainer.shadowRoot.querySelector('#tabsContainer').getBoundingClientRect();
-  if (container.right < tab.right || container.left > tab.left) {
-    headerType.tabContainer._scrollToLeft();
-    headerType.tabContainer._scrollToRight();
-    headerType.tabs[haActiveTabIndex].dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
-  }
-  for (const tab of headerType.tabs) {
-    if (tab != headerType.tabs[haActiveTabIndex]) tab.classList.remove('iron-selected');
-  }
-};
 
 export const observers = (config, ch, haElem) => {
   const callback = mutations => {

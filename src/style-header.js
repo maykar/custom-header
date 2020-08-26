@@ -1,11 +1,10 @@
-import { tabIndexByName } from './helpers';
+import { tabIndexByName, selectTab } from './helpers';
 import { hideMenuItems, buttonToOverflow, insertSettings } from './overflow-menu';
 import { kioskMode, removeKioskMode } from './kiosk-mode';
 import { menuButtonObservers } from './menu-observers';
 import { insertStyleTags } from './style-tags';
 import { redirects } from './redirects';
 import { fireEvent } from 'custom-card-helpers';
-import { selectTab } from './observers';
 import { ha_elements } from './ha-elements';
 
 export const styleHeader = (config, ch, haElem = ha_elements()) => {
