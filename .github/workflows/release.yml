@@ -11,7 +11,7 @@ jobs:
 
       - name: Set version number
         run: |
-          sed -i 's|master|${{ github.ref }}|g' ./src/custom-header.ts
+          sed -i 's|*DEV*|${{ github.ref }}|g' ./src/custom-header.ts
           sed -i 's|refs/tags/||' ./src/custom-header.ts
 
       - name: Build the card
