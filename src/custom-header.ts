@@ -1,20 +1,48 @@
-import { localize } from './localize/localize';
 import { deviceID } from './template-variables';
 import { ha_elements, hass } from './ha-elements';
 import { CustomHeader } from './build-header';
 import { CustomHeaderConfig } from './config';
 
-console.info(
-  `%c  CUSTOM-HEADER  \n%c  ${localize('common.version')} master  `,
-  'color: orange; font-weight: bold; background: black',
-  'color: white; font-weight: bold; background: dimgray',
-);
+const conInfo = {
+  header: `%c☰  CUSTOM HEADER *DEV*      `,
+  user: `%cUser's Name: ${hass.user.name}`,
+  uid: `%cUser ID: ${hass.user.id}`,
+  did: `%cDevice ID: ${deviceID}`,
+};
+const br = '%c\n';
 
-window.setTimeout(() => {
-  console.log("Current User's Name: ", hass.user.name);
-  console.log("Current User's ID: ", hass.user.id);
-  if (!customElements.get('card-tools')) console.log('Device ID: ', deviceID);
-}, 2000);
+const maxLen = Math.max(...Object.values(conInfo).map(el => el.length));
+for (const [key] of Object.entries(conInfo)) {
+  if (conInfo[key].length <= maxLen) conInfo[key] = conInfo[key].padEnd(maxLen);
+  if (key == 'header') conInfo[key] = conInfo[key].slice(0, -2) + '⋮ ';
+}
+
+const header = `
+  display: inline-block;
+  border-width: 1px 1px 1px 1px;
+  border-style: solid;
+  border-color: #424242;
+  color: white;
+  background: #03a9f4;
+  font-size: 11px;
+  padding: 4px 4.5px 5px 6px;`;
+const info = `
+  border-width: 0px 1px 0px 1px;
+  background: white;
+  color: #424242;
+  padding-right:6px;
+  line-height:0.7;`;
+
+console.info(
+  conInfo.header + br + conInfo.user + br + conInfo.uid + br + conInfo.did,
+  header,
+  '',
+  `${header} ${info} padding-top:6px;`,
+  '',
+  `${header} ${info}`,
+  '',
+  `${header} ${info} padding-bottom:6px; border-width: 0px 1px 1px 1px;`,
+);
 
 const hideHeader = haElem => {
   if (!haElem || !haElem.appHeader) return;
