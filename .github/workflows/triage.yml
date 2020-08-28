@@ -1,0 +1,12 @@
+name: "Triage Issue"
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: DeMoorJasper/triage-bot@master
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
