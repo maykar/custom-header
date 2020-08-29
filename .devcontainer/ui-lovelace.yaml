@@ -1,44 +1,44 @@
 custom_header:
-  exceptions:
-    - conditions:
-        tab: 1to3
-      config:
-        background: green
-  test_template: '{{ viewIndex }}'
-  # split_mode: true
-  template_variables: '{% set clock = (now().strftime("%I")|int)~now().strftime(":%M") %}'
-  background: '{{ states.input_text.background.state }}'
-  menu_color: '{{ states.input_text.menu_color.state }}'
-  voice_color: '{{ states.input_text.voice_color.state }}'
-  options_color: '{{ states.input_text.options_color.state }}'
-  all_tabs_color: '{{ states.input_text.all_tabs_color.state }}'
-  indicator_top: '{{ states.input_boolean.indicator_top.state == "on" }}'
-  footer_mode: '{{ states.input_boolean.footer_mode.state == "on" }}'
-  chevrons: '{{ states.input_boolean.chevrons.state == "on" }}'
-  hide_tabs: '{{ states.input_text.hide_tabs.state }}'
-  hidden_tab_redirect: '{{ states.input_boolean.hidden_tab_redirect.state == "on" }}'
-  kiosk_mode: '{{ states.input_boolean.kiosk_mode.state == "on" }}'
-  compact_mode: '{{ states.input_boolean.compact_mode.state == "on" }}'
-  disable_sidebar: '{{ states.input_boolean.disable_sidebar.state == "on" }}'
-  reverse_tab_direction: '{{ states.input_boolean.reverse_tab_direction.state == "on" }}'
-  reverse_button_direction: '{{ states.input_boolean.reverse_button_direction.state == "on" }}'
-  default_tab: '{{ states.input_text.default_tab.state }}'
-  disabled_mode: '{{ states.input_boolean.disabled_mode.state == "on" }}'
-  active_tab_color: '{{ states.input_text.active_tab_color.state }}'
-  tab_indicator_color: '{{ states.input_text.tab_indicator_color.state }}'
-  tab_icons:
-    pacman: '{% if states.input_boolean.icon_changes.state == "on" %}mdi:ghost{% endif %}'
-    '1': '{% if states.input_boolean.icon_changes.state == "on" %}mdi:pac-man{% endif %}'
-  button_icons:
-    menu: '{% if states.input_boolean.icon_changes.state == "on" %}mdi:xbox-controller-menu{% endif %}'
-    voice: '{% if states.input_boolean.icon_changes.state == "on" %}mdi:microphone-variant{%else%}mdi:comment-processing{% endif %}'
-    options: '{% if states.input_boolean.icon_changes.state == "on" %}mdi:dots-horizontal{% endif %}'
-  button_text:
-    menu: '{% if states.input_boolean.text_changes.state == "on" %}Menu{% endif %}'
-    options: '{% if states.input_boolean.text_changes.state == "on" %}{{dayNameLong}}<br>{{date}}{% endif %}'
-  menu_dropdown: '{{ states.input_boolean.menu_dropdown.state == "on" }}'
-  voice_dropdown: '{{ states.input_boolean.voice_dropdown.state == "on" }}'
-background: black
+#   exceptions:
+#     - conditions:
+#         tab: 1to3
+#       config:
+#         background: green
+#   test_template: '{{ viewIndex }}'
+#   # split_mode: true
+#   template_variables: '{% set clock = (now().strftime("%I")|int)~now().strftime(":%M") %}'
+#   background: '{{ states.input_text.background.state }}'
+#   menu_color: '{{ states.input_text.menu_color.state }}'
+#   voice_color: '{{ states.input_text.voice_color.state }}'
+#   options_color: '{{ states.input_text.options_color.state }}'
+#   all_tabs_color: '{{ states.input_text.all_tabs_color.state }}'
+#   indicator_top: '{{ states.input_boolean.indicator_top.state == "on" }}'
+#   footer_mode: '{{ states.input_boolean.footer_mode.state == "on" }}'
+#   chevrons: '{{ states.input_boolean.chevrons.state == "on" }}'
+#   hide_tabs: '{{ states.input_text.hide_tabs.state }}'
+#   hidden_tab_redirect: '{{ states.input_boolean.hidden_tab_redirect.state == "on" }}'
+#   kiosk_mode: '{{ states.input_boolean.kiosk_mode.state == "on" }}'
+#   compact_mode: '{{ states.input_boolean.compact_mode.state == "on" }}'
+#   disable_sidebar: '{{ states.input_boolean.disable_sidebar.state == "on" }}'
+#   reverse_tab_direction: '{{ states.input_boolean.reverse_tab_direction.state == "on" }}'
+#   reverse_button_direction: '{{ states.input_boolean.reverse_button_direction.state == "on" }}'
+#   default_tab: '{{ states.input_text.default_tab.state }}'
+#   disabled_mode: '{{ states.input_boolean.disabled_mode.state == "on" }}'
+#   active_tab_color: '{{ states.input_text.active_tab_color.state }}'
+#   tab_indicator_color: '{{ states.input_text.tab_indicator_color.state }}'
+#   tab_icons:
+#     pacman: '{% if states.input_boolean.icon_changes.state == "on" %}mdi:ghost{% endif %}'
+#     '1': '{% if states.input_boolean.icon_changes.state == "on" %}mdi:pac-man{% endif %}'
+#   button_icons:
+#     menu: '{% if states.input_boolean.icon_changes.state == "on" %}mdi:xbox-controller-menu{% endif %}'
+#     voice: '{% if states.input_boolean.icon_changes.state == "on" %}mdi:microphone-variant{%else%}mdi:comment-processing{% endif %}'
+#     options: '{% if states.input_boolean.icon_changes.state == "on" %}mdi:dots-horizontal{% endif %}'
+#   button_text:
+#     menu: '{% if states.input_boolean.text_changes.state == "on" %}Menu{% endif %}'
+#     options: '{% if states.input_boolean.text_changes.state == "on" %}{{dayNameLong}}<br>{{date}}{% endif %}'
+#   menu_dropdown: '{{ states.input_boolean.menu_dropdown.state == "on" }}'
+#   voice_dropdown: '{{ states.input_boolean.voice_dropdown.state == "on" }}'
+# background: black
 views:
   - icon: mdi:pac-man
     title: pacman
