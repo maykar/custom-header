@@ -4,7 +4,7 @@ import { CustomHeader } from './build-header';
 import { CustomHeaderConfig } from './config';
 
 const conInfo = {
-  header: `%c☰  CUSTOM HEADER *DEV*      `,
+  header: `%c☰  CUSTOM HEADER *DEV      `,
   user: `%cUser's Name: ${hass.user.name}`,
   uid: `%cUser ID: ${hass.user.id}`,
   did: `%cDevice ID: ${deviceID}`,
