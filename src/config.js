@@ -35,7 +35,7 @@ export class CustomHeaderConfig {
     }
 
     this.renderTemplate(ch, ha_elements(), lovelace);
-    this.catchTemplate(lovelace);
+    this.catchTemplate(lovelace, haElem, ch);
   }
 
   static renderTemplate(ch, haElem, lovelace) {
@@ -53,6 +53,8 @@ export class CustomHeaderConfig {
           } catch (e) {
             this.template_failed = true;
             this.helpfulTempError(result, e);
+            this.config = { disabled_mode: true };
+            this.processAndContinue(ch, haElem);
           }
           if (JSON.stringify(window.last_template_result) == JSON.stringify(this.config)) {
             this.changed = false;
@@ -92,7 +94,7 @@ export class CustomHeaderConfig {
     else return;
   }
 
-  static async catchTemplate(lovelace) {
+  static async catchTemplate(lovelace, haElem, ch) {
     try {
       const unsub = await this.unsub;
       if (this.changed) {
@@ -107,6 +109,8 @@ export class CustomHeaderConfig {
       if (this.disabled || !lovelace.config.custom_header) return;
       console.log('[CUSTOM-HEADER] There was an error with one or more of your templates:');
       console.log(`${e.message.substring(0, e.message.indexOf(')'))})`);
+      haElem.appHeader.style.display = '';
+      insertSettings(ch.header, {}, haElem, haElem.hass.user);
     }
   }
 

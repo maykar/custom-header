@@ -86,7 +86,10 @@ const showEditor = haElem => {
   }
 };
 
-export const insertSettings = (header, config, haElem) => {
+export const insertSettings = (header, config, haElem, user) => {
+  if (config.hide_ch_settings || (user && !user.is_admin && !user.is_owner && config.restrict_users)) {
+    return;
+  }
   if (haElem.lovelace.mode === 'storage') {
     let chSettings = document.createElement('paper-item');
     if (header.options.querySelector('mwc-list-item')) {

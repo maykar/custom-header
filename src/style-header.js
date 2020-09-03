@@ -14,9 +14,9 @@ export const styleHeader = (config, ch, haElem = ha_elements()) => {
   const user = haElem.hass.user;
   if (!user.is_admin && !user.is_owner && config.restrict_users) {
     config.disabled_mode = false;
-  } else if (!config.hide_ch_settings) {
-    insertSettings(ch.header, config, haElem);
   }
+
+  insertSettings(ch.header, config, haElem, user);
 
   if (config.disabled_mode) {
     window.customHeaderDisabled = true;

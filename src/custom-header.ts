@@ -3,6 +3,13 @@ import { ha_elements, hass } from './ha-elements';
 import { CustomHeader } from './build-header';
 import { CustomHeaderConfig } from './config';
 
+const hideHeader = haElem => {
+  if (!haElem || !haElem.appHeader) return;
+  haElem.appHeader.style.display = 'none';
+};
+
+if (!window.location.href.includes('disable_ch')) hideHeader(ha_elements());
+
 const conInfo = {
   header: `%c☰  CUSTOM HEADER *DEV      `,
   user: `%cUser's Name: ${hass.user.name}`,
@@ -43,13 +50,6 @@ console.info(
   '',
   `${header} ${info} padding-bottom:6px; border-width: 0px 1px 1px 1px;`,
 );
-
-const hideHeader = haElem => {
-  if (!haElem || !haElem.appHeader) return;
-  haElem.appHeader.style.display = 'none';
-};
-
-if (!window.location.href.includes('disable_ch')) hideHeader(ha_elements());
 
 export const rebuild = () => {
   const haElem = ha_elements();

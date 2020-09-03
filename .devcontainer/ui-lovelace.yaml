@@ -4,7 +4,6 @@ custom_header:
         tab: 1to3
       config:
         background: green
-  test_template: '{{ viewIndex }}'
   # split_mode: true
   template_variables: '{% set clock = (now().strftime("%I")|int)~now().strftime(":%M") %}'
   background: '{{ states.input_text.background.state }}'
@@ -32,7 +31,14 @@ custom_header:
   button_icons:
     menu: '{% if states.input_boolean.icon_changes.state == "on" %}mdi:xbox-controller-menu{% endif %}'
     voice: '{% if states.input_boolean.icon_changes.state == "on" %}mdi:microphone-variant{%else%}mdi:comment-processing{% endif %}'
-    options: '{% if states.input_boolean.icon_changes.state == "on" %}mdi:dots-horizontal{% endif %}'
+    options: >-
+      {%- set mapper = {'1':'one','2':'two','3':'three','4':'four','5':'five','6':'six',
+      '7':'seven','8':'eight','9':'nine','10':'ten','11':'eleven','12':'twelve'} -%}
+      {% set digit = now().strftime('%-I') %}
+      {%- set word = mapper[digit] -%}
+      {%- if states('sun.sun') == 'above_horizon' -%}mdi:clock-time-{{word}}
+      {%- else -%}mdi:clock-time-{{word}}-outline
+      {% endif %}
   button_text:
     menu: '{% if states.input_boolean.text_changes.state == "on" %}Menu{% endif %}'
     options: '{% if states.input_boolean.text_changes.state == "on" %}{{dayNameLong}}<br>{{date}}{% endif %}'
