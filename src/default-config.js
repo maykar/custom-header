@@ -64,6 +64,7 @@ export const defaultConfig = () => {
     hide_unused: false,
     hide_refresh: false,
     hide_config: false,
+    hide_edit_dash: false,
     hide_raw: false,
     hide_ch_settings: false,
     hide_reload_resources: false,

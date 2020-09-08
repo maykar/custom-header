@@ -129,6 +129,8 @@ export class CustomHeaderConfig {
       }
       if (config.header_text && config.header_text == ' ') config.header_text = '&nbsp;';
       if (config.split_mode) config.compact_mode = false;
+      if (config.hide_config) config.hide_edit_dash = true;
+      if (config.hide_edit_dash) config.hide_config = true;
       if (config.hide_header && config.disable_sidebar) {
         config.kiosk_mode = true;
         config.hide_header = false;
