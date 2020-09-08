@@ -186,6 +186,7 @@ export const insertStyleTags = (config, ch, haElem) => {
           padding-top: 96px;
           ${config.panel_view_css ? config.panel_view_css : ''}
           ${config.kiosk_mode || config.hide_header ? `min-height: 100vh !important; margin-bottom: 0 !important;` : ''}
+          ${config.footer_mode && config.compact_mode ? `margin-bottom: -100px !important;` : ''}
         }
         hui-view {
           padding-top: 100px;
