@@ -70,10 +70,10 @@ export class CustomHeader {
     header.stack = header.container.querySelector('ch-stack');
     header.stack.appendChild(contentContainer);
     header.stack.appendChild(header.tabContainer);
-    header.container.appendChild(header.options);
     if (header.voice && header.voice.style.visibility != 'hidden') {
       header.container.appendChild(header.voice);
     }
+    header.container.appendChild(header.options);
 
     header.container.style.visibility = 'hidden';
     this.ha_elem.appLayout.appendChild(header.container);
