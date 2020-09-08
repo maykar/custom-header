@@ -297,6 +297,9 @@ class ChConfigEditor extends LitElement {
 
   render() {
     this.exception = this.exception !== undefined && this.exception !== false;
+    this.hass = ha_elements().hass;
+    let version = ha_elements().hass.config.version.split('.');
+    version = parseInt(version[0] + version[1]);
     return html`
       <custom-style>
         <style is="custom-style">
@@ -476,7 +479,11 @@ class ChConfigEditor extends LitElement {
           'hide_config',
           true,
           true,
-          localize('editor.hide_configure_ui_title'),
+          `${
+            version >= 115
+              ? this.hass.localize(`ui.panel.lovelace.menu.edit_dashboard`) || `Hide 'Edit Dashboard'`
+              : localize('editor.hide_configure_ui_title')
+          }`,
           localize('editor.hide_configure_ui_tip'),
         )}
         ${this.haSwitch(
