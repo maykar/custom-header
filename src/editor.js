@@ -138,8 +138,11 @@ export class CustomHeaderEditor extends LitElement {
     newExceptions[target] = ev.detail.exception;
     for (const exceptions of newExceptions) {
       for (const key in exceptions.config) {
-        if (this._config[key] == exceptions.config[key]) delete exceptions.config[key];
-        else if (!this._config[key] && this.defaultConfig[key] == exceptions.config[key]) delete exceptions.config[key];
+        if (
+          this._config[key] == exceptions.config[key] ||
+          (!this._config[key] && this.defaultConfig[key] == exceptions.config[key])
+        )
+          delete exceptions.config[key];
       }
     }
     this._config = { ...this._config, exceptions: newExceptions };

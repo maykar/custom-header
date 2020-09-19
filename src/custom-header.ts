@@ -3,13 +3,6 @@ import { ha_elements, hass } from './ha-elements';
 import { CustomHeader } from './build-header';
 import { CustomHeaderConfig } from './config';
 
-const hideHeader = haElem => {
-  if (!haElem || !haElem.appHeader) return;
-  haElem.appHeader.style.display = 'none';
-};
-
-if (!window.location.href.includes('disable_ch')) hideHeader(ha_elements());
-
 const conInfo = {
   header: `%c☰  CUSTOM HEADER *DEV      `,
   user: `%cUser's Name: ${hass.user.name}`,
@@ -21,7 +14,7 @@ const br = '%c\n';
 const maxLen = Math.max(...Object.values(conInfo).map(el => el.length));
 for (const [key] of Object.entries(conInfo)) {
   if (conInfo[key].length <= maxLen) conInfo[key] = conInfo[key].padEnd(maxLen);
-  if (key == 'header') conInfo[key] = conInfo[key].slice(0, -2) + '⋮ ';
+  if (key == 'header') conInfo[key] = `${conInfo[key].slice(0, -2)}⋮ `;
 }
 
 const header = `
@@ -51,6 +44,13 @@ console.info(
   `${header} ${info} padding-bottom:6px; border-width: 0px 1px 1px 1px;`,
 );
 
+const hideHeader = haElem => {
+  if (!haElem || !haElem.appHeader) return;
+  haElem.appHeader.style.display = 'none';
+};
+
+if (!window.location.href.includes('disable_ch')) hideHeader(ha_elements());
+
 export const rebuild = () => {
   const haElem = ha_elements();
   if (
@@ -74,16 +74,16 @@ export const rebuild = () => {
           for (const removed of mutation.removedNodes) {
             if (removed.nodeName == 'HUI-EDITOR') {
               // Wait for app-toolbar to exist.
-              const raw_timeout = () => {
-                const ch_raw_timeout = window.setTimeout(() => {
+              const rawTimeout = () => {
+                const chRawTimeout = window.setTimeout(() => {
                   if (ha_elements().root.querySelector('app-toolbar')) {
-                    clearTimeout(ch_raw_timeout);
+                    clearTimeout(chRawTimeout);
                   } else {
-                    ch_raw_timeout;
+                    chRawTimeout;
                   }
                 }, 100);
               };
-              raw_timeout();
+              rawTimeout();
               rebuild();
               rawModeMO.disconnect();
               return;

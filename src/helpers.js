@@ -17,6 +17,7 @@ export const selectTab = (config, ch) => {
   if (!lovelace || !headerType.tabs[lovelace.current_view]) {
     return;
   } else if (headerType.tabContainer.selected != lovelace.current_view) {
+    for (const tab of headerType.tabs) tab.classList.remove('iron-selected');
     headerType.tabContainer.selectIndex(lovelace.current_view);
   }
 };
@@ -93,8 +94,9 @@ export const buildRange = string => {
 export const processTabArray = array => {
   let ranges = [];
   const sortNumber = (a, b) => a - b;
-  array = typeof array === 'string' ? array.replace(/\s+/g, '').split(',') : array;
+  array = typeof array === 'string' ? array.split(',') : array;
   for (const i in array) {
+    array[i] = array[i].trim();
     if (typeof array[i] == 'string' && array[i].includes('to')) {
       const rangeTest = array[i].replace(/ /g, '').split('to');
       if (!(rangeTest[0].match(/[a-z]/g) || rangeTest[1].match(/[a-z]/g))) ranges.push(buildRange(array[i]));

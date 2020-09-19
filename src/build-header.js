@@ -166,18 +166,12 @@ export class CustomHeader {
   }
 
   tapOrClick(listenElement, clickElement) {
-    listenElement.setAttribute('onClick', ' ');
-    if (clickElement.nodeName === 'MWC-LIST-ITEM') {
-      listenElement.addEventListener('tap', () => {
-        clickElement.dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
-      });
+    const clickIt = () => {
+      clickElement.dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
+    };
+    ['click', 'touchend'].forEach(evt => listenElement.addEventListener(evt, clickIt, false));
+    if (/mobile|ios|iphone|ipad/.test(navigator.userAgent.toLowerCase())) {
+      listenElement.addEventListener('tap', clickIt, false);
     }
-    listenElement.addEventListener('click', () => {
-      if (clickElement.nodeName === 'MWC-LIST-ITEM') {
-        clickElement.click();
-      } else {
-        clickElement.dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
-      }
-    });
   }
 }

@@ -27,8 +27,8 @@ export const insertStyleTags = (config, ch, haElem) => {
         display:flex;
         justify-content: center;
         font: 400 20px Roboto, sans-serif;
-        background: ${config.background || 'var(--primary-color)'};
-        color: ${config.elements_color || 'var(--text-primary-color)'};
+        background: ${config.background || 'var(--app-header-background-color)' || 'var(--primary-color)'};
+        color: ${config.elements_color || 'var(--app-header-text-color)' || 'var(--text-primary-color)'};
         margin-bottom: 0px;
         position: sticky;
         position: -webkit-sticky;
@@ -46,8 +46,8 @@ export const insertStyleTags = (config, ch, haElem) => {
         display:flex;
         justify-content: center;
         font: 400 20px Roboto, sans-serif;
-        background: ${config.background || 'var(--primary-color)'};
-        color: ${config.elements_color || 'var(--text-primary-color)'};
+        background: ${config.background || 'var(--app-header-background-color)' || 'var(--primary-color)'};
+        color: ${config.elements_color || 'var(--app-header-text-color)' || 'var(--text-primary-color)'};
         margin-bottom: 0px;
         margin-top: 0px;
         position: sticky;
