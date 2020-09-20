@@ -45,6 +45,7 @@ export const defaultConfig = () => {
     tab_icons_and_text: false,
     tab_text_only: false,
     reverse_tab_direction: false,
+    fit_tabs: false,
 
     // Buttons
     button_icons: [],

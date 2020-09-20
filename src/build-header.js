@@ -33,6 +33,8 @@ export class CustomHeader {
     header.tabContainer = document.createElement('paper-tabs');
     header.tabContainer.setAttribute('dir', 'ltr');
     header.tabContainer.setAttribute('scrollable', '');
+    header.tabContainer.setAttribute('no-slide', '');
+    header.tabContainer.setAttribute('autoselect', '');
     header.tabContainer.style.width = '100%';
     header.tabContainer.style.marginLeft = '0';
 
@@ -86,6 +88,8 @@ export class CustomHeader {
     footer.tabContainer = document.createElement('paper-tabs');
     footer.tabContainer.setAttribute('dir', 'ltr');
     footer.tabContainer.setAttribute('scrollable', '');
+    footer.tabContainer.setAttribute('no-slide', '');
+    footer.tabContainer.setAttribute('autoselect', '');
     footer.tabContainer.style.width = '100%';
     footer.tabContainer.style.marginLeft = '0';
 

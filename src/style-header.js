@@ -53,6 +53,14 @@ export const styleHeader = (config, ch, haElem = ha_elements()) => {
     ch.footer.container.style.display = 'none';
   }
 
+  if (config.fit_tabs) {
+    ch.header.tabContainer.setAttribute('fit-container', '');
+    ch.footer.tabContainer.setAttribute('fit-container', '');
+  } else {
+    ch.header.tabContainer.removeAttribute('fit-container');
+    ch.footer.tabContainer.removeAttribute('fit-container');
+  }
+
   if (config.split_mode) {
     ch.header.tabContainer.style.display = 'none';
     if (config.footer_mode) ch.footer.container.setAttribute('slot', 'header');

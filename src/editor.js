@@ -435,6 +435,7 @@ class ChConfigEditor extends LitElement {
           localize('editor.hidden_tab_redirect_tip'),
         )}
         ${this.haSwitch('shadow', true, false, localize('editor.shadow_title'), localize('editor.shadow_tip'))}
+        ${this.haSwitch('fit_tabs', true, false, localize('editor.fit_tabs_title'), localize('editor.fit_tabs_tip'))}
         ${!this.exception
           ? this.haSwitch(
               'restrict_users',
@@ -552,12 +553,19 @@ class ChConfigEditor extends LitElement {
         )}
       </div>
       <h4 class="underline">${localize('editor.tabs')}</h4>
-      <paper-dropdown-menu id="tabs" @value-changed="${this._tabVisibility}">
-        <paper-listbox slot="dropdown-content" .selected="${this.getConfig('show_tabs').length > 0 ? '1' : '0'}">
-          <paper-item>${localize('editor.tabs_hide')}</paper-item>
-          <paper-item>${localize('editor.tabs_show')}</paper-item>
-        </paper-listbox>
-      </paper-dropdown-menu>
+      <ha-switch
+        id="tabs"
+        ?checked="${this.getConfig('show_tabs').length > 0 ? 1 : 0}"
+        @change="${this._tabVisibility}"
+        title="${localize('editor.tabs_hide')}${'/' + localize('editor.tabs_show')}"
+        }
+      >
+      </ha-switch>
+      <switch-text>
+        <sw-text id="tabs_text" title="${localize('editor.tabs_hide')}${'/' + localize('editor.tabs_show')}"
+          >${this.getConfig('show_tabs').length > 0 ? localize('editor.tabs_show') : localize('editor.tabs_hide')}
+        </sw-text>
+      </switch-text>
       <div class="side-by-side">
         <div id="show" style="display:${this.getConfig('show_tabs').length > 0 ? 'initial' : 'none'}">
           <paper-input
@@ -620,10 +628,12 @@ class ChConfigEditor extends LitElement {
   _tabVisibility() {
     const show = this.shadowRoot.querySelector('#show');
     const hide = this.shadowRoot.querySelector('#hide');
-    if (this.shadowRoot.querySelector('#tabs').value == 'Hide Tabs') {
+    if (!this.shadowRoot.querySelector('#tabs').checked) {
+      this.shadowRoot.querySelector('#tabs_text').innerText = localize('editor.tabs_hide');
       show.style.display = 'none';
       hide.style.display = 'initial';
     } else {
+      this.shadowRoot.querySelector('#tabs_text').innerText = localize('editor.tabs_show');
       hide.style.display = 'none';
       show.style.display = 'initial';
     }
