@@ -11,6 +11,7 @@ index: 4
 | indicator_top         | Boolean       | false   | Places the current tab indicator on top of the tab                                         |
 | default_tab           | number/string |         | The default tab when entering Lovelace. Use "null" to override default for exceptions.     |
 | reverse_tab_direction | Boolean       | false   | Places tabs at opposite side of the window in reverse order                                |
+| fit_tabs              | Boolean       | false   | If the number of tabs fits on screen, fill the header's width with them                    |
 | hide_tabs             | string        |         | An array or comma separated string of tabs to hide, more info below                        |
 | show_tabs             | string        |         | An array or comma separated string of tabs to show, more info below                        |
 | hidden_tab_redirect   | Boolean       | true    | Automatically redirects off hidden tabs to either the default tab or the first visible tab |

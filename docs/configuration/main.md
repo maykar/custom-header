@@ -23,6 +23,7 @@ Options with a :warning: remove the ability to edit from the UI. See [important 
 | hide_refresh           | Boolean | false            | Hides the "Refresh" option in the options menu (yaml mode only)                                                |
 | hide_reload_resources  | Boolean | false            | Hides the "Reload Resources" option in the options menu (yaml mode only)                                       |
 | hide_config            | Boolean | false            | Hides the "Configure UI" option in the options menu :warning:                                                  |
+| hide_edit_dash         | Boolean | false            | Hides the "Edit Dashboard" option in the options menu :warning:                                                |
 | hide_raw               | Boolean | false            | Hides the "Raw Config Editor" option in the options menu :warning:                                             |
 | hide_ch_settings       | Boolean | false            | Hides the "Custom Header" option in the options menu                                                           |
 | default_tab_on_refresh | Boolean | true             | Disables/enables going to default tab on refresh. May cause default tab issues in some browsers when disabled. |

@@ -9,6 +9,18 @@ Major fixes, added features, or breaking changes.
 
 </br>
 
+## Sept. 19th 2020 - v1.7.9
+
+Added Features:
+
+ - fit_tabs: If the number of tabs fits on screen, fill the header's width with them.
+
+Fixes:
+
+- Fixes hiding tabs by title if the title includes spaces
+- Corrects background and element color defaults
+- Fixes issues related to button/tab presses on mobile devices
+
 ## June 10th 2020 - v1.5.8
 
 Added Features:
