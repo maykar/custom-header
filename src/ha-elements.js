@@ -13,7 +13,7 @@ export const ha_elements = () => {
   haElem.lovelace = getLovelace();
   haElem.homeAssistant = document.querySelector('home-assistant');
   haElem.main = haElem.homeAssistant.shadowRoot.querySelector('home-assistant-main').shadowRoot;
-  haElem.hass = haElem.homeAssistant.hass;
+  haElem.hass = getHass();
   haElem.partialPanel = haElem.main.querySelector('partial-panel-resolver');
   haElem.panel = haElem.main.querySelector('ha-panel-lovelace');
   if (!haElem.panel) return;

@@ -44,6 +44,8 @@ console.info(
   `${header} ${info} padding-bottom:6px; border-width: 0px 1px 1px 1px;`,
 );
 
+let haElem = ha_elements();
+
 const hideHeader = haElem => {
   if (!haElem || !haElem.appHeader) return;
   haElem.appHeader.style.display = 'none';
@@ -52,7 +54,7 @@ const hideHeader = haElem => {
 if (!window.location.href.includes('disable_ch')) hideHeader(ha_elements());
 
 export const rebuild = () => {
-  const haElem = ha_elements();
+  haElem = ha_elements();
   if (
     document
       .querySelector('home-assistant')!
@@ -167,7 +169,7 @@ export const rebuild = () => {
 };
 
 const rawConfigObserver = () => {
-  const haElem = ha_elements();
+  haElem = ha_elements();
   if (window['customHeaderRebuildMO']) window['customHeaderRebuildMO'].disconnect();
   if (window['customHeaderRawConfigExit']) window['customHeaderRawConfigExit'].disconnect();
   if (!haElem || !haElem.partialPanel) {

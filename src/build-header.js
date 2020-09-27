@@ -168,11 +168,13 @@ export class CustomHeader {
   }
 
   tapOrClick(listenElement, clickElement) {
-    const clickIt = () => {
+    const mobile = /mobile|ios|iphone|ipad/.test(navigator.userAgent.toLowerCase());
+    const clickIt = event => {
+      if (!mobile) event.preventDefault();
       clickElement.dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
     };
     ['click', 'touchend'].forEach(evt => listenElement.addEventListener(evt, clickIt, false));
-    if (/mobile|ios|iphone|ipad/.test(navigator.userAgent.toLowerCase())) {
+    if (mobile) {
       listenElement.addEventListener('tap', clickIt, false);
     }
   }
