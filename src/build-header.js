@@ -174,8 +174,6 @@ export class CustomHeader {
       clickElement.dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: false }));
     };
     ['click', 'touchend'].forEach(evt => listenElement.addEventListener(evt, clickIt, false));
-    if (mobile) {
-      listenElement.addEventListener('tap', clickIt, false);
-    }
+    if (mobile) listenElement.addEventListener('tap', clickIt, false);
   }
 }
