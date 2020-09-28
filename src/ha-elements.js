@@ -37,4 +37,5 @@ export const ha_elements = () => {
   haElem.sidebar.divider = haElem.sidebar.main.querySelector('div.divider');
   haElem.appHeader = haElem.root.querySelector('app-header');
   haElem.appLayout = haElem.root.querySelector('ha-app-layout');
+  return haElem;
 };
