@@ -1,5 +1,12 @@
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/maykar/custom-header?style=for-the-badge) ![GitHub Release Date](https://img.shields.io/github/release-date/maykar/custom-header?style=for-the-badge) ![GitHub Releases](https://img.shields.io/github/downloads/maykar/custom-header/latest/total?color=purple&label=%20release%20Downloads&style=for-the-badge)
 
+# No Longer an Active Project
+
+I have come to the difficult decision to stop work on Custom Header and have archived the project. Please, see the following post for more info:
+
+https://community.home-assistant.io/t/custom-header/155399/1100 
+
+
 # CUSTOM HEADER
 
 Custom Header adds enhancements and customization options to Home Assistant's Lovelace header. Custom Header is the replacement and successor of [Compact Custom Header](https://github.com/maykar/compact-custom-header).
